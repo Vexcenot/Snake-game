@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ceoud574mfpbh"]
+
+[sub_resource type="Theme" id="Theme_o7xog"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t4sp1"]
+bg_color = Color(1, 1, 1, 1)
+shadow_color = Color(0, 0, 0, 0.12549)
+shadow_size = 5
+
+[node name="Snek" type="Panel"]
+modulate = Color(1, 0, 0, 1)
+offset_right = 50.0
+offset_bottom = 50.0
+theme = SubResource("Theme_o7xog")
+theme_override_styles/panel = SubResource("StyleBoxFlat_t4sp1")

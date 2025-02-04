@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8rpn5napbsdu"]
+
+[ext_resource type="Texture2D" uid="uid://btidakxfbc2dd" path="res://sprite/snake whole.png" id="1_b3hid"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frb71"]
+size = Vector2(10.003, 10.003)
+
+[node name="tail" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_b3hid")
+hframes = 3
+frame = 1
+
+[node name="tail_collision" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="tail_collision_shape" type="CollisionShape2D" parent="Sprite2D/tail_collision"]
+scale = Vector2(0.799762, 0.799762)
+shape = SubResource("RectangleShape2D_frb71")

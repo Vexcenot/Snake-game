@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://jfm302t7cx8d"]
+
+[ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
+[ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
+
+[node name="Main" type="Node"]
+
+[node name="20592Png" type="Sprite2D" parent="."]
+position = Vector2(1688, 240)
+texture = ExtResource("1_h5eht")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_10edd")]
+position = Vector2(50, 196)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+visible = false

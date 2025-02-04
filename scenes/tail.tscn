@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5j5sp450qa5v"]
+
+[ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="1_dy438"]
+
+[node name="CharacterBody2D" instance=ExtResource("1_dy438")]
+script = null
