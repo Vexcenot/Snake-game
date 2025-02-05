@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsuainjlt5xx"]
-
-[ext_resource type="PackedScene" uid="uid://c8rpn5napbsdu" path="res://scenes/spawntest.tscn" id="1_cwavj"]
-
-[node name="tail" instance=ExtResource("1_cwavj")]
-
-[node name="Sprite2D" parent="." index="0"]
-modulate = Color(0.270588, 0.827451, 0.270588, 1)

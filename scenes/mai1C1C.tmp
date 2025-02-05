@@ -6,7 +6,6 @@
 [node name="Main" type="Node"]
 
 [node name="20592Png" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(1688, 240)
 texture = ExtResource("1_h5eht")
 

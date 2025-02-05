@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://disfsrloilqua"]
 
 [ext_resource type="Script" path="res://script/character_body_2d.gd" id="1_w2ywo"]
-[ext_resource type="Texture2D" uid="uid://btidakxfbc2dd" path="res://sprite/snake whole.png" id="2_u8oco"]
+[ext_resource type="Texture2D" uid="uid://d3i4uerfy1y6p" path="res://sprite/snake whole.png" id="2_u8oco"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxb1m"]
 size = Vector2(10.0566, 10.0566)
@@ -12,13 +12,20 @@ size = Vector2(10.5245, 10.5245)
 [node name="Snek" type="CharacterBody2D"]
 script = ExtResource("1_w2ywo")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 1.0
+drag_top_margin = 1.0
+drag_right_margin = 0.0
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 100
 texture = ExtResource("2_u8oco")
-hframes = 3
+hframes = 5
 frame = 2
-
-[node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.38419e-07)

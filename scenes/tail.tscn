@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://c5j5sp450qa5v"]
+[gd_scene load_steps=3 format=3 uid="uid://c8rpn5napbsdu"]
 
-[ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="1_dy438"]
+[ext_resource type="Texture2D" uid="uid://d3i4uerfy1y6p" path="res://sprite/snake whole.png" id="1_lqcct"]
 
-[node name="CharacterBody2D" instance=ExtResource("1_dy438")]
-script = null
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frb71"]
+size = Vector2(10.003, 10.003)
+
+[node name="tail" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_lqcct")
+hframes = 5
+
+[node name="tail_collision" type="StaticBody2D" parent="Sprite2D"]
+
+[node name="tail_collision_shape" type="CollisionShape2D" parent="Sprite2D/tail_collision"]
+scale = Vector2(0.799762, 0.799762)
+shape = SubResource("RectangleShape2D_frb71")
