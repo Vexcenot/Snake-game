@@ -6,7 +6,7 @@ var direction = Vector2.ZERO
 var timer = 100
 var move_distance = 8
 
-var final_time = 0.1
+var final_time = 0.5
 var collision = false
 var move_orders = []
 var moveable = false
@@ -111,11 +111,12 @@ func global_position_tracker():
 		orientations.pop_back()
 
 func move_tail_segments():
-	for i in range(min(length - 2, tail_segments.size() - 1)):  # Ignore last tail segment for turn checking
+	for i in range(min(length - 1, tail_segments.size())):  # Include last tail segment
 		if positions.size() > i + 1:
 			tail_segments[i].global_position = positions[i + 1]
 			update_tail_orientation(tail_segments[i], orientations[i + 1])
-			check_turn_segment(tail_segments[i], positions[i + 1])  
+			check_turn_segment(tail_segments[i], positions[i + 1])
+
 
 	# Move the last tail segment but also remove past turns it crosses
 	if tail_segments.size() > 0:
@@ -133,12 +134,23 @@ func remove_past_turns(last_tail_position):
 
 func check_turn_segment(segment, position):
 	var sprite = segment.get_node("Sprite2D")
+	var is_last_segment = (segment == tail_segments[-1])  # Check if it's the last tail segment
+
 	for turn in turn_positions:
 		if turn[0].distance_to(position) < move_distance * 0.5:  # Check if segment is at a turn
-			sprite.frame = 3
+			if is_last_segment:
+				sprite.frame = 4  # Last segment gets frame 4
+			else:
+				sprite.frame = 3  # Regular turn segments get frame 3
 			adjust_turn_frame(sprite, turn[1], turn[2])  # Pass previous and new facing directions
 			return
-	sprite.frame = 1  # Default sprite frame for normal segments
+
+	# Default behavior: last tail segment -> frame 0, others -> frame 1
+	if is_last_segment:
+		sprite.frame = 0
+	else:
+		sprite.frame = 1
+
 
 func adjust_turn_frame(sprite: Sprite2D, prev_facing: String, new_facing: String):
 	# Turns: prev_facing -> new_facing
@@ -232,15 +244,21 @@ func facer():
 
 #player inputs get added to a list to do list
 func _input(event):
-	if event.is_action_pressed("k_up") and move_orders.front() != "up":
-		move_orders.append("up")
-		print("up")
+	var new_move = ""
+
+	if event.is_action_pressed("k_up"):
+		new_move = "up"
 	elif event.is_action_pressed("k_down"):
-		move_orders.append("down")
+		new_move = "down"
 	elif event.is_action_pressed("k_left"):
-		move_orders.append("left")
+		new_move = "left"
 	elif event.is_action_pressed("k_right"):
-		move_orders.append("right")
+		new_move = "right"
+
+	# Ensure the new move is not a duplicate of the last move in the list
+	if new_move != "" and (move_orders.is_empty() or move_orders.back() != new_move):
+		move_orders.append(new_move)
+
 
 func update_sprite_orientation():
 	update_tail_orientation(self, facing)
