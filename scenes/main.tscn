@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=3 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
-[ext_resource type="PackedScene" uid="uid://c8rpn5napbsdu" path="res://scenes/tail.tscn" id="3_u3odb"]
 
 [node name="Main" type="Node"]
 
@@ -13,8 +12,6 @@ texture = ExtResource("1_h5eht")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_10edd")]
 position = Vector2(50, 196)
-speed = 200
-tail_segment_scene = ExtResource("3_u3odb")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visible = false

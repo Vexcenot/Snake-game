@@ -24,7 +24,7 @@ drag_right_margin = 0.0
 [node name="Sprite2D" type="Sprite2D" parent="."]
 z_index = 100
 texture = ExtResource("2_u8oco")
-hframes = 5
+hframes = 6
 frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
