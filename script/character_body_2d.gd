@@ -5,7 +5,7 @@ extends CharacterBody2D
 var direction = Vector2.ZERO
 var timer = 100
 var move_distance = 8
-
+var turn_positions = []  # Stores turn positions and directions
 var final_time = 0.5
 var collision = false
 var move_orders = []
@@ -61,17 +61,56 @@ func final_tail():
 			if i != last:
 				i.get_node("Sprite2D").frame = 1
 
+		# Debug prints
+		print("Final tail position:", last.global_position)
+		print("Turn positions:", turn_positions)
+
 func spawn_tail_segment():
 	if tail_segment_scene:
+		# Check if the last tail segment exists and has frame 4
+		if tail_segments.size() > 0:
+			var last_segment = tail_segments[-1]
+			var last_sprite = last_segment.get_node("Sprite2D")
+			if last_sprite and last_sprite.frame == 4:
+				return  # Do not spawn a new segment if the last one is final
+
+		# Spawn new tail segment
 		var tail_segment = tail_segment_scene.instantiate()
 		get_parent().add_child(tail_segment)
 		tail_segment.global_position = global_position
 		tail_segments.push_front(tail_segment)
 		length += 1
+
 		var sprite = tail_segment.get_node("Sprite2D")
 		if sprite:
 			await get_tree().create_timer(0.1).timeout
-	final_tail()
+
+		# Ensure only the last tail segment is updated, without resetting previous turn frames
+		update_tail_frames()
+
+
+func update_tail_frames():
+	if tail_segments.is_empty():
+		return
+	
+	# Update the last tail segment only
+	var last = tail_segments[-1]
+	var sprite = last.get_node("Sprite2D")
+	sprite.frame = 0  # Make sure the last segment is frame 0
+
+	# Keep turn frames intact
+	for i in range(tail_segments.size() - 1):
+		var segment = tail_segments[i]
+		var segment_sprite = segment.get_node("Sprite2D")
+		for turn in turn_positions:
+			if turn[0].distance_to(segment.global_position) < move_distance * 0.5:
+				segment_sprite.frame = 3  # Maintain turn segments
+				adjust_turn_frame(segment_sprite, turn[1], turn[2])
+				break  # Stop checking once a turn is found
+
+
+
+
 
 func time_reset():
 	if timer >= final_time:
@@ -103,6 +142,11 @@ func moving():
 		global_position_tracker()
 		move_tail_segments()
 
+		# Add tail segment only after moving
+		if pending_tail_segment:
+			spawn_tail_segment()
+			pending_tail_segment = false  # Reset flag
+
 func global_position_tracker():
 	positions.push_front(global_position)
 	orientations.push_front(facing)
@@ -118,13 +162,12 @@ func move_tail_segments():
 			check_turn_segment(tail_segments[i], positions[i + 1])
 
 
+##################FIX THIS################
 	# Move the last tail segment but also remove past turns it crosses
 	if tail_segments.size() > 0:
-		var last_index = tail_segments.size() - 1
-		if positions.size() > last_index + 1:
-			tail_segments[last_index].global_position = positions[last_index + 1]
-			update_tail_orientation(tail_segments[last_index], orientations[last_index + 1])
-			remove_past_turns(positions[last_index + 1])  # Remove turns at this position
+		var last_index = tail_segments.size()
+		if positions.size() > last_index:
+			remove_past_turns(positions[last_index])  # Remove turns at this position
 
 func remove_past_turns(last_tail_position):
 	for i in range(turn_positions.size() - 1, -1, -1):  # Iterate in reverse to safely remove elements
@@ -153,30 +196,45 @@ func check_turn_segment(segment, position):
 
 
 func adjust_turn_frame(sprite: Sprite2D, prev_facing: String, new_facing: String):
-	# Turns: prev_facing -> new_facing
+	# Turning logic: prev_facing -> new_facing
 	if prev_facing == "up" and new_facing == "right":  # Turning right from up
 		sprite.flip_h = false
 		sprite.rotation_degrees = 0
 	elif prev_facing == "up" and new_facing == "left":  # Turning left from up
 		sprite.flip_h = true
 		sprite.rotation_degrees = 0
+	elif prev_facing == "up" and new_facing == "down":  # Turning down from up
+		sprite.flip_h = false
+		sprite.rotation_degrees = 180
+	elif prev_facing == "right" and new_facing == "up":  # Turning up from right
+		sprite.flip_h = true
+		sprite.rotation_degrees = 90
+	elif prev_facing == "right" and new_facing == "down":  # Turning down from right
+		sprite.flip_h = false
+		sprite.rotation_degrees = 90
+	elif prev_facing == "right" and new_facing == "left":  # Turning left from right
+		sprite.flip_h = true
+		sprite.rotation_degrees = 180
 	elif prev_facing == "down" and new_facing == "right":  # Turning right from down
 		sprite.flip_h = true
 		sprite.rotation_degrees = 180
 	elif prev_facing == "down" and new_facing == "left":  # Turning left from down
 		sprite.flip_h = false
 		sprite.rotation_degrees = 180
+	elif prev_facing == "down" and new_facing == "up":  # Turning up from down
+		sprite.flip_h = false
+		sprite.rotation_degrees = 0
 	elif prev_facing == "left" and new_facing == "up":  # Turning up from left
 		sprite.flip_h = false
 		sprite.rotation_degrees = -90
 	elif prev_facing == "left" and new_facing == "down":  # Turning down from left
 		sprite.flip_h = true
 		sprite.rotation_degrees = -90
+	elif prev_facing == "left" and new_facing == "right":  # Turning right from left
+		sprite.flip_h = false
+		sprite.rotation_degrees = 0
 	elif prev_facing == "right" and new_facing == "up":  # Turning up from right
 		sprite.flip_h = true
-		sprite.rotation_degrees = 90
-	elif prev_facing == "right" and new_facing == "down":  # Turning down from right
-		sprite.flip_h = false
 		sprite.rotation_degrees = 90
 
 func update_tail_orientation(segment, orientation):
@@ -195,9 +253,14 @@ func update_tail_orientation(segment, orientation):
 			sprite.flip_h = false
 			sprite.rotation_degrees = 90
 
+var pending_tail_segment = false  # Flag to track pending tail addition
+
 func interact():
 	if Input.is_action_just_pressed("k_action") and tail_segment_scene and positions.size() > 1:
-		spawn_tail_segment()
+		pending_tail_segment = true  # Mark that we want to add a tail
+
+
+
 
 func loose():
 	if is_raycast_blocked(facing):
@@ -216,9 +279,6 @@ func move_current_scanner():
 		element2 = move_orders[1]
 	if element1 == element2:
 		move_orders.clear
-
-#takes move orders and append it to the actual snake movement if all conditions are right
-var turn_positions = []  # Stores turn positions and directions
 
 func facer():
 	if move_orders.size() > 0:
