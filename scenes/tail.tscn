@@ -9,7 +9,7 @@ size = Vector2(10.003, 10.003)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_lqcct")
-hframes = 6
+hframes = 13
 frame = 1
 
 [node name="tail_collision" type="StaticBody2D" parent="Sprite2D"]
