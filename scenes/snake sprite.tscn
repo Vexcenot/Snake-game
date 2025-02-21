@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://vfnjnj2mu8yd"]
+
+[ext_resource type="Texture2D" uid="uid://csphoisw14tj5" path="res://sprite/smol snake2.png" id="1_nrr0h"]
+
+[node name="Sprite2D" type="Sprite2D"]
+z_index = 100
+texture = ExtResource("1_nrr0h")
+hframes = 6
+frame = 1

@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=4 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_is7ar"]
+size = Vector2(1680, 32)
 
 [node name="Main" type="Node"]
 
@@ -15,3 +18,13 @@ position = Vector2(50, 196)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visible = false
+
+[node name="20592Png2" type="Sprite2D" parent="."]
+position = Vector2(1688, 240)
+texture = ExtResource("1_h5eht")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="20592Png2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="20592Png2/StaticBody2D"]
+position = Vector2(-849, -16)
+shape = SubResource("RectangleShape2D_is7ar")

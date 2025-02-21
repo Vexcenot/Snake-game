@@ -9,7 +9,7 @@ var turn_positions = []  # Stores turn positions and directions
 var final_time = 0.5
 var collision = false
 var move_orders = []
-var moveable = false
+var move_ready = false
 var positions = []
 var orientations = []  # Stores facing directions for tail
 var turns = []  # Stores turns made
@@ -19,8 +19,7 @@ var scanned = {"up": "", "down": "", "left": "", "right": ""}
 var facing = "right"
 var facing_prev = "right"
 var movesame = false
-var pending_tail_segment = false  # Flag to track pending tail addition
-var temp_segments = []  # Stores temporary ghost segments
+var pending_tail_segment = false  # Flag to track pending tail additionz
 @export var tail_segment_scene: PackedScene = preload("res://scenes/tail.tscn")
 @onready var up: RayCast2D = $up
 @onready var down: RayCast2D = $down
@@ -35,7 +34,6 @@ func _process(delta):
 	timer += delta
 	time_reset()
 	interact()
-	loose()
 	update_sprite_orientation()
 	#print("Facing:", facing)
 	#print("Previous Facing:", facing_prev)
@@ -53,6 +51,7 @@ func teleport_sequence():
 		position.x += move_distance
 		positions.push_front(global_position)
 		orientations.push_front(facing)
+	move_ready = true
 
 func final_tail():
 	if tail_segments.size() > 0:
@@ -66,7 +65,6 @@ func final_tail():
 		# Debug prints
 		print("Final tail position:", last.global_position)
 		print("Turn positions:", turn_positions)
-
 
 func spawn_tail_segment():
 	if tail_segment_scene:
@@ -88,37 +86,9 @@ func spawn_tail_segment():
 		if sprite:
 			await get_tree().create_timer(0.1).timeout
 
-		# Spawn a temporary segment behind the new one
-		spawn_temp_segment(tail_segment)
-
 		# Ensure only the last tail segment is updated, without resetting previous turn frames
 		update_tail_frames()
 
-
-func spawn_temp_segment(tail_segment):
-	# Spawn ghost segment behind the new one
-	var temp_segment = tail_segment_scene.instantiate()
-	get_parent().add_child(temp_segment)
-
-	# Position it behind the new tail segment
-	var offset = -direction * move_distance  # Move one step backward
-	temp_segment.global_position = tail_segment.global_position + offset
-	
-	# Set frame to 6 (ghost segment)
-	var temp_sprite = temp_segment.get_node("Sprite2D")
-	if temp_sprite:
-		temp_sprite.frame = 6
-
-	temp_segments.append(temp_segment)  # Store temp segment for removal later
-	
-func remove_reached_temp_segments():
-	# Check if the last tail segment has reached any temp segment
-	if tail_segments.size() > 0 and temp_segments.size() > 0:
-		var last_tail = tail_segments[-1]
-		for i in range(temp_segments.size() - 1, -1, -1):  # Iterate in reverse for safe removal
-			if last_tail.global_position.distance_to(temp_segments[i].global_position) < move_distance * 0.5:
-				temp_segments[i].queue_free()  # Remove segment
-				temp_segments.remove_at(i)  # Remove from list
 
 func update_tail_frames():
 	if tail_segments.is_empty():
@@ -138,6 +108,7 @@ func update_tail_frames():
 				segment_sprite.frame = 3  # Maintain turn segments
 				adjust_turn_frame(segment_sprite, turn[1], turn[2])
 				break  # Stop checking once a turn is found
+
 
 func time_reset():
 	if timer >= final_time:
@@ -188,8 +159,13 @@ func move_tail_segments():
 			update_tail_orientation(tail_segments[i], orientations[i + 1])
 			check_turn_segment(tail_segments[i], positions[i + 1])
 
-	# Remove temporary segments once the final tail reaches them
-	remove_reached_temp_segments()
+
+##################FIX THIS################
+	# Move the last tail segment but also remove past turns it crosses
+	if tail_segments.size() > 0:
+		var last_index = tail_segments.size()
+		if positions.size() > last_index:
+			remove_past_turns(positions[last_index])  # Remove turns at this position
 
 func remove_past_turns(last_tail_position):
 	for i in range(turn_positions.size() - 1, -1, -1):  # Iterate in reverse to safely remove elements
@@ -279,14 +255,7 @@ func interact():
 	if Input.is_action_just_pressed("k_action") and tail_segment_scene and positions.size() > 1:
 		pending_tail_segment = true  # Mark that we want to add a tail
 
-
-
-
-func loose():
-	if is_raycast_blocked(facing):
-		pause_game()
-
-func pause_game():
+func lose_game():
 	print("Game paused due to collision with StaticBody2D.")
 	get_tree().paused = true
 
@@ -304,7 +273,7 @@ func facer():
 	if move_orders.size() > 0:
 		var next_move = move_orders.pop_front()
 		if is_raycast_blocked(facing) and (is_opposite_direction(next_move, facing) or next_move == facing):
-			pause_game()
+			lose_game()
 			move_orders.clear()
 			return
 		if is_opposite_direction(next_move, facing):
@@ -316,7 +285,7 @@ func facer():
 		direction = {"up": Vector2.UP, "down": Vector2.DOWN, "left": Vector2.LEFT, "right": Vector2.RIGHT}[next_move]
 
 		if is_raycast_blocked(facing):
-			pause_game()
+			lose_game()
 
 	# Keep turn_positions one slot shorter than the snake length
 	if turn_positions.size() >= length:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://disfsrloilqua"]
 
 [ext_resource type="Script" path="res://script/character_body_2d.gd" id="1_w2ywo"]
-[ext_resource type="Texture2D" uid="uid://d3i4uerfy1y6p" path="res://sprite/snake whole.png" id="2_u8oco"]
+[ext_resource type="PackedScene" uid="uid://vfnjnj2mu8yd" path="res://scenes/snake sprite.tscn" id="2_ldr7d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxb1m"]
 size = Vector2(10.0566, 10.0566)
@@ -21,16 +21,15 @@ drag_left_margin = 1.0
 drag_top_margin = 1.0
 drag_right_margin = 0.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-z_index = 100
-texture = ExtResource("2_u8oco")
-hframes = 13
-frame = 2
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 2.38419e-07)
 scale = Vector2(0.795498, 0.795498)
 shape = SubResource("RectangleShape2D_sxb1m")
+
+[node name="Sprite2D" parent="." instance=ExtResource("2_ldr7d")]
+z_index = 101
+z_as_relative = true
+frame = 2
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -41,19 +40,19 @@ shape = SubResource("RectangleShape2D_5vq0g")
 
 [node name="up" type="RayCast2D" parent="."]
 rotation = -3.14159
-scale = Vector2(0.555, 0.555)
+scale = Vector2(0.555, 0.315)
 target_position = Vector2(0, 20)
 
 [node name="down" type="RayCast2D" parent="."]
-scale = Vector2(0.555, 0.555)
+scale = Vector2(0.555, 0.315)
 target_position = Vector2(0, 20)
 
 [node name="left" type="RayCast2D" parent="."]
 rotation = 1.5708
-scale = Vector2(0.555, 0.555)
+scale = Vector2(0.555, 0.274999)
 target_position = Vector2(0, 20)
 
 [node name="right" type="RayCast2D" parent="."]
 rotation = -1.5708
-scale = Vector2(0.555, 0.555)
+scale = Vector2(0.555, 0.315)
 target_position = Vector2(0, 20)
