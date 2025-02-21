@@ -28,7 +28,6 @@ shape = SubResource("RectangleShape2D_sxb1m")
 
 [node name="Sprite2D" parent="." instance=ExtResource("2_ldr7d")]
 z_index = 101
-z_as_relative = true
 frame = 2
 
 [node name="Area2D" type="Area2D" parent="."]

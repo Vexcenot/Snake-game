@@ -20,12 +20,16 @@ var facing = "right"
 var facing_prev = "right"
 var movesame = false
 var pending_tail_segment = false  # Flag to track pending tail additionz
+var powerup = "current power up goes here"
+var bigsnek = preload("res://sprite/big snake.png")
+var smallsnek = preload("res://sprite/smol snake.png")
 @export var tail_segment_scene: PackedScene = preload("res://scenes/tail.tscn")
 @onready var up: RayCast2D = $up
 @onready var down: RayCast2D = $down
 @onready var left: RayCast2D = $left
 @onready var right: RayCast2D = $right
 @onready var sprite: Sprite2D = $Sprite2D
+
 
 func _ready():
 	teleport_sequence()
@@ -308,6 +312,19 @@ func _input(event):
 	if new_move != "" and (move_orders.is_empty() or move_orders.back() != new_move):
 		move_orders.append(new_move)
 
+	if event.is_action_pressed("k_action2"):
+		Global.snake_status = "big"
+		#update_all_textures(bigsnek)
+
+#func update_all_textures(new_texture: Texture2D):
+	## Update the head's sprite
+	#sprite.texture = new_texture
+	#
+	## Loop through each tail segment and update its sprite texture
+	#for segment in tail_segments:
+		#var seg_sprite = segment.get_node("Sprite2D")
+		#if seg_sprite:
+			#seg_sprite.texture = new_texture
 
 func update_sprite_orientation():
 	update_tail_orientation(self, facing)

@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://vfnjnj2mu8yd"]
+[gd_scene load_steps=3 format=3 uid="uid://vfnjnj2mu8yd"]
 
-[ext_resource type="Texture2D" uid="uid://csphoisw14tj5" path="res://sprite/smol snake2.png" id="1_nrr0h"]
+[ext_resource type="Texture2D" uid="uid://bu8ibnwwvdvxc" path="res://sprite/smol snake.png" id="1_ryjaw"]
+[ext_resource type="Script" path="res://script/snake_sprite.gd" id="2_vv843"]
 
 [node name="Sprite2D" type="Sprite2D"]
 z_index = 100
-texture = ExtResource("1_nrr0h")
+texture = ExtResource("1_ryjaw")
 hframes = 6
 frame = 1
+script = ExtResource("2_vv843")

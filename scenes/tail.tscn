@@ -8,7 +8,6 @@ size = Vector2(10.003, 10.003)
 [node name="tail" type="Node2D"]
 
 [node name="Sprite2D" parent="." instance=ExtResource("1_wib06")]
-z_as_relative = true
 
 [node name="tail_collision" type="StaticBody2D" parent="."]
 
