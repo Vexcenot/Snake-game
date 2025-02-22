@@ -23,6 +23,8 @@ var pending_tail_segment = false  # Flag to track pending tail additionz
 var powerup = "current power up goes here"
 var bigsnek = preload("res://sprite/big snake.png")
 var smallsnek = preload("res://sprite/smol snake.png")
+var collided = false
+var snake_length = 2
 @export var tail_segment_scene: PackedScene = preload("res://scenes/tail.tscn")
 @onready var up: RayCast2D = $up
 @onready var down: RayCast2D = $down
@@ -44,11 +46,12 @@ func _process(delta):
 	#for turn in turns:
 		#print("Turned from", turn[0], "to", turn[1])
 	move_current_scanner()
+	print(Global.snake_status)
 
 func teleport_sequence():
 	await get_tree().process_frame
 	position.x -= 16
-	for i in range(2):
+	for i in range(snake_length):
 		positions.push_front(global_position)
 		orientations.push_front(facing)
 		spawn_tail_segment()
@@ -139,6 +142,7 @@ func is_raycast_blocked(direction: String) -> bool:
 func moving():
 	if direction != Vector2.ZERO:
 		if is_raycast_blocked(facing):
+			lose_game()
 			return
 		position += direction * move_distance
 		global_position_tracker()
@@ -148,6 +152,7 @@ func moving():
 		if pending_tail_segment:
 			spawn_tail_segment()
 			pending_tail_segment = false  # Reset flag
+		print(positions)
 
 func global_position_tracker():
 	positions.push_front(global_position)
@@ -259,9 +264,11 @@ func interact():
 	if Input.is_action_just_pressed("k_action") and tail_segment_scene and positions.size() > 1:
 		pending_tail_segment = true  # Mark that we want to add a tail
 
+#runs game over function and (should) clear out all datas
 func lose_game():
-	print("Game paused due to collision with StaticBody2D.")
+	print("fuck")
 	get_tree().paused = true
+	move_orders.clear()
 
 func move_current_scanner():
 	var element1
@@ -276,10 +283,6 @@ func move_current_scanner():
 func facer():
 	if move_orders.size() > 0:
 		var next_move = move_orders.pop_front()
-		if is_raycast_blocked(facing) and (is_opposite_direction(next_move, facing) or next_move == facing):
-			lose_game()
-			move_orders.clear()
-			return
 		if is_opposite_direction(next_move, facing):
 			return
 		if next_move != facing:  # Only store if an actual turn is made
@@ -287,9 +290,6 @@ func facer():
 
 		facing = next_move
 		direction = {"up": Vector2.UP, "down": Vector2.DOWN, "left": Vector2.LEFT, "right": Vector2.RIGHT}[next_move]
-
-		if is_raycast_blocked(facing):
-			lose_game()
 
 	# Keep turn_positions one slot shorter than the snake length
 	if turn_positions.size() >= length:
@@ -313,18 +313,23 @@ func _input(event):
 		move_orders.append(new_move)
 
 	if event.is_action_pressed("k_action2"):
-		Global.snake_status = "big"
+		set_power("big")
 		#update_all_textures(bigsnek)
 
-#func update_all_textures(new_texture: Texture2D):
-	## Update the head's sprite
-	#sprite.texture = new_texture
-	#
-	## Loop through each tail segment and update its sprite texture
-	#for segment in tail_segments:
-		#var seg_sprite = segment.get_node("Sprite2D")
-		#if seg_sprite:
-			#seg_sprite.texture = new_texture
+#flashes between current power status and next one
+#fix sound not working
+func set_power(power: String):
+	$SmbPowerup.play()
+	get_tree().paused = true
+	var current_power = Global.snake_status
+	var blink_sec = 0.1
+	for i in range(4):
+		Global.snake_status = current_power
+		await get_tree().create_timer(blink_sec).timeout
+		Global.snake_status = power
+		await get_tree().create_timer(blink_sec).timeout  # Wait again before switching back
+	get_tree().paused = false
+
 
 func update_sprite_orientation():
 	update_tail_orientation(self, facing)

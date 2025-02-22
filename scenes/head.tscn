@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://disfsrloilqua"]
+[gd_scene load_steps=6 format=3 uid="uid://disfsrloilqua"]
 
 [ext_resource type="Script" path="res://script/character_body_2d.gd" id="1_w2ywo"]
+[ext_resource type="AudioStream" uid="uid://ejud1j2m8yjc" path="res://sounds/smb_powerup.wav" id="2_ali73"]
 [ext_resource type="PackedScene" uid="uid://vfnjnj2mu8yd" path="res://scenes/snake sprite.tscn" id="2_ldr7d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxb1m"]
@@ -11,6 +12,12 @@ size = Vector2(10.5245, 10.5245)
 
 [node name="Snek" type="CharacterBody2D"]
 script = ExtResource("1_w2ywo")
+
+[node name="SmbPowerup" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+editor_description = "suppose to play da power up sound
+"
+stream = ExtResource("2_ali73")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
