@@ -317,7 +317,7 @@ func _input(event):
 		#update_all_textures(bigsnek)
 
 #flashes between current power status and next one
-#fix sound not working
+#make it detect if touching mushroom.
 func set_power(power: String):
 	$SmbPowerup.play()
 	get_tree().paused = true

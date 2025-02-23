@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://disfsrloilqua"]
 
 [ext_resource type="Script" path="res://script/character_body_2d.gd" id="1_w2ywo"]
+[ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="2_ali73"]
 [ext_resource type="PackedScene" uid="uid://vfnjnj2mu8yd" path="res://scenes/snake sprite.tscn" id="2_ldr7d"]
-[ext_resource type="AudioStream" uid="uid://d2ewhbbcxbw5e" path="res://sounds/smb_powerup2.mp3" id="2_rac2c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxb1m"]
 size = Vector2(10.0566, 10.0566)
@@ -17,7 +17,7 @@ script = ExtResource("1_w2ywo")
 process_mode = 3
 editor_description = "suppose to play da power up sound
 "
-stream = ExtResource("2_rac2c")
+stream = ExtResource("2_ali73")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
@@ -37,9 +37,9 @@ shape = SubResource("RectangleShape2D_sxb1m")
 z_index = 101
 frame = 2
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Head Area" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head Area"]
 position = Vector2(2.38419e-07, 2.38419e-07)
 scale = Vector2(0.760132, 0.760132)
 shape = SubResource("RectangleShape2D_5vq0g")

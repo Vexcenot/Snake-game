@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5idjgy4afmho"]
+
+[ext_resource type="Script" path="res://script/mushroom.gd" id="1_4125a"]
+[ext_resource type="Texture2D" uid="uid://8j811yk5hue7" path="res://sprite/mushrooms.png" id="2_8mpd3"]
+[ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="3_xbh4k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_51ipa"]
+
+[node name="Node2D" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_4125a")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[node name="Mushrooms" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("2_8mpd3")
+hframes = 2
+
+[node name="Area2D" type="Area2D" parent="RigidBody2D/Mushrooms"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/Mushrooms/Area2D"]
+scale = Vector2(0.84, 0.84)
+shape = SubResource("RectangleShape2D_pmrqf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+position = Vector2(0, 6)
+scale = Vector2(0.160001, 0.184181)
+shape = SubResource("RectangleShape2D_51ipa")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xbh4k")
+
+[connection signal="area_entered" from="RigidBody2D/Mushrooms/Area2D" to="." method="_on_area_2d_area_entered"]
