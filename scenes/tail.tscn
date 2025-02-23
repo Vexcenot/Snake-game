@@ -6,6 +6,7 @@
 size = Vector2(10.003, 10.003)
 
 [node name="tail" type="Node2D"]
+process_mode = 3
 
 [node name="Sprite2D" parent="." instance=ExtResource("1_wib06")]
 

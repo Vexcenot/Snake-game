@@ -13,7 +13,8 @@ func _process(delta: float) -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":
-		set_power("big")
+		#set_power("big")
+		queue_free()
 
 
 #changes current power of snake then despawns scene
@@ -23,12 +24,11 @@ func set_power(power: String):
 	get_tree().paused = true
 	$AudioStreamPlayer.play()
 	Global.snake_status = power
-	$RigidBody2D/Mushrooms.visible = false
+	#$RigidBody2D/Mushrooms.visible = false
 	for i in range(4):
 		Global.snake_status = current_power
 		await get_tree().create_timer(blink_sec).timeout
 		Global.snake_status = power
 		await get_tree().create_timer(blink_sec).timeout  # Wait again before switching back
 	get_tree().paused = false
-	await get_tree().create_timer(5).timeout
 	queue_free()

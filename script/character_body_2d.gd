@@ -4,9 +4,9 @@ extends CharacterBody2D
 
 var direction = Vector2.ZERO
 var timer = 100
+var final_time = 0.5
 var move_distance = 8
 var turn_positions = []  # Stores turn positions and directions
-var final_time = 0.5
 var collision = false
 var move_orders = []
 var move_ready = false
@@ -316,20 +316,31 @@ func _input(event):
 		set_power("big")
 		#update_all_textures(bigsnek)
 
+
+
 #flashes between current power status and next one
 #make it detect if touching mushroom.
 func set_power(power: String):
-	$SmbPowerup.play()
-	get_tree().paused = true
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
+	var original_time = final_time
+	$SmbPowerup.play()
+	get_tree().paused = true
+	final_time = 9999999
 	for i in range(4):
 		Global.snake_status = current_power
 		await get_tree().create_timer(blink_sec).timeout
 		Global.snake_status = power
 		await get_tree().create_timer(blink_sec).timeout  # Wait again before switching back
+	final_time = original_time
 	get_tree().paused = false
 
 
 func update_sprite_orientation():
 	update_tail_orientation(self, facing)
+
+
+func _on_head_area_area_entered(area: Area2D) -> void:
+	if area.name == "mushroom":
+		set_power("big")
+	

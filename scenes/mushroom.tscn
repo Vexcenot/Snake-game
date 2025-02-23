@@ -18,9 +18,9 @@ script = ExtResource("1_4125a")
 texture = ExtResource("2_8mpd3")
 hframes = 2
 
-[node name="Area2D" type="Area2D" parent="RigidBody2D/Mushrooms"]
+[node name="mushroom" type="Area2D" parent="RigidBody2D/Mushrooms"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/Mushrooms/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/Mushrooms/mushroom"]
 scale = Vector2(0.84, 0.84)
 shape = SubResource("RectangleShape2D_pmrqf")
 
@@ -32,4 +32,4 @@ shape = SubResource("RectangleShape2D_51ipa")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_xbh4k")
 
-[connection signal="area_entered" from="RigidBody2D/Mushrooms/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="RigidBody2D/Mushrooms/mushroom" to="." method="_on_area_2d_area_entered"]

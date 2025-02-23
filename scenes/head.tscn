@@ -11,6 +11,7 @@ size = Vector2(10.0566, 10.0566)
 size = Vector2(10.5245, 10.5245)
 
 [node name="Snek" type="CharacterBody2D"]
+process_mode = 3
 script = ExtResource("1_w2ywo")
 
 [node name="SmbPowerup" type="AudioStreamPlayer" parent="."]
@@ -62,3 +63,5 @@ target_position = Vector2(0, 20)
 rotation = -1.5708
 scale = Vector2(0.555, 0.315)
 target_position = Vector2(0, 20)
+
+[connection signal="area_entered" from="Head Area" to="." method="_on_head_area_area_entered"]
