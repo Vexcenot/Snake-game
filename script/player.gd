@@ -1,10 +1,17 @@
 extends CharacterBody2D
 
-@export var speed = 200
-
+@export var tail_segment_scene: PackedScene = preload("res://scenes/tail.tscn")
+@onready var up: RayCast2D = $up
+@onready var down: RayCast2D = $down
+@onready var left: RayCast2D = $left
+@onready var right: RayCast2D = $right
+@onready var sprite: Sprite2D = $Sprite2D
 var direction = Vector2.ZERO
 var timer = 100
-var final_time = 0.5
+var original_original_original_time = 0.3
+var original_original_time = original_original_original_time
+var original_time = original_original_time
+var final_time = original_time
 var move_distance = 8
 var turn_positions = []  # Stores turn positions and directions
 var collision = false
@@ -25,12 +32,8 @@ var bigsnek = preload("res://sprite/big snake.png")
 var smallsnek = preload("res://sprite/smol snake.png")
 var collided = false
 var snake_length = 2
-@export var tail_segment_scene: PackedScene = preload("res://scenes/tail.tscn")
-@onready var up: RayCast2D = $up
-@onready var down: RayCast2D = $down
-@onready var left: RayCast2D = $left
-@onready var right: RayCast2D = $right
-@onready var sprite: Sprite2D = $Sprite2D
+var powered = false
+var sprint = false
 
 
 func _ready():
@@ -41,12 +44,8 @@ func _process(delta):
 	time_reset()
 	interact()
 	update_sprite_orientation()
-	#print("Facing:", facing)
-	#print("Previous Facing:", facing_prev)
-	#for turn in turns:
-		#print("Turned from", turn[0], "to", turn[1])
 	move_current_scanner()
-	print(Global.snake_status)
+	sprinting()
 
 func teleport_sequence():
 	await get_tree().process_frame
@@ -266,9 +265,11 @@ func interact():
 
 #runs game over function and (should) clear out all datas
 func lose_game():
+	move_ready = false
 	print("fuck")
 	get_tree().paused = true
-	move_orders.clear()
+	original_time = 999999999
+	print(final_time)
 
 func move_current_scanner():
 	var element1
@@ -311,11 +312,20 @@ func _input(event):
 	# Ensure the new move is not a duplicate of the last move in the list
 	if new_move != "" and (move_orders.is_empty() or move_orders.back() != new_move):
 		move_orders.append(new_move)
+	#speed up.
 
+#debug
 	if event.is_action_pressed("k_action2"):
 		set_power("big")
 		#update_all_textures(bigsnek)
-
+	
+#fix moving beyond death
+func sprinting():
+	if Input.is_action_pressed("k_shift"):
+		final_time = original_time/3
+		print("shat")
+	else:
+		final_time = original_time
 
 
 #flashes between current power status and next one
@@ -323,17 +333,17 @@ func _input(event):
 func set_power(power: String):
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
-	var original_time = final_time
 	$SmbPowerup.play()
 	get_tree().paused = true
-	final_time = 9999999
+	original_time = 99999
 	for i in range(4):
 		Global.snake_status = current_power
 		await get_tree().create_timer(blink_sec).timeout
 		Global.snake_status = power
 		await get_tree().create_timer(blink_sec).timeout  # Wait again before switching back
-	final_time = original_time
+	original_time = original_original_time
 	get_tree().paused = false
+	powered = true
 
 
 func update_sprite_orientation():
@@ -341,6 +351,6 @@ func update_sprite_orientation():
 
 
 func _on_head_area_area_entered(area: Area2D) -> void:
-	if area.name == "mushroom":
+	if area.name == "mushroom" and powered == false:
 		set_power("big")
 	

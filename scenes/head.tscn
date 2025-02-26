@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://disfsrloilqua"]
 
-[ext_resource type="Script" path="res://script/character_body_2d.gd" id="1_w2ywo"]
+[ext_resource type="Script" path="res://script/player.gd" id="1_w2ywo"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="2_ali73"]
 [ext_resource type="PackedScene" uid="uid://vfnjnj2mu8yd" path="res://scenes/snake sprite.tscn" id="2_ldr7d"]
 
@@ -8,7 +8,7 @@
 size = Vector2(10.0566, 10.0566)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vq0g"]
-size = Vector2(10.5245, 10.5245)
+size = Vector2(5.26225, 10.5245)
 
 [node name="Snek" type="CharacterBody2D"]
 process_mode = 3
@@ -41,9 +41,10 @@ frame = 2
 [node name="Head Area" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head Area"]
-position = Vector2(2.38419e-07, 2.38419e-07)
+position = Vector2(2, 2.38419e-07)
 scale = Vector2(0.760132, 0.760132)
 shape = SubResource("RectangleShape2D_5vq0g")
+debug_color = Color(0.803934, 0.392138, 0.389069, 0.42)
 
 [node name="up" type="RayCast2D" parent="."]
 rotation = -3.14159
@@ -57,7 +58,7 @@ target_position = Vector2(0, 20)
 [node name="left" type="RayCast2D" parent="."]
 rotation = 1.5708
 scale = Vector2(0.555, 0.274999)
-target_position = Vector2(0, 20)
+target_position = Vector2(3.9135e-05, 21.8183)
 
 [node name="right" type="RayCast2D" parent="."]
 rotation = -1.5708

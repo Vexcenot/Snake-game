@@ -32,3 +32,7 @@ func set_power(power: String):
 		await get_tree().create_timer(blink_sec).timeout  # Wait again before switching back
 	get_tree().paused = false
 	queue_free()
+
+
+func _on_left_check_body_exited(body: Node2D) -> void:
+	pass # Replace with function body.
