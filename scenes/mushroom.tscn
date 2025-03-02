@@ -1,14 +1,75 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5idjgy4afmho"]
+[gd_scene load_steps=15 format=3 uid="uid://c5idjgy4afmho"]
 
 [ext_resource type="Script" path="res://script/mushroom.gd" id="1_4125a"]
 [ext_resource type="Texture2D" uid="uid://8j811yk5hue7" path="res://sprite/mushrooms.png" id="2_8mpd3"]
 [ext_resource type="Script" path="res://script/entity.gd" id="2_e0v0r"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="3_xbh4k"]
+[ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/smb_powerup_appears.wav" id="3_yysf2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
 size = Vector2(19.5238, 19.5238)
+
+[sub_resource type="Animation" id="Animation_xfln1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kd8tc"]
+resource_name = "spawn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 16), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gu7y0"]
+_data = {
+"RESET": SubResource("Animation_xfln1"),
+"spawn": SubResource("Animation_kd8tc")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpp18"]
 size = Vector2(10.0103, 1.27963)
@@ -25,7 +86,7 @@ size = Vector2(2, 16)
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("2_e0v0r")
-avoid_ledge = true
+block = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.820104, 0.781477)
@@ -41,6 +102,14 @@ hframes = 2
 position = Vector2(-0.2, -0.2)
 scale = Vector2(0.848732, 0.855057)
 shape = SubResource("RectangleShape2D_pmrqf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Mushrooms"]
+libraries = {
+"": SubResource("AnimationLibrary_gu7y0")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Mushrooms/AnimationPlayer"]
+stream = ExtResource("3_yysf2")
 
 [node name="left bottom" type="Area2D" parent="."]
 position = Vector2(3.55271e-15, 0)
@@ -58,7 +127,6 @@ scale = Vector2(0.820104, 0.781477)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="right bottom"]
 position = Vector2(9.14518, 10.8768)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_kg8q6")
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -86,6 +154,7 @@ shape = SubResource("RectangleShape2D_exsck")
 
 [connection signal="area_entered" from="Mushrooms/mushroom" to="." method="_on_mushroom_area_entered"]
 [connection signal="area_entered" from="Mushrooms/mushroom" to="Node2D" method="_on_area_2d_area_entered"]
+[connection signal="animation_finished" from="Mushrooms/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]
 [connection signal="body_exited" from="left bottom" to="Node2D" method="_on_side_checks_body_exited"]
 [connection signal="body_entered" from="right bottom" to="." method="_on_area_2d_body_entered"]
