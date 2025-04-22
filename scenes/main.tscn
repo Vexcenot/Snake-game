@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=8 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
 [ext_resource type="PackedScene" uid="uid://c5idjgy4afmho" path="res://scenes/mushroom.tscn" id="3_6ujkc"]
 [ext_resource type="PackedScene" uid="uid://cdbmv0psdbx0l" path="res://scenes/endpost.tscn" id="4_2e5vk"]
+[ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="5_gaidb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7ar"]
 size = Vector2(1674, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6nxm"]
+size = Vector2(80, 20)
 
 [node name="Main" type="Node"]
 
@@ -38,3 +42,12 @@ scale = Vector2(3.72, 1)
 
 [node name="Endpost" parent="." instance=ExtResource("4_2e5vk")]
 position = Vector2(431, 202)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(360, 155)
+shape = SubResource("RectangleShape2D_o6nxm")
+
+[node name="Goomba" parent="." instance=ExtResource("5_gaidb")]
+position = Vector2(370, 198)

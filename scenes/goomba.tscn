@@ -1,10 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5idjgy4afmho"]
+[gd_scene load_steps=15 format=3 uid="uid://bwwi52l72ncsf"]
 
-[ext_resource type="Script" path="res://script/mushroom.gd" id="1_4125a"]
-[ext_resource type="Texture2D" uid="uid://8j811yk5hue7" path="res://sprite/mushrooms.png" id="2_8mpd3"]
-[ext_resource type="Script" path="res://script/entity.gd" id="2_e0v0r"]
-[ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="3_xbh4k"]
-[ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/smb_powerup_appears.wav" id="3_yysf2"]
+[ext_resource type="Script" path="res://script/enemy.gd" id="1_13s4y"]
+[ext_resource type="Texture2D" uid="uid://cyjxthecr7oxv" path="res://sprite/goomba.png" id="2_tdxqk"]
+[ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/smb_powerup_appears.wav" id="3_y01q2"]
+[ext_resource type="Script" path="res://script/mushroom.gd" id="4_b12ce"]
+[ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="5_h7tmd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
 
@@ -83,22 +83,21 @@ size = Vector2(2, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exsck"]
 size = Vector2(2, 16)
 
-[node name="mushroom" type="CharacterBody2D"]
+[node name="Goomba" type="CharacterBody2D"]
 collision_layer = 2
-script = ExtResource("2_e0v0r")
-block = true
+script = ExtResource("1_13s4y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.820104, 0.781477)
 shape = SubResource("RectangleShape2D_v7c8f")
 
 [node name="Mushrooms" type="Sprite2D" parent="."]
-texture = ExtResource("2_8mpd3")
-hframes = 2
+texture = ExtResource("2_tdxqk")
+hframes = 3
 
-[node name="mushroom" type="Area2D" parent="Mushrooms"]
+[node name="enemy" type="Area2D" parent="Mushrooms"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Mushrooms/mushroom"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Mushrooms/enemy"]
 position = Vector2(-0.2, -0.2)
 scale = Vector2(0.848732, 0.855057)
 shape = SubResource("RectangleShape2D_pmrqf")
@@ -109,7 +108,7 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Mushrooms/AnimationPlayer"]
-stream = ExtResource("3_yysf2")
+stream = ExtResource("3_y01q2")
 
 [node name="left bottom" type="Area2D" parent="."]
 position = Vector2(3.55271e-15, 0)
@@ -131,10 +130,10 @@ shape = SubResource("RectangleShape2D_kg8q6")
 
 [node name="Node2D" type="Node2D" parent="."]
 process_mode = 3
-script = ExtResource("1_4125a")
+script = ExtResource("4_b12ce")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node2D"]
-stream = ExtResource("3_xbh4k")
+stream = ExtResource("5_h7tmd")
 
 [node name="left side" type="Area2D" parent="."]
 scale = Vector2(1, 0.331275)
@@ -152,8 +151,8 @@ position = Vector2(8, 0)
 scale = Vector2(1, 2.36695)
 shape = SubResource("RectangleShape2D_exsck")
 
-[connection signal="area_entered" from="Mushrooms/mushroom" to="." method="_on_mushroom_area_entered"]
-[connection signal="area_entered" from="Mushrooms/mushroom" to="Node2D" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Mushrooms/enemy" to="." method="_on_mushroom_area_entered"]
+[connection signal="area_entered" from="Mushrooms/enemy" to="Node2D" method="_on_area_2d_area_entered"]
 [connection signal="animation_finished" from="Mushrooms/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]
 [connection signal="body_exited" from="left bottom" to="Node2D" method="_on_side_checks_body_exited"]

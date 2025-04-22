@@ -14,8 +14,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta  # Apply gravity
 		move_and_slide()
 
-func _ready():
-	block_spawn()
+#func _ready():
+	#block_spawn()
 
 #check if on ledge and turns.
 func _on_side_checks_body_exited(body: Node2D) -> void:
@@ -50,10 +50,10 @@ func block_spawn():
 
 
 #deletes when being touched by head
-func _on_mushroom_area_entered(area: Area2D) -> void:
-	if area.name == "Head Area":
-		#set_power("big")
-		queue_free()
+#func _on_mushroom_area_entered(area: Area2D) -> void:
+	#if area.name == "Head Area":
+		##set_power("big")
+		#queue_free()
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

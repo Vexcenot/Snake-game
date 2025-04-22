@@ -359,6 +359,8 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		win()
 	if area.name == "endpost":
 		win2()
+	if area.name == "enemy":
+		lose_game()
 	
 	
 #win conditions when touching flag pole. position pole in way that snake head will always be inside it. Make sure snake head doesnt by pass it.
