@@ -1,0 +1,39 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdbmv0psdbx0l"]
+
+[ext_resource type="Texture2D" uid="uid://v723k288mi0g" path="res://sprite/flag pole.png" id="1_nypt7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8p4uc"]
+size = Vector2(2.42417, 152)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_468rv"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yswmm"]
+size = Vector2(1.99286, 5.46463)
+
+[node name="Endpost" type="Node2D"]
+position = Vector2(9, -6)
+
+[node name="FlagPole" type="Sprite2D" parent="."]
+position = Vector2(-9, -78)
+texture = ExtResource("1_nypt7")
+
+[node name="winarea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="winarea"]
+position = Vector2(-9.23836, -86)
+scale = Vector2(1.02168, 0.995506)
+shape = SubResource("RectangleShape2D_8p4uc")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-9, -2)
+shape = SubResource("RectangleShape2D_468rv")
+
+[node name="endpost" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="endpost"]
+position = Vector2(-9, -14)
+scale = Vector2(0.958135, 1.43996)
+shape = SubResource("RectangleShape2D_yswmm")

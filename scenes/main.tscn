@@ -3,21 +3,15 @@
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
 [ext_resource type="PackedScene" uid="uid://c5idjgy4afmho" path="res://scenes/mushroom.tscn" id="3_6ujkc"]
+[ext_resource type="PackedScene" uid="uid://cdbmv0psdbx0l" path="res://scenes/endpost.tscn" id="4_2e5vk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7ar"]
 size = Vector2(1674, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_unrtc"]
-size = Vector2(9.28082, 20)
-
 [node name="Main" type="Node"]
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(309, 132)
-
-[node name="Snek2" parent="." instance=ExtResource("2_10edd")]
-visible = false
-position = Vector2(49, 196)
+position = Vector2(331, 180)
 
 [node name="20592Png" type="Sprite2D" parent="."]
 position = Vector2(1688, 240)
@@ -35,19 +29,12 @@ texture = ExtResource("1_h5eht")
 position = Vector2(-849, -16)
 shape = SubResource("RectangleShape2D_is7ar")
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="20592Png2/wall"]
-position = Vector2(-1355, -79)
-scale = Vector2(0.0799988, 1)
-shape = SubResource("RectangleShape2D_is7ar")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="20592Png2/wall"]
-position = Vector2(-1548, -42)
-scale = Vector2(2.92, 1)
-shape = SubResource("RectangleShape2D_unrtc")
-
 [node name="CharacterBody2D2" parent="." instance=ExtResource("3_6ujkc")]
 position = Vector2(344, 137)
 
 [node name="CharacterBody2D3" parent="." instance=ExtResource("3_6ujkc")]
 position = Vector2(137, 172)
 scale = Vector2(3.72, 1)
+
+[node name="Endpost" parent="." instance=ExtResource("4_2e5vk")]
+position = Vector2(431, 202)

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var speeder = 45
-var gravity = 3500  # Default Godot gravity in pixels per second squared
+var gravity = 700 
 @export var avoid_ledge = false
 @export var block = false
 var speed = speeder

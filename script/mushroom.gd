@@ -11,10 +11,7 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.name == "Head Area":
-		#set_power("big")
-		queue_free()
+
 
 
 #changes current power of snake then despawns scene

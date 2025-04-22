@@ -34,6 +34,8 @@ var collided = false
 var snake_length = 2
 var powered = false
 var sprint = false
+var player_input = true
+var move_exit = false
 
 
 func _ready():
@@ -300,13 +302,13 @@ func facer():
 func _input(event):
 	var new_move = ""
 
-	if event.is_action_pressed("k_up"):
+	if event.is_action_pressed("k_up") and player_input == true:
 		new_move = "up"
-	elif event.is_action_pressed("k_down"):
+	elif event.is_action_pressed("k_down") and player_input == true:
 		new_move = "down"
-	elif event.is_action_pressed("k_left"):
+	elif event.is_action_pressed("k_left") and player_input == true:
 		new_move = "left"
-	elif event.is_action_pressed("k_right"):
+	elif event.is_action_pressed("k_right") and player_input == true:
 		new_move = "right"
 
 	# Ensure the new move is not a duplicate of the last move in the list
@@ -353,4 +355,25 @@ func update_sprite_orientation():
 func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "mushroom" and powered == false:
 		set_power("big")
+	if area.name == "winarea":
+		win()
+	if area.name == "endpost":
+		win2()
+	
+	
+#win conditions when touching flag pole. position pole in way that snake head will always be inside it. Make sure snake head doesnt by pass it.
+#make flag seperate item that gets eten when snake touched top of flag pole
+func win():
+	player_input = false
+	original_time = 999999999
+	await get_tree().create_timer(0.5).timeout
+	original_time = original_original_time
+	if move_exit == true:
+		move_orders.append("right")
+	else:
+		move_orders.append("down")
+
+func win2():
+	move_exit = true
+	move_orders.append("right")
 	
