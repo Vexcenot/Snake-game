@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0yh13wsoj6jf"]
+
+[ext_resource type="Texture2D" uid="uid://cjcxgltippxrq" path="res://sprite/enemy flag.png" id="1_4nj3v"]
+[ext_resource type="Script" path="res://flag.gd" id="2_erh7b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwxna"]
+size = Vector2(8, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjocn"]
+
+[node name="flag" type="Sprite2D"]
+texture = ExtResource("1_4nj3v")
+script = ExtResource("2_erh7b")
+
+[node name="eat area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="eat area"]
+position = Vector2(4, -1)
+shape = SubResource("RectangleShape2D_wwxna")
+
+[node name="edible" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="edible"]
+scale = Vector2(3.07808, 3.07808)
+shape = SubResource("RectangleShape2D_kjocn")
+
+[connection signal="area_entered" from="eat area" to="." method="_on_eat_area_area_entered"]
+[connection signal="body_entered" from="eat area" to="." method="_on_eat_area_body_entered"]

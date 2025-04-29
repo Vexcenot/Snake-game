@@ -2,20 +2,19 @@
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
-[ext_resource type="PackedScene" uid="uid://c5idjgy4afmho" path="res://scenes/mushroom.tscn" id="3_6ujkc"]
 [ext_resource type="PackedScene" uid="uid://cdbmv0psdbx0l" path="res://scenes/endpost.tscn" id="4_2e5vk"]
+[ext_resource type="PackedScene" uid="uid://d0yh13wsoj6jf" path="res://scenes/flag.tscn" id="5_2ealn"]
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="5_gaidb"]
+[ext_resource type="PackedScene" uid="uid://c5idjgy4afmho" path="res://scenes/mushroom.tscn" id="6_2spgy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7ar"]
-size = Vector2(1674, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6nxm"]
-size = Vector2(80, 20)
+size = Vector2(1674, 31)
 
 [node name="Main" type="Node"]
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(331, 180)
+position = Vector2(264, 169)
+scale = Vector2(2.00944, 1.98341)
 
 [node name="20592Png" type="Sprite2D" parent="."]
 position = Vector2(1688, 240)
@@ -30,24 +29,22 @@ texture = ExtResource("1_h5eht")
 [node name="wall" type="StaticBody2D" parent="20592Png2"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="20592Png2/wall"]
-position = Vector2(-849, -16)
+position = Vector2(-849, -15.5)
 shape = SubResource("RectangleShape2D_is7ar")
-
-[node name="CharacterBody2D2" parent="." instance=ExtResource("3_6ujkc")]
-position = Vector2(344, 137)
-
-[node name="CharacterBody2D3" parent="." instance=ExtResource("3_6ujkc")]
-position = Vector2(137, 172)
-scale = Vector2(3.72, 1)
 
 [node name="Endpost" parent="." instance=ExtResource("4_2e5vk")]
 position = Vector2(431, 202)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(360, 155)
-shape = SubResource("RectangleShape2D_o6nxm")
-
 [node name="Goomba" parent="." instance=ExtResource("5_gaidb")]
-position = Vector2(370, 198)
+position = Vector2(318, 200)
+avoid_ledge = true
+
+[node name="Goomba2" parent="." instance=ExtResource("5_gaidb")]
+position = Vector2(330, 136)
+avoid_ledge = true
+
+[node name="flag" parent="." instance=ExtResource("5_2ealn")]
+position = Vector2(413, 56)
+
+[node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
+position = Vector2(316, 200)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8rpn5napbsdu"]
+[gd_scene load_steps=6 format=3 uid="uid://dl2ghvf36ax3h"]
 
-[ext_resource type="PackedScene" uid="uid://vfnjnj2mu8yd" path="res://scenes/snake sprite.tscn" id="1_wib06"]
+[ext_resource type="PackedScene" uid="uid://vfnjnj2mu8yd" path="res://scenes/snake sprite.tscn" id="1_60rs1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_frb71"]
 size = Vector2(10.003, 10.003)
@@ -67,7 +67,7 @@ _data = {
 process_mode = 3
 scale = Vector2(2, 2)
 
-[node name="Sprite2D" parent="." instance=ExtResource("1_wib06")]
+[node name="Sprite2D" parent="." instance=ExtResource("1_60rs1")]
 hframes = 8
 
 [node name="tail_collision" type="StaticBody2D" parent="."]

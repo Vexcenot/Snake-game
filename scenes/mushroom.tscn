@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c5idjgy4afmho"]
+[gd_scene load_steps=16 format=3 uid="uid://c5idjgy4afmho"]
 
 [ext_resource type="Script" path="res://script/mushroom.gd" id="1_4125a"]
 [ext_resource type="Texture2D" uid="uid://8j811yk5hue7" path="res://sprite/mushrooms.png" id="2_8mpd3"]
@@ -7,9 +7,10 @@
 [ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/smb_powerup_appears.wav" id="3_yysf2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
+size = Vector2(9.75486, 7.44074)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
-size = Vector2(19.5238, 19.5238)
+size = Vector2(19.5238, 21.0023)
 
 [sub_resource type="Animation" id="Animation_xfln1"]
 length = 0.001
@@ -78,10 +79,12 @@ size = Vector2(10.0103, 1.27963)
 size = Vector2(1.21936, 1.27965)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sjlml"]
-size = Vector2(2, 16)
+size = Vector2(2, 2.39006)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exsck"]
-size = Vector2(2, 16)
+size = Vector2(2, 2.44695)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euomj"]
 
 [node name="mushroom" type="CharacterBody2D"]
 collision_layer = 2
@@ -89,6 +92,7 @@ script = ExtResource("2_e0v0r")
 block = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 4.90738)
 scale = Vector2(0.820104, 0.781477)
 shape = SubResource("RectangleShape2D_v7c8f")
 
@@ -99,8 +103,8 @@ hframes = 2
 [node name="mushroom" type="Area2D" parent="Mushrooms"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mushrooms/mushroom"]
-position = Vector2(-0.2, -0.2)
-scale = Vector2(0.848732, 0.855057)
+position = Vector2(-0.2, -0.581445)
+scale = Vector2(0.51218, 0.515997)
 shape = SubResource("RectangleShape2D_pmrqf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Mushrooms"]
@@ -140,7 +144,7 @@ stream = ExtResource("3_xbh4k")
 scale = Vector2(1, 0.331275)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left side"]
-position = Vector2(-8, 0)
+position = Vector2(-8, 18.3084)
 scale = Vector2(1, 2.69044)
 shape = SubResource("RectangleShape2D_sjlml")
 
@@ -148,9 +152,15 @@ shape = SubResource("RectangleShape2D_sjlml")
 scale = Vector2(0.95107, 0.380408)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right side"]
-position = Vector2(8, 0)
+position = Vector2(8, 16.0397)
 scale = Vector2(1, 2.36695)
 shape = SubResource("RectangleShape2D_exsck")
+
+[node name="edible" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="edible"]
+scale = Vector2(3.07808, 3.07808)
+shape = SubResource("RectangleShape2D_euomj")
 
 [connection signal="area_entered" from="Mushrooms/mushroom" to="." method="_on_mushroom_area_entered"]
 [connection signal="area_entered" from="Mushrooms/mushroom" to="Node2D" method="_on_area_2d_area_entered"]

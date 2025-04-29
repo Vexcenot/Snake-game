@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
-var speeder = 50
+var speeder = 25
 var gravity = 700 
 @export var avoid_ledge = false
 @export var block = false
-var speed = speeder
+var speed = -speeder
 
 
 #movement baby!!!!
@@ -21,16 +21,13 @@ func _physics_process(delta: float) -> void:
 func _on_side_checks_body_exited(body: Node2D) -> void:
 	if speed == speeder and avoid_ledge == true:
 		speed = -speeder
-		print("fuck1")
+
 	elif speed == -speeder and avoid_ledge == true:
 		speed = speeder
-		print("fuck2")
 
-#check if on edge and turns
+#if bumped wall, turns.
 func _on_left_side_body_entered(body: Node2D) -> void:
 	speed = speeder
-	print("shit")
-
 
 func _on_right_side_body_entered(body: Node2D) -> void:
 	speed = -speeder

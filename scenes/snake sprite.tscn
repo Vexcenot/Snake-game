@@ -7,6 +7,6 @@
 process_mode = 3
 z_index = 100
 texture = ExtResource("1_ryjaw")
-hframes = 6
+hframes = 7
 frame = 1
 script = ExtResource("2_vv843")

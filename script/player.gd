@@ -12,7 +12,7 @@ var original_original_original_time = 0.3
 var original_original_time = original_original_original_time
 var original_time = original_original_time
 var final_time = original_time
-var move_distance = 8
+var move_distance = 16
 var turn_positions = []  # Stores turn positions and directions
 var collision = false
 var move_orders = []
@@ -51,7 +51,7 @@ func _process(delta):
 
 func teleport_sequence():
 	await get_tree().process_frame
-	position.x -= 16
+	position.x -= move_distance
 	for i in range(snake_length):
 		positions.push_front(global_position)
 		orientations.push_front(facing)
@@ -61,66 +61,33 @@ func teleport_sequence():
 		orientations.push_front(facing)
 	move_ready = true
 
-func final_tail():
-	if tail_segments.size() > 0:
-		var last = tail_segments[-1]
-		var sprite = last.get_node("Sprite2D")
-		sprite.frame = 0
-		for i in tail_segments:
-			if i != last:
-				i.get_node("Sprite2D").frame = 1
-
-		# Debug prints
-		print("Final tail position:", last.global_position)
-		print("Turn positions:", turn_positions)
 
 func spawn_tail_segment():
 	if tail_segment_scene:
-		# Check if the last tail segment exists and has frame 4
-		if tail_segments.size() > 0:
-			var last_segment = tail_segments[-1]
-			var last_sprite = last_segment.get_node("Sprite2D")
-			if last_sprite and last_sprite.frame == 4:
-				return  # Do not spawn a new segment if the last one is final
-
 		# Spawn new tail segment
 		var tail_segment = tail_segment_scene.instantiate()
 		get_parent().add_child(tail_segment)
 		tail_segment.global_position = global_position
+		
+		# Make the segment initially invisible
+		tail_segment.modulate.a = 0
+		
 		tail_segments.push_front(tail_segment)
 		length += 1
-
-		var sprite = tail_segment.get_node("Sprite2D")
-		if sprite:
-			await get_tree().create_timer(0.1).timeout
-
-		# Ensure only the last tail segment is updated, without resetting previous turn frames
-		update_tail_frames()
-
-
-func update_tail_frames():
-	if tail_segments.is_empty():
-		return
 	
 	# Update the last tail segment only
 	var last = tail_segments[-1]
 	var sprite = last.get_node("Sprite2D")
 	sprite.frame = 0  # Make sure the last segment is frame 0
 
-	# Keep turn frames intact
-	for i in range(tail_segments.size() - 1):
-		var segment = tail_segments[i]
-		var segment_sprite = segment.get_node("Sprite2D")
-		for turn in turn_positions:
-			if turn[0].distance_to(segment.global_position) < move_distance * 0.5:
-				segment_sprite.frame = 3  # Maintain turn segments
-				adjust_turn_frame(segment_sprite, turn[1], turn[2])
-				break  # Stop checking once a turn is found
 
 
 func time_reset():
 	if timer >= final_time:
-
+		# Make all tail segments visible
+		for segment in tail_segments:
+			segment.modulate.a = 1
+			
 		facing_prev = facing  # Save previous facing before updating
 		facer()
 		moving()
@@ -163,14 +130,12 @@ func global_position_tracker():
 		orientations.pop_back()
 
 func move_tail_segments():
-	for i in range(min(length - 1, tail_segments.size())):  # Include last tail segment
+	for i in range(min(length, tail_segments.size())):
 		if positions.size() > i + 1:
 			tail_segments[i].global_position = positions[i + 1]
 			update_tail_orientation(tail_segments[i], orientations[i + 1])
 			check_turn_segment(tail_segments[i], positions[i + 1])
 
-
-##################FIX THIS################
 	# Move the last tail segment but also remove past turns it crosses
 	if tail_segments.size() > 0:
 		var last_index = tail_segments.size()
@@ -268,10 +233,28 @@ func interact():
 #runs game over function and (should) clear out all datas
 func lose_game():
 	move_ready = false
-	print("fuck")
 	get_tree().paused = true
 	original_time = 999999999
-	print(final_time)
+	sprite.frame = 6
+	var delay_between_segments = 0.05  # 50ms delay between segments
+	var all_segments = [self] + tail_segments  # Head first, then tail segments
+	
+	# First, play the head's death animation
+	await get_tree().create_timer(0.18).timeout
+	$AnimationPlayer.play("die")
+	await get_tree().create_timer(delay_between_segments).timeout  # Initial delay for head
+	
+	# Start from index 1 since we already animated the head
+	for i in range(1, all_segments.size()):
+		var segment = all_segments[i]
+		if segment.has_node("AnimationPlayer"):
+			var anim_player = segment.get_node("AnimationPlayer")
+			anim_player.play("die")
+		
+		# Wait before playing the next segment's animation
+		if i < all_segments.size() - 1:  # Don't wait after the last segment
+			await get_tree().create_timer(delay_between_segments).timeout
+
 
 func move_current_scanner():
 	var element1
@@ -346,7 +329,7 @@ func set_power(power: String):
 	original_time = original_original_time
 	get_tree().paused = false
 	powered = true
-
+	pending_tail_segment = true
 
 func update_sprite_orientation():
 	update_tail_orientation(self, facing)
@@ -361,6 +344,12 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		win2()
 	if area.name == "enemy":
 		lose_game()
+	if area.name == "edible":
+		sprite.frame = 5
+
+func _on_head_area_area_exited(area: Area2D) -> void:
+	if area.name == "edible":
+		sprite.frame = 2
 	
 	
 #win conditions when touching flag pole. position pole in way that snake head will always be inside it. Make sure snake head doesnt by pass it.

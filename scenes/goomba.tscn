@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bwwi52l72ncsf"]
+[gd_scene load_steps=18 format=3 uid="uid://bwwi52l72ncsf"]
 
 [ext_resource type="Script" path="res://script/enemy.gd" id="1_13s4y"]
 [ext_resource type="Texture2D" uid="uid://cyjxthecr7oxv" path="res://sprite/goomba.png" id="2_tdxqk"]
@@ -7,9 +7,10 @@
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="5_h7tmd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
+size = Vector2(16.5839, 2.32223)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
-size = Vector2(19.5238, 19.5238)
+size = Vector2(16.4952, 12.9506)
 
 [sub_resource type="Animation" id="Animation_xfln1"]
 length = 0.001
@@ -83,11 +84,50 @@ size = Vector2(2, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exsck"]
 size = Vector2(2, 16)
 
+[sub_resource type="Animation" id="Animation_khbii"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mushrooms:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2o3b2"]
+resource_name = "walk"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mushrooms:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ajt5r"]
+_data = {
+"RESET": SubResource("Animation_khbii"),
+"walk": SubResource("Animation_2o3b2")
+}
+
 [node name="Goomba" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_13s4y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.98023e-08, 7)
 scale = Vector2(0.820104, 0.781477)
 shape = SubResource("RectangleShape2D_v7c8f")
 
@@ -98,7 +138,7 @@ hframes = 3
 [node name="enemy" type="Area2D" parent="Mushrooms"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mushrooms/enemy"]
-position = Vector2(-0.2, -0.2)
+position = Vector2(2.38419e-07, 2.53676)
 scale = Vector2(0.848732, 0.855057)
 shape = SubResource("RectangleShape2D_pmrqf")
 
@@ -121,7 +161,7 @@ scale = Vector2(0.121811, -1)
 shape = SubResource("RectangleShape2D_cpp18")
 
 [node name="right bottom" type="Area2D" parent="."]
-position = Vector2(-5.96046e-08, 0)
+position = Vector2(-3.55271e-15, 0)
 scale = Vector2(0.820104, 0.781477)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="right bottom"]
@@ -139,7 +179,7 @@ stream = ExtResource("5_h7tmd")
 scale = Vector2(1, 0.331275)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left side"]
-position = Vector2(-8, 0)
+position = Vector2(-7, 0)
 scale = Vector2(1, 2.69044)
 shape = SubResource("RectangleShape2D_sjlml")
 
@@ -147,9 +187,15 @@ shape = SubResource("RectangleShape2D_sjlml")
 scale = Vector2(0.95107, 0.380408)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right side"]
-position = Vector2(8, 0)
+position = Vector2(7.36013, 0)
 scale = Vector2(1, 2.36695)
 shape = SubResource("RectangleShape2D_exsck")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ajt5r")
+}
+autoplay = "walk"
 
 [connection signal="area_entered" from="Mushrooms/enemy" to="." method="_on_mushroom_area_entered"]
 [connection signal="area_entered" from="Mushrooms/enemy" to="Node2D" method="_on_area_2d_area_entered"]
