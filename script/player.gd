@@ -144,7 +144,7 @@ func move_tail_segments():
 
 func remove_past_turns(last_tail_position):
 	for i in range(turn_positions.size() - 1, -1, -1):  # Iterate in reverse to safely remove elements
-		if turn_positions[i][0].distance_to(last_tail_position) < move_distance * 0.5:
+		if turn_positions[i][0].distance_to(last_tail_position) < move_distance * 0.5 and pending_tail_segment == false:
 			turn_positions.pop_at(i)  # Remove the turn position
 
 
