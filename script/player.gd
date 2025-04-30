@@ -14,12 +14,12 @@ var original_time = original_original_time
 var final_time = original_time
 var move_distance = 16
 var turn_positions = []  # Stores turn positions and directions
+var eat_positions = []  # Stores turn positions and directions
 var collision = false
 var move_orders = []
 var move_ready = false
 var positions = []
 var orientations = []  # Stores facing directions for tail
-var turns = []  # Stores turns made
 var length = 3
 var tail_segments = []
 var scanned = {"up": "", "down": "", "left": "", "right": ""}
@@ -40,6 +40,7 @@ var move_exit = false
 
 func _ready():
 	teleport_sequence()
+	
 
 func _process(delta):
 	timer += delta
@@ -61,6 +62,9 @@ func teleport_sequence():
 		orientations.push_front(facing)
 	move_ready = true
 
+func ready_spawn_tail(): #prepares to add tail
+	pending_tail_segment = true
+	eat_positions.push_front(global_position) #adds "full" sprite to tail. 
 
 func spawn_tail_segment():
 	if tail_segment_scene:
@@ -78,7 +82,8 @@ func spawn_tail_segment():
 	# Update the last tail segment only
 	var last = tail_segments[-1]
 	var sprite = last.get_node("Sprite2D")
-	sprite.frame = 0  # Make sure the last segment is frame 0
+	if move_ready == false:
+		sprite.frame = 0
 
 
 
@@ -135,13 +140,28 @@ func move_tail_segments():
 			tail_segments[i].global_position = positions[i + 1]
 			update_tail_orientation(tail_segments[i], orientations[i + 1])
 			check_turn_segment(tail_segments[i], positions[i + 1])
+			check_eat_segment(tail_segments[i], positions[i + 1])
 
-	# Move the last tail segment but also remove past turns it crosses
+	# Remove past eat positions when the last tail segment passes them
 	if tail_segments.size() > 0:
 		var last_index = tail_segments.size()
 		if positions.size() > last_index:
-			remove_past_turns(positions[last_index])  # Remove turns at this position
+			remove_past_turns(positions[last_index])
+			remove_past_eats(positions[last_index])
+func check_eat_segment(segment, position):
+	var sprite = segment.get_node("Sprite2D")
+	for eat_pos in eat_positions:
+		if eat_pos.distance_to(position) < move_distance * 0.5:
+			# Only show eating animation if it's not the last segment
+			if segment != tail_segments[-1]:
+				sprite.frame = 7
+			return
 
+func remove_past_eats(last_tail_position):
+	for i in range(eat_positions.size() - 1, -1, -1):
+		if eat_positions[i].distance_to(last_tail_position) < move_distance * 0.5:
+			eat_positions.pop_at(i)
+			
 func remove_past_turns(last_tail_position):
 	for i in range(turn_positions.size() - 1, -1, -1):  # Iterate in reverse to safely remove elements
 		if turn_positions[i][0].distance_to(last_tail_position) < move_distance * 0.5 and pending_tail_segment == false:
@@ -228,7 +248,9 @@ func update_tail_orientation(segment, orientation):
 
 func interact():
 	if Input.is_action_just_pressed("k_action") and tail_segment_scene and positions.size() > 1:
-		pending_tail_segment = true  # Mark that we want to add a tail
+		ready_spawn_tail()
+		# Record the position where we're adding a new tail segment
+		eat_positions.push_front(global_position)
 
 #runs game over function and (should) clear out all datas
 func lose_game():
@@ -314,29 +336,29 @@ func sprinting():
 
 
 #flashes between current power status and next one
-#make it detect if touching mushroom.
 func set_power(power: String):
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
-	$SmbPowerup.play()
-	get_tree().paused = true
-	original_time = 99999
-	for i in range(4):
-		Global.snake_status = current_power
-		await get_tree().create_timer(blink_sec).timeout
-		Global.snake_status = power
-		await get_tree().create_timer(blink_sec).timeout  # Wait again before switching back
-	original_time = original_original_time
-	get_tree().paused = false
+	if powered == false:
+		$SmbPowerup.play()
+		get_tree().paused = true
+		original_time = 99999
+		for i in range(4):
+			Global.snake_status = current_power
+			await get_tree().create_timer(blink_sec).timeout
+			Global.snake_status = power
+			await get_tree().create_timer(blink_sec).timeout  # Wait again before switching back
+		original_time = original_original_time
+		get_tree().paused = false
 	powered = true
-	pending_tail_segment = true
+	ready_spawn_tail()
 
 func update_sprite_orientation():
 	update_tail_orientation(self, facing)
 
 
 func _on_head_area_area_entered(area: Area2D) -> void:
-	if area.name == "mushroom" and powered == false:
+	if area.name == "mushroom":
 		set_power("big")
 	if area.name == "winarea":
 		win()
@@ -367,4 +389,3 @@ func win():
 func win2():
 	move_exit = true
 	move_orders.append("right")
-	
