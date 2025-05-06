@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cdbmv0psdbx0l"]
+[gd_scene load_steps=10 format=3 uid="uid://cdbmv0psdbx0l"]
 
+[ext_resource type="Script" path="res://scenes/endpost.gd" id="1_5o4dw"]
 [ext_resource type="Texture2D" uid="uid://v723k288mi0g" path="res://sprite/flag pole.png" id="1_nypt7"]
+[ext_resource type="PackedScene" uid="uid://d0yh13wsoj6jf" path="res://scenes/flag.tscn" id="2_eyagw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8p4uc"]
 size = Vector2(5.87268, 152)
@@ -9,10 +11,48 @@ size = Vector2(5.87268, 152)
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yswmm"]
-size = Vector2(6.26217, 9.02803)
+size = Vector2(6.26217, 10.5906)
+
+[sub_resource type="Animation" id="Animation_ulfmi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("stuff:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-17, -144)]
+}
+
+[sub_resource type="Animation" id="Animation_qetf1"]
+resource_name = "flagdown"
+length = 1.13
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("stuff:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-17, -144), Vector2(-17, -21.61)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b5ljr"]
+_data = {
+"RESET": SubResource("Animation_ulfmi"),
+"flagdown": SubResource("Animation_qetf1")
+}
 
 [node name="Endpost" type="Node2D"]
 position = Vector2(9, -6)
+script = ExtResource("1_5o4dw")
 
 [node name="FlagPole" type="Sprite2D" parent="."]
 position = Vector2(-9, -78)
@@ -34,6 +74,19 @@ shape = SubResource("RectangleShape2D_468rv")
 [node name="endpost" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="endpost"]
-position = Vector2(-9, -16.5)
+position = Vector2(-9, -11.375)
 scale = Vector2(0.958135, 1.43996)
 shape = SubResource("RectangleShape2D_yswmm")
+
+[node name="stuff" type="Node2D" parent="."]
+position = Vector2(-17, -144)
+
+[node name="flag" parent="stuff" instance=ExtResource("2_eyagw")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b5ljr")
+}
+
+[connection signal="area_entered" from="winarea" to="." method="_on_winarea_area_entered"]
+[connection signal="body_entered" from="winarea" to="." method="_on_winarea_body_entered"]

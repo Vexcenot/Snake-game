@@ -36,6 +36,7 @@ var powered = false
 var sprint = false
 var player_input = true
 var move_exit = false
+var under_block = false
 
 
 func _ready():
@@ -49,6 +50,7 @@ func _process(delta):
 	update_sprite_orientation()
 	move_current_scanner()
 	sprinting()
+	update_global_direction()
 
 func teleport_sequence():
 	await get_tree().process_frame
@@ -256,7 +258,7 @@ func interact():
 func lose_game():
 	move_ready = false
 	get_tree().paused = true
-	original_time = 999999999
+	pause_move()
 	sprite.frame = 6
 	var delay_between_segments = 0.05  # 50ms delay between segments
 	var all_segments = [self] + tail_segments  # Head first, then tail segments
@@ -277,6 +279,9 @@ func lose_game():
 		if i < all_segments.size() - 1:  # Don't wait after the last segment
 			await get_tree().create_timer(delay_between_segments).timeout
 
+func update_global_direction():
+	if not move_orders.is_empty():
+		Global.direction = move_orders[0]
 
 func move_current_scanner():
 	var element1
@@ -307,8 +312,11 @@ func facer():
 func _input(event):
 	var new_move = ""
 
-	if event.is_action_pressed("k_up") and player_input == true:
+	if event.is_action_pressed("k_up") and player_input == true and under_block == false:
 		new_move = "up"
+	#detects if head is under a ? block then makes up do a different command.
+	elif event.is_action_pressed("k_up") and player_input == true and under_block == true:
+		hit_block()
 	elif event.is_action_pressed("k_down") and player_input == true:
 		new_move = "down"
 	elif event.is_action_pressed("k_left") and player_input == true:
@@ -342,13 +350,13 @@ func set_power(power: String):
 	if powered == false:
 		$SmbPowerup.play()
 		get_tree().paused = true
-		original_time = 99999
+		pause_move()
 		for i in range(4):
 			Global.snake_status = current_power
 			await get_tree().create_timer(blink_sec).timeout
 			Global.snake_status = power
 			await get_tree().create_timer(blink_sec).timeout  # Wait again before switching back
-		original_time = original_original_time
+		resume_move()
 		get_tree().paused = false
 	powered = true
 	ready_spawn_tail()
@@ -356,7 +364,7 @@ func set_power(power: String):
 func update_sprite_orientation():
 	update_tail_orientation(self, facing)
 
-
+#how snake when touch different stuffs.
 func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "mushroom":
 		set_power("big")
@@ -368,19 +376,41 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		lose_game()
 	if area.name == "edible":
 		sprite.frame = 5
+	if area.name == "block_area":
+		under_block = true
+		
 
+
+#when leaving area.
 func _on_head_area_area_exited(area: Area2D) -> void:
 	if area.name == "edible":
 		sprite.frame = 2
+	if area.name == "block_area":
+		under_block = false
+		
+		#plays animation when hitting ? block
+func hit_block():
+		pause_move()
+		sprite.frame = 8
+		await get_tree().create_timer(0.2).timeout
+		sprite.frame = 2
+		await get_tree().create_timer(0.2).timeout
+		resume_move()
 	
+func pause_move():
+	original_time = 999999999
+	
+func resume_move():
+	original_time = original_original_time
 	
 #win conditions when touching flag pole. position pole in way that snake head will always be inside it. Make sure snake head doesnt by pass it.
 #make flag seperate item that gets eten when snake touched top of flag pole
 func win():
+	move_orders.clear
 	player_input = false
-	original_time = 999999999
+	pause_move()
 	await get_tree().create_timer(0.5).timeout
-	original_time = original_original_time
+	resume_move()
 	if move_exit == true:
 		move_orders.append("right")
 	else:

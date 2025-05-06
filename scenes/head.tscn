@@ -9,7 +9,7 @@
 size = Vector2(20.7417, 10.0566)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vq0g"]
-size = Vector2(5.26225, 10.5245)
+size = Vector2(9.70178, 10.5245)
 
 [sub_resource type="Animation" id="Animation_8dqsq"]
 length = 0.001
@@ -96,14 +96,14 @@ shape = SubResource("RectangleShape2D_sxb1m")
 
 [node name="Sprite2D" parent="." instance=ExtResource("2_ldr7d")]
 z_index = 101
-hframes = 8
+hframes = 9
 frame = 2
 
 [node name="Head Area" type="Area2D" parent="."]
 scale = Vector2(1.03715, 1.04205)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head Area"]
-position = Vector2(2, 2.38419e-07)
+position = Vector2(0, -5.68434e-14)
 scale = Vector2(0.760132, 0.760132)
 shape = SubResource("RectangleShape2D_5vq0g")
 debug_color = Color(0.803934, 0.392138, 0.389069, 0.42)

@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://flag.gd" id="2_erh7b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wwxna"]
-size = Vector2(8, 14)
+size = Vector2(6, 11)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kjocn"]
 
@@ -12,10 +12,10 @@ size = Vector2(8, 14)
 texture = ExtResource("1_4nj3v")
 script = ExtResource("2_erh7b")
 
-[node name="eat area" type="Area2D" parent="."]
+[node name="flag_1" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="eat area"]
-position = Vector2(4, -1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flag_1"]
+position = Vector2(8, 2.5)
 shape = SubResource("RectangleShape2D_wwxna")
 
 [node name="edible" type="Area2D" parent="."]
@@ -24,5 +24,5 @@ shape = SubResource("RectangleShape2D_wwxna")
 scale = Vector2(3.07808, 3.07808)
 shape = SubResource("RectangleShape2D_kjocn")
 
-[connection signal="area_entered" from="eat area" to="." method="_on_eat_area_area_entered"]
-[connection signal="body_entered" from="eat area" to="." method="_on_eat_area_body_entered"]
+[connection signal="area_entered" from="flag_1" to="." method="_on_eat_area_area_entered"]
+[connection signal="body_entered" from="flag_1" to="." method="_on_eat_area_body_entered"]

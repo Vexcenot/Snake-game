@@ -1,0 +1,113 @@
+[gd_scene load_steps=8 format=3 uid="uid://d26kswglulmbs"]
+
+[ext_resource type="Script" path="res://question_block.gd" id="1_6qukx"]
+[ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="1_se7by"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4m24q"]
+size = Vector2(8, 15)
+
+[sub_resource type="Animation" id="Animation_k3qg7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AllTheSmallBlocksTogether:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AllTheSmallBlocksTogether:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.125001, 0, 0.125001, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_sul1p"]
+resource_name = "bump"
+length = 0.250002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("AllTheSmallBlocksTogether:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0833333, 0.15, 0.233333, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -6), Vector2(0, -6), Vector2(0, 1), Vector2(0, 0)]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AllTheSmallBlocksTogether:offset:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AllTheSmallBlocksTogether:offset:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, -6, -0.05, 0, 0, 0, -6, 0, 0, 0, 0, 0, -0.017, 5, 0, 0),
+"times": PackedFloat32Array(0, 0.0833333, 0.15, 0.25)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kq0y0"]
+_data = {
+"RESET": SubResource("Animation_k3qg7"),
+"bump": SubResource("Animation_sul1p")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i8jn1"]
+size = Vector2(8, 10)
+
+[node name="question block" type="Node2D"]
+script = ExtResource("1_6qukx")
+
+[node name="AllTheSmallBlocksTogether" type="Sprite2D" parent="."]
+texture = ExtResource("1_se7by")
+hframes = 4
+vframes = 3
+frame = 4
+
+[node name="block_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="block_area"]
+position = Vector2(0, 8)
+shape = SubResource("RectangleShape2D_4m24q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kq0y0")
+}
+
+[node name="block_area_inner" type="Area2D" parent="."]
+position = Vector2(0, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="block_area_inner"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_i8jn1")
+
+[connection signal="area_entered" from="block_area" to="." method="_on_block_area_area_entered"]
+[connection signal="area_exited" from="block_area" to="." method="_on_block_area_area_exited"]
+[connection signal="area_entered" from="block_area_inner" to="." method="_on_block_area_inner_area_entered"]
+[connection signal="area_exited" from="block_area_inner" to="." method="_on_block_area_inner_area_exited"]

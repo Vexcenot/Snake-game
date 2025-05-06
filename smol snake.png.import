@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bc7qh15aako70"
-path="res://.godot/imported/smol snake.png-dd01dfec71c63af6e6ff9d0af7d48b06.ctex"
+uid="uid://5d34jnusnvaf"
+path="res://.godot/imported/smol snake.png-ea03fb74e1d6d6d7b5c2282f634eb2eb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/smol snake.png"
-dest_files=["res://.godot/imported/smol snake.png-dd01dfec71c63af6e6ff9d0af7d48b06.ctex"]
+source_file="res://smol snake.png"
+dest_files=["res://.godot/imported/smol snake.png-ea03fb74e1d6d6d7b5c2282f634eb2eb.ctex"]
 
 [params]
 

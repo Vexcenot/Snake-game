@@ -3,9 +3,9 @@
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
 [ext_resource type="PackedScene" uid="uid://cdbmv0psdbx0l" path="res://scenes/endpost.tscn" id="4_2e5vk"]
-[ext_resource type="PackedScene" uid="uid://d0yh13wsoj6jf" path="res://scenes/flag.tscn" id="5_2ealn"]
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="5_gaidb"]
 [ext_resource type="PackedScene" uid="uid://c5idjgy4afmho" path="res://scenes/mushroom.tscn" id="6_2spgy"]
+[ext_resource type="PackedScene" uid="uid://d26kswglulmbs" path="res://scenes/question block.tscn" id="6_06g6w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7ar"]
 size = Vector2(1674, 31)
@@ -13,7 +13,7 @@ size = Vector2(1674, 31)
 [node name="Main" type="Node"]
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(264, 169)
+position = Vector2(264, 204)
 scale = Vector2(2.00944, 1.98341)
 
 [node name="20592Png" type="Sprite2D" parent="."]
@@ -43,14 +43,20 @@ avoid_ledge = true
 position = Vector2(330, 136)
 avoid_ledge = true
 
-[node name="flag" parent="." instance=ExtResource("5_2ealn")]
-position = Vector2(413, 56)
-
 [node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(316, 200)
+position = Vector2(329, 115)
 
 [node name="mushroom2" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(269, 170)
+position = Vector2(220, 200)
 
 [node name="mushroom3" parent="." instance=ExtResource("6_2spgy")]
 position = Vector2(390, 201)
+
+[node name="question block" parent="." instance=ExtResource("6_06g6w")]
+position = Vector2(344, 88)
+
+[node name="question block2" parent="." instance=ExtResource("6_06g6w")]
+position = Vector2(360, 88)
+
+[node name="question block3" parent="." instance=ExtResource("6_06g6w")]
+position = Vector2(376, 88)
