@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://flag.gd" id="2_erh7b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wwxna"]
-size = Vector2(6, 11)
+size = Vector2(6, 12.25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kjocn"]
 
@@ -15,7 +15,7 @@ script = ExtResource("2_erh7b")
 [node name="flag_1" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flag_1"]
-position = Vector2(8, 2.5)
+position = Vector2(9, -2.125)
 shape = SubResource("RectangleShape2D_wwxna")
 
 [node name="edible" type="Area2D" parent="."]

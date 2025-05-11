@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://disfsrloilqua"]
+[gd_scene load_steps=11 format=3 uid="uid://disfsrloilqua"]
 
 [ext_resource type="Script" path="res://script/player.gd" id="1_w2ywo"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="2_ali73"]
@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="4_pw8ip"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxb1m"]
-size = Vector2(20.7417, 10.0566)
+size = Vector2(10.0566, 5.0283)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vq0g"]
 size = Vector2(9.70178, 10.5245)
@@ -69,6 +69,9 @@ _data = {
 "die": SubResource("Animation_wgeep")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpnw1"]
+size = Vector2(8, 8)
+
 [node name="Snek" type="CharacterBody2D"]
 process_mode = 3
 scale = Vector2(2, 2)
@@ -90,7 +93,7 @@ drag_top_margin = 1.0
 drag_right_margin = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4.25, 2.38419e-07)
+position = Vector2(-5.24521e-06, 0)
 scale = Vector2(0.795498, 0.795498)
 shape = SubResource("RectangleShape2D_sxb1m")
 
@@ -137,5 +140,14 @@ visible = false
 position = Vector2(461, 83)
 texture = ExtResource("4_pw8ip")
 
+[node name="blockdetection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="blockdetection"]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_xpnw1")
+
 [connection signal="area_entered" from="Head Area" to="." method="_on_head_area_area_entered"]
 [connection signal="area_exited" from="Head Area" to="." method="_on_head_area_area_exited"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="blockdetection" to="." method="_on_blockdetection_area_entered"]
+[connection signal="area_exited" from="blockdetection" to="." method="_on_blockdetection_area_exited"]

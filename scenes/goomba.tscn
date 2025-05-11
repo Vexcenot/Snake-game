@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://script/enemy.gd" id="1_13s4y"]
 [ext_resource type="Texture2D" uid="uid://cyjxthecr7oxv" path="res://sprite/goomba.png" id="2_tdxqk"]
-[ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/smb_powerup_appears.wav" id="3_y01q2"]
+[ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/smb_powerup_spawn.wav" id="3_y01q2"]
 [ext_resource type="Script" path="res://script/mushroom.gd" id="4_b12ce"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="5_h7tmd"]
 
@@ -10,7 +10,7 @@
 size = Vector2(16.5839, 2.32223)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
-size = Vector2(16.4952, 12.9506)
+size = Vector2(16.4952, 17.5427)
 
 [sub_resource type="Animation" id="Animation_xfln1"]
 length = 0.001
@@ -138,7 +138,7 @@ hframes = 3
 [node name="enemy" type="Area2D" parent="Mushrooms"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mushrooms/enemy"]
-position = Vector2(2.38419e-07, 2.53676)
+position = Vector2(0, 0.500006)
 scale = Vector2(0.848732, 0.855057)
 shape = SubResource("RectangleShape2D_pmrqf")
 

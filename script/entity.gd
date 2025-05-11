@@ -14,8 +14,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta  # Apply gravity
 		move_and_slide()
 
-func _ready():
-	block_spawn()
+#func _ready():
+	#spawning()
 
 #check if on ledge and turns.
 func _on_side_checks_body_exited(body: Node2D) -> void:
@@ -43,7 +43,7 @@ func set_speed():
 
 
 #play sprite animation sliding up and enabling movement
-func block_spawn():
+func spawning():
 	if block == true:
 		$Mushrooms/AnimationPlayer.play("spawn")
 		$Mushrooms/AnimationPlayer/AudioStreamPlayer2D.play()

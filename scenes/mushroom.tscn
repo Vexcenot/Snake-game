@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://8j811yk5hue7" path="res://sprite/mushrooms.png" id="2_8mpd3"]
 [ext_resource type="Script" path="res://script/entity.gd" id="2_e0v0r"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="3_xbh4k"]
-[ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/smb_powerup_appears.wav" id="3_yysf2"]
+[ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/smb_powerup_spawn.wav" id="3_yysf2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
 size = Vector2(9.75486, 7.44074)
@@ -164,7 +164,6 @@ shape = SubResource("RectangleShape2D_euomj")
 
 [connection signal="area_entered" from="Mushrooms/mushroom" to="." method="_on_mushroom_area_entered"]
 [connection signal="area_entered" from="Mushrooms/mushroom" to="Node2D" method="_on_area_2d_area_entered"]
-[connection signal="animation_finished" from="Mushrooms/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]
 [connection signal="body_exited" from="left bottom" to="Node2D" method="_on_side_checks_body_exited"]
 [connection signal="body_entered" from="right bottom" to="." method="_on_area_2d_body_entered"]

@@ -38,7 +38,6 @@ var player_input = true
 var move_exit = false
 var under_block = false
 
-
 func _ready():
 	teleport_sequence()
 	
@@ -51,6 +50,7 @@ func _process(delta):
 	move_current_scanner()
 	sprinting()
 	update_global_direction()
+	block_pow()
 
 func teleport_sequence():
 	await get_tree().process_frame
@@ -190,6 +190,7 @@ func check_turn_segment(segment, position):
 		sprite.frame = 1
 
 
+
 func adjust_turn_frame(sprite: Sprite2D, prev_facing: String, new_facing: String):
 	# Turning logic: prev_facing -> new_facing
 	if prev_facing == "up" and new_facing == "right":  # Turning right from up
@@ -308,6 +309,8 @@ func facer():
 	if turn_positions.size() >= length:
 		turn_positions.pop_back()
 
+
+
 #player inputs get added to a list to do list
 func _input(event):
 	var new_move = ""
@@ -387,7 +390,16 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 		sprite.frame = 2
 	if area.name == "block_area":
 		under_block = false
-		
+
+
+#make it stay under the block until an input is pressed that moves the snake outta da way.
+func block_pow():
+	if Global.direction == "up" and under_block == true:
+		move_ready = false
+		hit_block()
+		#make snake turn left if player inputs it and ignore right append
+		move_orders.append("right")
+
 		#plays animation when hitting ? block
 func hit_block():
 		pause_move()
@@ -396,6 +408,7 @@ func hit_block():
 		sprite.frame = 2
 		await get_tree().create_timer(0.2).timeout
 		resume_move()
+	
 	
 func pause_move():
 	original_time = 999999999
