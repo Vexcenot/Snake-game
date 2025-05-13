@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 func block_collect():
 	if blocked:
 		$AnimationPlayer.play("collect")
-		
+		$AudioStreamPlayer2D.play()
 		
 
 #get collected if touched by snakes

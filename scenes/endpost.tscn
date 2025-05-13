@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cdbmv0psdbx0l"]
 
-[ext_resource type="Script" path="res://scenes/endpost.gd" id="1_5o4dw"]
+[ext_resource type="Script" path="res://script/endpost.gd" id="1_5o4dw"]
 [ext_resource type="Texture2D" uid="uid://v723k288mi0g" path="res://sprite/flag pole.png" id="1_nypt7"]
 [ext_resource type="PackedScene" uid="uid://d0yh13wsoj6jf" path="res://scenes/flag.tscn" id="2_eyagw"]
 

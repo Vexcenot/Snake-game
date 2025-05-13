@@ -2,6 +2,7 @@ extends Node2D
 var snake_under = false
 var snake_boop = false
 var spawnable = false
+var animated = false
 @export var items: Array[PackedScene] = []
 @export var false_block = false
 @export var invis_block = false
@@ -14,6 +15,7 @@ func _process(delta: float) -> void:
 	bump_up_detect()
 	spawn_item()
 	visability()
+	rest_block()
 
 func visability():
 	if false_block:
@@ -29,24 +31,40 @@ func _input(event):
 	if event.is_action_pressed("k_up") and snake_under:
 		spawnable = true
 
-
+func rest_block():
+	if items.size() == 0:
+		$block_area.monitorable = false
+		$block_area.monitoring = false
+		invis_block = false
+		false_block = false
+		$AllTheSmallBlocksTogether.visible = true
+		$AllTheSmallBlocksTogether.frame = 7
 
 func spawn_item():
-	# Only spawn if there are items left
 	if items.size() > 0 and spawnable:
 		spawnable = false
-		$AnimationPlayer.play("bump")
-		$spawn_sound.play()
-		$bump_sound.play()
-		#when block outta items:
-		if items.size() == 1:
-			$block_area.monitorable = false
-			$block_area.monitoring = false
-			invis_block = false
-			false_block = false
-			$AllTheSmallBlocksTogether.visible = true
-			$AllTheSmallBlocksTogether.frame = 7
-			
+		var coining = items[0].resource_path == "res://scenes/coin_blocked.tscn"
+		if coining:
+			$AnimationPlayer.play("bump")
+			var coin_instance = items[0].instantiate()
+			add_child(coin_instance)
+			items.pop_front()
+			animated = false
+	# Only spawn if there are items left
+		else:
+			$AnimationPlayer.play("bump")
+			$spawn_sound.play()
+			$bump_sound.play()
+			if animated:
+				var spawned_item = items[0].instantiate()
+				add_child(spawned_item)
+				spawned_item.position.y -= 8
+				create_tween().tween_property(spawned_item, "position", Vector2(spawned_item.position.x, spawned_item.position.y - 8), 1.05)
+				items.pop_front()
+				animated = false
+			#when block outta items:
+
+
 
 
 #toggles if snake is under block
@@ -66,11 +84,11 @@ func move_up_16_pixels():
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	var spawned_item = items[0].instantiate()
-	add_child(spawned_item)
-	spawned_item.position.y -= 8
-	create_tween().tween_property(spawned_item, "position", Vector2(spawned_item.position.x, spawned_item.position.y - 8), 1.05)
-	items.pop_front()
+	animated = true
+
+
 	
-	
+
+
+		
 #make it so that if coin scene then use slightly diff function
