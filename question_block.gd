@@ -3,6 +3,8 @@ var snake_under = false
 var snake_boop = false
 var spawnable = false
 @export var items: Array[PackedScene] = []
+@export var false_block = false
+@export var invis_block = false
 
 
 func _ready() -> void:
@@ -11,9 +13,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	bump_up_detect()
 	spawn_item()
-	bricked()
+	visability()
 
-
+func visability():
+	if false_block:
+		$AllTheSmallBlocksTogether.frame = 1
+	elif invis_block:
+		$AllTheSmallBlocksTogether.visible = false
 
 func bump_up_detect():
 	if snake_under and Global.direction == "up":
@@ -32,6 +38,15 @@ func spawn_item():
 		$AnimationPlayer.play("bump")
 		$spawn_sound.play()
 		$bump_sound.play()
+		#when block outta items:
+		if items.size() == 1:
+			$block_area.monitorable = false
+			$block_area.monitoring = false
+			invis_block = false
+			false_block = false
+			$AllTheSmallBlocksTogether.visible = true
+			$AllTheSmallBlocksTogether.frame = 7
+			
 
 
 #toggles if snake is under block
@@ -44,11 +59,7 @@ func _on_block_area_area_exited(area: Area2D) -> void:
 		snake_under = false
 		spawnable = false
 		
-func bricked():
-	if items.size() == 0:
-		$AllTheSmallBlocksTogether.frame = 7
-		$block_area.monitorable = false
-		$block_area.monitoring = false
+
 		
 func move_up_16_pixels():
 	position.y -= 16
@@ -60,5 +71,6 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	spawned_item.position.y -= 8
 	create_tween().tween_property(spawned_item, "position", Vector2(spawned_item.position.x, spawned_item.position.y - 8), 1.05)
 	items.pop_front()
+	
 	
 #make it so that if coin scene then use slightly diff function

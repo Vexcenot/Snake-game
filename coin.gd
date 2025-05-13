@@ -1,5 +1,5 @@
 extends Node2D
-
+@export var blocked = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,9 +10,12 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+#runs when coin spawns from block
 func block_collect():
-	$AnimationPlayer.play("collect")
-	
+	if blocked:
+		$AnimationPlayer.play("collect")
+		
+		
 
 #get collected if touched by snakes
 func _on_coin_area_area_entered(area: Area2D) -> void:

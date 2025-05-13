@@ -50,7 +50,8 @@ position = Vector2(390, 201)
 
 [node name="question block" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(37, 8)
-items = Array[PackedScene]([ExtResource("5_gaidb"), ExtResource("6_2spgy")])
+items = Array[PackedScene]([ExtResource("6_2spgy"), ExtResource("5_gaidb")])
+false_block = true
 
 [node name="question block2" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(360, 88)
