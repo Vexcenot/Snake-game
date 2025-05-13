@@ -1,0 +1,110 @@
+[gd_scene load_steps=7 format=3 uid="uid://lhmipeci2e24"]
+
+[ext_resource type="Script" path="res://coin.gd" id="1_6qxui"]
+[ext_resource type="Texture2D" uid="uid://by1lwoolytm2w" path="res://sprite/coins.png" id="1_ervcb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_povfb"]
+size = Vector2(10, 14)
+
+[sub_resource type="Animation" id="Animation_rwwey"]
+resource_name = "collect"
+length = 0.36
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Coins:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 6, 3, 4]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Coins:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-32, 0, 0, 0, 0, -64, -0.1, 0, 0.1, 0, -32, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.166667, 0.333333)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Coins:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.36),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_el3ql"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Coins:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Coins:offset:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.18, 0, 0.18, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Coins:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bbffo"]
+_data = {
+"RESET": SubResource("Animation_el3ql"),
+"collect": SubResource("Animation_rwwey")
+}
+
+[node name="coin" type="Node2D"]
+script = ExtResource("1_6qxui")
+
+[node name="coin_area" type="Area2D" parent="."]
+
+[node name="coin_area_shape" type="CollisionShape2D" parent="coin_area"]
+shape = SubResource("RectangleShape2D_povfb")
+
+[node name="Coins" type="Sprite2D" parent="."]
+texture = ExtResource("1_ervcb")
+hframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bbffo")
+}
+
+[connection signal="area_entered" from="coin_area" to="." method="_on_coin_area_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
