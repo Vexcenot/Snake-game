@@ -109,7 +109,7 @@ libraries = {
 "": SubResource("AnimationLibrary_bbffo")
 }
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="coin_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_2iamv")
 volume_db = 24.0
 

@@ -2,7 +2,6 @@ extends Node2D
 var snake_under = false
 var snake_boop = false
 var spawnable = false
-var animated = false
 @export var items: Array[PackedScene] = []
 @export var false_block = false
 @export var invis_block = false
@@ -43,27 +42,21 @@ func rest_block():
 func spawn_item():
 	if items.size() > 0 and spawnable:
 		spawnable = false
-		var coining = items[0].resource_path == "res://scenes/coin_blocked.tscn"
+		var coining = items[0].resource_path == "res://scenes/coin.tscn"
 		if coining:
 			$AnimationPlayer.play("bump")
 			var coin_instance = items[0].instantiate()
 			add_child(coin_instance)
 			items.pop_front()
-			animated = false
-	# Only spawn if there are items left
 		else:
 			$AnimationPlayer.play("bump")
 			$spawn_sound.play()
 			$bump_sound.play()
-			if animated:
-				var spawned_item = items[0].instantiate()
-				add_child(spawned_item)
-				spawned_item.position.y -= 8
-				create_tween().tween_property(spawned_item, "position", Vector2(spawned_item.position.x, spawned_item.position.y - 8), 1.05)
-				items.pop_front()
-				animated = false
-			#when block outta items:
-
+			var spawned_item = items[0].instantiate()
+			add_child(spawned_item)
+			spawned_item.position.y -= 8
+			create_tween().tween_property(spawned_item, "position", Vector2(spawned_item.position.x, spawned_item.position.y - 8), 1.05)
+			items.pop_front()
 
 
 
@@ -81,10 +74,6 @@ func _on_block_area_area_exited(area: Area2D) -> void:
 		
 func move_up_16_pixels():
 	position.y -= 16
-
-
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	animated = true
 
 
 	

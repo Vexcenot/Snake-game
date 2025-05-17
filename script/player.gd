@@ -37,6 +37,7 @@ var sprint = false
 var player_input = true
 var move_exit = false
 var under_block = false
+var dead = false
 
 func _ready():
 	teleport_sequence()
@@ -257,6 +258,7 @@ func interact():
 
 #runs game over function and (should) clear out all datas
 func lose_game():
+	dead = true
 	move_ready = false
 	get_tree().paused = true
 	pause_move()
@@ -359,7 +361,8 @@ func set_power(power: String):
 			await get_tree().create_timer(blink_sec).timeout
 			Global.snake_status = power
 			await get_tree().create_timer(blink_sec).timeout  # Wait again before switching back
-		resume_move()
+		if move_ready:
+			resume_move()
 		get_tree().paused = false
 	powered = true
 	ready_spawn_tail()
@@ -395,7 +398,7 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 #make it stay under the block until an input is pressed that moves the snake outta da way.
 func block_pow():
 	if Global.direction == "up" and under_block == true:
-		move_ready = false
+		#move_ready = false
 		hit_block()
 		#make snake turn left if player inputs it and ignore right append
 		move_orders.append("right")

@@ -9,7 +9,7 @@
 size = Vector2(10.0566, 5.0283)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vq0g"]
-size = Vector2(9.70178, 10.5245)
+size = Vector2(9.70178, 6.94361)
 
 [sub_resource type="Animation" id="Animation_8dqsq"]
 length = 0.001
@@ -106,7 +106,7 @@ frame = 2
 scale = Vector2(1.03715, 1.04205)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head Area"]
-position = Vector2(0, -5.68434e-14)
+position = Vector2(0, 0.239912)
 scale = Vector2(0.760132, 0.760132)
 shape = SubResource("RectangleShape2D_5vq0g")
 debug_color = Color(0.803934, 0.392138, 0.389069, 0.42)

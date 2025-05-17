@@ -1,5 +1,6 @@
 extends Node2D
 @export var blocked = false
+var collected = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,14 +15,17 @@ func _process(delta: float) -> void:
 func block_collect():
 	if blocked:
 		$AnimationPlayer.play("collect")
-		$AudioStreamPlayer2D.play()
+		$coin_sound.play()
+
 		
 
 #get collected if touched by snakes
 func _on_coin_area_area_entered(area: Area2D) -> void:
-	if area.name == "winarea":
-		return
+	if area.name == "Head Area" and not collected:
+		collected = true
+		$Coins.visible = false
+		$coin_sound.play()
 
 
-func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	print("fuck")
+func _on_coin_sound_finished() -> void:
+	queue_free()

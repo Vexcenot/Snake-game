@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://lhmipeci2e24"]
+[gd_scene load_steps=8 format=3 uid="uid://mqd3ia4tml2t"]
 
-[ext_resource type="Script" path="res://coin.gd" id="1_6qxui"]
-[ext_resource type="Texture2D" uid="uid://by1lwoolytm2w" path="res://sprite/coins.png" id="1_ervcb"]
-[ext_resource type="AudioStream" uid="uid://sytrfv5uaavu" path="res://sounds/coin.wav" id="3_3ogj1"]
+[ext_resource type="Script" path="res://coin.gd" id="1_snpfx"]
+[ext_resource type="Texture2D" uid="uid://by1lwoolytm2w" path="res://sprite/coins.png" id="2_ihxnd"]
+[ext_resource type="AudioStream" uid="uid://sytrfv5uaavu" path="res://sounds/coin.wav" id="3_2iamv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_povfb"]
 size = Vector2(10, 14)
@@ -12,14 +12,14 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Coins:visible")
+tracks/0/path = NodePath("Coins:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [true]
+"update": 1,
+"values": [0]
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
@@ -29,20 +29,20 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.18, 0, 0.18, 0),
+"points": PackedFloat32Array(-2, -0.18, 0, 0.18, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Coins:frame")
+tracks/2/path = NodePath("Coins:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0]
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_rwwey"]
@@ -51,14 +51,14 @@ length = 0.36
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Coins:visible")
+tracks/0/path = NodePath("Coins:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.36),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [true, false]
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 6, 3, 4]
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
@@ -68,20 +68,20 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(-32, 0, 0, 0, 0, -64, -0.1, 0, 0.1, 0, -32, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, -64, -0.1, 0, 0.1, 0, -16, 0, 0, 0, 0),
 "times": PackedFloat32Array(0, 0.166667, 0.333333)
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Coins:frame")
+tracks/2/path = NodePath("Coins:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [3, 4, 5, 6, 3, 4]
+"times": PackedFloat32Array(0, 0.36),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bbffo"]
@@ -91,7 +91,7 @@ _data = {
 }
 
 [node name="coin" type="Node2D"]
-script = ExtResource("1_6qxui")
+script = ExtResource("1_snpfx")
 blocked = true
 
 [node name="coin_area" type="Area2D" parent="."]
@@ -100,7 +100,8 @@ blocked = true
 shape = SubResource("RectangleShape2D_povfb")
 
 [node name="Coins" type="Sprite2D" parent="."]
-texture = ExtResource("1_ervcb")
+texture = ExtResource("2_ihxnd")
+offset = Vector2(0, -2)
 hframes = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -109,8 +110,8 @@ libraries = {
 }
 
 [node name="coin_sound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_3ogj1")
+stream = ExtResource("3_2iamv")
+volume_db = 24.0
 
 [connection signal="area_entered" from="coin_area" to="." method="_on_coin_area_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="finished" from="coin_sound" to="." method="_on_coin_sound_finished"]

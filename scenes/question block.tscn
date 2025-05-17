@@ -61,7 +61,7 @@ frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="block_area"]
 position = Vector2(0, 9.05)
-scale = Vector2(1, 0.119999)
+scale = Vector2(0.36, 0.119999)
 shape = SubResource("RectangleShape2D_4m24q")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -77,11 +77,10 @@ shape = SubResource("RectangleShape2D_1qot3")
 
 [node name="spawn_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_t6dqi")
-volume_db = 24.0
 
 [node name="bump_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_nfuos")
-volume_db = 6.0
+volume_db = 5.0
 
 [connection signal="area_entered" from="block_area" to="." method="_on_block_area_area_entered"]
 [connection signal="area_exited" from="block_area" to="." method="_on_block_area_area_exited"]
