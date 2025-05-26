@@ -305,7 +305,7 @@ func lose_power():
 	var blink_sec = 0.1
 	var current_power = Global.snake_status
 	hurting = true
-	$SmbPowerup.play()
+	$PowerDown.play()
 	get_tree().paused = true
 	pause_move()
 	for i in range(4):
