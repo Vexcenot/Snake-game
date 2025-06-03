@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://dvwvb1vytus7m"]
+
+[ext_resource type="Script" uid="uid://cawhmentg76h1" path="res://script/player_camera.gd" id="1_fyf37"]
+[ext_resource type="Texture2D" uid="uid://46caf8m3jbwl" path="res://sprite/question1.png" id="2_jmf3e"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uyavn"]
+size = Vector2(780, 240)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpg4h"]
+size = Vector2(13143, 24898)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pu1xt"]
+size = Vector2(277, 240)
+
+[node name="camera_system" type="Node2D"]
+script = ExtResource("1_fyf37")
+
+[node name="move_cam" type="Area2D" parent="."]
+position = Vector2(2.72848e-12, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="move_cam"]
+position = Vector2(518, 1.00001)
+scale = Vector2(1, 9999)
+shape = SubResource("RectangleShape2D_uyavn")
+debug_color = Color(5.58317e-06, 0.809802, 0.941832, 0.42)
+
+[node name="Sprite2D" type="Sprite2D" parent="move_cam"]
+visible = false
+position = Vector2(147, 94)
+scale = Vector2(-2.37043, 22.5388)
+texture = ExtResource("2_jmf3e")
+
+[node name="oob_area" type="Area2D" parent="move_cam"]
+position = Vector2(-6, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="move_cam/oob_area"]
+position = Vector2(-6579, 0)
+shape = SubResource("RectangleShape2D_xpg4h")
+debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="move_cam/oob_area"]
+position = Vector2(87, -206)
+scale = Vector2(43.5333, 1)
+shape = SubResource("RectangleShape2D_pu1xt")
+debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="move_cam/oob_area"]
+position = Vector2(78, 308)
+scale = Vector2(42.16, 1)
+shape = SubResource("RectangleShape2D_pu1xt")
+debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
+
+[connection signal="area_entered" from="move_cam" to="." method="_on_move_cam_area_entered"]
+[connection signal="area_exited" from="move_cam" to="." method="_on_move_cam_area_exited"]

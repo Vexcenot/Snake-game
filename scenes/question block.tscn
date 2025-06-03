@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://d26kswglulmbs"]
 
-[ext_resource type="Script" path="res://question_block.gd" id="1_6qukx"]
+[ext_resource type="Script" uid="uid://b2i6awvoc2mp0" path="res://script/question_block.gd" id="1_6qukx"]
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="1_se7by"]
 [ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/smb_powerup_spawn.wav" id="3_t6dqi"]
 [ext_resource type="AudioStream" uid="uid://chhy42b001hm4" path="res://sounds/bump.wav" id="4_nfuos"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4m24q"]
-size = Vector2(16, 15.8334)
+size = Vector2(16, 32.5002)
 
 [sub_resource type="Animation" id="Animation_k3qg7"]
 length = 0.001
@@ -40,8 +40,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kq0y0"]
 _data = {
-"RESET": SubResource("Animation_k3qg7"),
-"bump": SubResource("Animation_sul1p")
+&"RESET": SubResource("Animation_k3qg7"),
+&"bump": SubResource("Animation_sul1p")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1qot3"]
@@ -60,13 +60,13 @@ frame = 4
 [node name="block_area" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="block_area"]
-position = Vector2(0, 9.05)
+position = Vector2(0, 10.05)
 scale = Vector2(0.36, 0.119999)
 shape = SubResource("RectangleShape2D_4m24q")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_kq0y0")
+&"": SubResource("AnimationLibrary_kq0y0")
 }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]

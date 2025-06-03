@@ -1,10 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://disfsrloilqua"]
+[gd_scene load_steps=13 format=3 uid="uid://disfsrloilqua"]
 
-[ext_resource type="Script" path="res://script/player.gd" id="1_w2ywo"]
+[ext_resource type="Script" uid="uid://cggccwq77ls3n" path="res://script/player.gd" id="1_w2ywo"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="2_ali73"]
 [ext_resource type="PackedScene" uid="uid://vfnjnj2mu8yd" path="res://scenes/snake sprite.tscn" id="2_ldr7d"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="4_pw8ip"]
 [ext_resource type="AudioStream" uid="uid://e44f00ph5aem" path="res://sounds/power down.wav" id="5_d0mn4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6rdic"]
+size = Vector2(4.07919, 5.53036)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxb1m"]
 size = Vector2(10.0566, 5.0283)
@@ -66,8 +69,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f3nah"]
 _data = {
-"RESET": SubResource("Animation_8dqsq"),
-"die": SubResource("Animation_wgeep")
+&"RESET": SubResource("Animation_8dqsq"),
+&"die": SubResource("Animation_wgeep")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpnw1"]
@@ -78,14 +81,19 @@ process_mode = 3
 scale = Vector2(2, 2)
 script = ExtResource("1_w2ywo")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-position_smoothing_speed = 1.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-drag_left_margin = 1.0
-drag_top_margin = 1.0
-drag_right_margin = 0.0
+[node name="pixel gapper" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -3)
+scale = Vector2(0.490294, 0.36164)
+shape = SubResource("RectangleShape2D_6rdic")
+disabled = true
+debug_color = Color(0.54883, 0.560408, 0.188049, 0.42)
+
+[node name="pixel gapper2" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 3)
+scale = Vector2(0.490294, 0.36164)
+shape = SubResource("RectangleShape2D_6rdic")
+disabled = true
+debug_color = Color(0.54883, 0.560408, 0.188049, 0.42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5.24521e-06, 0)
@@ -99,6 +107,8 @@ frame = 2
 
 [node name="Head Area" type="Area2D" parent="."]
 scale = Vector2(1.03715, 1.04205)
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head Area"]
 position = Vector2(0, 0.239912)
@@ -110,24 +120,28 @@ debug_color = Color(0.803934, 0.392138, 0.389069, 0.42)
 rotation = -3.14159
 scale = Vector2(0.555, 0.315)
 target_position = Vector2(0, 20)
+collision_mask = 3
 
 [node name="down" type="RayCast2D" parent="."]
 scale = Vector2(0.555, 0.315)
 target_position = Vector2(0, 20)
+collision_mask = 3
 
 [node name="left" type="RayCast2D" parent="."]
 rotation = 1.5708
 scale = Vector2(0.555, 0.274999)
 target_position = Vector2(3.9135e-05, 21.8183)
+collision_mask = 3
 
 [node name="right" type="RayCast2D" parent="."]
 rotation = -1.5708
 scale = Vector2(0.555, 0.315)
 target_position = Vector2(0, 20)
+collision_mask = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_f3nah")
+&"": SubResource("AnimationLibrary_f3nah")
 }
 
 [node name="20592Png" type="Sprite2D" parent="."]
@@ -151,6 +165,19 @@ stream = ExtResource("2_ali73")
 position = Vector2(-6, 3.5)
 stream = ExtResource("5_d0mn4")
 volume_db = 24.0
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2(-9.53674e-06, -3.57628e-07)
+limit_left = 0
+limit_top = 0
+limit_right = 3376
+limit_bottom = 0
+limit_smoothed = true
+position_smoothing_speed = 100.0
+drag_horizontal_enabled = true
+drag_left_margin = 1.0
+drag_right_margin = 0.0
+editor_draw_drag_margin = true
 
 [connection signal="area_entered" from="Head Area" to="." method="_on_head_area_area_entered"]
 [connection signal="area_exited" from="Head Area" to="." method="_on_head_area_area_exited"]

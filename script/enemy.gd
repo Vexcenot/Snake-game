@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-var speeder = 25
-var gravity = 700 
+@export var speeder = 25
+@export var gravity = 700 
 @export var avoid_ledge = false
 @export var block = false
 var speed = -speeder

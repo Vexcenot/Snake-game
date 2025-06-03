@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=11 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
@@ -6,16 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="5_gaidb"]
 [ext_resource type="PackedScene" uid="uid://c5idjgy4afmho" path="res://scenes/mushroom.tscn" id="6_2spgy"]
 [ext_resource type="PackedScene" uid="uid://d26kswglulmbs" path="res://scenes/question block.tscn" id="6_06g6w"]
+[ext_resource type="PackedScene" uid="uid://dvwvb1vytus7m" path="res://scenes/camera_system.tscn" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://lhmipeci2e24" path="res://scenes/coin.tscn" id="8_fs55x"]
+[ext_resource type="PackedScene" uid="uid://pba4v6gle2ea" path="res://scenes/castle.tscn" id="9_85g3d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7ar"]
 size = Vector2(1674, 31)
 
 [node name="Main" type="Node"]
-
-[node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(39, 22)
-scale = Vector2(2.00944, 1.98341)
 
 [node name="20592Png" type="Sprite2D" parent="."]
 position = Vector2(1688, 240)
@@ -32,6 +30,7 @@ texture = ExtResource("1_h5eht")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="20592Png2/wall"]
 position = Vector2(-849, -15.5)
 shape = SubResource("RectangleShape2D_is7ar")
+disabled = true
 
 [node name="Endpost" parent="." instance=ExtResource("4_2e5vk")]
 position = Vector2(431, 202)
@@ -41,13 +40,16 @@ position = Vector2(393, 199)
 avoid_ledge = true
 
 [node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(54, 22)
+position = Vector2(38, 57)
 
 [node name="mushroom2" parent="." instance=ExtResource("6_2spgy")]
 position = Vector2(220, 200)
 
 [node name="mushroom3" parent="." instance=ExtResource("6_2spgy")]
 position = Vector2(390, 201)
+
+[node name="Snek" parent="." instance=ExtResource("2_10edd")]
+position = Vector2(40, 55)
 
 [node name="question block2" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(360, 88)
@@ -56,14 +58,25 @@ position = Vector2(360, 88)
 position = Vector2(376, 88)
 
 [node name="question block5" parent="." instance=ExtResource("6_06g6w")]
-position = Vector2(70, 8)
+position = Vector2(70, 39)
+items = Array[PackedScene]([ExtResource("8_fs55x")])
 
 [node name="question block4" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(38, 39)
 
 [node name="question block6" parent="." instance=ExtResource("6_06g6w")]
-position = Vector2(70, 39)
+position = Vector2(54, 39)
+
+[node name="question block7" parent="." instance=ExtResource("6_06g6w")]
+position = Vector2(116, 55)
+metadata/_edit_group_ = true
 
 [node name="coin" parent="." instance=ExtResource("8_fs55x")]
 position = Vector2(55, 8)
 blocked = false
+
+[node name="camera_system" parent="." instance=ExtResource("8_85g3d")]
+position = Vector2(-1, 81)
+
+[node name="Node2D" parent="." instance=ExtResource("9_85g3d")]
+position = Vector2(220, 208)

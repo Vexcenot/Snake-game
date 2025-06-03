@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8rpn5napbsdu"]
+[gd_scene load_steps=7 format=3 uid="uid://c8rpn5napbsdu"]
 
 [ext_resource type="PackedScene" uid="uid://vfnjnj2mu8yd" path="res://scenes/snake sprite.tscn" id="1_wib06"]
 
@@ -59,9 +59,12 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f3nah"]
 _data = {
-"RESET": SubResource("Animation_8dqsq"),
-"die": SubResource("Animation_wgeep")
+&"RESET": SubResource("Animation_8dqsq"),
+&"die": SubResource("Animation_wgeep")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wne8n"]
+size = Vector2(17.6526, 17.6526)
 
 [node name="tail" type="Node2D"]
 process_mode = 3
@@ -78,5 +81,13 @@ shape = SubResource("RectangleShape2D_frb71")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_f3nah")
+&"": SubResource("AnimationLibrary_f3nah")
 }
+
+[node name="tail area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="tail area"]
+position = Vector2(-1.0356e-08, 2.98023e-08)
+rotation = -3.14159
+scale = Vector2(0.453191, 0.453191)
+shape = SubResource("RectangleShape2D_wne8n")
