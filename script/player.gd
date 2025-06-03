@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 var direction = Vector2.ZERO
 var timer = 100
-var original_original_original_time = 1 #adjusts speed of snake I like 0.3
+var original_original_original_time = 0.3 #adjusts speed of snake I like 0.3
 var original_original_time = original_original_original_time
 var original_time = original_original_time
 var final_time = original_time
@@ -40,7 +40,7 @@ var under_block = false
 var dead = false
 var hurting = false
 var ignore_turn = false
-var timer_counter_toggle = true
+var timer_counter_toggle = false
 var timer_counter = 0
 var moves_made = []
 var pending_turn = false
@@ -56,7 +56,9 @@ func resume_turn():
 		ignore_turn = false
 		
 func _process(delta):
-	resume_turn()
+	print(ignore_turn)
+	print(timer_counter)
+	#resume_turn()
 	#print(move_orders)
 	#print(timer_counter)
 
@@ -67,7 +69,8 @@ func _process(delta):
 	sprinting()
 	update_global_direction()
 	block_pow()
-	turn_hit_detect()
+	#turn_hit_detect()
+
 
 
 	#update_camera()
@@ -118,17 +121,19 @@ func time_reset():
 		facer()
 		moving()
 		timer = 0
-		ignore_turn = false
-		if timer_counter_toggle == true and timer_counter < 1:
-			timer_counter += 1
-		else:
-			timer_counter = 0
 
+		if timer_counter_toggle == true:
+			timer_counter += 1
+		if timer_counter >= 2:
+			ignore_turn = false
+			timer_counter_toggle = false
+			timer_counter = 0
 		if move_orders.size() > 0:
 			move_saved.append(move_orders[-1])
 			if move_saved.size() > 2:
 				move_saved.pop_front()
-		print(move_saved)
+
+
 
 
 		
@@ -389,7 +394,6 @@ func update_global_direction():
 	if not move_orders.is_empty():
 		Global.direction = move_orders[-1]
 
-#if snake facing right and has tail to left of him going same direction then mark is head on
 
 #removes turning if turned into a hit
 func turn_hit_detect():
@@ -412,9 +416,9 @@ func facer():
 			return
 		#checks turns
 		#make it not make turn if next move will not run into a wall.
-		if next_move != facing and ignore_turn == false:  # Only store if an actual turn is made
-			pending_turn = true
-			turn_positions.push_front([global_position, facing, next_move])  # Store both previous and new facing
+		if next_move != facing and not ignore_turn:  # Only store if an actual turn is made
+			turn_positions.push_front([global_position, facing, move_orders[-1]])
+			  # Store both previous and new facing
 			
 
 		facing = next_move
@@ -423,6 +427,7 @@ func facer():
 	# Keep turn_positions one slot shorter than the snake length
 	if turn_positions.size() >= length:
 		turn_positions.pop_back()
+		
 
 #player inputs get added to a list to do list
 func _input(event):
@@ -430,15 +435,28 @@ func _input(event):
 
 	if event.is_action_pressed("k_up") and player_input == true and under_block == false:
 		new_move = "up"
+		if up.is_colliding():
+			ignore_turn = true
+			timer_counter_toggle = true
 	#detects if head is under a ? block then makes up do a different command.
 	elif event.is_action_pressed("k_up") and player_input == true and under_block == true:
 		hit_block()
+
 	elif event.is_action_pressed("k_down") and player_input == true:
 		new_move = "down"
+		if down.is_colliding():
+			ignore_turn = true
+			timer_counter_toggle = true
 	elif event.is_action_pressed("k_left") and player_input == true:
 		new_move = "left"
+		if left.is_colliding():
+			ignore_turn = true
+			timer_counter_toggle = true
 	elif event.is_action_pressed("k_right") and player_input == true:
 		new_move = "right"
+		if right.is_colliding():
+			ignore_turn = true
+			timer_counter_toggle = true
 
 	# Ensure the new move is not a duplicate of the last move in the list
 	if new_move != "" and (move_orders.is_empty() or move_orders.back() != new_move):
