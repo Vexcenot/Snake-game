@@ -520,6 +520,7 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 
 
 #make it stay under the block until an input is pressed that moves the snake outta da way.
+#make it not auto run away 4/6/2025
 func block_pow():
 	if Global.direction == "up" and under_block == true:
 		#move_ready = false

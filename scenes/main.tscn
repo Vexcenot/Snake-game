@@ -39,9 +39,6 @@ position = Vector2(431, 202)
 position = Vector2(393, 199)
 avoid_ledge = true
 
-[node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(38, 57)
-
 [node name="mushroom2" parent="." instance=ExtResource("6_2spgy")]
 position = Vector2(220, 200)
 
@@ -59,6 +56,7 @@ position = Vector2(376, 88)
 
 [node name="question block5" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(70, 39)
+items = Array[PackedScene]([ExtResource("6_2spgy")])
 
 [node name="question block4" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(38, 39)
