@@ -8,14 +8,11 @@ extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 var direction = Vector2.ZERO
 var timer = 100
-var original_original_original_time = 0.3 #adjusts speed of snake I like 0.3
-var original_original_time = original_original_original_time
-var original_time = original_original_time
-var final_time = original_time
+var snake_speed = 0.3 #adjusts speed of snake I like 0.3
+var final_time = snake_speed
 var move_distance = 16
 var turn_positions = []  # Stores turn positions and directions
 var eat_positions = []  # Stores eat positions and directions
-var collision = false
 var move_orders = []
 var move_ready = false
 var positions = []
@@ -42,23 +39,13 @@ var hurting = false
 var ignore_turn = false
 var timer_counter_toggle = false
 var timer_counter = 0
-var moves_made = []
-var pending_turn = false
-var straight = true
-var reset_ignore = false
-var move_saved = []
 
 func _ready():
 	teleport_sequence()
-	
-func resume_turn():
-	if move_saved.size() > 1 and move_saved[-1] == move_saved[-2]:
-		ignore_turn = false
 		
 func _process(delta):
 	print(ignore_turn)
 	print(timer_counter)
-	#resume_turn()
 	#print(move_orders)
 	#print(timer_counter)
 
@@ -69,11 +56,7 @@ func _process(delta):
 	sprinting()
 	update_global_direction()
 	block_pow()
-	#turn_hit_detect()
 
-
-
-	#update_camera()
 
 func teleport_sequence():
 	await get_tree().process_frame
@@ -106,9 +89,9 @@ func spawn_tail_segment():
 	
 	# Update the last tail segment only
 	var last = tail_segments[-1]
-	var sprite = last.get_node("Sprite2D")
+	var tail_tip = last.get_node("Sprite2D")
 	if move_ready == false:
-		sprite.frame = 0
+		tail_tip.frame = 0
 
 
 
@@ -128,24 +111,13 @@ func time_reset():
 			ignore_turn = false
 			timer_counter_toggle = false
 			timer_counter = 0
-		if move_orders.size() > 0:
-			move_saved.append(move_orders[-1])
-			if move_saved.size() > 2:
-				move_saved.pop_front()
 
 
 
 
 		
 
-func move_history():
-	if pending_turn == true:
-		moves_made.push_front("turn")
-		pending_turn = false
-	else:
-		moves_made.push_front("straight")
-	if moves_made.size() > 3:
-		moves_made.pop_back()
+
 		
 
 func is_opposite_direction(new_move: String, current_facing: String) -> bool:
@@ -154,8 +126,8 @@ func is_opposite_direction(new_move: String, current_facing: String) -> bool:
 		(new_move == "left" and current_facing == "right") or \
 		(new_move == "right" and current_facing == "left")
 
-func is_raycast_blocked(direction: String) -> bool:
-	match direction:
+func is_raycast_blocked(snake_facing: String) -> bool:
+	match snake_facing:
 		"up": return up.is_colliding() and up.get_collider() is StaticBody2D
 		"down": return down.is_colliding() and down.get_collider() is StaticBody2D
 		"left": return left.is_colliding() and left.get_collider() is StaticBody2D
@@ -201,13 +173,13 @@ func move_tail_segments():
 		if positions.size() > last_index:
 			remove_past_turns(positions[last_index])
 			remove_past_eats(positions[last_index])
-func check_eat_segment(segment, position):
-	var sprite = segment.get_node("Sprite2D")
+func check_eat_segment(segment, eat_coords):
+	var full_sprite = segment.get_node("Sprite2D")
 	for eat_pos in eat_positions:
-		if eat_pos.distance_to(position) < move_distance * 0.5:
+		if eat_pos.distance_to(eat_coords) < move_distance * 0.5:
 			# Only show eating animation if it's not the last segment
 			if segment != tail_segments[-1]:
-				sprite.frame = 7
+				full_sprite.frame = 7
 			return
 
 func remove_past_eats(last_tail_position):
@@ -221,66 +193,66 @@ func remove_past_turns(last_tail_position):
 			turn_positions.pop_at(i)  # Remove the turn position
 
 
-func adjust_turn_frame(sprite: Sprite2D, prev_facing: String, new_facing: String):
+func adjust_turn_frame(turn_sprite: Sprite2D, prev_facing: String, new_facing: String):
 	# Turning logic: prev_facing -> new_facing
 	if prev_facing == "up" and new_facing == "right" :  # Turning right from up
-		sprite.flip_h = false
-		sprite.rotation_degrees = 0
+		turn_sprite.flip_h = false
+		turn_sprite.rotation_degrees = 0
 	elif prev_facing == "up" and new_facing == "left":  # Turning left from up
-		sprite.flip_h = true
-		sprite.rotation_degrees = 0
+		turn_sprite.flip_h = true
+		turn_sprite.rotation_degrees = 0
 	elif prev_facing == "up" and new_facing == "down":  # Turning down from up
-		sprite.flip_h = false
-		sprite.rotation_degrees = 180
+		turn_sprite.flip_h = false
+		turn_sprite.rotation_degrees = 180
 	elif prev_facing == "right" and new_facing == "up":  # Turning up from right
-		sprite.flip_h = true
-		sprite.rotation_degrees = 90
+		turn_sprite.flip_h = true
+		turn_sprite.rotation_degrees = 90
 	elif prev_facing == "right" and new_facing == "down":  # Turning down from right
-		sprite.flip_h = false
-		sprite.rotation_degrees = 90
+		turn_sprite.flip_h = false
+		turn_sprite.rotation_degrees = 90
 	elif prev_facing == "right" and new_facing == "left":  # Turning left from right
-		sprite.flip_h = true
-		sprite.rotation_degrees = 180
+		turn_sprite.flip_h = true
+		turn_sprite.rotation_degrees = 180
 	elif prev_facing == "down" and new_facing == "right":  # Turning right from down
-		sprite.flip_h = true
-		sprite.rotation_degrees = 180
+		turn_sprite.flip_h = true
+		turn_sprite.rotation_degrees = 180
 	elif prev_facing == "down" and new_facing == "left":  # Turning left from down
-		sprite.flip_h = false
-		sprite.rotation_degrees = 180
+		turn_sprite.flip_h = false
+		turn_sprite.rotation_degrees = 180
 	elif prev_facing == "down" and new_facing == "up":  # Turning up from down
-		sprite.flip_h = false
-		sprite.rotation_degrees = 0
+		turn_sprite.flip_h = false
+		turn_sprite.rotation_degrees = 0
 	elif prev_facing == "left" and new_facing == "up":  # Turning up from left
-		sprite.flip_h = false
-		sprite.rotation_degrees = -90
+		turn_sprite.flip_h = false
+		turn_sprite.rotation_degrees = -90
 	elif prev_facing == "left" and new_facing == "down":  # Turning down from left
-		sprite.flip_h = true
-		sprite.rotation_degrees = -90
+		turn_sprite.flip_h = true
+		turn_sprite.rotation_degrees = -90
 	elif prev_facing == "left" and new_facing == "right":  # Turning right from left
-		sprite.flip_h = false
-		sprite.rotation_degrees = 0
+		turn_sprite.flip_h = false
+		turn_sprite.rotation_degrees = 0
 	elif prev_facing == "right" and new_facing == "up":  # Turning up from right
-		sprite.flip_h = true
-		sprite.rotation_degrees = 90
+		turn_sprite.flip_h = true
+		turn_sprite.rotation_degrees = 90
 
 
 
 
 func update_tail_orientation(segment, orientation):
-	var sprite = segment.get_node("Sprite2D")
+	var turn_sprite = segment.get_node("Sprite2D")
 	match orientation:
 		"left":
-			sprite.flip_h = true
-			sprite.rotation_degrees = 0
+			turn_sprite.flip_h = true
+			turn_sprite.rotation_degrees = 0
 		"right":
-			sprite.flip_h = false
-			sprite.rotation_degrees = 0
+			turn_sprite.flip_h = false
+			turn_sprite.rotation_degrees = 0
 		"up":
-			sprite.flip_h = false
-			sprite.rotation_degrees = -90
+			turn_sprite.flip_h = false
+			turn_sprite.rotation_degrees = -90
 		"down":
-			sprite.flip_h = false
-			sprite.rotation_degrees = 90
+			turn_sprite.flip_h = false
+			turn_sprite.rotation_degrees = 90
 
 
 
@@ -315,32 +287,32 @@ func lose_power():
 		await get_tree().create_timer(blink_sec).timeout
 		Global.snake_status = "small"
 		await get_tree().create_timer(blink_sec).timeout
-	if move_ready:
-		resume_move()
+
+	resume_move()
 
 	get_tree().paused = false
 	powered = false
 	
 	
 #makes tails check if there's a turn
-func check_turn_segment(segment, position):
-	var sprite = segment.get_node("Sprite2D")
+func check_turn_segment(segment, turn_coord):
+	var tail_sprite = segment.get_node("Sprite2D")
 	var is_last_segment = (segment == tail_segments[-1])  # Check if it's the last tail segment
 
 	for turn in turn_positions:
-		if turn[0].distance_to(position) < move_distance * 0.5:  # Check if segment is at a turn
+		if turn[0].distance_to(turn_coord) < move_distance * 0.5:  # Check if segment is at a turn
 			if is_last_segment:
-				sprite.frame = 4  # Last segment gets frame 4
+				tail_sprite.frame = 4  # Last segment gets frame 4
 			else:
-				sprite.frame = 3  # Regular turn segments get frame 3
-			adjust_turn_frame(sprite, turn[1], turn[2])  # Pass previous and new facing directions
+				tail_sprite.frame = 3  # Regular turn segments get frame 3
+			adjust_turn_frame(tail_sprite, turn[1], turn[2])  # Pass previous and new facing directions
 			return
 
 	# Default behavior: last tail segment -> frame 0, others -> frame 1
 	if is_last_segment:
-		sprite.frame = 0
+		tail_sprite.frame = 0
 	else:
-		sprite.frame = 1
+		tail_sprite.frame = 1
 
 
 func set_power(power: String):
@@ -355,8 +327,8 @@ func set_power(power: String):
 			await get_tree().create_timer(blink_sec).timeout
 			Global.snake_status = power
 			await get_tree().create_timer(blink_sec).timeout  # Wait again before switching back
-		if move_ready:
-			resume_move()
+
+		resume_move()
 		get_tree().paused = false
 	powered = true
 	ready_spawn_tail()
@@ -394,15 +366,6 @@ func update_global_direction():
 	if not move_orders.is_empty():
 		Global.direction = move_orders[-1]
 
-
-#removes turning if turned into a hit
-func turn_hit_detect():
-	if move_orders.size() > 0:
-		var dir_name = move_orders[-1]
-		var dir_object = get(dir_name)
-		if dir_object and dir_object.is_colliding():
-			ignore_turn = true
-
 		
 
 
@@ -434,29 +397,33 @@ func _input(event):
 	var new_move = ""
 
 	if event.is_action_pressed("k_up") and player_input == true and under_block == false:
-		new_move = "up"
-		if up.is_colliding():
-			ignore_turn = true
-			timer_counter_toggle = true
+		if move_orders.size() > 0 and move_orders[-1] != "down" or move_orders.size() == 0:
+			new_move = "up"
+			if up.is_colliding():
+				ignore_turn = true
+				timer_counter_toggle = true
 	#detects if head is under a ? block then makes up do a different command.
-	elif event.is_action_pressed("k_up") and player_input == true and under_block == true:
-		hit_block()
+			elif under_block == true:
+				hit_block()
 
 	elif event.is_action_pressed("k_down") and player_input == true:
-		new_move = "down"
-		if down.is_colliding():
-			ignore_turn = true
-			timer_counter_toggle = true
+		if move_orders.size() > 0 and move_orders[-1] != "up" or move_orders.size() == 0:
+			new_move = "down"
+			if down.is_colliding():
+				ignore_turn = true
+				timer_counter_toggle = true
 	elif event.is_action_pressed("k_left") and player_input == true:
-		new_move = "left"
-		if left.is_colliding():
-			ignore_turn = true
-			timer_counter_toggle = true
+		if move_orders.size() > 0 and move_orders[-1] != "right" or move_orders.size() == 0:
+			new_move = "left"
+			if left.is_colliding():
+				ignore_turn = true
+				timer_counter_toggle = true
 	elif event.is_action_pressed("k_right") and player_input == true:
-		new_move = "right"
-		if right.is_colliding():
-			ignore_turn = true
-			timer_counter_toggle = true
+		if move_orders.size() > 0 and move_orders[-1] != "left" or move_orders.size() == 0:
+			new_move = "right"
+			if right.is_colliding():
+				ignore_turn = true
+				timer_counter_toggle = true
 
 	# Ensure the new move is not a duplicate of the last move in the list
 	if new_move != "" and (move_orders.is_empty() or move_orders.back() != new_move):
@@ -470,15 +437,11 @@ func _input(event):
 	
 #fix moving beyond death
 func sprinting():
-	if Input.is_action_pressed("k_shift"):
-		final_time = original_time/3
-	else:
-		final_time = original_time
-
-
-
-	
-
+	if move_ready == true:
+		if Input.is_action_pressed("k_shift"):
+			final_time = snake_speed*0.3
+		else:
+			final_time = snake_speed
 
 func update_sprite_orientation():
 	update_tail_orientation(self, facing)
@@ -498,19 +461,16 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "block_area":
 		under_block = true
 	if area.name == "move_cam":
-		var window = 256 / 2
+		var window = 128
 		var pos = position.x
 		$Camera.limit_left = pos-window
 	if area.name == "oob_area":
 		die()
 	if area.name == "entrance":
-		$Camera.limit_right = position.x + 256/3
+		$Camera.limit_right = position.x + 85
 		#make it disappear and disable camera system area
 		
 		
-		
-
-
 #when leaving area.
 func _on_head_area_area_exited(area: Area2D) -> void:
 	if area.name == "edible":
@@ -542,16 +502,18 @@ func hit_block():
 	
 	
 func pause_move():
-	original_time = 999999999
+	move_ready = false
+	timer = 0
+	final_time = 9999
 	
 func resume_move():
-	original_time = original_original_time
+	move_ready = true
+	final_time = snake_speed
 	timer = 0
 	
 #win conditions when touching flag pole. position pole in way that snake head will always be inside it. Make sure snake head doesnt by pass it.
 #make flag seperate item that gets eten when snake touched top of flag pole
 func win():
-	move_orders.clear
 	player_input = false
 	pause_move()
 	await get_tree().create_timer(0.5).timeout
