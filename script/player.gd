@@ -39,13 +39,13 @@ var hurting = false
 var ignore_turn = false
 var timer_counter_toggle = false
 var timer_counter = 0
+var limit_move = "direction which snake cannot go"
 
 func _ready():
 	teleport_sequence()
 		
 func _process(delta):
-	print(ignore_turn)
-	print(timer_counter)
+	print(limit_move)
 	#print(move_orders)
 	#print(timer_counter)
 
@@ -68,7 +68,9 @@ func teleport_sequence():
 		position.x += move_distance
 		positions.push_front(global_position)
 		orientations.push_front(facing)
+	limit_move = "left"
 	move_ready = true
+	
 
 func ready_spawn_tail(): #prepares to add tail
 	pending_tail_segment = true
@@ -396,9 +398,10 @@ func facer():
 func _input(event):
 	var new_move = ""
 
-	if event.is_action_pressed("k_up") and player_input == true and under_block == false:
+	if event.is_action_pressed("k_up") and player_input == true and under_block == false and limit_move != "up":
 		if move_orders.size() > 0 and move_orders[-1] != "down" or move_orders.size() == 0:
 			new_move = "up"
+			limit_move = "down"
 			if up.is_colliding():
 				ignore_turn = true
 				timer_counter_toggle = true
@@ -406,21 +409,24 @@ func _input(event):
 			elif under_block == true:
 				hit_block()
 
-	elif event.is_action_pressed("k_down") and player_input == true:
+	elif event.is_action_pressed("k_down") and player_input == true and limit_move != "down":
 		if move_orders.size() > 0 and move_orders[-1] != "up" or move_orders.size() == 0:
 			new_move = "down"
+			limit_move = "up"
 			if down.is_colliding():
 				ignore_turn = true
 				timer_counter_toggle = true
-	elif event.is_action_pressed("k_left") and player_input == true:
+	elif event.is_action_pressed("k_left") and player_input == true and limit_move != "left":
 		if move_orders.size() > 0 and move_orders[-1] != "right" or move_orders.size() == 0:
 			new_move = "left"
+			limit_move = "right"
 			if left.is_colliding():
 				ignore_turn = true
 				timer_counter_toggle = true
-	elif event.is_action_pressed("k_right") and player_input == true:
+	elif event.is_action_pressed("k_right") and player_input == true and limit_move != "right":
 		if move_orders.size() > 0 and move_orders[-1] != "left" or move_orders.size() == 0:
 			new_move = "right"
+			limit_move = "left"
 			if right.is_colliding():
 				ignore_turn = true
 				timer_counter_toggle = true
