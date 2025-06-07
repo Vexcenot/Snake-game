@@ -48,8 +48,7 @@ func _ready():
 	teleport_sequence()
 		
 func _process(delta):
-	print(under_block)
-	print(move_orders)
+	print(ignore_turn)
 	#print(move_orders)
 	#print(timer_counter)
 
@@ -100,9 +99,10 @@ func spawn_tail_segment():
 		tail_tip.frame = 0
 
 
-#tik rate system
+#tick rate system
 func time_reset():
 	if timer >= final_time:
+
 		# Make all tail segments visible
 		for segment in tail_segments:
 			segment.modulate.a = 1
@@ -113,12 +113,18 @@ func time_reset():
 
 		if timer_counter_toggle == true:
 			timer_counter += 1
+		#if timer_counter == 1:
+			#turn_positions.clear()
 		if timer_counter >= 2:
 			ignore_turn = false
 			timer_counter_toggle = false
 			timer_counter = 0
-		
 
+		
+func pop_turn():
+	if ignore_turn and hurting:
+		hurting = false
+		
 		
 #prevents snake from moving in on itself. Moves this to kmove
 func is_opposite_direction(new_move: String, current_facing: String) -> bool:
@@ -303,7 +309,7 @@ func check_turn_segment(segment, turn_coord):
 
 	for turn in turn_positions:
 		if turn[0].distance_to(turn_coord) < move_distance * 0.5:  # Check if segment is at a turn
-			if is_last_segment:
+			if is_last_segment: #turn sprite
 				tail_sprite.frame = 4  # Last segment gets frame 4
 			else:
 				tail_sprite.frame = 3  # Regular turn segments get frame 3
@@ -367,7 +373,7 @@ func die():
 
 func update_global_direction():
 	if not move_orders.is_empty():
-		Global.direction = move_orders[-1]
+		Global.direction = move_orders[0]
 
 		
 
@@ -377,13 +383,13 @@ func update_global_direction():
 
 func facer():
 	if move_orders.size() > 0:
-		var next_move = move_orders[-1]
+		var next_move = move_orders.pop_front()
 		if is_opposite_direction(next_move, facing):
 			return
 		#checks turns
 		#make it not make turn if next move will not run into a wall.
-		if next_move != facing and not ignore_turn:  # Only store if an actual turn is made
-			turn_positions.push_front([global_position, facing, move_orders[-1]])
+		if next_move != facing and ignore_turn == false: 
+			turn_positions.push_front([global_position, facing, next_move])  # Store both previous and new facing
 			  # Store both previous and new facing
 			
 
@@ -400,10 +406,10 @@ func _input(event):
 	var new_move = ""
 
 	if event.is_action_pressed("k_up") and player_input == true and under_block == false and limit_move != "up":
-		if move_orders.size() > 0 and move_orders[-1] != "down" or move_orders.size() == 0:
+		if move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0:
 			new_move = "up"
 			limit_move = "down"
-			if up.is_colliding():
+			if up.is_colliding() and move_orders.size() == 0:
 				timer_counter_toggle = true
 				ignore_turn = true
 	#bumps ? block directlyt above
@@ -415,24 +421,24 @@ func _input(event):
 		resume_move()
 
 	elif event.is_action_pressed("k_down") and player_input == true and limit_move != "down":
-		if move_orders.size() > 0 and move_orders[-1] != "up" or move_orders.size() == 0:
+		if move_orders.size() > 0 and move_orders[0] != "up" or move_orders.size() == 0:
 			new_move = "down"
 			limit_move = "up"
-			if down.is_colliding():
+			if down.is_colliding() and move_orders.size() == 0:
 				ignore_turn = true
 				timer_counter_toggle = true
 	elif event.is_action_pressed("k_left") and player_input == true and limit_move != "left":
-		if move_orders.size() > 0 and move_orders[-1] != "right" or move_orders.size() == 0:
+		if move_orders.size() > 0 and move_orders[0] != "right" or move_orders.size() == 0:
 			new_move = "left"
 			limit_move = "right"
-			if left.is_colliding():
+			if left.is_colliding() and move_orders.size() == 0:
 				ignore_turn = true
 				timer_counter_toggle = true
 	elif event.is_action_pressed("k_right") and player_input == true and limit_move != "right":
-		if move_orders.size() > 0 and move_orders[-1] != "left" or move_orders.size() == 0:
+		if move_orders.size() > 0 and move_orders[0] != "left" or move_orders.size() == 0:
 			new_move = "right"
 			limit_move = "left"
-			if right.is_colliding():
+			if right.is_colliding() and move_orders.size() == 0:
 				ignore_turn = true
 				timer_counter_toggle = true
 
@@ -503,7 +509,7 @@ func block_pow():
 		await get_tree().create_timer(0.6).timeout
 		under_block =true
 		#make snake turn left if player inputs it and ignore right append
-		if move_orders[-1] != "up" or under_under_block == false:
+		if move_orders.size() > 0 and move_orders[0] != "up" or under_under_block == false:
 			resume_move()
 			under_block = false
 		
@@ -551,5 +557,5 @@ func win2():
 
 func update_camera():
 	var window_width = get_viewport().size.x
-	if move_orders.size() > 0 and move_orders[-1] == "right":
+	if move_orders.size() > 0 and move_orders[0] == "right":
 		$Camera.limit_left = window_width

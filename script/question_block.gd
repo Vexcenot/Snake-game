@@ -39,7 +39,6 @@ func rest_block():
 		false_block = false
 		$AllTheSmallBlocksTogether.visible = true
 		$AllTheSmallBlocksTogether.frame = 7
-		print("fuck")
 
 func spawn_item():
 	if items.size() > 0:
