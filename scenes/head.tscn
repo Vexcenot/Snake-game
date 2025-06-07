@@ -86,14 +86,14 @@ position = Vector2(-2, -3)
 scale = Vector2(0.490294, 0.36164)
 shape = SubResource("RectangleShape2D_6rdic")
 disabled = true
-debug_color = Color(0.54883, 0.560408, 0.188049, 0.42)
+debug_color = Color(0, 0, 0, 1)
 
 [node name="pixel gapper2" type="CollisionShape2D" parent="."]
 position = Vector2(-2, 3)
 scale = Vector2(0.490294, 0.36164)
 shape = SubResource("RectangleShape2D_6rdic")
 disabled = true
-debug_color = Color(0.54883, 0.560408, 0.188049, 0.42)
+debug_color = Color(0, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-5.24521e-06, 0)

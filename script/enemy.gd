@@ -5,11 +5,12 @@ extends CharacterBody2D
 @export var avoid_ledge = false
 @export var block = false
 var speed = -speeder
+var activate = false
 
 
 #movement baby!!!!
 func _physics_process(delta: float) -> void:
-	if block == false:
+	if block == false and activate == true:
 		velocity.x = speed
 		velocity.y += gravity * delta  # Apply gravity
 		move_and_slide()
@@ -55,3 +56,10 @@ func block_spawn():
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	block = false
+
+
+
+
+func _on_enemy_area_entered(area: Area2D) -> void:
+	if area.name == "activate_entity":
+		activate = true
