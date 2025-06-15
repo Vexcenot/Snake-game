@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://disfsrloilqua"]
+[gd_scene load_steps=14 format=3 uid="uid://disfsrloilqua"]
 
 [ext_resource type="Script" uid="uid://cggccwq77ls3n" path="res://script/player.gd" id="1_w2ywo"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="2_ali73"]
 [ext_resource type="PackedScene" uid="uid://vfnjnj2mu8yd" path="res://scenes/snake sprite.tscn" id="2_ldr7d"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="4_pw8ip"]
 [ext_resource type="AudioStream" uid="uid://e44f00ph5aem" path="res://sounds/power down.wav" id="5_d0mn4"]
+[ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="6_480qb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rdic"]
 size = Vector2(4.07919, 5.53036)
@@ -178,6 +179,11 @@ drag_horizontal_enabled = true
 drag_left_margin = 1.0
 drag_right_margin = 0.0
 editor_draw_drag_margin = true
+
+[node name="AllTheSmallBlocksTogether" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
+scale = Vector2(0.0544305, 0.0544305)
+texture = ExtResource("6_480qb")
 
 [connection signal="area_entered" from="Head Area" to="." method="_on_head_area_area_entered"]
 [connection signal="area_exited" from="Head Area" to="." method="_on_head_area_area_exited"]

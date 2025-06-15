@@ -7,8 +7,9 @@ extends CharacterBody2D
 @onready var right: RayCast2D = $right
 @onready var sprite: Sprite2D = $Sprite2D
 
-var snake_length = 2 #how long the snake starts
 var snake_speed = 0.3 #adjusts speed of snake I like 0.3
+var snake_length = 2 #how long the snake starts
+
 
 var direction = Vector2.ZERO
 var timer = 100
@@ -275,6 +276,8 @@ func interact():
 #pain happens here
 #runs game over function and (should) clear out all datas
 func hurt():
+	var facing_pain = Global.direction
+	
 	print("OWWWWWWWWWWWWW")
 	hurting = true
 	if powered:
@@ -388,6 +391,15 @@ func facer():
 			return
 		#checks turns
 		#make it not make turn if next move will not run into a wall.
+		if next_move == "up" and up.is_colliding():
+			ignoring_turning()
+		elif next_move == "down" and down.is_colliding():
+			ignoring_turning()
+		elif next_move == "right" and right.is_colliding():
+			ignoring_turning()
+		elif next_move == "left" and left.is_colliding():
+			ignoring_turning()
+
 		if next_move != facing and ignore_turn == false: 
 			turn_positions.push_front([global_position, facing, next_move])  # Store both previous and new facing
 			  # Store both previous and new facing
@@ -404,14 +416,6 @@ func facer():
 #player inputs get added to a list to do list
 func _input(event):
 	var new_move = ""
-
-	if event.is_action_pressed("k_up") and player_input == true and under_block == false and limit_move != "up":
-		if move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0:
-			new_move = "up"
-			limit_move = "down"
-			if up.is_colliding() and move_orders.size() == 0:
-				timer_counter_toggle = true
-				ignore_turn = true
 	#bumps ? block directlyt above
 	if under_block == true and event.is_action_pressed("k_up"):
 
@@ -420,27 +424,23 @@ func _input(event):
 		await get_tree().create_timer(0.3).timeout
 		resume_move()
 
+#move inputs
+	if event.is_action_pressed("k_up") and player_input == true and under_block == false and limit_move != "up":
+		if move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0:
+			new_move = "up"
+			limit_move = "down"
 	elif event.is_action_pressed("k_down") and player_input == true and limit_move != "down":
 		if move_orders.size() > 0 and move_orders[0] != "up" or move_orders.size() == 0:
 			new_move = "down"
 			limit_move = "up"
-			if down.is_colliding() and move_orders.size() == 0:
-				ignore_turn = true
-				timer_counter_toggle = true
 	elif event.is_action_pressed("k_left") and player_input == true and limit_move != "left":
 		if move_orders.size() > 0 and move_orders[0] != "right" or move_orders.size() == 0:
 			new_move = "left"
 			limit_move = "right"
-			if left.is_colliding() and move_orders.size() == 0:
-				ignore_turn = true
-				timer_counter_toggle = true
 	elif event.is_action_pressed("k_right") and player_input == true and limit_move != "right":
 		if move_orders.size() > 0 and move_orders[0] != "left" or move_orders.size() == 0:
 			new_move = "right"
 			limit_move = "left"
-			if right.is_colliding() and move_orders.size() == 0:
-				ignore_turn = true
-				timer_counter_toggle = true
 
 	# Ensure the new move is not a duplicate of the last move in the list
 	if new_move != "" and (move_orders.is_empty() or move_orders.back() != new_move):
@@ -451,7 +451,12 @@ func _input(event):
 	if event.is_action_pressed("k_action2"):
 		set_power("big")
 		#update_all_textures(bigsnek)
-	
+
+#makes snake not create turn sprite for a single turn
+func ignoring_turning():
+		ignore_turn = true
+		timer_counter_toggle = true
+
 #fix moving beyond death
 func sprinting():
 	if move_ready == true:
