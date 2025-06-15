@@ -108,14 +108,11 @@ func time_reset():
 		for segment in tail_segments:
 			segment.modulate.a = 1
 		facing_prev = facing  # Save previous facing before updating
-		facer()
-		moving()
+		move()
 		timer = 0
 
 		if timer_counter_toggle == true:
 			timer_counter += 1
-		#if timer_counter == 1:
-			#turn_positions.clear()
 		if timer_counter >= 2:
 			ignore_turn = false
 			timer_counter_toggle = false
@@ -126,13 +123,6 @@ func pop_turn():
 	if ignore_turn and hurting:
 		hurting = false
 		
-		
-#prevents snake from moving in on itself. Moves this to kmove
-func is_opposite_direction(new_move: String, current_facing: String) -> bool:
-	return (new_move == "up" and current_facing == "down") or \
-		(new_move == "down" and current_facing == "up") or \
-		(new_move == "left" and current_facing == "right") or \
-		(new_move == "right" and current_facing == "left")
 
 func is_raycast_blocked(snake_facing: String) -> bool:
 	match snake_facing:
@@ -144,21 +134,7 @@ func is_raycast_blocked(snake_facing: String) -> bool:
 
 
 
-func moving():
-	#runs hurt mechanic if facing is the same as raycast
-	if direction != Vector2.ZERO:
-		if is_raycast_blocked(facing):
-			hurt()
-			return
 
-		position += direction * move_distance
-		global_position_tracker()
-		move_tail_segments()
-
-		# Add tail segment only after moving
-		if pending_tail_segment:
-			spawn_tail_segment()
-			pending_tail_segment = false  # Reset flag
 
 func global_position_tracker():
 	positions.push_front(global_position)
@@ -378,42 +354,46 @@ func update_global_direction():
 	if not move_orders.is_empty():
 		Global.direction = move_orders[0]
 
-		
 
-
-
-
-
-func facer():
+func move():
 	if move_orders.size() > 0:
 		var next_move = move_orders.pop_front()
-		if is_opposite_direction(next_move, facing):
-			return
+
 		#checks turns
 		#make it not make turn if next move will not run into a wall.
-		if next_move == "up" and up.is_colliding():
+		if next_move == "up" and up.is_colliding() and up.get_collider() is StaticBody2D:
 			ignoring_turning()
-		elif next_move == "down" and down.is_colliding():
+		elif next_move == "down" and down.is_colliding() and down.get_collider() is StaticBody2D:
 			ignoring_turning()
-		elif next_move == "right" and right.is_colliding():
+		elif next_move == "right" and right.is_colliding() and right.get_collider() is StaticBody2D:
 			ignoring_turning()
-		elif next_move == "left" and left.is_colliding():
+		elif next_move == "left" and left.is_colliding() and left.get_collider() is StaticBody2D:
 			ignoring_turning()
 
 		if next_move != facing and ignore_turn == false: 
 			turn_positions.push_front([global_position, facing, next_move])  # Store both previous and new facing
 			  # Store both previous and new facing
-			
-
 		facing = next_move
 		direction = {"up": Vector2.UP, "down": Vector2.DOWN, "left": Vector2.LEFT, "right": Vector2.RIGHT}[next_move]
-
 	# Keep turn_positions one slot shorter than the snake length
 	if turn_positions.size() >= length:
 		turn_positions.pop_back()
+		#runs hurt mechanic if facing is the same as raycast
 		
+	if direction != Vector2.ZERO:
+		if is_raycast_blocked(facing):
+			hurt()
+			return
 
-#player inputs get added to a list to do list
+		position += direction * move_distance
+		global_position_tracker()
+		move_tail_segments()
+
+		# Add tail segment only after moving
+		if pending_tail_segment:
+			spawn_tail_segment()
+			pending_tail_segment = false  # Reset flag
+#snake movement inputs
 func _input(event):
 	var new_move = ""
 	#bumps ? block directlyt above
@@ -429,35 +409,39 @@ func _input(event):
 		if move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0:
 			new_move = "up"
 			limit_move = "down"
+			move_orders.append("up")
 	elif event.is_action_pressed("k_down") and player_input == true and limit_move != "down":
 		if move_orders.size() > 0 and move_orders[0] != "up" or move_orders.size() == 0:
 			new_move = "down"
 			limit_move = "up"
+			move_orders.append("down")
 	elif event.is_action_pressed("k_left") and player_input == true and limit_move != "left":
 		if move_orders.size() > 0 and move_orders[0] != "right" or move_orders.size() == 0:
 			new_move = "left"
 			limit_move = "right"
+			move_orders.append("left")
 	elif event.is_action_pressed("k_right") and player_input == true and limit_move != "right":
 		if move_orders.size() > 0 and move_orders[0] != "left" or move_orders.size() == 0:
 			new_move = "right"
 			limit_move = "left"
+			move_orders.append("right")
 
 	# Ensure the new move is not a duplicate of the last move in the list
-	if new_move != "" and (move_orders.is_empty() or move_orders.back() != new_move):
-		move_orders.append(new_move)
+	#if new_move != "" and (move_orders.is_empty() or move_orders.back() != new_move):
+		#move_orders.append(new_move)
 	#speed up.
 
-#debug
+#debug makes snake big
 	if event.is_action_pressed("k_action2"):
 		set_power("big")
 		#update_all_textures(bigsnek)
 
-#makes snake not create turn sprite for a single turn
+#prevents turn sprite for a single turn
 func ignoring_turning():
 		ignore_turn = true
 		timer_counter_toggle = true
 
-#fix moving beyond death
+#vroom.
 func sprinting():
 	if move_ready == true:
 		if Input.is_action_pressed("k_shift"):
@@ -468,7 +452,7 @@ func sprinting():
 func update_sprite_orientation():
 	update_tail_orientation(self, facing)
 
-#how snake when touch different stuffs.
+#how snake when touch different areas.
 func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "mushroom":
 		set_power("big")
@@ -504,7 +488,7 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 		under_under_block = false
 
 
-#make it stay under the block until an input is pressed that moves the snake outta da way.
+#block hitting mechanic
 func block_pow():
 	if Global.direction == "up" and under_block == true and under_under_block == true:
 		under_block = false
@@ -519,8 +503,8 @@ func block_pow():
 			under_block = false
 		
 
-		#plays animation when hitting ? block
 
+#block bumping animation
 func hit_block():
 
 		sprite.frame = 8

@@ -81,4 +81,4 @@ position = Vector2(220, 208)
 position = Vector2(361, 201)
 
 [node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(35, 76)
+position = Vector2(36, 55)
