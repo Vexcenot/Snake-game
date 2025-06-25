@@ -49,6 +49,8 @@ func _ready():
 	teleport_sequence()
 		
 func _process(delta):
+	if move_orders.size() > 2:
+		move_orders.pop_back()
 	print(ignore_turn)
 	#print(move_orders)
 	#print(timer_counter)
@@ -64,6 +66,7 @@ func _process(delta):
 
 #gives snake length on start
 func teleport_sequence():
+
 	await get_tree().process_frame
 	position.x -= move_distance*snake_length
 	for i in range(snake_length):
@@ -119,9 +122,7 @@ func time_reset():
 			timer_counter = 0
 
 		
-func pop_turn():
-	if ignore_turn and hurting:
-		hurting = false
+
 		
 
 func is_raycast_blocked(snake_facing: String) -> bool:
@@ -255,7 +256,6 @@ func hurt():
 	var facing_pain = Global.direction
 	
 	print("OWWWWWWWWWWWWW")
-	hurting = true
 	if powered:
 		lose_power()
 	else:
@@ -354,9 +354,33 @@ func update_global_direction():
 	if not move_orders.is_empty():
 		Global.direction = move_orders[0]
 
+var collide_up = false
+var collide_down = false
+var collide_left = false
+var collide_right = false
+func check_collide():
+	if hurting and up.is_colliding() and up.get_collider() is StaticBody2D:
+		collide_up = true
+	else:
+		collide_up = false
+	if hurting and down.is_colliding() and down.get_collider() is StaticBody2D:
+		collide_down = true
+	else:
+		collide_down = false
+	if hurting and right.is_colliding() and right.get_collider() is StaticBody2D:
+		collide_right = true
+	else:
+		collide_right = false
+	if hurting and left.is_colliding() and right.get_collider() is StaticBody2D:
+		collide_left = true
+	else:
+		collide_left = false
+	
+
+		
 
 func move():
-	if move_orders.size() > 0:
+	if move_orders.size() > 0: #make it also check if snake is paused and that next move wouldnt run into itself.
 		var next_move = move_orders.pop_front()
 
 		#checks turns
@@ -370,6 +394,8 @@ func move():
 		elif next_move == "left" and left.is_colliding() and left.get_collider() is StaticBody2D:
 			ignoring_turning()
 
+
+#move calculate
 		if next_move != facing and ignore_turn == false: 
 			turn_positions.push_front([global_position, facing, next_move])  # Store both previous and new facing
 			  # Store both previous and new facing
@@ -380,6 +406,7 @@ func move():
 		turn_positions.pop_back()
 		#runs hurt mechanic if facing is the same as raycast
 		
+#real moves
 	if direction != Vector2.ZERO:
 		if is_raycast_blocked(facing):
 			hurt()
@@ -393,6 +420,8 @@ func move():
 		if pending_tail_segment:
 			spawn_tail_segment()
 			pending_tail_segment = false  # Reset flag
+
+
 #snake movement inputs
 func _input(event):
 	var new_move = ""
@@ -516,11 +545,13 @@ func hit_block():
 	
 	
 func pause_move():
+	hurting = true
 	move_ready = false
 	timer = 0
 	final_time = 9999
 	
 func resume_move():
+	hurting = false
 	move_ready = true
 	final_time = snake_speed
 
