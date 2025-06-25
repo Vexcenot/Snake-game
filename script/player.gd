@@ -51,7 +51,8 @@ func _ready():
 func _process(delta):
 	if move_orders.size() > 2:
 		move_orders.pop_back()
-	print(ignore_turn)
+	print(direction)
+	
 	#print(move_orders)
 	#print(timer_counter)
 
@@ -62,6 +63,7 @@ func _process(delta):
 	sprinting()
 	update_global_direction()
 	block_pow()
+	check_collide()
 
 
 #gives snake length on start
@@ -391,6 +393,7 @@ func move():
 			ignoring_turning()
 		elif next_move == "right" and right.is_colliding() and right.get_collider() is StaticBody2D:
 			ignoring_turning()
+			print("fuck")
 		elif next_move == "left" and left.is_colliding() and left.get_collider() is StaticBody2D:
 			ignoring_turning()
 
@@ -411,10 +414,18 @@ func move():
 		if is_raycast_blocked(facing):
 			hurt()
 			return
-
-		position += direction * move_distance
-		global_position_tracker()
-		move_tail_segments()
+		if direction == Vector2.UP and collide_up:
+			return
+		elif direction == Vector2.DOWN and collide_down:
+			return
+		elif direction == Vector2.RIGHT and collide_right:
+			return
+		elif direction == Vector2.LEFT and collide_left:
+			return
+		else:
+			position += direction * move_distance
+			global_position_tracker()
+			move_tail_segments()
 
 		# Add tail segment only after moving
 		if pending_tail_segment:
