@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://disfsrloilqua"]
+[gd_scene load_steps=16 format=3 uid="uid://disfsrloilqua"]
 
 [ext_resource type="Script" uid="uid://cggccwq77ls3n" path="res://script/player.gd" id="1_w2ywo"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="2_ali73"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="4_pw8ip"]
 [ext_resource type="AudioStream" uid="uid://e44f00ph5aem" path="res://sounds/power down.wav" id="5_d0mn4"]
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="6_480qb"]
+[ext_resource type="Texture2D" uid="uid://bc7qh15aako70" path="res://sprite/smol snake.png" id="7_tctuf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rdic"]
 size = Vector2(4.07919, 5.53036)
@@ -68,10 +69,14 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.4, 2.49231)
 }
 
+[sub_resource type="Animation" id="Animation_a62mm"]
+resource_name = "die1"
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f3nah"]
 _data = {
 &"RESET": SubResource("Animation_8dqsq"),
-&"die": SubResource("Animation_wgeep")
+&"die": SubResource("Animation_wgeep"),
+&"die1": SubResource("Animation_a62mm")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpnw1"]
@@ -181,9 +186,17 @@ drag_right_margin = 0.0
 editor_draw_drag_margin = true
 
 [node name="AllTheSmallBlocksTogether" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -7)
 scale = Vector2(0.0544305, 0.0544305)
 texture = ExtResource("6_480qb")
+
+[node name="neck sprite" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-0.5, 3.5)
+texture = ExtResource("7_tctuf")
+hframes = 9
+frame = 8
 
 [connection signal="area_entered" from="Head Area" to="." method="_on_head_area_area_entered"]
 [connection signal="area_exited" from="Head Area" to="." method="_on_head_area_area_exited"]

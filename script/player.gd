@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var right: RayCast2D = $right
 @onready var sprite: Sprite2D = $Sprite2D
 
-var snake_speed = 0.3 #adjusts speed of snake I like 0.3
+var snake_speed = 1 #adjusts speed of snake I like 0.3
 var snake_length = 2 #how long the snake starts
 
 
@@ -25,7 +25,7 @@ var length = 3
 var tail_segments = []
 var scanned = {"up": "", "down": "", "left": "", "right": ""}
 var facing = "right"
-var facing_prev = "right"
+var prev_move = "right"
 var movesame = false
 var pending_tail_segment = false  # Flag to track pending tail additionz
 var powerup = "current power up goes here"
@@ -44,31 +44,68 @@ var ignore_turn = false
 var timer_counter_toggle = false
 var timer_counter = 0
 var limit_move = "direction which snake cannot go"
+var xLimit = "orientation the snake cant move in"
 
 func _ready():
 	teleport_sequence()
-		
-func _process(delta):
-	if move_orders.size() > 2:
-		move_orders.pop_back()
-	print(direction)
-	
-	#print(move_orders)
-	#print(timer_counter)
 
+func _process(delta):
+	if move_orders.size() > 3:
+		move_orders.pop_back()
+		if move_orders[0] == move_orders[1]:
+			move_orders.pop_front()
+	print("lim ", limit_move)
+	print("ord", move_orders)
 	timer += delta
 	time_reset()
-	interact()
+	#interact()
 	update_sprite_orientation()
 	sprinting()
 	update_global_direction()
 	block_pow()
 	check_collide()
+		
 
+#snake movement inputs
+func _input(event):
+	#bumps ? block directlyt above
+	if under_block == true and event.is_action_pressed("k_up"):
+		hit_block()
+		pause_move()
+		await get_tree().create_timer(0.3).timeout
+		resume_move()
+#move inputs
+	if event.is_action_pressed("k_up") and player_input == true and under_block == false and limit_move != "up" and xLimit != "vert":
+		if move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0:
+			xLimit = "vert"
+			limit_move = "down"
+			move_orders.append("up")
+	elif event.is_action_pressed("k_down") and player_input == true and limit_move != "down" and xLimit != "vert":
+		if move_orders.size() > 0 and move_orders[0] != "up" or move_orders.size() == 0:
+			xLimit = "vert"
+			limit_move = "up"
+			move_orders.append("down")
+	elif event.is_action_pressed("k_left") and player_input == true and limit_move != "left" and xLimit != "hori":
+		if move_orders.size() > 0 and move_orders[0] != "right" or move_orders.size() == 0:
+			xLimit = "hori"
+			limit_move = "right"
+			move_orders.append("left")
+	elif event.is_action_pressed("k_right") and player_input == true and limit_move != "right" and xLimit != "hori":
+		if move_orders.size() > 0 and move_orders[0] != "left" or move_orders.size() == 0:
+			xLimit = "hori"
+			limit_move = "left"
+			move_orders.append("right")
+#debug1
+	if event.is_action_pressed("k_action"):
+		ready_spawn_tail()
+		eat_positions.push_front(global_position)
+#debug2
+	if event.is_action_pressed("k_action2"):
+		move_ready = true
+		final_time = snake_speed
 
 #gives snake length on start
 func teleport_sequence():
-
 	await get_tree().process_frame
 	position.x -= move_distance*snake_length
 	for i in range(snake_length):
@@ -78,12 +115,11 @@ func teleport_sequence():
 		orientations.push_front(facing)
 	limit_move = "left"
 	move_ready = true
-	
+
 #processes adding length to snake mid-game
 func ready_spawn_tail(): #prepares to add tail
 	pending_tail_segment = true
 	eat_positions.push_front(global_position) #adds "full" sprite to tail.
-
 #function that spawns tails
 func spawn_tail_segment():
 	if tail_segment_scene:
@@ -91,41 +127,31 @@ func spawn_tail_segment():
 		var tail_segment = tail_segment_scene.instantiate()
 		get_parent().add_child(tail_segment)
 		tail_segment.global_position = global_position
-		
 		# Make the segment initially invisible
 		tail_segment.modulate.a = 0
-		
 		tail_segments.push_front(tail_segment)
 		length += 1
-	
 	# Update the last tail segment only
 	var last = tail_segments[-1]
 	var tail_tip = last.get_node("Sprite2D")
 	if move_ready == false:
 		tail_tip.frame = 0
 
-
 #tick rate system
 func time_reset():
 	if timer >= final_time:
-
 		# Make all tail segments visible
 		for segment in tail_segments:
 			segment.modulate.a = 1
-		facing_prev = facing  # Save previous facing before updating
+		prev_move = facing  # Save previous facing before updating
 		move()
 		timer = 0
-
 		if timer_counter_toggle == true:
 			timer_counter += 1
 		if timer_counter >= 2:
 			ignore_turn = false
 			timer_counter_toggle = false
 			timer_counter = 0
-
-		
-
-		
 
 func is_raycast_blocked(snake_facing: String) -> bool:
 	match snake_facing:
@@ -134,10 +160,6 @@ func is_raycast_blocked(snake_facing: String) -> bool:
 		"left": return left.is_colliding() and left.get_collider() is StaticBody2D
 		"right": return right.is_colliding() and right.get_collider() is StaticBody2D
 		_: return false
-
-
-
-
 
 func global_position_tracker():
 	positions.push_front(global_position)
@@ -178,7 +200,6 @@ func remove_past_turns(last_tail_position):
 	for i in range(turn_positions.size() - 1, -1, -1):  # Iterate in reverse to safely remove elements
 		if turn_positions[i][0].distance_to(last_tail_position) < move_distance * 0.5 and pending_tail_segment == false:
 			turn_positions.pop_at(i)  # Remove the turn position
-
 
 func adjust_turn_frame(turn_sprite: Sprite2D, prev_facing: String, new_facing: String):
 	# Turning logic: prev_facing -> new_facing
@@ -222,9 +243,6 @@ func adjust_turn_frame(turn_sprite: Sprite2D, prev_facing: String, new_facing: S
 		turn_sprite.flip_h = true
 		turn_sprite.rotation_degrees = 90
 
-
-
-
 func update_tail_orientation(segment, orientation):
 	var turn_sprite = segment.get_node("Sprite2D")
 	match orientation:
@@ -240,11 +258,6 @@ func update_tail_orientation(segment, orientation):
 		"down":
 			turn_sprite.flip_h = false
 			turn_sprite.rotation_degrees = 90
-
-
-
-
-
 
 func interact():
 	if Input.is_action_just_pressed("k_action") and tail_segment_scene and positions.size() > 1:
@@ -264,7 +277,6 @@ func hurt():
 		die()
 
 func lose_power():
-	
 	var blink_sec = 0.1
 	var current_power = Global.snake_status
 	$PowerDown.play()
@@ -275,19 +287,15 @@ func lose_power():
 		await get_tree().create_timer(blink_sec).timeout
 		Global.snake_status = "small"
 		await get_tree().create_timer(blink_sec).timeout
-
 	resume_move()
 	timer = 0
-
 	get_tree().paused = false
 	powered = false
-	
-	
+
 #makes tails check if there's a turn
 func check_turn_segment(segment, turn_coord):
 	var tail_sprite = segment.get_node("Sprite2D")
 	var is_last_segment = (segment == tail_segments[-1])  # Check if it's the last tail segment
-
 	for turn in turn_positions:
 		if turn[0].distance_to(turn_coord) < move_distance * 0.5:  # Check if segment is at a turn
 			if is_last_segment: #turn sprite
@@ -296,13 +304,11 @@ func check_turn_segment(segment, turn_coord):
 				tail_sprite.frame = 3  # Regular turn segments get frame 3
 			adjust_turn_frame(tail_sprite, turn[1], turn[2])  # Pass previous and new facing directions
 			return
-
 	# Default behavior: last tail segment -> frame 0, others -> frame 1
 	if is_last_segment:
 		tail_sprite.frame = 0
 	else:
 		tail_sprite.frame = 1
-
 
 func set_power(power: String):
 	var current_power = Global.snake_status
@@ -316,7 +322,6 @@ func set_power(power: String):
 			await get_tree().create_timer(blink_sec).timeout
 			Global.snake_status = power
 			await get_tree().create_timer(blink_sec).timeout  # Wait again before switching back
-
 		resume_move()
 		timer = 0
 		get_tree().paused = false
@@ -331,31 +336,23 @@ func die():
 	sprite.frame = 6
 	var delay_between_segments = 0.05  # 50ms delay between segments
 	var all_segments = [self] + tail_segments  # Head first, then tail segments
-		
 		# First, play the head's death animation
 	await get_tree().create_timer(0.18).timeout
 	$AnimationPlayer.play("die")
 	await get_tree().create_timer(delay_between_segments).timeout  # Initial delay for head
-		
 		# Start from index 1 since we already animated the head
 	for i in range(1, all_segments.size()):
 		var segment = all_segments[i]
 		if segment.has_node("AnimationPlayer"):
 			var anim_player = segment.get_node("AnimationPlayer")
 			anim_player.play("die")
-			
 			# Wait before playing the next segment's animation
 		if i < all_segments.size() - 1:  # Don't wait after the last segment
 			await get_tree().create_timer(delay_between_segments).timeout
 
-
-
-
-
 func update_global_direction():
 	if not move_orders.is_empty():
 		Global.direction = move_orders[0]
-
 var collide_up = false
 var collide_down = false
 var collide_left = false
@@ -377,14 +374,17 @@ func check_collide():
 		collide_left = true
 	else:
 		collide_left = false
-	
 
-		
-
+var move_direction = Vector2.ZERO
+var next_move = "the next move the snake will make"
 func move():
 	if move_orders.size() > 0: #make it also check if snake is paused and that next move wouldnt run into itself.
-		var next_move = move_orders.pop_front()
-
+		if move_orders[0] == next_move:
+			move_orders.pop_front()
+		elif move_orders[0] == limit_move:
+			move_orders.pop_front()
+		else:
+			next_move = move_orders.pop_front()
 		#checks turns
 		#make it not make turn if next move will not run into a wall.
 		if next_move == "up" and up.is_colliding() and up.get_collider() is StaticBody2D:
@@ -403,27 +403,20 @@ func move():
 			turn_positions.push_front([global_position, facing, next_move])  # Store both previous and new facing
 			  # Store both previous and new facing
 		facing = next_move
-		direction = {"up": Vector2.UP, "down": Vector2.DOWN, "left": Vector2.LEFT, "right": Vector2.RIGHT}[next_move]
+		move_direction = {"up": Vector2.UP, "down": Vector2.DOWN, "left": Vector2.LEFT, "right": Vector2.RIGHT}[next_move]
 	# Keep turn_positions one slot shorter than the snake length
 	if turn_positions.size() >= length:
 		turn_positions.pop_back()
 		#runs hurt mechanic if facing is the same as raycast
 		
 #real moves
-	if direction != Vector2.ZERO:
+	if move_direction != Vector2.ZERO:
+
 		if is_raycast_blocked(facing):
 			hurt()
 			return
-		if direction == Vector2.UP and collide_up:
-			return
-		elif direction == Vector2.DOWN and collide_down:
-			return
-		elif direction == Vector2.RIGHT and collide_right:
-			return
-		elif direction == Vector2.LEFT and collide_left:
-			return
 		else:
-			position += direction * move_distance
+			position += move_direction * move_distance
 			global_position_tracker()
 			move_tail_segments()
 
@@ -433,48 +426,7 @@ func move():
 			pending_tail_segment = false  # Reset flag
 
 
-#snake movement inputs
-func _input(event):
-	var new_move = ""
-	#bumps ? block directlyt above
-	if under_block == true and event.is_action_pressed("k_up"):
 
-		hit_block()
-		pause_move()
-		await get_tree().create_timer(0.3).timeout
-		resume_move()
-
-#move inputs
-	if event.is_action_pressed("k_up") and player_input == true and under_block == false and limit_move != "up":
-		if move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0:
-			new_move = "up"
-			limit_move = "down"
-			move_orders.append("up")
-	elif event.is_action_pressed("k_down") and player_input == true and limit_move != "down":
-		if move_orders.size() > 0 and move_orders[0] != "up" or move_orders.size() == 0:
-			new_move = "down"
-			limit_move = "up"
-			move_orders.append("down")
-	elif event.is_action_pressed("k_left") and player_input == true and limit_move != "left":
-		if move_orders.size() > 0 and move_orders[0] != "right" or move_orders.size() == 0:
-			new_move = "left"
-			limit_move = "right"
-			move_orders.append("left")
-	elif event.is_action_pressed("k_right") and player_input == true and limit_move != "right":
-		if move_orders.size() > 0 and move_orders[0] != "left" or move_orders.size() == 0:
-			new_move = "right"
-			limit_move = "left"
-			move_orders.append("right")
-
-	# Ensure the new move is not a duplicate of the last move in the list
-	#if new_move != "" and (move_orders.is_empty() or move_orders.back() != new_move):
-		#move_orders.append(new_move)
-	#speed up.
-
-#debug makes snake big
-	if event.is_action_pressed("k_action2"):
-		set_power("big")
-		#update_all_textures(bigsnek)
 
 #prevents turn sprite for a single turn
 func ignoring_turning():
@@ -485,12 +437,14 @@ func ignoring_turning():
 func sprinting():
 	if move_ready == true:
 		if Input.is_action_pressed("k_shift"):
-			final_time = snake_speed*0.3
+			#final_time = snake_speed*0.3
+			final_time = 0.07
 		else:
 			final_time = snake_speed
 
 func update_sprite_orientation():
-	update_tail_orientation(self, facing)
+	#if ignore_turn == false:
+		update_tail_orientation(self, facing)
 
 #how snake when touch different areas.
 func _on_head_area_area_entered(area: Area2D) -> void:
@@ -517,8 +471,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "entrance":
 		$Camera.limit_right = position.x + 85
 		#make it disappear and disable camera system area
-		
-		
+
 #when leaving area.
 func _on_head_area_area_exited(area: Area2D) -> void:
 	if area.name == "edible":
@@ -527,13 +480,11 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 		under_block = false
 		under_under_block = false
 
-
 #block hitting mechanic
 func block_pow():
 	if Global.direction == "up" and under_block == true and under_under_block == true:
 		under_block = false
 		pause_move()
-
 		hit_block()
 		await get_tree().create_timer(0.6).timeout
 		under_block =true
@@ -541,20 +492,14 @@ func block_pow():
 		if move_orders.size() > 0 and move_orders[0] != "up" or under_under_block == false:
 			resume_move()
 			under_block = false
-		
-
 
 #block bumping animation
 func hit_block():
-
 		sprite.frame = 8
 		await get_tree().create_timer(0.2).timeout
-
 		sprite.frame = 2
 		await get_tree().create_timer(0.2).timeout
 
-	
-	
 func pause_move():
 	hurting = true
 	move_ready = false
@@ -566,9 +511,7 @@ func resume_move():
 	move_ready = true
 	final_time = snake_speed
 
-	
-#win conditions when touching flag pole. position pole in way that snake head will always be inside it. Make sure snake head doesnt by pass it.
-#make flag seperate item that gets eten when snake touched top of flag pole
+#win conditions when touching flag pole. position pole in way that snake head will always be inside it & snake head doesnt by pass it.
 func win():
 	player_input = false
 	pause_move()
@@ -578,7 +521,7 @@ func win():
 		move_orders.append("right")
 	else:
 		move_orders.append("down")
-
+#second part of win animation
 func win2():
 	move_exit = true
 	move_orders.append("right")
