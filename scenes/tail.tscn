@@ -71,7 +71,7 @@ process_mode = 3
 scale = Vector2(2, 2)
 
 [node name="Sprite2D" parent="." instance=ExtResource("1_wib06")]
-hframes = 9
+hframes = 10
 
 [node name="tail_collision" type="StaticBody2D" parent="."]
 
