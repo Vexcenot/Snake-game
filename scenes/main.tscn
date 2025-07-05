@@ -39,13 +39,14 @@ position = Vector2(393, 199)
 avoid_ledge = true
 
 [node name="mushroom2" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(220, 200)
+position = Vector2(335, 137)
 
 [node name="mushroom3" parent="." instance=ExtResource("6_2spgy")]
 position = Vector2(390, 201)
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(38, 55)
+position = Vector2(8, 195)
+scale = Vector2(2, 2.07506)
 
 [node name="question block2" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(360, 88)
@@ -68,10 +69,10 @@ position = Vector2(55, 8)
 blocked = false
 
 [node name="camera_system" parent="." instance=ExtResource("8_85g3d")]
-position = Vector2(-1, 81)
+position = Vector2(13, 81)
 
-[node name="Node2D" parent="." instance=ExtResource("9_85g3d")]
-position = Vector2(220, 208)
+[node name="caslte" parent="." instance=ExtResource("9_85g3d")]
+position = Vector2(280, 208)
 
 [node name="Goomba2" parent="." instance=ExtResource("5_gaidb")]
 position = Vector2(361, 201)

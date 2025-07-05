@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var right: RayCast2D = $right
 @onready var sprite: Sprite2D = $Sprite2D
 
-var snake_speed = 0.3 #adjusts speed of snake I like 0.3
+var snake_speed = 0.1 #adjusts speed of snake I like 0.3
 var snake_length = 2 #how long the snake starts
 
 
@@ -57,7 +57,7 @@ func _process(delta):
 		if move_orders[0] == move_orders[1]:
 			move_orders.pop_front()
 	print("lim ", limit_move)
-	print("ord", move_orders)
+	print(crap)
 	timer += delta
 	time_reset()
 	#interact()
@@ -66,7 +66,7 @@ func _process(delta):
 	update_global_direction()
 	block_pow()
 	check_collide()
-
+	enter_entrance()
 		
 
 #snake movement inputs
@@ -480,9 +480,16 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		$Camera.limit_left = pos-window
 	if area.name == "oob_area":
 		die()
-	if area.name == "entrance":
-		$Camera.limit_right = position.x + 85
+	#if area.name == "entrance":
+		#$Camera.limit_right = position.x + 70
 		#make it disappear and disable camera system area
+var crap
+func enter_entrance():
+	if Global.shit == false:
+		crap = position.x + 132
+	else:
+		$Camera.limit_right = crap 
+
 
 #when leaving area.
 func _on_head_area_area_exited(area: Area2D) -> void:
