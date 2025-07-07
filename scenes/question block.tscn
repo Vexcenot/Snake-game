@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" uid="uid://b2i6awvoc2mp0" path="res://script/question_block.gd" id="1_6qukx"]
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="1_se7by"]
-[ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/smb_powerup_spawn.wav" id="3_t6dqi"]
+[ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/rise up.wav" id="3_t6dqi"]
 [ext_resource type="AudioStream" uid="uid://chhy42b001hm4" path="res://sounds/bump.wav" id="4_nfuos"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4m24q"]
-size = Vector2(16, 32.5002)
+size = Vector2(16, 65.8338)
 
 [sub_resource type="Animation" id="Animation_k3qg7"]
 length = 0.001
@@ -60,8 +60,8 @@ frame = 4
 [node name="block_area" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="block_area"]
-position = Vector2(0, 10.05)
-scale = Vector2(0.36, 0.119999)
+position = Vector2(0, 12.05)
+scale = Vector2(0.160001, 0.119999)
 shape = SubResource("RectangleShape2D_4m24q")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -70,6 +70,8 @@ libraries = {
 }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-0.5, 0)

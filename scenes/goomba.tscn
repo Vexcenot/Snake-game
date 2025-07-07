@@ -1,16 +1,16 @@
-[gd_scene load_steps=18 format=3 uid="uid://bwwi52l72ncsf"]
+[gd_scene load_steps=19 format=3 uid="uid://bwwi52l72ncsf"]
 
 [ext_resource type="Script" uid="uid://c33skdsqnghbu" path="res://script/enemy.gd" id="1_13s4y"]
 [ext_resource type="Texture2D" uid="uid://cyjxthecr7oxv" path="res://sprite/goomba.png" id="2_tdxqk"]
-[ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/smb_powerup_spawn.wav" id="3_y01q2"]
+[ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/rise up.wav" id="3_y01q2"]
 [ext_resource type="Script" uid="uid://b0y4h2xmmwr2e" path="res://script/mushroom.gd" id="4_b12ce"]
-[ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="5_h7tmd"]
+[ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/power up.wav" id="5_h7tmd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
 size = Vector2(16.5839, 2.32223)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
-size = Vector2(16.4952, 17.5427)
+size = Vector2(16.4952, 16.3732)
 
 [sub_resource type="Animation" id="Animation_xfln1"]
 length = 0.001
@@ -122,6 +122,8 @@ _data = {
 &"walk": SubResource("Animation_2o3b2")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5lml2"]
+
 [node name="Goomba" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_13s4y")
@@ -138,7 +140,7 @@ hframes = 3
 [node name="enemy" type="Area2D" parent="Mushrooms"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mushrooms/enemy"]
-position = Vector2(0, 0.500006)
+position = Vector2(0, 1)
 scale = Vector2(0.848732, 0.855057)
 shape = SubResource("RectangleShape2D_pmrqf")
 
@@ -196,6 +198,13 @@ libraries = {
 &"": SubResource("AnimationLibrary_ajt5r")
 }
 autoplay = "walk"
+
+[node name="edible2" type="Area2D" parent="."]
+scale = Vector2(0.479999, 0.479999)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="edible2"]
+scale = Vector2(6.3504, 6.3504)
+shape = SubResource("RectangleShape2D_5lml2")
 
 [connection signal="area_entered" from="Mushrooms/enemy" to="." method="_on_mushroom_area_entered"]
 [connection signal="area_entered" from="Mushrooms/enemy" to="." method="_on_enemy_area_entered"]

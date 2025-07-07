@@ -1,9 +1,13 @@
 extends Node2D
 var update = false
 
-func _process(delta: float) -> void:
+#func _process(delta: float) -> void:
+	#if update and Global.shit == false:
+		#position.x += 500*delta
+		
+func _physics_process(delta: float) -> void:
 	if update and Global.shit == false:
-		position.x += 2
+		position.x += 360*delta
 
 
 

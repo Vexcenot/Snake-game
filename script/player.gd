@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var right: RayCast2D = $right
 @onready var sprite: Sprite2D = $Sprite2D
 
-var snake_speed = 0.1 #adjusts speed of snake I like 0.3
+var snake_speed = 0.3 #adjusts speed of snake I like 0.3
 var snake_length = 2 #how long the snake starts
 
 
@@ -46,18 +46,20 @@ var timer_counter_toggle = false
 var timer_counter = 0
 var limit_move = "direction which snake cannot go"
 var xLimit = "orientation the snake cant move in"
+var fuck = false
 
 
 func _ready():
 	teleport_sequence()
 
 func _process(delta):
-	if move_orders.size() > 3:
+	fucker()
+	if move_orders.size() > 2:
 		move_orders.pop_back()
 		if move_orders[0] == move_orders[1]:
 			move_orders.pop_front()
-	print("lim ", limit_move)
-	print(crap)
+	#print("lim ", limit_move)
+	#print(crap)
 	timer += delta
 	time_reset()
 	#interact()
@@ -67,19 +69,26 @@ func _process(delta):
 	block_pow()
 	check_collide()
 	enter_entrance()
+	collision_updater()
+	eat_animation()
 		
 
 #snake movement inputs
 func _input(event):
 	#bumps ? block directlyt above
-	if under_block == true and event.is_action_pressed("k_up"):
-		hit_block()
-		pause_move()
-		await get_tree().create_timer(0.3).timeout
-		resume_move()
+	#if under_block == true and event.is_action_pressed("k_up"):
+		#hit_block()
+		#pause_move()
+		#await get_tree().create_timer(0.3).timeout
+		#resume_move()
 #move inputs
-	if event.is_action_pressed("k_up") and player_input == true and under_block == false and limit_move != "up" and xLimit != "vert":
-		if move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0:
+	if event.is_action_pressed("k_up"):
+		if under_block == true:
+			hit_block()
+			pause_move()
+			await get_tree().create_timer(0.3).timeout
+			resume_move()
+		elif move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0 and player_input == true and under_block == false and limit_move != "up" and xLimit != "vert":
 			xLimit = "vert"
 			limit_move = "down"
 			move_orders.append("up")
@@ -100,15 +109,26 @@ func _input(event):
 			move_orders.append("right")
 #debug1
 	if event.is_action_pressed("k_action"):
-		ready_spawn_tail()
+		eat()
 		eat_positions.push_front(global_position)
 #debug2
 	if event.is_action_pressed("k_action2"):
-		move_ready = true
-		final_time = snake_speed
+		fuck = true
 
-#gives snake length on start
+func fucker():
+	if fuck:
+		if under_block == true:
+			hit_block()
+			pause_move()
+			await get_tree().create_timer(0.3).timeout
+			resume_move()
+		elif move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0 and player_input == true and under_block == false and limit_move != "up" and xLimit != "vert":
+			xLimit = "vert"
+			limit_move = "down"
+			move_orders.append("up")
+	#gives snake length on start
 func teleport_sequence():
+	limit_move = "left"
 	await get_tree().process_frame
 	position.x -= move_distance*snake_length
 	for i in range(snake_length):
@@ -116,13 +136,16 @@ func teleport_sequence():
 		position.x += move_distance
 		positions.push_front(global_position)
 		orientations.push_front(facing)
-	limit_move = "left"
+
 	move_ready = true
 
 #processes adding length to snake mid-game
-func ready_spawn_tail(): #prepares to add tail
+func eat(): #prepares to add tail
+	eatAnim = true
+	#sprite.frame = 5
 	pending_tail_segment = true
 	eat_positions.push_front(global_position) #adds "full" sprite to tail.
+
 #function that spawns tails
 func spawn_tail_segment():
 	if tail_segment_scene:
@@ -141,6 +164,7 @@ func spawn_tail_segment():
 		tail_tip.frame = 0
 
 #tick rate system
+var eatAnim2 = false
 func time_reset():
 	if timer >= final_time:
 		# Make all tail segments visible
@@ -157,6 +181,14 @@ func time_reset():
 			timer_counter = 0
 			if sprite.frame == 9:
 				sprite.frame = 2
+		if eatAnim:
+			eatAnim2 = true
+			sprite.frame = 2
+		if eatAnim2 == true:
+			eatAnim2 = false
+			eatAnim = false
+			
+			
 
 func is_raycast_blocked(snake_facing: String) -> bool:
 	match snake_facing:
@@ -266,7 +298,7 @@ func update_tail_orientation(segment, orientation):
 
 func interact():
 	if Input.is_action_just_pressed("k_action") and tail_segment_scene and positions.size() > 1:
-		ready_spawn_tail()
+		eat()
 		# Record the position where we're adding a new tail segment
 		eat_positions.push_front(global_position)
 
@@ -299,6 +331,28 @@ func lose_power():
 	timer = 0
 	get_tree().paused = false
 	powered = false
+	
+#snake pass through blocks when smalln't
+func collision_updater():
+	if Global.snake_status != "small":
+		$up.set_collision_mask_value(2, true)
+		$down.set_collision_mask_value(2, true)
+		$left.set_collision_mask_value(2, true)
+		$right.set_collision_mask_value(2, true)
+		$up.set_collision_mask_value(1, false)
+		$down.set_collision_mask_value(1, false)
+		$left.set_collision_mask_value(1, false)
+		$right.set_collision_mask_value(1, false)
+	else:
+		$up.set_collision_mask_value(2, false)
+		$down.set_collision_mask_value(2, false)
+		$left.set_collision_mask_value(2, false)
+		$right.set_collision_mask_value(2, false)
+		$up.set_collision_mask_value(1, true)
+		$down.set_collision_mask_value(1, true)
+		$left.set_collision_mask_value(1, true)
+		$right.set_collision_mask_value(1, true)
+
 
 
 #makes tails check if there's a turn
@@ -335,7 +389,7 @@ func set_power(power: String):
 		timer = 0
 		get_tree().paused = false
 	powered = true
-	ready_spawn_tail()
+	eat()
 
 func die():
 	dead = true
@@ -459,6 +513,7 @@ func update_sprite_orientation():
 		update_tail_orientation(self, facing)
 
 #how snake when touch different areas.
+
 func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "mushroom":
 		set_power("big")
@@ -466,12 +521,13 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		win()
 	if area.name == "endpost":
 		win2()
-	if area.name == "enemy":
+	if area.name == "enemy" and Global.snake_status == "small":
 		hurt()
 	if area.name == "edible":
 		sprite.frame = 5
-	if area.name == "block_area":
-		Global.hitting = true
+	if area.name == "edible2" and Global.snake_status != "small":
+		sprite.frame = 5
+	if area.name == "block_area2" and Global.snake_status == "small" or area.name == "block_area":
 		under_block = true
 		under_under_block = true
 	if area.name == "move_cam":
@@ -480,9 +536,12 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		$Camera.limit_left = pos-window
 	if area.name == "oob_area":
 		die()
-	#if area.name == "entrance":
-		#$Camera.limit_right = position.x + 70
-		#make it disappear and disable camera system area
+	if Global.snake_status != "small":
+		if area.name == "brick_area" or area.name == "enemy":
+			eat()
+	if area.name == "entrance":
+		get_tree().change_scene_to_file("res://scenes/endscreen.tscn")
+
 var crap
 func enter_entrance():
 	if Global.shit == false:
@@ -490,12 +549,16 @@ func enter_entrance():
 	else:
 		$Camera.limit_right = crap 
 
+var eatAnim = false
+func eat_animation():
+	if eatAnim:
+		sprite.frame = 5
 
 #when leaving area.
 func _on_head_area_area_exited(area: Area2D) -> void:
-	if area.name == "edible":
+	if area.name == "edible" or "edible2":
 		sprite.frame = 2
-	if area.name == "block_area":
+	if area.name == "block_area" or "block_area2":
 		under_block = false
 		under_under_block = false
 
@@ -507,10 +570,13 @@ func block_pow():
 		hit_block()
 		await get_tree().create_timer(0.6).timeout
 		under_block =true
+		print("fuck")
 		#make snake turn left if player inputs it and ignore right append
 		if move_orders.size() > 0 and move_orders[0] != "up" or under_under_block == false:
 			resume_move()
 			under_block = false
+		
+
 
 #block bumping animation
 func hit_block():

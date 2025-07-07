@@ -1,0 +1,122 @@
+[gd_scene load_steps=11 format=3 uid="uid://cixj1ykvju5v2"]
+
+[ext_resource type="Script" uid="uid://dmdkbtc7oi0gh" path="res://script/brick.gd" id="1_0w5h4"]
+[ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="2_7mekc"]
+[ext_resource type="Texture2D" uid="uid://i70ofguicb50" path="res://sprite/brick particles.png" id="3_7mekc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5p85m"]
+size = Vector2(16, 14)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mt0q5"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mekc"]
+size = Vector2(16, 32.5002)
+
+[sub_resource type="Animation" id="Animation_k3qg7"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AllTheSmallBlocksTogether:offset:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.125001, 0, 0.125001, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_sul1p"]
+resource_name = "bump"
+length = 0.250002
+step = 0.0166667
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AllTheSmallBlocksTogether:offset:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, -6, -0.05, 0, 0, 0, -6, 0, 0, 0, 0, 0, -0.017, 5, 0, 0),
+"times": PackedFloat32Array(0, 0.0833333, 0.15, 0.25)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kq0y0"]
+_data = {
+&"RESET": SubResource("Animation_k3qg7"),
+&"bump": SubResource("Animation_sul1p")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c34n8"]
+
+[node name="brick" type="Node2D"]
+script = ExtResource("1_0w5h4")
+
+[node name="AllTheSmallBlocksTogether" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_7mekc")
+hframes = 4
+vframes = 3
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_5p85m")
+
+[node name="brick_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="brick_area"]
+scale = Vector2(0.506386, 0.506386)
+shape = SubResource("RectangleShape2D_mt0q5")
+
+[node name="block_area2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="block_area2"]
+position = Vector2(0, 10.05)
+scale = Vector2(0.159999, 0.119999)
+shape = SubResource("RectangleShape2D_7mekc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_kq0y0")
+}
+
+[node name="BrickParticles" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(22, -2)
+texture = ExtResource("3_7mekc")
+hframes = 2
+vframes = 2
+
+[node name="BrickParticles2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(22, -2)
+texture = ExtResource("3_7mekc")
+hframes = 2
+vframes = 2
+
+[node name="BrickParticles3" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(22, -2)
+texture = ExtResource("3_7mekc")
+hframes = 2
+vframes = 2
+
+[node name="BrickParticles4" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(22, -2)
+texture = ExtResource("3_7mekc")
+hframes = 2
+vframes = 2
+
+[node name="edible2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="edible2"]
+scale = Vector2(2.52, 2.52)
+shape = SubResource("RectangleShape2D_c34n8")
+
+[connection signal="area_entered" from="brick_area" to="." method="_on_brick_area_area_entered"]
+[connection signal="area_entered" from="block_area2" to="." method="_on_bottom_check_area_entered"]
+[connection signal="area_exited" from="block_area2" to="." method="_on_bottom_check_area_exited"]

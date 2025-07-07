@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c0eyl1emaghlh"
+path="res://.godot/imported/win song.wav-843fc877e3044afb3f53ff9d9c2caba9.sample"
+
+[deps]
+
+source_file="res://sounds/win song.wav"
+dest_files=["res://.godot/imported/win song.wav-843fc877e3044afb3f53ff9d9c2caba9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

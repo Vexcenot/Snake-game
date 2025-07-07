@@ -1,7 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://disfsrloilqua"]
+[gd_scene load_steps=17 format=3 uid="uid://disfsrloilqua"]
 
 [ext_resource type="Script" uid="uid://cggccwq77ls3n" path="res://script/player.gd" id="1_w2ywo"]
-[ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/smb_powerup.wav" id="2_ali73"]
+[ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/power up.wav" id="2_ali73"]
 [ext_resource type="PackedScene" uid="uid://vfnjnj2mu8yd" path="res://scenes/snake sprite.tscn" id="2_ldr7d"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="4_pw8ip"]
 [ext_resource type="AudioStream" uid="uid://e44f00ph5aem" path="res://sounds/power down.wav" id="5_d0mn4"]
@@ -67,6 +67,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
 }
 
 [sub_resource type="Animation" id="Animation_wgeep"]
@@ -136,11 +148,28 @@ tracks/2/keys = {
 "values": [0.0, -1.5708]
 }
 
+[sub_resource type="Animation" id="Animation_tctuf"]
+resource_name = "eat"
+length = 0.100003
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [5, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f3nah"]
 _data = {
 &"RESET": SubResource("Animation_8dqsq"),
 &"die": SubResource("Animation_wgeep"),
-&"die1": SubResource("Animation_a62mm")
+&"die1": SubResource("Animation_a62mm"),
+&"eat": SubResource("Animation_tctuf")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rdic"]
@@ -158,6 +187,8 @@ size = Vector2(8, 8)
 [node name="Snek" type="CharacterBody2D"]
 process_mode = 3
 scale = Vector2(2, 2)
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_w2ywo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -187,7 +218,7 @@ shape = SubResource("RectangleShape2D_sxb1m")
 [node name="Sprite2D" parent="." instance=ExtResource("2_ldr7d")]
 z_index = 101
 hframes = 10
-frame = 2
+frame = 5
 
 [node name="Head Area" type="Area2D" parent="."]
 scale = Vector2(1.03715, 1.04205)
@@ -251,7 +282,7 @@ limit_top = 0
 limit_right = 9999
 limit_bottom = 0
 limit_smoothed = true
-position_smoothing_speed = 100.0
+drag_horizontal_offset = -1.0
 drag_left_margin = 1.0
 drag_right_margin = 0.0
 editor_draw_drag_margin = true

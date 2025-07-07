@@ -3,6 +3,7 @@ var snake_under = false
 var snake_boop = false
 var spawnable = false
 var timing = false
+
 @export var items: Array[PackedScene] = []
 @export var false_block = false
 @export var invis_block = false
@@ -12,6 +13,7 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
+
 	#bump_up_detect()
 	visability()
 	rest_block()
@@ -23,10 +25,6 @@ func visability():
 	elif invis_block:
 		$AllTheSmallBlocksTogether.visible = false
 
-#func bump_up_detect():
-	#if snake_under and Global.direction == "up":
-		#spawnable = true
-
 func _input(event):
 	if event.is_action_pressed("k_up") and snake_under:
 		spawn_item()
@@ -35,6 +33,7 @@ func rest_block():
 	if items.size() == 0:
 		$block_area.monitorable = false
 		$block_area.monitoring = false
+
 		invis_block = false
 		false_block = false
 		$AllTheSmallBlocksTogether.visible = true
@@ -74,6 +73,8 @@ func _on_block_area_area_entered(area: Area2D) -> void:
 		else: 
 			snake_under = true
 
+
+
 			
 
 func _on_block_area_area_exited(area: Area2D) -> void:
@@ -81,6 +82,7 @@ func _on_block_area_area_exited(area: Area2D) -> void:
 		snake_under = false
 		spawnable = false
 		timing = false
+
 		
 
 		

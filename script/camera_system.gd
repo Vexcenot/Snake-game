@@ -2,7 +2,7 @@ extends Node2D
 var move_toggle = false
 
 func _process(delta: float) -> void:
-	move_camera()
+	move_camera(delta)
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":
@@ -14,6 +14,6 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 		move_toggle = false
 
 
-func move_camera():
+func move_camera(delta):
 	if move_toggle:
-		global_position.x += 1
+		global_position.x += 1.0*delta

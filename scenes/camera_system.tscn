@@ -38,9 +38,14 @@ texture = ExtResource("4_me7dy")
 position = Vector2(-6, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="oob_area"]
-position = Vector2(-6579, 0)
+position = Vector2(-6604, 0)
 shape = SubResource("RectangleShape2D_xpg4h")
 debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
+
+[node name="EnemyFlag" type="Sprite2D" parent="oob_area/CollisionShape2D"]
+position = Vector2(6551, 44)
+scale = Vector2(2.53083, 221.939)
+texture = ExtResource("5_jpr4p")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="oob_area"]
 position = Vector2(87, -206)
@@ -60,11 +65,9 @@ shape = SubResource("RectangleShape2D_xpg4h")
 debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
 
 [node name="move_cam" type="Area2D" parent="."]
-visible = false
 position = Vector2(1, -1)
 
 [node name="Sprite2D" type="Sprite2D" parent="move_cam"]
-visible = false
 position = Vector2(147, 94)
 rotation = 3.14159
 scale = Vector2(2.37043, -22.5388)
@@ -94,11 +97,6 @@ disable_mode = 1
 position = Vector2(-36.5, 117)
 scale = Vector2(1, 12.08)
 shape = SubResource("RectangleShape2D_jpr4p")
-
-[node name="EnemyFlag" type="Sprite2D" parent="."]
-position = Vector2(-34, 44)
-scale = Vector2(2.53083, 221.939)
-texture = ExtResource("5_jpr4p")
 
 [connection signal="area_entered" from="move_cam" to="." method="_on_move_cam_area_entered"]
 [connection signal="area_exited" from="move_cam" to="." method="_on_move_cam_area_exited"]

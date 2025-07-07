@@ -48,10 +48,9 @@ func block_spawn():
 
 
 #deletes when being touched by head
-#func _on_mushroom_area_entered(area: Area2D) -> void:
-	#if area.name == "Head Area":
-		##set_power("big")
-		#queue_free()
+func _on_mushroom_area_entered(area: Area2D) -> void:
+	if area.name == "Head Area" and Global.snake_status != "small":
+		queue_free()
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
