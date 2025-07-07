@@ -68,6 +68,7 @@ debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
 position = Vector2(1, -1)
 
 [node name="Sprite2D" type="Sprite2D" parent="move_cam"]
+visible = false
 position = Vector2(147, 94)
 rotation = 3.14159
 scale = Vector2(2.37043, -22.5388)
