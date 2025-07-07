@@ -41,6 +41,7 @@ position = Vector2(192, 202)
 
 [node name="Goomba" parent="." instance=ExtResource("5_gaidb")]
 position = Vector2(102, 85)
+avoid_ledge = true
 
 [node name="mushroom3" parent="." instance=ExtResource("6_2spgy")]
 position = Vector2(390, 201)
