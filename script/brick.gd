@@ -33,7 +33,9 @@ func _input(event):
 func spawn_item():
 	if Global.snake_status == "small":
 		$AnimationPlayer.play("bump")
-
+		$kill.position.y = -13
+		await get_tree().create_timer(0.1).timeout
+		$kill.position.y = 0
 func keepSpawning():
 	if spawnable == true and timing == true:
 		spawn_item()

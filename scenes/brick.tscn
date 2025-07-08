@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cixj1ykvju5v2"]
+[gd_scene load_steps=12 format=3 uid="uid://cixj1ykvju5v2"]
 
 [ext_resource type="Script" uid="uid://dmdkbtc7oi0gh" path="res://script/brick.gd" id="1_0w5h4"]
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="2_7mekc"]
@@ -51,6 +51,9 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c34n8"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ci8dj"]
+size = Vector2(20, 8)
+
 [node name="brick" type="Node2D"]
 script = ExtResource("1_0w5h4")
 
@@ -83,39 +86,51 @@ libraries = {
 &"": SubResource("AnimationLibrary_kq0y0")
 }
 
+[node name="edible2" type="Area2D" parent="."]
+scale = Vector2(1.33619, 1.33619)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="edible2"]
+scale = Vector2(1.2, 1.2)
+shape = SubResource("RectangleShape2D_c34n8")
+
 [node name="BrickParticles" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(22, -2)
+position = Vector2(23, -4)
 texture = ExtResource("3_7mekc")
 hframes = 2
 vframes = 2
 
 [node name="BrickParticles2" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(22, -2)
+position = Vector2(31, -4)
 texture = ExtResource("3_7mekc")
 hframes = 2
 vframes = 2
+frame = 1
 
 [node name="BrickParticles3" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(22, -2)
+position = Vector2(23, 4)
 texture = ExtResource("3_7mekc")
 hframes = 2
 vframes = 2
+frame = 1
 
 [node name="BrickParticles4" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(22, -2)
+position = Vector2(31, 4)
 texture = ExtResource("3_7mekc")
 hframes = 2
 vframes = 2
+frame = 3
 
-[node name="edible2" type="Area2D" parent="."]
+[node name="kill" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="edible2"]
-scale = Vector2(2.52, 2.52)
-shape = SubResource("RectangleShape2D_c34n8")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="kill"]
+position = Vector2(0, 1)
+scale = Vector2(0.280001, 1)
+shape = SubResource("RectangleShape2D_ci8dj")
+debug_color = Color(0.919403, 0.247321, 0.3578, 0.42)
 
 [connection signal="area_entered" from="brick_area" to="." method="_on_brick_area_area_entered"]
 [connection signal="area_entered" from="block_area2" to="." method="_on_bottom_check_area_entered"]

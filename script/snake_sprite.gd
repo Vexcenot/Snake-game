@@ -16,4 +16,13 @@ func current_powerup():
 		sprite.texture = bigsnek
 	elif Global.snake_status == "small":
 		sprite.texture = smolsnek
-		
+	
+
+
+#func _on_tail_area_area_exited(area: Area2D) -> void:
+
+
+
+#func _on_tail_area_area_entered(area: Area2D) -> void:
+	#if area.name == "entrance":
+		#$".".visible = false

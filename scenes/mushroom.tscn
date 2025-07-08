@@ -104,7 +104,7 @@ hframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mushrooms/mushroom"]
 position = Vector2(-0.2, -0.581445)
-scale = Vector2(0.51218, 0.515997)
+scale = Vector2(0.912184, 0.515997)
 shape = SubResource("RectangleShape2D_pmrqf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Mushrooms"]

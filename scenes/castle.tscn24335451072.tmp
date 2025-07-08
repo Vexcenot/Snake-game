@@ -22,8 +22,8 @@ shape = SubResource("RectangleShape2D_bly62")
 
 [node name="CastleEnd" type="Sprite2D" parent="."]
 visible = false
-z_index = 102
-position = Vector2(80, -40)
+z_index = 5
+position = Vector2(140, -40)
 texture = ExtResource("3_njhjj")
 
 [connection signal="area_entered" from="entrance" to="." method="_on_entrance_area_entered"]

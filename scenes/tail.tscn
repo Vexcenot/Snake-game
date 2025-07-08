@@ -91,3 +91,6 @@ position = Vector2(-1.0356e-08, 2.98023e-08)
 rotation = -3.14159
 scale = Vector2(0.453191, 0.453191)
 shape = SubResource("RectangleShape2D_wne8n")
+
+[connection signal="area_entered" from="tail area" to="Sprite2D" method="_on_tail_area_area_entered"]
+[connection signal="area_exited" from="tail area" to="Sprite2D" method="_on_tail_area_area_exited"]

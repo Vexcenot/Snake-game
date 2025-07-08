@@ -6,25 +6,46 @@ extends CharacterBody2D
 @export var block = false
 var speed = -speeder
 var activate = false
+var leftfloor = 0
+var rightfloor = 0
 
 
 #movement baby!!!!
 func _physics_process(delta: float) -> void:
 	if block == false and activate == true:
+
 		velocity.x = speed
 		velocity.y += gravity * delta  # Apply gravity
 		move_and_slide()
+		ledge_checker()
+		goback()
 
 #func _ready():
 	#block_spawn()
 
+func ledge_checker():
+	pass
+	#if avoid_ledge:
+		#if $left.is_colliding():
+			#return
+		#else:
+			#speed = -speeder
+		#if $right.is_colliding():
+			#return
+		#else:
+			#speed = speeder
 #check if on ledge and turns.
 func _on_side_checks_body_exited(body: Node2D) -> void:
-	if speed == speeder and avoid_ledge == true:
-		speed = -speeder
-
-	elif speed == -speeder and avoid_ledge == true:
-		speed = speeder
+	#if avoid_ledge:
+		#if speed == speeder:
+			#speed = -speeder
+			#print("tik")
+#
+		#elif speed == -speeder:
+			#speed = speeder
+			#print("t0k")
+			
+	pass
 
 #if bumped wall, turns.
 func _on_left_side_body_entered(body: Node2D) -> void:
@@ -62,3 +83,27 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _on_enemy_area_entered(area: Area2D) -> void:
 	if area.name == "activate_entity":
 		activate = true
+	if area.name == "kill":
+		queue_free()
+
+#LEDGE DETECTION
+func goback():
+	pass
+	if avoid_ledge:
+		if leftfloor <= 0:
+			speed = speeder
+		elif rightfloor <= 0:
+			speed = -speeder
+
+func _on_left_bottom_body_entered(body: Node2D) -> void:
+	leftfloor += 1
+
+func _on_right_bottom_body_entered(body: Node2D) -> void:
+	rightfloor += 1
+	
+
+func _on_left_bottom_body_exited(body: Node2D) -> void:
+	leftfloor -= 1
+	
+func _on_right_bottom_body_exited(body: Node2D) -> void:
+	rightfloor -= 1

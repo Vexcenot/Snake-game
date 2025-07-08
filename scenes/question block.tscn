@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d26kswglulmbs"]
+[gd_scene load_steps=11 format=3 uid="uid://d26kswglulmbs"]
 
 [ext_resource type="Script" uid="uid://b2i6awvoc2mp0" path="res://script/question_block.gd" id="1_6qukx"]
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="1_se7by"]
@@ -47,6 +47,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1qot3"]
 size = Vector2(15, 14)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_okhft"]
+size = Vector2(20, 8)
+
 [node name="question block" type="Node2D"]
 script = ExtResource("1_6qukx")
 
@@ -83,6 +86,14 @@ stream = ExtResource("3_t6dqi")
 [node name="bump_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_nfuos")
 volume_db = 5.0
+
+[node name="kill" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="kill"]
+position = Vector2(0, 1)
+scale = Vector2(0.280001, 1)
+shape = SubResource("RectangleShape2D_okhft")
+debug_color = Color(0.919403, 0.247321, 0.3578, 0.42)
 
 [connection signal="area_entered" from="block_area" to="." method="_on_block_area_area_entered"]
 [connection signal="area_exited" from="block_area" to="." method="_on_block_area_area_exited"]

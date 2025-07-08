@@ -10,75 +10,29 @@
 
 [sub_resource type="Animation" id="Animation_8dqsq"]
 length = 0.001
-tracks/0/type = "bezier"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position:x")
+tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("neck sprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:offset")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprite2D:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.466667),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sprite2D:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [5]
+"values": [2, 2]
 }
 
 [sub_resource type="Animation" id="Animation_wgeep"]
@@ -218,7 +172,7 @@ shape = SubResource("RectangleShape2D_sxb1m")
 [node name="Sprite2D" parent="." instance=ExtResource("2_ldr7d")]
 z_index = 101
 hframes = 10
-frame = 5
+frame = 2
 
 [node name="Head Area" type="Area2D" parent="."]
 scale = Vector2(1.03715, 1.04205)
@@ -234,24 +188,24 @@ debug_color = Color(0.803934, 0.392138, 0.389069, 0.42)
 [node name="up" type="RayCast2D" parent="."]
 rotation = -3.14159
 scale = Vector2(0.555, 0.315)
-target_position = Vector2(0, 20)
+target_position = Vector2(2.05555e-05, 14.2857)
 collision_mask = 3
 
 [node name="down" type="RayCast2D" parent="."]
-scale = Vector2(0.555, 0.315)
-target_position = Vector2(0, 20)
+scale = Vector2(0.559004, 0.315)
+target_position = Vector2(0, 14.2857)
 collision_mask = 3
 
 [node name="left" type="RayCast2D" parent="."]
 rotation = 1.5708
 scale = Vector2(0.555, 0.274999)
-target_position = Vector2(3.9135e-05, 21.8183)
+target_position = Vector2(2.93513e-05, 16.3637)
 collision_mask = 3
 
 [node name="right" type="RayCast2D" parent="."]
 rotation = -1.5708
 scale = Vector2(0.555, 0.315)
-target_position = Vector2(0, 20)
+target_position = Vector2(-2.93513e-05, 14.2857)
 collision_mask = 3
 
 [node name="20592Png" type="Sprite2D" parent="."]

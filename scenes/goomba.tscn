@@ -73,7 +73,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpp18"]
-size = Vector2(10.0103, 1.27963)
+size = Vector2(10.0103, 1.27967)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kg8q6"]
 size = Vector2(1.21936, 1.27965)
@@ -134,6 +134,7 @@ scale = Vector2(0.820104, 0.781477)
 shape = SubResource("RectangleShape2D_v7c8f")
 
 [node name="Mushrooms" type="Sprite2D" parent="."]
+z_index = 2
 texture = ExtResource("2_tdxqk")
 hframes = 3
 
@@ -168,6 +169,7 @@ scale = Vector2(0.820104, 0.781477)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="right bottom"]
 position = Vector2(9.14518, 10.8768)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_kg8q6")
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -203,16 +205,20 @@ autoplay = "walk"
 scale = Vector2(0.479999, 0.479999)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="edible2"]
-scale = Vector2(6.3504, 6.3504)
+scale = Vector2(2.60039, 2.88802)
 shape = SubResource("RectangleShape2D_5lml2")
 
-[connection signal="area_entered" from="Mushrooms/enemy" to="." method="_on_mushroom_area_entered"]
 [connection signal="area_entered" from="Mushrooms/enemy" to="." method="_on_enemy_area_entered"]
+[connection signal="area_entered" from="Mushrooms/enemy" to="." method="_on_mushroom_area_entered"]
 [connection signal="area_entered" from="Mushrooms/enemy" to="Node2D" method="_on_area_2d_area_entered"]
 [connection signal="animation_finished" from="Mushrooms/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]
+[connection signal="body_exited" from="left bottom" to="." method="_on_left_bottom_body_exited"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]
 [connection signal="body_exited" from="left bottom" to="Node2D" method="_on_side_checks_body_exited"]
+[connection signal="body_entered" from="right bottom" to="." method="_on_right_bottom_body_entered"]
 [connection signal="body_entered" from="right bottom" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="right bottom" to="." method="_on_right_bottom_body_exited"]
 [connection signal="body_exited" from="right bottom" to="." method="_on_side_checks_body_exited"]
 [connection signal="body_exited" from="right bottom" to="Node2D" method="_on_side_checks_body_exited"]
 [connection signal="body_entered" from="left side" to="." method="_on_left_side_body_entered"]

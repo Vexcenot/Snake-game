@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var right: RayCast2D = $right
 @onready var sprite: Sprite2D = $Sprite2D
 
-var snake_speed = 0.3 #adjusts speed of snake I like 0.3
+var snake_speed = 0.1 #adjusts speed of snake I like 0.3
 var snake_length = 2 #how long the snake starts
 
 
@@ -47,12 +47,13 @@ var timer_counter = 0
 var limit_move = "direction which snake cannot go"
 var xLimit = "orientation the snake cant move in"
 var fuck = false
-
+var winning = false
 
 func _ready():
 	teleport_sequence()
 
 func _process(delta):
+	print(under_block)
 	fucker()
 	if move_orders.size() > 2:
 		move_orders.pop_back()
@@ -71,6 +72,7 @@ func _process(delta):
 	enter_entrance()
 	collision_updater()
 	eat_animation()
+	painful_turn()
 		
 
 #snake movement inputs
@@ -114,6 +116,10 @@ func _input(event):
 #debug2
 	if event.is_action_pressed("k_action2"):
 		fuck = true
+		
+func painful_turn():
+	if ignore_turn:
+		sprite.frame = 9
 
 func fucker():
 	if fuck:
@@ -138,10 +144,11 @@ func teleport_sequence():
 		orientations.push_front(facing)
 
 	move_ready = true
-
+var invincible = false
 #processes adding length to snake mid-game
 func eat(): #prepares to add tail
 	eatAnim = true
+
 	#sprite.frame = 5
 	pending_tail_segment = true
 	eat_positions.push_front(global_position) #adds "full" sprite to tail.
@@ -305,13 +312,15 @@ func interact():
 #pain happens here
 #runs game over function and (should) clear out all datas
 func hurt():
-	var facing_pain = Global.direction
-	
-	print("OWWWWWWWWWWWWW")
-	if powered:
-		lose_power()
-	else:
-		die()
+	if invincible == false:
+		var facing_pain = Global.direction
+		
+		print("OWWWWWWWWWWWWW")
+		if powered:
+			lose_power()
+		else:
+			die()
+
 
 func lose_power():
 	var blink_sec = 0.1
@@ -321,7 +330,7 @@ func lose_power():
 	$PowerDown.play()
 	get_tree().paused = true
 	pause_move()
-	for i in range(4):
+	for i in range(5):
 		Global.snake_status = current_power
 		await get_tree().create_timer(blink_sec).timeout
 		Global.snake_status = "small"
@@ -374,6 +383,7 @@ func check_turn_segment(segment, turn_coord):
 		tail_sprite.frame = 1
 
 func set_power(power: String):
+	eat()
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
 	if powered == false:
@@ -389,7 +399,7 @@ func set_power(power: String):
 		timer = 0
 		get_tree().paused = false
 	powered = true
-	eat()
+	
 
 func die():
 	dead = true
@@ -490,9 +500,7 @@ func move():
 			pending_tail_segment = false  # Reset flag
 
 
-func painful_turn():
-	if ignore_turn:
-		sprite.frame = 9
+
 
 #prevents turn sprite for a single turn
 func ignoring_turning():
@@ -534,13 +542,19 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		var window = 128
 		var pos = position.x
 		$Camera.limit_left = pos-window
-	if area.name == "oob_area":
+	if area.name == "oob_area" and winning == false:
 		die()
 	if Global.snake_status != "small":
 		if area.name == "brick_area" or area.name == "enemy":
 			eat()
-	if area.name == "entrance":
-		get_tree().change_scene_to_file("res://scenes/endscreen.tscn")
+	#if area.name == "entrance":
+		#get
+		#$".".visible = false
+	#if area.name == "entrance":
+		#get_tree().change_scene_to_file("res://scenes/endscreen.tscn")
+
+	if area.name == "flag_1":
+		eat()
 
 var crap
 func enter_entrance():
@@ -561,6 +575,8 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 	if area.name == "block_area" or "block_area2":
 		under_block = false
 		under_under_block = false
+	#if area.name == "entrance":
+		#$Sprite2D.visible = false
 
 #block hitting mechanic
 func block_pow():
@@ -586,18 +602,23 @@ func hit_block():
 		await get_tree().create_timer(0.2).timeout
 
 func pause_move():
+	invincible = true
 	hurting = true
 	move_ready = false
+
 	timer = 0
 	final_time = 9999
 	
 func resume_move():
+	invincible = false
 	hurting = false
 	move_ready = true
 	final_time = snake_speed
 
 #win conditions when touching flag pole. position pole in way that snake head will always be inside it & snake head doesnt by pass it.
 func win():
+	invincible = true
+	winning = true
 	player_input = false
 	pause_move()
 	await get_tree().create_timer(0.5).timeout

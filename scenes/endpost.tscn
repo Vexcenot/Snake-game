@@ -11,7 +11,7 @@ size = Vector2(5.87268, 152)
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yswmm"]
-size = Vector2(6.26217, 10.5906)
+size = Vector2(6.26217, 14.7574)
 
 [sub_resource type="Animation" id="Animation_ulfmi"]
 length = 0.001
@@ -74,7 +74,7 @@ shape = SubResource("RectangleShape2D_468rv")
 [node name="endpost" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="endpost"]
-position = Vector2(-9, -11.375)
+position = Vector2(-9, -14.375)
 scale = Vector2(0.958135, 1.43996)
 shape = SubResource("RectangleShape2D_yswmm")
 
@@ -85,7 +85,7 @@ position = Vector2(-17, -144)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_b5ljr")
+&"": SubResource("AnimationLibrary_b5ljr")
 }
 
 [connection signal="area_entered" from="winarea" to="." method="_on_winarea_area_entered"]
