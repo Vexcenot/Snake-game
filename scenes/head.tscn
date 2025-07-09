@@ -186,17 +186,20 @@ shape = SubResource("RectangleShape2D_5vq0g")
 debug_color = Color(0.803934, 0.392138, 0.389069, 0.42)
 
 [node name="up" type="RayCast2D" parent="."]
+position = Vector2(0, -1.5)
 rotation = -3.14159
 scale = Vector2(0.555, 0.315)
 target_position = Vector2(2.05555e-05, 14.2857)
 collision_mask = 3
 
 [node name="down" type="RayCast2D" parent="."]
+position = Vector2(0, 1.5)
 scale = Vector2(0.559004, 0.315)
-target_position = Vector2(0, 14.2857)
+target_position = Vector2(0, 12.6984)
 collision_mask = 3
 
 [node name="left" type="RayCast2D" parent="."]
+position = Vector2(-2, 0)
 rotation = 1.5708
 scale = Vector2(0.555, 0.274999)
 target_position = Vector2(2.93513e-05, 16.3637)
@@ -205,7 +208,7 @@ collision_mask = 3
 [node name="right" type="RayCast2D" parent="."]
 rotation = -1.5708
 scale = Vector2(0.555, 0.315)
-target_position = Vector2(-2.93513e-05, 14.2857)
+target_position = Vector2(-4.23963e-05, 20.6349)
 collision_mask = 3
 
 [node name="20592Png" type="Sprite2D" parent="."]

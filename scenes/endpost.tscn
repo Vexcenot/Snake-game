@@ -1,52 +1,58 @@
-[gd_scene load_steps=10 format=3 uid="uid://cdbmv0psdbx0l"]
+[gd_scene load_steps=13 format=3 uid="uid://cdbmv0psdbx0l"]
 
 [ext_resource type="Script" uid="uid://dfgnrao7h28wa" path="res://script/endpost.gd" id="1_5o4dw"]
 [ext_resource type="Texture2D" uid="uid://v723k288mi0g" path="res://sprite/flag pole.png" id="1_nypt7"]
 [ext_resource type="PackedScene" uid="uid://d0yh13wsoj6jf" path="res://scenes/flag.tscn" id="2_eyagw"]
+[ext_resource type="Texture2D" uid="uid://i70ofguicb50" path="res://sprite/brick particles.png" id="3_e08ka"]
+[ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="4_rncqr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8p4uc"]
-size = Vector2(5.87268, 152)
+size = Vector2(5.87268, 146.316)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yswmm"]
+size = Vector2(6.26217, 11.5944)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_468rv"]
 size = Vector2(16, 16)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yswmm"]
-size = Vector2(6.26217, 14.7574)
 
 [sub_resource type="Animation" id="Animation_ulfmi"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("stuff:position")
+tracks/0/path = NodePath("brick:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-17, -144)]
+"values": [Vector2(-9, -2)]
 }
 
 [sub_resource type="Animation" id="Animation_qetf1"]
 resource_name = "flagdown"
 length = 1.13
+
+[sub_resource type="Animation" id="Animation_rncqr"]
+resource_name = "brick down"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("stuff:position")
+tracks/0/path = NodePath("brick:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.1),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-17, -144), Vector2(-17, -21.61)]
+"values": [Vector2(-9, -2), Vector2(-9, 27.89)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b5ljr"]
 _data = {
 &"RESET": SubResource("Animation_ulfmi"),
+&"brick down": SubResource("Animation_rncqr"),
 &"flagdown": SubResource("Animation_qetf1")
 }
 
@@ -61,32 +67,45 @@ texture = ExtResource("1_nypt7")
 [node name="winarea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="winarea"]
-position = Vector2(-9, -86)
+position = Vector2(-9, -83.1708)
 scale = Vector2(1.02168, 0.995506)
 shape = SubResource("RectangleShape2D_8p4uc")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(-9, -2)
-shape = SubResource("RectangleShape2D_468rv")
 
 [node name="endpost" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="endpost"]
-position = Vector2(-9, -14.375)
-scale = Vector2(0.958135, 1.43996)
+position = Vector2(-9, -10)
+scale = Vector2(11.2781, 2.75996)
 shape = SubResource("RectangleShape2D_yswmm")
 
-[node name="stuff" type="Node2D" parent="."]
-position = Vector2(-17, -144)
+[node name="BrickParticles" type="Sprite2D" parent="endpost"]
+position = Vector2(-10, -11)
+scale = Vector2(4.49333, 2.16)
+texture = ExtResource("3_e08ka")
 
-[node name="flag" parent="stuff" instance=ExtResource("2_eyagw")]
+[node name="brick" type="Sprite2D" parent="."]
+position = Vector2(-9, -2)
+texture = ExtResource("4_rncqr")
+hframes = 4
+vframes = 3
+frame = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="brick"]
+position = Vector2(9, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="brick/StaticBody2D"]
+position = Vector2(-9, -2)
+shape = SubResource("RectangleShape2D_468rv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_b5ljr")
 }
 
+[node name="flag" parent="." instance=ExtResource("2_eyagw")]
+position = Vector2(-17, -144)
+
 [connection signal="area_entered" from="winarea" to="." method="_on_winarea_area_entered"]
 [connection signal="body_entered" from="winarea" to="." method="_on_winarea_body_entered"]
+[connection signal="area_entered" from="endpost" to="." method="_on_endpost_area_entered"]
+[connection signal="area_exited" from="endpost" to="." method="_on_endpost_area_exited"]

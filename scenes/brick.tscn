@@ -11,7 +11,7 @@ size = Vector2(16, 14)
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mekc"]
-size = Vector2(16, 32.5002)
+size = Vector2(16, 65.8338)
 
 [sub_resource type="Animation" id="Animation_k3qg7"]
 length = 0.001
@@ -77,7 +77,7 @@ shape = SubResource("RectangleShape2D_mt0q5")
 [node name="block_area2" type="Area2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="block_area2"]
-position = Vector2(0, 10.05)
+position = Vector2(0, 12.05)
 scale = Vector2(0.159999, 0.119999)
 shape = SubResource("RectangleShape2D_7mekc")
 

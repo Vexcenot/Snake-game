@@ -7,7 +7,7 @@ extends CharacterBody2D
 @onready var right: RayCast2D = $right
 @onready var sprite: Sprite2D = $Sprite2D
 
-var snake_speed = 0.1 #adjusts speed of snake I like 0.3
+var snake_speed = 0.2 #adjusts speed of snake I like 0.3
 var snake_length = 2 #how long the snake starts
 
 
@@ -47,15 +47,16 @@ var timer_counter = 0
 var limit_move = "direction which snake cannot go"
 var xLimit = "orientation the snake cant move in"
 var fuck = false
-var winning = false
+var cum
+
 
 func _ready():
 	teleport_sequence()
 
 func _process(delta):
-	print(under_block)
+	print(xLimit)
 	fucker()
-	if move_orders.size() > 2:
+	if move_orders.size() > 3:
 		move_orders.pop_back()
 		if move_orders[0] == move_orders[1]:
 			move_orders.pop_front()
@@ -73,6 +74,7 @@ func _process(delta):
 	collision_updater()
 	eat_animation()
 	painful_turn()
+	win2()
 		
 
 #snake movement inputs
@@ -118,7 +120,7 @@ func _input(event):
 		fuck = true
 		
 func painful_turn():
-	if ignore_turn:
+	if ignore_turn and Global.snake_status != "small":
 		sprite.frame = 9
 
 func fucker():
@@ -194,6 +196,7 @@ func time_reset():
 		if eatAnim2 == true:
 			eatAnim2 = false
 			eatAnim = false
+		cum = Global.direction
 			
 			
 
@@ -426,6 +429,7 @@ func die():
 func update_global_direction():
 	if not move_orders.is_empty():
 		Global.direction = move_orders[0]
+
 var collide_up = false
 var collide_down = false
 var collide_left = false
@@ -450,6 +454,9 @@ func check_collide():
 
 var move_direction = Vector2.ZERO
 var next_move = "the next move the snake will make"
+
+
+
 func move():
 	if move_orders.size() > 0: #make it also check if snake is paused and that next move wouldnt run into itself.
 		if move_orders[0] == next_move:
@@ -525,10 +532,10 @@ func update_sprite_orientation():
 func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "mushroom":
 		set_power("big")
-	if area.name == "winarea":
+	if area.name == "winarea" and Global.winning == false:
 		win()
 	if area.name == "endpost":
-		win2()
+		move_exit = true
 	if area.name == "enemy" and Global.snake_status == "small":
 		hurt()
 	if area.name == "edible":
@@ -542,7 +549,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		var window = 128
 		var pos = position.x
 		$Camera.limit_left = pos-window
-	if area.name == "oob_area" and winning == false:
+	if area.name == "oob_area" and Global.winning == false:
 		die()
 	if Global.snake_status != "small":
 		if area.name == "brick_area" or area.name == "enemy":
@@ -552,9 +559,10 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		#$".".visible = false
 	#if area.name == "entrance":
 		#get_tree().change_scene_to_file("res://scenes/endscreen.tscn")
+#
+	#if area.name == "flag_1":
+		#eat_positions.push_front(global_position)
 
-	if area.name == "flag_1":
-		eat()
 
 var crap
 func enter_entrance():
@@ -577,6 +585,8 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 		under_under_block = false
 	#if area.name == "entrance":
 		#$Sprite2D.visible = false
+	if area.name == "endpost":
+		move_exit = false
 
 #block hitting mechanic
 func block_pow():
@@ -618,19 +628,32 @@ func resume_move():
 #win conditions when touching flag pole. position pole in way that snake head will always be inside it & snake head doesnt by pass it.
 func win():
 	invincible = true
-	winning = true
+	Global.winning = true
 	player_input = false
+	xLimit = "none"
+	limit_move = "none"
 	pause_move()
 	await get_tree().create_timer(0.5).timeout
 	resume_move()
 	if move_exit == true:
-		move_orders.append("right")
+		move_exit2 = true
 	else:
 		move_orders.append("down")
+		Global.direction = "down"
+		move_exit2 = true
 #second part of win animation
+var 	move_exit2 = false
 func win2():
-	move_exit = true
-	move_orders.append("right")
+	if move_exit and move_exit2:
+		move_exit2 = false
+		if Global.direction == "left":
+			move_orders.clear()
+			move_orders.append("down")
+			move_orders.append("right")
+		else:
+			move_orders.append("right")
+			move_orders.append("down")
+			move_orders.append("right")
 #take snake position and only update it if its counting up. 
 #apply it to camera limit.w
 #if moveorder left then apply camera limit to player currrent possition
