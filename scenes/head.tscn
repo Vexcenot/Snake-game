@@ -135,8 +135,8 @@ size = Vector2(10.0566, 5.0283)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vq0g"]
 size = Vector2(9.70178, 6.94361)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpnw1"]
-size = Vector2(8, 8)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tctuf"]
+size = Vector2(27.0348, 13.3794)
 
 [node name="Snek" type="CharacterBody2D"]
 process_mode = 3
@@ -186,41 +186,36 @@ shape = SubResource("RectangleShape2D_5vq0g")
 debug_color = Color(0.803934, 0.392138, 0.389069, 0.42)
 
 [node name="up" type="RayCast2D" parent="."]
-position = Vector2(0, -1.5)
+position = Vector2(0, -2)
 rotation = -3.14159
 scale = Vector2(0.555, 0.315)
-target_position = Vector2(2.05555e-05, 14.2857)
+target_position = Vector2(1.59876e-05, 11.1111)
 collision_mask = 3
 
 [node name="down" type="RayCast2D" parent="."]
 position = Vector2(0, 1.5)
 scale = Vector2(0.559004, 0.315)
-target_position = Vector2(0, 12.6984)
+target_position = Vector2(0, 11.1111)
 collision_mask = 3
 
 [node name="left" type="RayCast2D" parent="."]
 position = Vector2(-2, 0)
 rotation = 1.5708
 scale = Vector2(0.555, 0.274999)
-target_position = Vector2(2.93513e-05, 16.3637)
+target_position = Vector2(2.28288e-05, 12.7273)
 collision_mask = 3
 
 [node name="right" type="RayCast2D" parent="."]
+position = Vector2(0.5, 0)
 rotation = -1.5708
 scale = Vector2(0.555, 0.315)
-target_position = Vector2(-4.23963e-05, 20.6349)
+target_position = Vector2(-2.93513e-05, 14.2857)
 collision_mask = 3
 
 [node name="20592Png" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(461, 83)
 texture = ExtResource("4_pw8ip")
-
-[node name="blockdetection" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="blockdetection"]
-position = Vector2(0, -8)
-shape = SubResource("RectangleShape2D_xpnw1")
 
 [node name="SmbPowerup" type="AudioStreamPlayer" parent="."]
 process_mode = 3
@@ -257,8 +252,15 @@ texture = ExtResource("7_tctuf")
 hframes = 21
 frame = 1
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-2.98023e-08, -6)
+rotation = 3.14159
+scale = Vector2(0.295915, 0.295915)
+shape = SubResource("RectangleShape2D_tctuf")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Head Area" to="." method="_on_head_area_area_entered"]
 [connection signal="area_exited" from="Head Area" to="." method="_on_head_area_area_exited"]
-[connection signal="area_entered" from="blockdetection" to="." method="_on_blockdetection_area_entered"]
-[connection signal="area_exited" from="blockdetection" to="." method="_on_blockdetection_area_exited"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

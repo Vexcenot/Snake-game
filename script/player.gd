@@ -54,13 +54,12 @@ func _ready():
 	teleport_sequence()
 
 func _process(delta):
-	print(xLimit)
 	fucker()
 	if move_orders.size() > 3:
 		move_orders.pop_back()
 		if move_orders[0] == move_orders[1]:
 			move_orders.pop_front()
-	#print("lim ", limit_move)
+	print(underbounce)
 	#print(crap)
 	timer += delta
 	time_reset()
@@ -76,8 +75,62 @@ func _process(delta):
 	painful_turn()
 	win2()
 		
-
+var shit 
 #snake movement inputs
+func move():
+	if move_orders.size() > 0: #make it also check if snake is paused and that next move wouldnt run into itself.
+		if move_orders[0] == next_move or move_orders[0] == limit_move:
+			move_orders.pop_front()
+		else:
+			next_move = move_orders.pop_front()
+		#checks turns
+		#make it not make turn if next move will not run into a wall.
+		if next_move == "up" and up.is_colliding() and up.get_collider() is StaticBody2D:
+			if under_block == true:
+				hit_block()
+				pause_move()
+				await get_tree().create_timer(0.3).timeout
+				resume_move()
+			else:
+				ignoring_turning()
+			#$AnimationPlayer.play("die1")
+		elif next_move == "down" and down.is_colliding() and down.get_collider() is StaticBody2D:
+			ignoring_turning()
+		elif next_move == "right" and right.is_colliding() and right.get_collider() is StaticBody2D:
+			ignoring_turning()
+			print("fuck")
+		elif next_move == "left" and left.is_colliding() and left.get_collider() is StaticBody2D:
+			ignoring_turning()
+
+
+#move calculate
+		if next_move != facing and ignore_turn == false: 
+				turn_positions.push_front([global_position, facing, next_move])  # Store both previous and new facing
+			  # Store both previous and new facing
+		facing = next_move
+		move_direction = {"up": Vector2.UP, "down": Vector2.DOWN, "left": Vector2.LEFT, "right": Vector2.RIGHT}[next_move]
+	# Keep turn_positions one slot shorter than the snake length
+	if turn_positions.size() >= length:
+		turn_positions.pop_back()
+		#runs hurt mechanic if facing is the same as raycast
+		
+#real moves
+	if move_direction != Vector2.ZERO:
+
+		if is_raycast_blocked(facing):
+			hurt()
+			return
+		else:
+			position += move_direction * move_distance
+			global_position_tracker()
+			move_tail_segments()
+
+		# Add tail segment only after moving
+		if pending_tail_segment:
+			spawn_tail_segment()
+			pending_tail_segment = false  # Reset flag
+
+
 func _input(event):
 	#bumps ? block directlyt above
 	#if under_block == true and event.is_action_pressed("k_up"):
@@ -87,11 +140,13 @@ func _input(event):
 		#resume_move()
 #move inputs
 	if event.is_action_pressed("k_up"):
+		await get_tree().create_timer(0.1).timeout
 		if under_block == true:
 			hit_block()
 			pause_move()
 			await get_tree().create_timer(0.3).timeout
 			resume_move()
+			
 		elif move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0 and player_input == true and under_block == false and limit_move != "up" and xLimit != "vert":
 			xLimit = "vert"
 			limit_move = "down"
@@ -457,54 +512,6 @@ var next_move = "the next move the snake will make"
 
 
 
-func move():
-	if move_orders.size() > 0: #make it also check if snake is paused and that next move wouldnt run into itself.
-		if move_orders[0] == next_move:
-			move_orders.pop_front()
-		elif move_orders[0] == limit_move:
-			move_orders.pop_front()
-		else:
-			next_move = move_orders.pop_front()
-		#checks turns
-		#make it not make turn if next move will not run into a wall.
-		if next_move == "up" and up.is_colliding() and up.get_collider() is StaticBody2D:
-			ignoring_turning()
-			#$AnimationPlayer.play("die1")
-		elif next_move == "down" and down.is_colliding() and down.get_collider() is StaticBody2D:
-			ignoring_turning()
-		elif next_move == "right" and right.is_colliding() and right.get_collider() is StaticBody2D:
-			ignoring_turning()
-			print("fuck")
-		elif next_move == "left" and left.is_colliding() and left.get_collider() is StaticBody2D:
-			ignoring_turning()
-
-
-#move calculate
-		if next_move != facing and ignore_turn == false: 
-			turn_positions.push_front([global_position, facing, next_move])  # Store both previous and new facing
-			  # Store both previous and new facing
-		facing = next_move
-		move_direction = {"up": Vector2.UP, "down": Vector2.DOWN, "left": Vector2.LEFT, "right": Vector2.RIGHT}[next_move]
-	# Keep turn_positions one slot shorter than the snake length
-	if turn_positions.size() >= length:
-		turn_positions.pop_back()
-		#runs hurt mechanic if facing is the same as raycast
-		
-#real moves
-	if move_direction != Vector2.ZERO:
-
-		if is_raycast_blocked(facing):
-			hurt()
-			return
-		else:
-			position += move_direction * move_distance
-			global_position_tracker()
-			move_tail_segments()
-
-		# Add tail segment only after moving
-		if pending_tail_segment:
-			spawn_tail_segment()
-			pending_tail_segment = false  # Reset flag
 
 
 
@@ -560,8 +567,8 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	#if area.name == "entrance":
 		#get_tree().change_scene_to_file("res://scenes/endscreen.tscn")
 #
-	#if area.name == "flag_1":
-		#eat_positions.push_front(global_position)
+	if area.name == "flag_1":
+		eat()
 
 
 var crap
@@ -588,13 +595,13 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 	if area.name == "endpost":
 		move_exit = false
 
-#block hitting mechanic
+#block constant hitting mechanic
 func block_pow():
 	if Global.direction == "up" and under_block == true and under_under_block == true:
 		under_block = false
 		pause_move()
 		hit_block()
-		await get_tree().create_timer(0.6).timeout
+		await get_tree().create_timer(0.8).timeout
 		under_block =true
 		print("fuck")
 		#make snake turn left if player inputs it and ignore right append
@@ -662,3 +669,11 @@ func update_camera():
 	var window_width = get_viewport().size.x
 	if move_orders.size() > 0 and move_orders[0] == "right":
 		$Camera.limit_left = window_width
+
+var underbounce = false
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.name == "block_area2" or area.name == "block_area":
+		print("SHID")
+		underbounce = true

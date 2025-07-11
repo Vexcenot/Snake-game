@@ -30,10 +30,6 @@ tracks/0/keys = {
 "values": [Vector2(-9, -2)]
 }
 
-[sub_resource type="Animation" id="Animation_qetf1"]
-resource_name = "flagdown"
-length = 1.13
-
 [sub_resource type="Animation" id="Animation_rncqr"]
 resource_name = "brick down"
 tracks/0/type = "value"
@@ -48,6 +44,10 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(-9, -2), Vector2(-9, 27.89)]
 }
+
+[sub_resource type="Animation" id="Animation_qetf1"]
+resource_name = "flagdown"
+length = 1.13
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b5ljr"]
 _data = {
@@ -79,6 +79,7 @@ scale = Vector2(11.2781, 2.75996)
 shape = SubResource("RectangleShape2D_yswmm")
 
 [node name="BrickParticles" type="Sprite2D" parent="endpost"]
+visible = false
 position = Vector2(-10, -11)
 scale = Vector2(4.49333, 2.16)
 texture = ExtResource("3_e08ka")

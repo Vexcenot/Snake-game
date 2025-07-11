@@ -40,7 +40,7 @@ func keepSpawning():
 	if spawnable == true and timing == true:
 		spawn_item()
 		spawnable = false
-		await get_tree().create_timer(0.6).timeout
+		await get_tree().create_timer(0.8).timeout
 		spawnable = true
 		
 #make it so that if coin scene then use slightly diff function
