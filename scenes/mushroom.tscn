@@ -10,7 +10,7 @@
 size = Vector2(9.75486, 7.44074)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
-size = Vector2(19.5238, 21.0023)
+size = Vector2(19.5238, 28.7543)
 
 [sub_resource type="Animation" id="Animation_xfln1"]
 length = 0.001
@@ -103,8 +103,8 @@ hframes = 2
 [node name="mushroom" type="Area2D" parent="Mushrooms"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Mushrooms/mushroom"]
-position = Vector2(-0.2, -0.581445)
-scale = Vector2(0.912184, 0.515997)
+position = Vector2(-0.2, -2.58144)
+scale = Vector2(1.07219, 0.515997)
 shape = SubResource("RectangleShape2D_pmrqf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Mushrooms"]

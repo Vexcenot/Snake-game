@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cdbmv0psdbx0l"]
+[gd_scene load_steps=14 format=3 uid="uid://cdbmv0psdbx0l"]
 
 [ext_resource type="Script" uid="uid://dfgnrao7h28wa" path="res://script/endpost.gd" id="1_5o4dw"]
 [ext_resource type="Texture2D" uid="uid://v723k288mi0g" path="res://sprite/flag pole.png" id="1_nypt7"]
@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="4_rncqr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8p4uc"]
-size = Vector2(5.87268, 146.316)
+size = Vector2(5.87268, 152.343)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yswmm"]
 size = Vector2(6.26217, 11.5944)
@@ -56,6 +56,8 @@ _data = {
 &"flagdown": SubResource("Animation_qetf1")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e08ka"]
+
 [node name="Endpost" type="Node2D"]
 position = Vector2(9, -6)
 script = ExtResource("1_5o4dw")
@@ -63,11 +65,12 @@ script = ExtResource("1_5o4dw")
 [node name="FlagPole" type="Sprite2D" parent="."]
 position = Vector2(-9, -78)
 texture = ExtResource("1_nypt7")
+hframes = 2
 
 [node name="winarea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="winarea"]
-position = Vector2(-9, -83.1708)
+position = Vector2(-9, -86.1708)
 scale = Vector2(1.02168, 0.995506)
 shape = SubResource("RectangleShape2D_8p4uc")
 
@@ -106,7 +109,16 @@ libraries = {
 [node name="flag" parent="." instance=ExtResource("2_eyagw")]
 position = Vector2(-17, -144)
 
+[node name="ball" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
+position = Vector2(-9, -158)
+scale = Vector2(0.400001, 0.400001)
+shape = SubResource("RectangleShape2D_e08ka")
+
 [connection signal="area_entered" from="winarea" to="." method="_on_winarea_area_entered"]
 [connection signal="body_entered" from="winarea" to="." method="_on_winarea_body_entered"]
 [connection signal="area_entered" from="endpost" to="." method="_on_endpost_area_entered"]
 [connection signal="area_exited" from="endpost" to="." method="_on_endpost_area_exited"]
+[connection signal="area_entered" from="ball" to="." method="_on_ball_area_entered"]
+[connection signal="area_exited" from="ball" to="." method="_on_ball_area_exited"]

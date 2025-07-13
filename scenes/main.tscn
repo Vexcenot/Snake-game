@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=11 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
 [ext_resource type="PackedScene" uid="uid://cdbmv0psdbx0l" path="res://scenes/endpost.tscn" id="4_2e5vk"]
-[ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="5_gaidb"]
 [ext_resource type="PackedScene" uid="uid://c5idjgy4afmho" path="res://scenes/mushroom.tscn" id="6_2spgy"]
 [ext_resource type="PackedScene" uid="uid://d26kswglulmbs" path="res://scenes/question block.tscn" id="6_06g6w"]
 [ext_resource type="PackedScene" uid="uid://dvwvb1vytus7m" path="res://scenes/camera_system.tscn" id="8_85g3d"]
@@ -39,15 +38,11 @@ shape = SubResource("RectangleShape2D_is7ar")
 [node name="Endpost" parent="." instance=ExtResource("4_2e5vk")]
 position = Vector2(192, 202)
 
-[node name="Goomba" parent="." instance=ExtResource("5_gaidb")]
-position = Vector2(68, 106)
-avoid_ledge = true
-
 [node name="mushroom3" parent="." instance=ExtResource("6_2spgy")]
 position = Vector2(390, 201)
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(55, 137)
+position = Vector2(55, 134)
 scale = Vector2(2, 2.07506)
 
 [node name="question block7" parent="." instance=ExtResource("6_06g6w")]
@@ -70,20 +65,20 @@ blocked = false
 position = Vector2(13, 81)
 
 [node name="brick" parent="." instance=ExtResource("10_choun")]
-position = Vector2(119, 121)
+position = Vector2(117, 89)
 
 [node name="brick4" parent="." instance=ExtResource("10_choun")]
-position = Vector2(103, 121)
+position = Vector2(101, 89)
 
 [node name="question block10" parent="." instance=ExtResource("6_06g6w")]
-position = Vector2(71, 121)
+position = Vector2(69, 89)
 items = Array[PackedScene]([ExtResource("6_2spgy")])
 
 [node name="brick11" parent="." instance=ExtResource("10_choun")]
-position = Vector2(55, 121)
+position = Vector2(53, 89)
 
 [node name="brick9" parent="." instance=ExtResource("10_choun")]
-position = Vector2(87, 121)
+position = Vector2(85, 89)
 
 [node name="brick10" parent="." instance=ExtResource("10_choun")]
 position = Vector2(87, 152)

@@ -31,3 +31,13 @@ func _on_endpost_area_entered(area: Area2D) -> void:
 func _on_endpost_area_exited(area: Area2D) -> void:
 	if area.name == "Head Area":
 		shit = false  
+
+
+#func _on_ball_area_entered(area: Area2D) -> void:
+	#if area.name == "Head Area":
+		#$FlagPole.frame = 1
+
+
+func _on_ball_area_exited(area: Area2D) -> void:
+	if area.name == "Head Area":
+		$FlagPole.frame = 1

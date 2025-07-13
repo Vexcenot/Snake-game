@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c45xxb85c34k7"]
+
+[ext_resource type="Texture2D" uid="uid://dk80yoyld1dbi" path="res://sprite/ball.png" id="1_gphky"]
+[ext_resource type="Script" uid="uid://bj6joqpkeytjc" path="res://script/flag.gd" id="2_653cc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wwxna"]
+size = Vector2(6, 7.125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjocn"]
+
+[node name="flag" type="Sprite2D"]
+texture = ExtResource("1_gphky")
+script = ExtResource("2_653cc")
+
+[node name="flag_1" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flag_1"]
+position = Vector2(0, -1)
+scale = Vector2(4.05446, 4.05446)
+shape = SubResource("RectangleShape2D_wwxna")
+
+[node name="edible" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="edible"]
+scale = Vector2(3.07808, 3.07808)
+shape = SubResource("RectangleShape2D_kjocn")
+
+[connection signal="area_entered" from="flag_1" to="." method="_on_eat_area_area_entered"]
+[connection signal="body_entered" from="flag_1" to="." method="_on_eat_area_body_entered"]

@@ -3,7 +3,7 @@ var snake_under = false
 var snake_boop = false
 var spawnable = false
 var timing = false
-
+var keep = false
 @export var items: Array[PackedScene] = []
 @export var false_block = false
 @export var invis_block = false
@@ -25,9 +25,9 @@ func visability():
 	elif invis_block:
 		$AllTheSmallBlocksTogether.visible = false
 
-func _input(event):
-	if event.is_action_pressed("k_up") and snake_under:
-		spawn_item()
+#func _input(event):
+	#if event.is_action_pressed("k_up") and snake_under:
+		#spawn_item()
 
 func rest_block():
 	if items.size() == 0:
@@ -41,6 +41,7 @@ func rest_block():
 
 func spawn_item():
 	if items.size() > 0:
+		await get_tree().create_timer(0.1).timeout
 		var coining = items[0].resource_path == "res://scenes/coin.tscn"
 		if coining:
 			$AnimationPlayer.play("bump")
@@ -61,20 +62,23 @@ func spawn_item():
 		$kill.position.y = 0
 
 func keepSpawning():
-	if spawnable == true and timing == true:
+	if spawnable and keep:
 		spawn_item()
 		spawnable = false
 		await get_tree().create_timer(0.8).timeout
-		spawnable = true
-
+		if keep:
+			spawnable = true
+	elif spawnable:
+		spawn_item()
+		spawnable = false
 #toggles if snake is under block
 func _on_block_area_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":
 		if Global.direction == "up":
+			keep = true
 			spawnable = true
-			timing = true
 		else: 
-			snake_under = true
+			spawnable = true
 
 
 
@@ -85,6 +89,7 @@ func _on_block_area_area_exited(area: Area2D) -> void:
 		snake_under = false
 		spawnable = false
 		timing = false
+		keep = false
 
 		
 
