@@ -11,9 +11,6 @@ func _process(delta: float) -> void:
 	pass
 
 
-
-
-
 #changes current power of snake then despawns scene
 func set_power(power: String):
 	var current_power = Global.snake_status

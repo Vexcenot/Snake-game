@@ -1,11 +1,15 @@
-[gd_scene load_steps=17 format=3 uid="uid://disfsrloilqua"]
+[gd_scene load_steps=22 format=3 uid="uid://disfsrloilqua"]
 
 [ext_resource type="Script" uid="uid://cggccwq77ls3n" path="res://script/player.gd" id="1_w2ywo"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/power up.wav" id="2_ali73"]
 [ext_resource type="PackedScene" uid="uid://vfnjnj2mu8yd" path="res://scenes/snake sprite.tscn" id="2_ldr7d"]
+[ext_resource type="Texture2D" uid="uid://duvigqweiirdn" path="res://sprite/fire snake.png" id="3_yj8r8"]
+[ext_resource type="Texture2D" uid="uid://c5lwc826jjh1r" path="res://sprite/snake flash 1.png" id="4_3l1wl"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="4_pw8ip"]
 [ext_resource type="AudioStream" uid="uid://e44f00ph5aem" path="res://sounds/power down.wav" id="5_d0mn4"]
+[ext_resource type="Texture2D" uid="uid://spoj5e0o0m44" path="res://sprite/snake flash 2.png" id="5_x1llb"]
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="6_480qb"]
+[ext_resource type="Texture2D" uid="uid://xr7pysod2o11" path="res://sprite/snake flash 3.png" id="6_emtd3"]
 [ext_resource type="Texture2D" uid="uid://bc7qh15aako70" path="res://sprite/smol snake.png" id="7_tctuf"]
 
 [sub_resource type="Animation" id="Animation_8dqsq"]
@@ -33,6 +37,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [2, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_tctuf")]
 }
 
 [sub_resource type="Animation" id="Animation_wgeep"]
@@ -118,12 +134,30 @@ tracks/0/keys = {
 "values": [5, 2]
 }
 
+[sub_resource type="Animation" id="Animation_n8xhp"]
+resource_name = "fire_up"
+length = 0.133337
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_yj8r8"), ExtResource("4_3l1wl"), ExtResource("5_x1llb"), ExtResource("6_emtd3")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f3nah"]
 _data = {
 &"RESET": SubResource("Animation_8dqsq"),
 &"die": SubResource("Animation_wgeep"),
 &"die1": SubResource("Animation_a62mm"),
-&"eat": SubResource("Animation_tctuf")
+&"eat": SubResource("Animation_tctuf"),
+&"fire_up": SubResource("Animation_n8xhp")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rdic"]

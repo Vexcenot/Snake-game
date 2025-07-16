@@ -59,7 +59,7 @@ func _process(delta):
 		move_orders.pop_back()
 		if move_orders[0] == move_orders[1]:
 			move_orders.pop_front()
-	print(under_block)
+	print(move_orders)
 	#print(crap)
 	timer += delta
 	time_reset()
@@ -74,7 +74,8 @@ func _process(delta):
 	eat_animation()
 	painful_turn()
 	win2()
-		
+	dead_sprite()
+	fucker()
 var shit 
 #snake movement inputs 
 
@@ -88,7 +89,7 @@ func _input(event):
 		#await get_tree().create_timer(0.3).timeout
 		#resume_move()
 #move inputs
-	if event.is_action_pressed("k_up"):
+	if event.is_action_pressed("k_up") and player_input == true:
 		#await get_tree().create_timer(0.1).timeout
 		if under_block > 0:
 			pass
@@ -97,7 +98,7 @@ func _input(event):
 			#await get_tree().create_timer(0.3).timeout
 			#resume_move()
 			#await get_tree().create_timer(0.1).timeout
-		elif move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0 and player_input == true and limit_move != "up" and xLimit != "vert" and under_block <= 0:
+		elif move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0 and limit_move != "up" and xLimit != "vert" and under_block <= 0:
 			xLimit = "vert"
 			limit_move = "down"
 			move_orders.append("up")
@@ -123,22 +124,16 @@ func _input(event):
 #debug2
 	if event.is_action_pressed("k_action2"):
 		fuck = true
-		
+	if event.is_action_released("k_action2"):
+		fuck = false
 func painful_turn():
 	if ignore_turn and Global.snake_status != "small":
 		sprite.frame = 9
 
 func fucker():
 	if fuck:
-		if under_block == true:
-			hit_block()
-			pause_move()
-			await get_tree().create_timer(0.3).timeout
-			resume_move()
-		elif move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0 and player_input == true and under_block == false and limit_move != "up" and xLimit != "vert":
-			xLimit = "vert"
-			limit_move = "down"
-			move_orders.append("up")
+		move_orders.append("right")
+			
 	#gives snake length on start
 func teleport_sequence():
 	limit_move = "left"
@@ -412,6 +407,9 @@ func set_power(power: String):
 		get_tree().paused = false
 	powered = true
 	
+func dead_sprite():
+	if dead:
+		sprite.frame = 6
 
 func die():
 	dead = true
@@ -493,6 +491,8 @@ var aah = 0
 func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "mushroom":
 		set_power("big")
+	if area.name == "flower": #add proper power up trans
+		Global.snake_status = "fire"
 	if area.name == "winarea" and Global.winning == false:
 		win()
 	if area.name == "endpost":
@@ -503,12 +503,10 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		sprite.frame = 5
 	if area.name == "edible2" and Global.snake_status != "small":
 		sprite.frame = 5
-	if area.name == "block_area2" and Global.snake_status == "small" or area.name == "block_area":
-		if Global.direction == "up":
-			invincible = true
-			await get_tree().create_timer(snake_speed).timeout
-			invincible = false
+	if area.name == "block_area2" and Global.snake_status == "small":
 		under_block += 1 #make this count up and down insteadd
+	if area.name == "block_area":
+		under_block += 1
 	if area.name == "move_cam":
 		var window = 128
 		var pos = position.x
@@ -546,7 +544,7 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 		sprite.frame = 2
 	if area.name == "edible2" and Global.snake_status != "small":
 		sprite.frame = 2
-	if area.name == "block_area2":
+	if area.name == "block_area2" and Global.snake_status == "small":
 		under_block -= 1
 	if area.name == "block_area":
 		under_block -= 1
@@ -596,6 +594,7 @@ func resume_move():
 
 #win conditions when touching flag pole. position pole in way that snake head will always be inside it & snake head doesnt by pass it.
 func win():
+	move_orders.clear()
 	invincible = true
 	Global.winning = true
 	player_input = false
@@ -632,13 +631,6 @@ func update_camera():
 	if move_orders.size() > 0 and move_orders[0] == "right":
 		$Camera.limit_left = window_width
 
-var underbounce = false
-
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.name == "block_area2" or area.name == "block_area":
-		print("SHID")
-		underbounce = true
 func move():
 	if move_orders.size() > 0: #make it also check if snake is paused and that next move wouldnt run into itself.
 		if move_orders[0] == next_move or move_orders[0] == limit_move or move_orders[0] == "up" and under_block > 0:

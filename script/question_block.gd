@@ -31,24 +31,31 @@ func visability():
 
 func rest_block():
 	if items.size() == 0:
-		$block_area.monitorable = false
-		$block_area.monitoring = false
-
 		invis_block = false
 		false_block = false
 		$AllTheSmallBlocksTogether.visible = true
 		$AllTheSmallBlocksTogether.frame = 7
+		await get_tree().create_timer(0.8).timeout
+		$block_area.monitorable = false
+		$block_area.monitoring = false
+
+
 
 func spawn_item():
 	if items.size() > 0:
 		await get_tree().create_timer(0.1).timeout
 		var coining = items[0].resource_path == "res://scenes/coin.tscn"
+		var mushrooming = items[0].resource_path == "res://scenes/mushroom.tscn"
 		if coining:
 			$AnimationPlayer.play("bump")
 			var coin_instance = items[0].instantiate()
 			add_child(coin_instance)
 			items.pop_front()
 		else:
+			if mushrooming and Global.snake_status != "small":
+				print('jack')
+				items[0] = load("res://scenes/fire_flower.tscn")
+			
 			$AnimationPlayer.play("bump")
 			$spawn_sound.play()
 			$bump_sound.play()

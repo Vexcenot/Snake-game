@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://dtxpx2ar41ngs"]
+
+[ext_resource type="Script" uid="uid://johy3heq6366" path="res://scenes/fire_flower.gd" id="1_2e132"]
+[ext_resource type="Texture2D" uid="uid://bw58fes4ojd7c" path="res://sprite/fire flower.png" id="2_tmda7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hejio"]
+size = Vector2(19.5238, 28.7543)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2e132"]
+
+[sub_resource type="Animation" id="Animation_tmda7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireFlower:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2e132"]
+resource_name = "flash"
+length = 0.26667
+loop_mode = 1
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireFlower:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hejio"]
+_data = {
+&"RESET": SubResource("Animation_tmda7"),
+&"flash": SubResource("Animation_2e132")
+}
+
+[node name="FireFlower" type="Node2D"]
+script = ExtResource("1_2e132")
+
+[node name="FireFlower" type="Sprite2D" parent="."]
+texture = ExtResource("2_tmda7")
+hframes = 4
+
+[node name="flower" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flower"]
+position = Vector2(0, -3)
+scale = Vector2(0.47219, 0.227244)
+shape = SubResource("RectangleShape2D_hejio")
+
+[node name="edible" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="edible"]
+scale = Vector2(3.07808, 3.07808)
+shape = SubResource("RectangleShape2D_2e132")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hejio")
+}
+autoplay = "flash"
+
+[connection signal="area_entered" from="flower" to="." method="_on_flower_area_entered"]

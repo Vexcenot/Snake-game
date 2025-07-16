@@ -1,6 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://c8rpn5napbsdu"]
+[gd_scene load_steps=13 format=3 uid="uid://c8rpn5napbsdu"]
 
 [ext_resource type="PackedScene" uid="uid://vfnjnj2mu8yd" path="res://scenes/snake sprite.tscn" id="1_wib06"]
+[ext_resource type="Texture2D" uid="uid://bc7qh15aako70" path="res://sprite/smol snake.png" id="2_plhoa"]
+[ext_resource type="Texture2D" uid="uid://duvigqweiirdn" path="res://sprite/fire snake.png" id="2_y75tr"]
+[ext_resource type="Texture2D" uid="uid://c5lwc826jjh1r" path="res://sprite/snake flash 1.png" id="3_plhoa"]
+[ext_resource type="Texture2D" uid="uid://spoj5e0o0m44" path="res://sprite/snake flash 2.png" id="4_hd0vu"]
+[ext_resource type="Texture2D" uid="uid://xr7pysod2o11" path="res://sprite/snake flash 3.png" id="5_eios8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_frb71"]
 size = Vector2(10.003, 10.003)
@@ -28,6 +33,18 @@ tracks/1/keys = {
 "handle_modes": PackedInt32Array(0),
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_plhoa")]
 }
 
 [sub_resource type="Animation" id="Animation_wgeep"]
@@ -57,10 +74,27 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.4, 2.49231)
 }
 
+[sub_resource type="Animation" id="Animation_2xphg"]
+resource_name = "fire_up"
+length = 0.133337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_y75tr"), ExtResource("3_plhoa"), ExtResource("4_hd0vu"), ExtResource("5_eios8")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f3nah"]
 _data = {
 &"RESET": SubResource("Animation_8dqsq"),
-&"die": SubResource("Animation_wgeep")
+&"die": SubResource("Animation_wgeep"),
+&"fire_up": SubResource("Animation_2xphg")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wne8n"]
@@ -74,6 +108,8 @@ scale = Vector2(2, 2)
 hframes = 10
 
 [node name="tail_collision" type="StaticBody2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="tail_collision_shape" type="CollisionShape2D" parent="tail_collision"]
 scale = Vector2(0.799762, 0.799762)

@@ -16,6 +16,8 @@ func current_powerup():
 		sprite.texture = bigsnek
 	elif Global.snake_status == "small":
 		sprite.texture = smolsnek
+	elif Global.snake_status == "fire":
+		$"../AnimationPlayer".play("fire_up")
 	
 
 

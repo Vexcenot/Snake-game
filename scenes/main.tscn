@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=12 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dvwvb1vytus7m" path="res://scenes/camera_system.tscn" id="8_85g3d"]
 [ext_resource type="PackedScene" uid="uid://lhmipeci2e24" path="res://scenes/coin.tscn" id="8_fs55x"]
 [ext_resource type="PackedScene" uid="uid://cixj1ykvju5v2" path="res://scenes/brick.tscn" id="10_choun"]
+[ext_resource type="PackedScene" uid="uid://dtxpx2ar41ngs" path="res://scenes/fire_flower.tscn" id="10_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://pba4v6gle2ea" path="res://scenes/castle.tscn" id="10_ya4ey"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7ar"]
@@ -80,12 +81,6 @@ position = Vector2(53, 89)
 [node name="brick9" parent="." instance=ExtResource("10_choun")]
 position = Vector2(85, 89)
 
-[node name="brick10" parent="." instance=ExtResource("10_choun")]
-position = Vector2(87, 152)
-
-[node name="brick13" parent="." instance=ExtResource("10_choun")]
-position = Vector2(55, 152)
-
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 320.0
 offset_top = 72.0
@@ -96,3 +91,9 @@ color = Color(0.364706, 0.580392, 0.980392, 1)
 
 [node name="castle" parent="." instance=ExtResource("10_ya4ey")]
 position = Vector2(279, 209)
+
+[node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
+position = Vector2(72, 201)
+
+[node name="FireFlower" parent="." instance=ExtResource("10_eb6dy")]
+position = Vector2(120, 201)

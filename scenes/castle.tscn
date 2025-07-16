@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://pba4v6gle2ea"]
 
 [ext_resource type="Texture2D" uid="uid://dks35iv4uw2ex" path="res://sprite/castle.png" id="1_pb8oa"]
-[ext_resource type="Script" uid="uid://37k627442dai" path="res://scenes/castle.gd" id="1_rjj26"]
+[ext_resource type="Script" uid="uid://37k627442dai" path="res://script/castle.gd" id="1_rjj26"]
 [ext_resource type="Texture2D" uid="uid://chy65qog88bac" path="res://sprite/castle end.png" id="3_njhjj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bly62"]
