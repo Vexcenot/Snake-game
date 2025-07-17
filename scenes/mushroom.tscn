@@ -97,6 +97,7 @@ scale = Vector2(0.820104, 0.781477)
 shape = SubResource("RectangleShape2D_v7c8f")
 
 [node name="Mushrooms" type="Sprite2D" parent="."]
+z_index = 1
 texture = ExtResource("2_8mpd3")
 hframes = 2
 

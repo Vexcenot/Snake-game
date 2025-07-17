@@ -134,7 +134,7 @@ scale = Vector2(0.820104, 0.781477)
 shape = SubResource("RectangleShape2D_v7c8f")
 
 [node name="Mushrooms" type="Sprite2D" parent="."]
-z_index = 2
+z_index = 1
 texture = ExtResource("2_tdxqk")
 hframes = 3
 
@@ -169,7 +169,6 @@ scale = Vector2(0.820104, 0.781477)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="right bottom"]
 position = Vector2(9.14518, 10.8768)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_kg8q6")
 
 [node name="Node2D" type="Node2D" parent="."]

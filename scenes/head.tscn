@@ -267,7 +267,6 @@ limit_left = 0
 limit_top = 0
 limit_right = 9999
 limit_bottom = 0
-limit_smoothed = true
 drag_horizontal_offset = -1.0
 drag_left_margin = 1.0
 drag_right_margin = 0.0

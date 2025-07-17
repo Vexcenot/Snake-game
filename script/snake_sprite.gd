@@ -1,10 +1,9 @@
 extends Sprite2D
 var bigsnek = preload("res://sprite/big snake.png")
 var smolsnek = preload("res://sprite/smol snake.png")
+var firesnek = preload("res://sprite/fire snake.png")
+var touched_pole = false
 @onready var sprite = $"."
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,13 +17,10 @@ func current_powerup():
 		sprite.texture = smolsnek
 	elif Global.snake_status == "fire":
 		$"../AnimationPlayer".play("fire_up")
-	
+	elif Global.snake_status == "fire2":
+		sprite.texture = firesnek
 
 
-#func _on_tail_area_area_exited(area: Area2D) -> void:
-
-
-
-#func _on_tail_area_area_entered(area: Area2D) -> void:
-	#if area.name == "entrance":
-		#$".".visible = false
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.name == "winarea":
+		z_index = 1

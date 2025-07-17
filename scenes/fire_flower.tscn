@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://dtxpx2ar41ngs"]
 
-[ext_resource type="Script" uid="uid://johy3heq6366" path="res://scenes/fire_flower.gd" id="1_2e132"]
+[ext_resource type="Script" uid="uid://johy3heq6366" path="res://script/fire_flower.gd" id="1_2e132"]
 [ext_resource type="Texture2D" uid="uid://bw58fes4ojd7c" path="res://sprite/fire flower.png" id="2_tmda7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hejio"]
@@ -51,6 +51,7 @@ _data = {
 script = ExtResource("1_2e132")
 
 [node name="FireFlower" type="Sprite2D" parent="."]
+z_index = 1
 texture = ExtResource("2_tmda7")
 hframes = 4
 

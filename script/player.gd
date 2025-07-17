@@ -30,6 +30,7 @@ var movesame = false
 var pending_tail_segment = false  # Flag to track pending tail additionz
 var powerup = "current power up goes here"
 var bigsnek = preload("res://sprite/big snake.png")
+var firesnek = preload("res://sprite/fire snake.png")
 var smallsnek = preload("res://sprite/smol snake.png")
 var collided = false
 var powered = false
@@ -389,6 +390,22 @@ func check_turn_segment(segment, turn_coord):
 	else:
 		tail_sprite.frame = 1
 
+func set_firepower(): 
+	eat()
+	var current_power = Global.snake_status
+	var blink_sec = 0.1
+	if Global.snake_status != "fire2":
+		$SmbPowerup.play()
+		get_tree().paused = true
+		pause_move()
+		Global.snake_status = "fire"
+		await get_tree().create_timer(0.5).timeout
+		Global.snake_status = "fire2"
+		resume_move()
+		timer = 0
+		get_tree().paused = false
+	powered = true
+
 func set_power(power: String):
 	eat()
 	var current_power = Global.snake_status
@@ -492,9 +509,12 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "mushroom":
 		set_power("big")
 	if area.name == "flower": #add proper power up trans
-		Global.snake_status = "fire"
+		set_firepower()
 	if area.name == "winarea" and Global.winning == false:
 		win()
+		$".".set_collision_mask_value(3, false)
+		$right.set_collision_mask_value(2, false)
+		$right.set_collision_mask_value(1, false)
 	if area.name == "endpost":
 		move_exit = true
 	if area.name == "enemy" and Global.snake_status == "small":
@@ -516,20 +536,11 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if Global.snake_status != "small":
 		if area.name == "brick_area" or area.name == "enemy":
 			eat()
-	#if area.name == "entrance":
-		#get
-		#$".".visible = false
-	#if area.name == "entrance":
-		#get_tree().change_scene_to_file("res://scenes/endscreen.tscn")
-#
-	#if area.name == "flag_1":
-		#eat()
-
 
 var crap
 func enter_entrance():
 	if Global.shit == false:
-		crap = position.x + 132
+		crap = position.x + 135
 	else:
 		$Camera.limit_right = crap 
 
