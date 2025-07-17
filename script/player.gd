@@ -512,9 +512,6 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		set_firepower()
 	if area.name == "winarea" and Global.winning == false:
 		win()
-		$".".set_collision_mask_value(3, false)
-		$right.set_collision_mask_value(2, false)
-		$right.set_collision_mask_value(1, false)
 	if area.name == "endpost":
 		move_exit = true
 	if area.name == "enemy" and Global.snake_status == "small":
