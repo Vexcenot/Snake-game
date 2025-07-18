@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
 @export var tail_segment_scene: PackedScene = preload("res://scenes/tail.tscn")
+@export var fire_ball: PackedScene = preload("res://scenes/fire_ball.tscn")
 @onready var up: RayCast2D = $up
 @onready var down: RayCast2D = $down
 @onready var left: RayCast2D = $left
 @onready var right: RayCast2D = $right
 @onready var sprite: Sprite2D = $Sprite2D
 
-var snake_speed = 0.2 #adjusts speed of snake I like 0.3
+var snake_speed = 0.1 #adjusts speed of snake I like 0.3
 var snake_length = 2 #how long the snake starts
 
 
@@ -119,9 +120,25 @@ func _input(event):
 			limit_move = "left"
 			move_orders.append("right")
 #debug1
-	if event.is_action_pressed("k_action"):
-		eat()
-		eat_positions.push_front(global_position)
+	if event.is_action_pressed("k_action") and player_input == true:
+		var fire_ball = fire_ball.instantiate()
+		get_parent().add_child(fire_ball)
+		if Global.direction == "right":
+			fire_ball.global_position.x = global_position.x + 20
+			fire_ball.global_position.y = global_position.y
+		elif Global.direction == "left":
+					fire_ball.global_position.x = global_position.x - 20
+					fire_ball.global_position.y = global_position.y
+		elif Global.direction == "up":
+					fire_ball.global_position.x = global_position.x
+					fire_ball.global_position.y = global_position.y - 20
+		elif Global.direction == "down":
+					fire_ball.global_position.x = global_position.x
+					fire_ball.global_position.y = global_position.y + 13
+
+
+		#eat()
+		#eat_positions.push_front(global_position)
 #debug2
 	if event.is_action_pressed("k_action2"):
 		fuck = true
