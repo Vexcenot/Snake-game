@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=16 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
@@ -11,9 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://dtxpx2ar41ngs" path="res://scenes/fire_flower.tscn" id="10_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://pba4v6gle2ea" path="res://scenes/castle.tscn" id="10_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="11_ya4ey"]
+[ext_resource type="Texture2D" uid="uid://46caf8m3jbwl" path="res://sprite/question1.png" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://s8kidv16iy81" path="res://scenes/fire_ball.tscn" id="13_trceg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7ar"]
 size = Vector2(1674, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trceg"]
+size = Vector2(16.5, 16)
 
 [node name="Main" type="Node"]
 
@@ -102,3 +107,30 @@ position = Vector2(120, 201)
 [node name="Goomba" parent="." instance=ExtResource("11_ya4ey")]
 position = Vector2(84, 74)
 avoid_ledge = true
+
+[node name="mushroom2" parent="." instance=ExtResource("6_2spgy")]
+position = Vector2(53, 74)
+
+[node name="Question1" type="Sprite2D" parent="mushroom2"]
+position = Vector2(16.56, 92.56)
+scale = Vector2(28.32, 1)
+texture = ExtResource("12_eb6dy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="mushroom2/Question1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mushroom2/Question1/StaticBody2D"]
+shape = SubResource("RectangleShape2D_trceg")
+
+[node name="Question2" type="Sprite2D" parent="mushroom2"]
+position = Vector2(95.56, 81.56)
+rotation = 1.5708
+scale = Vector2(28.32, 1)
+texture = ExtResource("12_eb6dy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="mushroom2/Question2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="mushroom2/Question2/StaticBody2D"]
+shape = SubResource("RectangleShape2D_trceg")
+
+[node name="fire ball" parent="." instance=ExtResource("13_trceg")]
+position = Vector2(89, 124)

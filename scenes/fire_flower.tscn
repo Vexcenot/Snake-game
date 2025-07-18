@@ -51,7 +51,6 @@ _data = {
 script = ExtResource("1_2e132")
 
 [node name="FireFlower" type="Sprite2D" parent="."]
-z_index = 1
 texture = ExtResource("2_tmda7")
 hframes = 4
 

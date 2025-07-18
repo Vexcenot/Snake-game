@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://s8kidv16iy81"]
+
+[ext_resource type="Script" uid="uid://dksnvaw6iq2ko" path="res://fire_ball.gd" id="1_gregu"]
+[ext_resource type="Texture2D" uid="uid://c7qn2jwjas720" path="res://sprite/icon.svg" id="2_qsv8u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xdfro"]
+size = Vector2(20, 4)
+
+[node name="fire ball" type="Node2D"]
+script = ExtResource("1_gregu")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_qsv8u")
+
+[node name="side collision" type="Area2D" parent="Icon"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/side collision"]
+scale = Vector2(0.440001, 0.16)
+shape = SubResource("RectangleShape2D_xdfro")
+
+[node name="bottom collision" type="Area2D" parent="Icon"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/bottom collision"]
+position = Vector2(0, 4)
+scale = Vector2(0.300284, 0.200376)
+shape = SubResource("RectangleShape2D_xdfro")
+
+[connection signal="body_entered" from="Icon/side collision" to="." method="_on_side_collision_body_entered"]
+[connection signal="area_entered" from="Icon/bottom collision" to="." method="_on_bottom_collision_area_entered"]
+[connection signal="area_shape_entered" from="Icon/bottom collision" to="." method="_on_bottom_collision_area_shape_entered"]
+[connection signal="body_entered" from="Icon/bottom collision" to="." method="_on_bottom_collision_body_entered"]
