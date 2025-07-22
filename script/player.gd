@@ -8,7 +8,7 @@ extends CharacterBody2D
 @onready var right: RayCast2D = $right
 @onready var sprite: Sprite2D = $Sprite2D
 
-var snake_speed = 0.1 #adjusts speed of snake I like 0.3
+var snake_speed = 0.3 #adjusts speed of snake I like 0.3
 var snake_length = 2 #how long the snake starts
 
 
@@ -155,6 +155,7 @@ func fucker():
 	#gives snake length on start
 func teleport_sequence():
 	limit_move = "left"
+	Global.direction = "right"
 	await get_tree().process_frame
 	position.x -= move_distance*snake_length
 	for i in range(snake_length):

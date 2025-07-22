@@ -1,22 +1,142 @@
-[gd_scene load_steps=4 format=3 uid="uid://s8kidv16iy81"]
+[gd_scene load_steps=10 format=3 uid="uid://s8kidv16iy81"]
 
 [ext_resource type="Script" uid="uid://dksnvaw6iq2ko" path="res://fire_ball.gd" id="1_gregu"]
-[ext_resource type="Texture2D" uid="uid://c7qn2jwjas720" path="res://sprite/icon.svg" id="2_qsv8u"]
+[ext_resource type="Texture2D" uid="uid://c31oaxth3qqi" path="res://sprite/fireball.png" id="2_qddq2"]
+[ext_resource type="Texture2D" uid="uid://dgf52usnl0p6e" path="res://sprite/explode.png" id="3_une7w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xdfro"]
 size = Vector2(20, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qddq2"]
+
+[sub_resource type="Animation" id="Animation_qddq2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explode:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Icon:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Explode:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ggq3o"]
+resource_name = "explode"
+length = 0.16667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explode:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icon:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Explode:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_une7w"]
+resource_name = "spinning"
+length = 0.133337
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ggq3o"]
+_data = {
+&"RESET": SubResource("Animation_qddq2"),
+&"explode": SubResource("Animation_ggq3o"),
+&"spinning": SubResource("Animation_une7w")
+}
 
 [node name="fire ball" type="Node2D"]
 script = ExtResource("1_gregu")
 
 [node name="Icon" type="Sprite2D" parent="."]
 z_index = 3
-texture = ExtResource("2_qsv8u")
+texture = ExtResource("2_qddq2")
+hframes = 4
 
 [node name="side collision" type="Area2D" parent="Icon"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/side collision"]
-scale = Vector2(0.440001, 0.16)
+position = Vector2(0, -6)
+scale = Vector2(0.200001, 0.16)
 shape = SubResource("RectangleShape2D_xdfro")
 
 [node name="bottom collision" type="Area2D" parent="Icon"]
@@ -26,7 +146,26 @@ position = Vector2(0, 4)
 scale = Vector2(0.300284, 0.200376)
 shape = SubResource("RectangleShape2D_xdfro")
 
+[node name="fireball" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fireball"]
+scale = Vector2(0.519998, 0.519998)
+shape = SubResource("RectangleShape2D_qddq2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ggq3o")
+}
+
+[node name="Explode" type="Sprite2D" parent="."]
+visible = false
+z_index = 4
+texture = ExtResource("3_une7w")
+hframes = 3
+
+[connection signal="area_entered" from="Icon/side collision" to="." method="_on_side_collision_area_entered"]
 [connection signal="body_entered" from="Icon/side collision" to="." method="_on_side_collision_body_entered"]
 [connection signal="area_entered" from="Icon/bottom collision" to="." method="_on_bottom_collision_area_entered"]
 [connection signal="area_shape_entered" from="Icon/bottom collision" to="." method="_on_bottom_collision_area_shape_entered"]
 [connection signal="body_entered" from="Icon/bottom collision" to="." method="_on_bottom_collision_body_entered"]
+[connection signal="area_entered" from="fireball" to="." method="_on_fireball_area_entered"]

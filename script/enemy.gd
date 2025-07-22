@@ -84,7 +84,9 @@ func _on_enemy_area_entered(area: Area2D) -> void:
 	if area.name == "activate_entity":
 		activate = true
 	if area.name == "kill":
-		queue_free()
+		queue_free()#unique flip die sprite
+	if area.name == "fireball":
+		queue_free()#turn into cooked state for extra point
 
 #LEDGE DETECTION
 func goback():
