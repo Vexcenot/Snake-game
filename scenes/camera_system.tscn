@@ -34,32 +34,33 @@ visible = false
 position = Vector2(185, 127)
 texture = ExtResource("4_me7dy")
 
-[node name="oob_area" type="Area2D" parent="."]
+[node name="oob" type="Area2D" parent="."]
 position = Vector2(-6, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="oob_area"]
+[node name="EnemyFlag" type="Sprite2D" parent="oob"]
+visible = false
+position = Vector2(-33.4399, 44)
+scale = Vector2(2.53083, 221.939)
+texture = ExtResource("5_jpr4p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="oob"]
 position = Vector2(-6584.44, 0)
 shape = SubResource("RectangleShape2D_xpg4h")
 debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
 
-[node name="EnemyFlag" type="Sprite2D" parent="oob_area/CollisionShape2D"]
-position = Vector2(6551, 44)
-scale = Vector2(2.53083, 221.939)
-texture = ExtResource("5_jpr4p")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="oob_area"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="oob"]
 position = Vector2(87, -206)
 scale = Vector2(43.5333, 1)
 shape = SubResource("RectangleShape2D_pu1xt")
 debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
 
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="oob_area"]
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="oob"]
 position = Vector2(78, 308)
 scale = Vector2(42.16, 1)
 shape = SubResource("RectangleShape2D_pu1xt")
 debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
 
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="oob_area"]
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="oob"]
 position = Vector2(6837, -75)
 shape = SubResource("RectangleShape2D_xpg4h")
 debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)

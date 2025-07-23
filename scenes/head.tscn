@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://disfsrloilqua"]
+[gd_scene load_steps=25 format=3 uid="uid://disfsrloilqua"]
 
 [ext_resource type="Script" uid="uid://cggccwq77ls3n" path="res://script/player.gd" id="1_w2ywo"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/power up.wav" id="2_ali73"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="6_480qb"]
 [ext_resource type="Texture2D" uid="uid://xr7pysod2o11" path="res://sprite/snake flash 3.png" id="6_emtd3"]
 [ext_resource type="Texture2D" uid="uid://bc7qh15aako70" path="res://sprite/smol snake.png" id="7_tctuf"]
+[ext_resource type="Texture2D" uid="uid://cyvq3674ylf7x" path="res://sprite/mid snake.png" id="7_x1llb"]
+[ext_resource type="Texture2D" uid="uid://bbyqmdj4gc06g" path="res://sprite/big snake.png" id="8_emtd3"]
 
 [sub_resource type="Animation" id="Animation_8dqsq"]
 length = 0.001
@@ -151,13 +153,31 @@ tracks/0/keys = {
 "values": [ExtResource("3_yj8r8"), ExtResource("4_3l1wl"), ExtResource("5_x1llb"), ExtResource("6_emtd3")]
 }
 
+[sub_resource type="Animation" id="Animation_a80fa"]
+resource_name = "grow up"
+length = 0.800002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.233333, 0.3, 0.366667, 0.466667, 0.533333, 0.633333, 0.7, 0.766667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("7_tctuf"), ExtResource("7_x1llb"), ExtResource("7_tctuf"), ExtResource("8_emtd3"), ExtResource("7_tctuf"), ExtResource("7_x1llb"), ExtResource("8_emtd3"), ExtResource("7_tctuf"), ExtResource("7_x1llb"), ExtResource("8_emtd3"), ExtResource("7_tctuf")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f3nah"]
 _data = {
 &"RESET": SubResource("Animation_8dqsq"),
 &"die": SubResource("Animation_wgeep"),
 &"die1": SubResource("Animation_a62mm"),
 &"eat": SubResource("Animation_tctuf"),
-&"fire_up": SubResource("Animation_n8xhp")
+&"fire_up": SubResource("Animation_n8xhp"),
+&"grow up": SubResource("Animation_a80fa")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6rdic"]

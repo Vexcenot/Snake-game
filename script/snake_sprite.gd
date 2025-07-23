@@ -1,7 +1,8 @@
 extends Sprite2D
 var bigsnek = preload("res://sprite/big snake.png")
 var smolsnek = preload("res://sprite/smol snake.png")
-var firesnek = preload("res://sprite/fire snake.png")
+var firesnek = preload("res://sprite/fire 2.png") 
+var midsnek = preload("res://sprite/mid snake.png")
 var touched_pole = false
 @onready var sprite = $"."
 

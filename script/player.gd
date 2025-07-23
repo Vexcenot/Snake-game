@@ -61,7 +61,7 @@ func _process(delta):
 		move_orders.pop_back()
 		if move_orders[0] == move_orders[1]:
 			move_orders.pop_front()
-	print(move_orders)
+	print(Global.active_balls)
 	#print(crap)
 	timer += delta
 	time_reset()
@@ -120,7 +120,7 @@ func _input(event):
 			limit_move = "left"
 			move_orders.append("right")
 #debug1
-	if event.is_action_pressed("k_action") and player_input == true:
+	if event.is_action_pressed("k_action") and player_input == true and Global.active_balls <= 1 and Global.snake_status == "fire2": #fix this
 		var fire_ball = fire_ball.instantiate()
 		get_parent().add_child(fire_ball)
 		if Global.direction == "right":
@@ -417,7 +417,7 @@ func set_firepower():
 		get_tree().paused = true
 		pause_move()
 		Global.snake_status = "fire"
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(1.2).timeout
 		Global.snake_status = "fire2"
 		resume_move()
 		timer = 0
@@ -527,7 +527,10 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "mushroom":
 		set_power("big")
 	if area.name == "flower": #add proper power up trans
-		set_firepower()
+		if Global.snake_status == "small":
+			set_power("big")
+		else:
+			set_firepower()
 	if area.name == "winarea" and Global.winning == false:
 		win()
 	if area.name == "endpost":
@@ -546,7 +549,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		var window = 128
 		var pos = position.x
 		$Camera.limit_left = pos-window
-	if area.name == "oob_area" and Global.winning == false:
+	if area.name == "oob" and Global.winning == false:
 		die()
 	if Global.snake_status != "small":
 		if area.name == "brick_area" or area.name == "enemy":

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=14 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://pba4v6gle2ea" path="res://scenes/castle.tscn" id="10_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="11_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://d0yh13wsoj6jf" path="res://scenes/flag.tscn" id="13_a8y0u"]
-[ext_resource type="PackedScene" uid="uid://s8kidv16iy81" path="res://scenes/fire_ball.tscn" id="13_trceg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7ar"]
 size = Vector2(1674, 31)
@@ -69,20 +68,17 @@ blocked = false
 position = Vector2(13, 81)
 
 [node name="brick" parent="." instance=ExtResource("10_choun")]
-position = Vector2(117, 89)
+position = Vector2(117, 88)
 
 [node name="brick4" parent="." instance=ExtResource("10_choun")]
-position = Vector2(101, 89)
+position = Vector2(101, 88)
 
 [node name="question block10" parent="." instance=ExtResource("6_06g6w")]
-position = Vector2(69, 89)
+position = Vector2(69, 88)
 items = Array[PackedScene]([ExtResource("6_2spgy")])
 
-[node name="brick11" parent="." instance=ExtResource("10_choun")]
-position = Vector2(53, 89)
-
 [node name="brick9" parent="." instance=ExtResource("10_choun")]
-position = Vector2(85, 89)
+position = Vector2(85, 88)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = 320.0
@@ -99,7 +95,10 @@ position = Vector2(280, 208)
 position = Vector2(72, 201)
 
 [node name="FireFlower" parent="." instance=ExtResource("10_eb6dy")]
-position = Vector2(120, 201)
+position = Vector2(53, 134)
+
+[node name="FireFlower2" parent="." instance=ExtResource("10_eb6dy")]
+position = Vector2(73, 135)
 
 [node name="Goomba" parent="." instance=ExtResource("11_ya4ey")]
 position = Vector2(84, 74)
@@ -107,9 +106,6 @@ avoid_ledge = true
 
 [node name="mushroom2" parent="." instance=ExtResource("6_2spgy")]
 position = Vector2(53, 74)
-
-[node name="fire ball" parent="." instance=ExtResource("13_trceg")]
-position = Vector2(129, 69)
 
 [node name="flag" parent="." instance=ExtResource("13_a8y0u")]
 position = Vector2(173, 58)
