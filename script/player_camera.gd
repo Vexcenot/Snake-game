@@ -6,7 +6,7 @@ var update = false
 		#position.x += 500*delta
 		
 func _physics_process(delta: float) -> void:
-	if update and Global.shit == false:
+	if update == true and Global.shit == false:
 		position.x += 360*delta
 
 

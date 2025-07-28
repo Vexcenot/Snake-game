@@ -6,10 +6,14 @@ var midsnek = preload("res://sprite/mid snake.png")
 var touched_pole = false
 @onready var sprite = $"."
 
+#func _ready() -> void:
+	#if Global.spawn_facing == 1:
+		#$".".rotate(90)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_float) -> void:
 	current_powerup()
+	blinking()
 
 func current_powerup():
 	if Global.snake_status == "big":
@@ -21,6 +25,12 @@ func current_powerup():
 	elif Global.snake_status == "fire2":
 		sprite.texture = firesnek
 
+func blinking():
+	if Global.visible == false:
+		$".".visible = false
+	else: 
+		$".".visible = true
+		
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.name == "winarea":

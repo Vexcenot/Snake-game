@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=15 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
-[ext_resource type="PackedScene" uid="uid://cdbmv0psdbx0l" path="res://scenes/endpost.tscn" id="4_2e5vk"]
 [ext_resource type="PackedScene" uid="uid://c5idjgy4afmho" path="res://scenes/mushroom.tscn" id="6_2spgy"]
 [ext_resource type="PackedScene" uid="uid://d26kswglulmbs" path="res://scenes/question block.tscn" id="6_06g6w"]
 [ext_resource type="PackedScene" uid="uid://dvwvb1vytus7m" path="res://scenes/camera_system.tscn" id="8_85g3d"]
@@ -11,42 +10,32 @@
 [ext_resource type="PackedScene" uid="uid://dtxpx2ar41ngs" path="res://scenes/fire_flower.tscn" id="10_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://pba4v6gle2ea" path="res://scenes/castle.tscn" id="10_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="11_ya4ey"]
-[ext_resource type="PackedScene" uid="uid://d0yh13wsoj6jf" path="res://scenes/flag.tscn" id="13_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://cpkdjcp5lcxe" path="res://scenes/pipe.tscn" id="12_eb6dy"]
+[ext_resource type="Texture2D" uid="uid://chy65qog88bac" path="res://sprite/castle end.png" id="12_trceg"]
+
+[sub_resource type="PackedScene" id="PackedScene_eb6dy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7ar"]
 size = Vector2(1674, 31)
 
 [node name="Main" type="Node"]
 
-[node name="20592Png" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(1688, 244)
+[node name="bng" type="Sprite2D" parent="."]
+position = Vector2(1688, 240)
 texture = ExtResource("1_h5eht")
+
+[node name="Snek" parent="." instance=ExtResource("2_10edd")]
+position = Vector2(56, 200)
+scale = Vector2(2, 2.07506)
+fire_ball = SubResource("PackedScene_eb6dy")
+metadata/_edit_group_ = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 visible = false
 
-[node name="20592Png2" type="Sprite2D" parent="."]
-position = Vector2(405, 240)
-texture = ExtResource("1_h5eht")
-
-[node name="wall" type="StaticBody2D" parent="20592Png2"]
-collision_layer = 3
-collision_mask = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="20592Png2/wall"]
-position = Vector2(-849, -15.5)
-shape = SubResource("RectangleShape2D_is7ar")
-
-[node name="Endpost" parent="." instance=ExtResource("4_2e5vk")]
-position = Vector2(190, 202)
-
 [node name="mushroom3" parent="." instance=ExtResource("6_2spgy")]
 position = Vector2(390, 201)
-
-[node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(55, 134)
-scale = Vector2(2, 2.07506)
+stopped = true
 
 [node name="question block7" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(86, 39)
@@ -64,9 +53,6 @@ blocked = false
 position = Vector2(37, 24)
 blocked = false
 
-[node name="camera_system" parent="." instance=ExtResource("8_85g3d")]
-position = Vector2(13, 81)
-
 [node name="brick" parent="." instance=ExtResource("10_choun")]
 position = Vector2(117, 88)
 
@@ -80,22 +66,11 @@ items = Array[PackedScene]([ExtResource("6_2spgy")])
 [node name="brick9" parent="." instance=ExtResource("10_choun")]
 position = Vector2(85, 88)
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = 320.0
-offset_top = 72.0
-offset_right = 360.0
-offset_bottom = 112.0
-scale = Vector2(2.84, 2.44)
-color = Color(0.364706, 0.580392, 0.980392, 1)
-
 [node name="castle" parent="." instance=ExtResource("10_ya4ey")]
-position = Vector2(280, 208)
+position = Vector2(504, 208)
 
 [node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(72, 201)
-
-[node name="FireFlower" parent="." instance=ExtResource("10_eb6dy")]
-position = Vector2(53, 134)
+position = Vector2(33, 121)
 
 [node name="FireFlower2" parent="." instance=ExtResource("10_eb6dy")]
 position = Vector2(73, 135)
@@ -107,5 +82,27 @@ avoid_ledge = true
 [node name="mushroom2" parent="." instance=ExtResource("6_2spgy")]
 position = Vector2(53, 74)
 
-[node name="flag" parent="." instance=ExtResource("13_a8y0u")]
-position = Vector2(173, 58)
+[node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
+position = Vector2(110, 208)
+x_coords = 1
+y_coords = 1
+x_cam = 1
+y_cam = 1
+teleporterable = false
+
+[node name="CastleEnd" type="Sprite2D" parent="."]
+position = Vector2(5183, 118)
+scale = Vector2(1.62792, 2.94988)
+texture = ExtResource("12_trceg")
+
+[node name="camera_system" parent="." instance=ExtResource("8_85g3d")]
+position = Vector2(20, 86)
+
+[node name="wall" type="StaticBody2D" parent="."]
+position = Vector2(405, 240)
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall"]
+position = Vector2(-849, -15.5)
+shape = SubResource("RectangleShape2D_is7ar")

@@ -87,6 +87,8 @@ func _on_enemy_area_entered(area: Area2D) -> void:
 		queue_free()#unique flip die sprite
 	if area.name == "fireball":
 		queue_free()#turn into cooked state for extra point
+	if area.name == "delete":
+		queue_free()
 
 #LEDGE DETECTION
 func goback():

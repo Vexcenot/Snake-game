@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://lhmipeci2e24"]
+[gd_scene load_steps=9 format=3 uid="uid://lhmipeci2e24"]
 
 [ext_resource type="Script" uid="uid://n5ftbeu3taa2" path="res://script/coin.gd" id="1_6qxui"]
 [ext_resource type="Texture2D" uid="uid://by1lwoolytm2w" path="res://sprite/coins.png" id="1_ervcb"]
@@ -90,6 +90,8 @@ _data = {
 &"collect": SubResource("Animation_rwwey")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_11l1o"]
+
 [node name="coin" type="Node2D"]
 script = ExtResource("1_6qxui")
 blocked = true
@@ -110,6 +112,12 @@ libraries = {
 
 [node name="coin_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_3ogj1")
+
+[node name="edible" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="edible"]
+scale = Vector2(3.07808, 3.07808)
+shape = SubResource("RectangleShape2D_11l1o")
 
 [connection signal="area_entered" from="coin_area" to="." method="_on_coin_area_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

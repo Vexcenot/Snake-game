@@ -89,7 +89,6 @@ size = Vector2(2, 2.44695)
 [node name="mushroom" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("2_e0v0r")
-block = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4.90738)

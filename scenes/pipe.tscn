@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://cpkdjcp5lcxe"]
+
+[ext_resource type="Script" uid="uid://cltc831160c57" path="res://pipe.gd" id="1_78010"]
+[ext_resource type="Texture2D" uid="uid://bvk5jcpk433v2" path="res://sprite/pipe.png" id="1_bepn3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bepn3"]
+size = Vector2(20, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_arayy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_arpqm"]
+size = Vector2(6.8125, 63)
+
+[node name="pipe" type="Node2D"]
+script = ExtResource("1_78010")
+teleporterable = true
+
+[node name="Pipe" type="Sprite2D" parent="."]
+z_index = 4
+position = Vector2(0, -32)
+texture = ExtResource("1_bepn3")
+
+[node name="pipe_enter" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pipe_enter"]
+position = Vector2(0, -61)
+shape = SubResource("RectangleShape2D_bepn3")
+
+[node name="pipe_teleport" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pipe_teleport"]
+position = Vector2(0, -13)
+scale = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_bepn3")
+
+[node name="top_block" type="StaticBody2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top_block"]
+position = Vector2(0, -53)
+shape = SubResource("RectangleShape2D_arayy")
+
+[node name="left wall" type="StaticBody2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left wall"]
+position = Vector2(-14, -31)
+scale = Vector2(0.559999, 1)
+shape = SubResource("RectangleShape2D_arpqm")
+
+[node name="right wall" type="StaticBody2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right wall"]
+position = Vector2(14, -32)
+scale = Vector2(0.560001, 1)
+shape = SubResource("RectangleShape2D_arpqm")
+
+[connection signal="area_entered" from="pipe_enter" to="." method="_on_enter_pipe_area_entered"]
+[connection signal="area_entered" from="pipe_teleport" to="." method="_on_enter_pipe_area_entered"]

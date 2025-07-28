@@ -1,7 +1,8 @@
 extends CharacterBody2D
-
+enum spawn_dir {right,down,left,up}
 @export var tail_segment_scene: PackedScene = preload("res://scenes/tail.tscn")
 @export var fire_ball: PackedScene = preload("res://scenes/fire_ball.tscn")
+@export var START_DIR : spawn_dir
 @onready var up: RayCast2D = $up
 @onready var down: RayCast2D = $down
 @onready var left: RayCast2D = $left
@@ -9,9 +10,7 @@ extends CharacterBody2D
 @onready var sprite: Sprite2D = $Sprite2D
 
 var snake_speed = 0.3 #adjusts speed of snake I like 0.3
-var snake_length = 2 #how long the snake starts
-
-
+var snake_length = 2 #+ Global.bonus_length
 var direction = Vector2.ZERO
 var timer = 100
 var final_time = snake_speed
@@ -49,19 +48,19 @@ var timer_counter = 0
 var limit_move = "direction which snake cannot go"
 var xLimit = "orientation the snake cant move in"
 var fuck = false
-var cum
+
 
 
 func _ready():
+	Global.spawn_facing = START_DIR
 	teleport_sequence()
 
 func _process(delta):
-
+	print(Global.cam_teley)
 	if move_orders.size() > 3:
 		move_orders.pop_back()
 		if move_orders[0] == move_orders[1]:
 			move_orders.pop_front()
-	print(Global.active_balls)
 	#print(crap)
 	timer += delta
 	time_reset()
@@ -154,22 +153,38 @@ func fucker():
 			
 	#gives snake length on start
 func teleport_sequence():
-	limit_move = "left"
-	Global.direction = "right"
-	await get_tree().process_frame
-	position.x -= move_distance*snake_length
-	for i in range(snake_length):
-		spawn_tail_segment()
-		position.x += move_distance
-		positions.push_front(global_position)
-		orientations.push_front(facing)
+	if START_DIR == spawn_dir.right:
+		limit_move = "left"
+		Global.direction = "right"
+		await get_tree().process_frame
+		position.x -= move_distance*snake_length
+		for i in range(snake_length):
+			spawn_tail_segment()
+			position.x += move_distance
+			positions.push_front(global_position)
+			orientations.push_front(facing)
+	elif START_DIR == spawn_dir.down:
+		facing = "down"
+		limit_move = "up"
+		Global.direction = "down"
+		await get_tree().process_frame
+		position.y -= move_distance*snake_length
+		for i in range(snake_length):
+			spawn_tail_segment()
+			position.y += move_distance
+			positions.push_front(global_position)
+			orientations.push_front(facing)
+		move_orders.append("down")
+		pause_move()
+
+			
 
 	move_ready = true
 var invincible = false
 #processes adding length to snake mid-game
 func eat(): #prepares to add tail
+	Global.bonus_length += 1
 	eatAnim = true
-
 	#sprite.frame = 5
 	pending_tail_segment = true
 	eat_positions.push_front(global_position) #adds "full" sprite to tail.
@@ -215,7 +230,6 @@ func time_reset():
 		if eatAnim2 == true:
 			eatAnim2 = false
 			eatAnim = false
-		cum = Global.direction
 			
 			
 
@@ -308,6 +322,9 @@ func adjust_turn_frame(turn_sprite: Sprite2D, prev_facing: String, new_facing: S
 	elif prev_facing == "right" and new_facing == "up":  # Turning up from right
 		turn_sprite.flip_h = true
 		turn_sprite.rotation_degrees = 90
+	elif prev_facing == "down" and new_facing == "down":  # Turning up from right
+		turn_sprite.flip_h = false
+		turn_sprite.rotation_degrees = 90
 
 func update_tail_orientation(segment, orientation):
 	var turn_sprite = segment.get_node("Sprite2D")
@@ -331,6 +348,15 @@ func interact():
 		# Record the position where we're adding a new tail segment
 		eat_positions.push_front(global_position)
 
+#invincibility blink
+#func invinciblity_blink():
+	#var blink_sec2 = 0.08
+	#for i in range(57):
+		#Global.visible = false
+		#await get_tree().create_timer(blink_sec2).timeout
+		#Global.visible = true
+		#await get_tree().create_timer(blink_sec2).timeout
+	
 #pain happens here
 #runs game over function and (should) clear out all datas
 func hurt():
@@ -349,6 +375,9 @@ func hurt():
 
 
 func lose_power():
+	invincible = true
+	#invinciblity_blink()
+	Global.snake_status = "big"
 	var blink_sec = 0.1
 	var current_power = Global.snake_status
 	if ignore_turn:
@@ -366,7 +395,8 @@ func lose_power():
 	timer = 0
 	get_tree().paused = false
 	powered = false
-	
+	await get_tree().create_timer(3.34).timeout
+	invincible = false
 #snake pass through blocks when smalln't
 func collision_updater():
 	if Global.snake_status != "small":
@@ -417,7 +447,7 @@ func set_firepower():
 		get_tree().paused = true
 		pause_move()
 		Global.snake_status = "fire"
-		await get_tree().create_timer(1.2).timeout
+		await get_tree().create_timer(1).timeout
 		Global.snake_status = "fire2"
 		resume_move()
 		timer = 0
@@ -549,11 +579,28 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		var window = 128
 		var pos = position.x
 		$Camera.limit_left = pos-window
-	if area.name == "oob" and Global.winning == false:
+	if area.name == "oob" and Global.winning == false and invincible == false:
 		die()
 	if Global.snake_status != "small":
 		if area.name == "brick_area" or area.name == "enemy":
 			eat()
+	if area.name == "coin_area":
+		eat()
+	if area.name == "pipe_enter":
+		move_orders.clear()
+		player_input = false
+		invincible = true
+		$PowerDown.play()
+		await get_tree().create_timer(1.22).timeout
+		get_tree().change_scene_to_file("res://scenes/main.tscn")
+		#position.y = 9999
+		#run this after sound effect
+		#position.x = Global.teleport_x
+		#position.y = Global.teleport_y
+		print("fuck")
+	if area.name == "pipe_teleport" and player_input == false:
+		position.y = 9999
+		
 
 var crap
 func enter_entrance():
@@ -581,6 +628,8 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 		#$Sprite2D.visible = false
 	if area.name == "endpost":
 		move_exit = false
+	if area.name == "entrance" and Global.winning == true:
+		position.y = 9999
 
 #block constant hitting mechanic
 func block_pow():
@@ -665,12 +714,11 @@ func move():
 		if move_orders[0] == next_move or move_orders[0] == limit_move or move_orders[0] == "up" and under_block > 0:
 			move_orders.pop_front()
 		else:
-
 			next_move = move_orders.pop_front()
 		#checks turns
 		#make it not make turn if next move will not run into a wall.
 		if next_move == "up" and up.is_colliding() and up.get_collider() is StaticBody2D:
-				ignoring_turning()
+			ignoring_turning()
 			#$AnimationPlayer.play("die1")
 		elif next_move == "down" and down.is_colliding() and down.get_collider() is StaticBody2D:
 			ignoring_turning()
