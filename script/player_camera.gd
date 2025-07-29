@@ -1,16 +1,22 @@
 extends Node2D
 var update = false
 
-#func _process(delta: float) -> void:
-	#if update and Global.shit == false:
-		#position.x += 500*delta
+func _process(delta: float) -> void:
+	teleport()
+	camera_updater()
 		
 func _physics_process(delta: float) -> void:
 	if update == true and Global.shit == false:
 		position.x += 360*delta
 
-
-
+func teleport():
+	if Global.teleport_all:
+		Global.teleport_all = false
+		position.x = Global.cam_telex
+		position.y = Global.cam_teley
+		
+func camera_updater():
+	Global.camera_limit = position.x
 
 func _on_move_cam_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":

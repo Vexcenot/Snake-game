@@ -13,3 +13,5 @@ var cam_telex = 0
 var cam_teley = 0
 var bonus_length = 0
 var spawn_facing
+var teleport_all = false
+var camera_limit = 0

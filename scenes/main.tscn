@@ -25,7 +25,7 @@ position = Vector2(1688, 240)
 texture = ExtResource("1_h5eht")
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(56, 200)
+position = Vector2(56, 104)
 scale = Vector2(2, 2.07506)
 fire_ball = SubResource("PackedScene_eb6dy")
 metadata/_edit_group_ = true
@@ -84,19 +84,15 @@ position = Vector2(53, 74)
 
 [node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
 position = Vector2(110, 208)
-x_coords = 1
-y_coords = 1
-x_cam = 1
-y_cam = 1
-teleporterable = false
+x_snek = 3488
+x_cam = 3456
 
 [node name="CastleEnd" type="Sprite2D" parent="."]
-position = Vector2(5183, 118)
-scale = Vector2(1.62792, 2.94988)
+position = Vector2(3584, 120)
+scale = Vector2(1.63998, 3)
 texture = ExtResource("12_trceg")
 
 [node name="camera_system" parent="." instance=ExtResource("8_85g3d")]
-position = Vector2(20, 86)
 
 [node name="wall" type="StaticBody2D" parent="."]
 position = Vector2(405, 240)

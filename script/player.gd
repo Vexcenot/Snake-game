@@ -56,7 +56,7 @@ func _ready():
 	teleport_sequence()
 
 func _process(delta):
-	print(Global.cam_teley)
+	print(move_orders)
 	if move_orders.size() > 3:
 		move_orders.pop_back()
 		if move_orders[0] == move_orders[1]:
@@ -77,6 +77,7 @@ func _process(delta):
 	win2()
 	dead_sprite()
 	fucker()
+	teleport()
 var shit 
 #snake movement inputs 
 
@@ -210,6 +211,7 @@ func spawn_tail_segment():
 var eatAnim2 = false
 func time_reset():
 	if timer >= final_time:
+		$Camera.limit_left = Global.camera_limit + 2
 		# Make all tail segments visible
 		for segment in tail_segments:
 			segment.modulate.a = 1
@@ -382,7 +384,7 @@ func lose_power():
 	var current_power = Global.snake_status
 	if ignore_turn:
 		sprite.frame = 9
-	$PowerDown.play()
+	$Powerdn.play()
 	get_tree().paused = true
 	pause_move()
 	for i in range(5):
@@ -443,7 +445,7 @@ func set_firepower():
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
 	if Global.snake_status != "fire2":
-		$SmbPowerup.play()
+		$Powerup.play()
 		get_tree().paused = true
 		pause_move()
 		Global.snake_status = "fire"
@@ -459,7 +461,7 @@ func set_power(power: String):
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
 	if powered == false:
-		$SmbPowerup.play()
+		$Powerup.play()
 		get_tree().paused = true
 		pause_move()
 		for i in range(4):
@@ -575,10 +577,10 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		under_block += 1 #make this count up and down insteadd
 	if area.name == "block_area":
 		under_block += 1
-	if area.name == "move_cam":
-		var window = 128
-		var pos = position.x
-		$Camera.limit_left = pos-window
+	#if area.name == "move_cam":
+		#var window = 128
+		#var pos = position.x
+		#$Camera.limit_left = Global.camera_limit
 	if area.name == "oob" and Global.winning == false and invincible == false:
 		die()
 	if Global.snake_status != "small":
@@ -587,20 +589,29 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "coin_area":
 		eat()
 	if area.name == "pipe_enter":
+		#$Powerdn.play()
+		position.y = 9999
 		move_orders.clear()
 		player_input = false
 		invincible = true
-		$PowerDown.play()
+		
 		await get_tree().create_timer(1.22).timeout
-		get_tree().change_scene_to_file("res://scenes/main.tscn")
+		
+		#get_tree().change_scene_to_file("res://scenes/main.tscn")
 		#position.y = 9999
 		#run this after sound effect
 		#position.x = Global.teleport_x
 		#position.y = Global.teleport_y
 		print("fuck")
-	if area.name == "pipe_teleport" and player_input == false:
-		position.y = 9999
+	#if area.name == "pipe_teleport" and player_input == false:
+		#position.y = 9999
 		
+func teleport():
+	if Global.teleport_all:
+		position.x = Global.teleport_x
+		position.y = Global.teleport_y
+		player_input = true
+		invincible = false
 
 var crap
 func enter_entrance():
@@ -624,11 +635,9 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 		under_block -= 1
 	if area.name == "block_area":
 		under_block -= 1
-	#if area.name == "entrance":
-		#$Sprite2D.visible = false
 	if area.name == "endpost":
 		move_exit = false
-	if area.name == "entrance" and Global.winning == true:
+	if area.name == "entrance" and Global.winning == true or area.name == "pipe_enter":
 		position.y = 9999
 
 #block constant hitting mechanic

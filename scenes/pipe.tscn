@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpkdjcp5lcxe"]
+[gd_scene load_steps=7 format=3 uid="uid://cpkdjcp5lcxe"]
 
 [ext_resource type="Script" uid="uid://cltc831160c57" path="res://pipe.gd" id="1_78010"]
 [ext_resource type="Texture2D" uid="uid://bvk5jcpk433v2" path="res://sprite/pipe.png" id="1_bepn3"]
+[ext_resource type="AudioStream" uid="uid://e44f00ph5aem" path="res://sounds/power down.wav" id="3_8p0di"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bepn3"]
 size = Vector2(20, 4)
@@ -24,13 +25,6 @@ texture = ExtResource("1_bepn3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pipe_enter"]
 position = Vector2(0, -61)
-shape = SubResource("RectangleShape2D_bepn3")
-
-[node name="pipe_teleport" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="pipe_teleport"]
-position = Vector2(0, -13)
-scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_bepn3")
 
 [node name="top_block" type="StaticBody2D" parent="."]
@@ -59,5 +53,9 @@ position = Vector2(14, -32)
 scale = Vector2(0.560001, 1)
 shape = SubResource("RectangleShape2D_arpqm")
 
+[node name="PowerDown" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-6, 3.5)
+stream = ExtResource("3_8p0di")
+volume_db = 24.0
+
 [connection signal="area_entered" from="pipe_enter" to="." method="_on_enter_pipe_area_entered"]
-[connection signal="area_entered" from="pipe_teleport" to="." method="_on_enter_pipe_area_entered"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://dvwvb1vytus7m"]
+[gd_scene load_steps=13 format=3 uid="uid://dvwvb1vytus7m"]
 
 [ext_resource type="Script" uid="uid://cawhmentg76h1" path="res://script/player_camera.gd" id="1_fyf37"]
 [ext_resource type="Texture2D" uid="uid://46caf8m3jbwl" path="res://sprite/question1.png" id="2_jmf3e"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="2_pu1xt"]
 [ext_resource type="Texture2D" uid="uid://dks35iv4uw2ex" path="res://sprite/castle.png" id="4_me7dy"]
 [ext_resource type="Texture2D" uid="uid://cjcxgltippxrq" path="res://sprite/enemy flag.png" id="5_jpr4p"]
+[ext_resource type="Texture2D" uid="uid://dk80yoyld1dbi" path="res://sprite/ball.png" id="6_4ljkw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xpg4h"]
 size = Vector2(13143, 24898)
@@ -28,7 +29,7 @@ script = ExtResource("1_fyf37")
 
 [node name="bg" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(1688.1, 199)
+position = Vector2(1688, 241)
 texture = ExtResource("2_pu1xt")
 
 [node name="Castle" type="Sprite2D" parent="."]
@@ -40,22 +41,24 @@ texture = ExtResource("4_me7dy")
 position = Vector2(-6, 0)
 
 [node name="left" type="CollisionShape2D" parent="oob"]
-position = Vector2(-6580, 32)
+position = Vector2(-6574, -1)
 shape = SubResource("RectangleShape2D_xpg4h")
 debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
 
 [node name="left ruler" type="Sprite2D" parent="oob/left"]
-position = Vector2(6546, 40)
+visible = false
+position = Vector2(6550, 42)
 scale = Vector2(2.53083, 221.939)
 texture = ExtResource("5_jpr4p")
 
 [node name="top" type="CollisionShape2D" parent="oob"]
-position = Vector2(87, -206)
+position = Vector2(6, -121)
 scale = Vector2(43.5333, 1)
 shape = SubResource("RectangleShape2D_pu1xt")
 debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
 
 [node name="top ruler" type="Sprite2D" parent="oob/top"]
+visible = false
 position = Vector2(-1.17152, 100)
 rotation = 1.5708
 scale = Vector2(2.53083, 5.09814)
@@ -63,7 +66,7 @@ skew = -9.66787e-05
 texture = ExtResource("5_jpr4p")
 
 [node name="bot" type="CollisionShape2D" parent="oob"]
-position = Vector2(78, 308)
+position = Vector2(74, 362)
 scale = Vector2(42.16, 1)
 shape = SubResource("RectangleShape2D_pu1xt")
 debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
@@ -77,6 +80,7 @@ debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
 position = Vector2(0, -1)
 
 [node name="Sprite2D" type="Sprite2D" parent="move_cam"]
+visible = false
 position = Vector2(147, 94)
 rotation = 3.14159
 scale = Vector2(2.37043, -22.5388)
@@ -98,12 +102,11 @@ shape = SubResource("RectangleShape2D_me7dy")
 debug_color = Color(0, 0.64849, 0.179057, 0.42)
 
 [node name="castle_detect" type="Area2D" parent="."]
-visible = false
 position = Vector2(0, -1)
 disable_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="castle_detect"]
-position = Vector2(-36.5, 117)
+position = Vector2(-40, 121)
 scale = Vector2(1, 12.08)
 shape = SubResource("RectangleShape2D_jpr4p")
 
@@ -114,6 +117,17 @@ position = Vector2(37, 5)
 position = Vector2(-112, 0)
 scale = Vector2(5.56, 26.36)
 shape = SubResource("RectangleShape2D_4ljkw")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(129, 120)
+enabled = false
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
+
+[node name="Ball" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(4, 4)
+texture = ExtResource("6_4ljkw")
 
 [connection signal="area_entered" from="move_cam" to="." method="_on_move_cam_area_entered"]
 [connection signal="area_exited" from="move_cam" to="." method="_on_move_cam_area_exited"]

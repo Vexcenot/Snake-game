@@ -269,26 +269,18 @@ visible = false
 position = Vector2(461, 83)
 texture = ExtResource("4_pw8ip")
 
-[node name="SmbPowerup" type="AudioStreamPlayer" parent="."]
+[node name="Powerup" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 editor_description = "suppose to play da power up sound
 "
 stream = ExtResource("2_ali73")
 
-[node name="PowerDown" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(-6, 3.5)
+[node name="Powerdn" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+editor_description = "suppose to play da power up sound
+"
 stream = ExtResource("5_d0mn4")
-volume_db = 24.0
-
-[node name="Camera" type="Camera2D" parent="."]
-limit_left = 0
-limit_top = 0
-limit_right = 9999
-limit_bottom = 0
-drag_horizontal_offset = -1.0
-drag_left_margin = 1.0
-drag_right_margin = 0.0
-editor_draw_drag_margin = true
+volume_db = 15.0
 
 [node name="AllTheSmallBlocksTogether" type="Sprite2D" parent="."]
 visible = false
@@ -310,6 +302,19 @@ position = Vector2(-2.98023e-08, -6)
 rotation = 3.14159
 scale = Vector2(0.295915, 0.295915)
 shape = SubResource("RectangleShape2D_tctuf")
+
+[node name="Camera" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 9999
+limit_bottom = 0
+position_smoothing_speed = 100.0
+drag_horizontal_offset = -1.0
+drag_left_margin = 1.0
+drag_right_margin = 0.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+metadata/_edit_group_ = true
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Head Area" to="." method="_on_head_area_area_entered"]
