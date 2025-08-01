@@ -1,6 +1,13 @@
 extends Node2D
 var move_toggle = false
 
+func _ready() -> void:
+	if Global.teleport_all:
+		#Global.teleport_all = false
+		position.x = Global.cam_telex
+		position.y = Global.cam_teley
+		#Global.teleport_all2 = true
+
 func _process(delta: float) -> void:
 	move_camera(delta)
 

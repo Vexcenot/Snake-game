@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://uc8ypljbqtbo"]
+
+[node name="Camera" type="Node2D"]
+
+[node name="Camera" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
+limit_right = 9999
+limit_bottom = 0
+position_smoothing_speed = 100.0
+drag_horizontal_offset = -1.0
+drag_left_margin = 1.0
+drag_right_margin = 0.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+metadata/_edit_group_ = true

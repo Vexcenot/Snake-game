@@ -31,7 +31,6 @@ shape = SubResource("RectangleShape2D_bly62")
 visible = false
 z_index = 100
 position = Vector2(80, -20)
-scale = Vector2(1, 1)
 texture = ExtResource("3_njhjj")
 vframes = 2
 frame = 1

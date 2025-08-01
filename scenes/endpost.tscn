@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="4_rncqr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8p4uc"]
-size = Vector2(5.87268, 152.343)
+size = Vector2(3.91512, 152.343)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yswmm"]
 size = Vector2(6.26217, 11.5944)
@@ -70,7 +70,7 @@ hframes = 2
 [node name="winarea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="winarea"]
-position = Vector2(-9, -86.1708)
+position = Vector2(-10, -86.1708)
 scale = Vector2(1.02168, 0.995506)
 shape = SubResource("RectangleShape2D_8p4uc")
 

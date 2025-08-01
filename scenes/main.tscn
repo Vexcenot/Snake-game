@@ -11,12 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://pba4v6gle2ea" path="res://scenes/castle.tscn" id="10_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="11_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://cpkdjcp5lcxe" path="res://scenes/pipe.tscn" id="12_eb6dy"]
-[ext_resource type="Texture2D" uid="uid://chy65qog88bac" path="res://sprite/castle end.png" id="12_trceg"]
 
 [sub_resource type="PackedScene" id="PackedScene_eb6dy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_is7ar"]
 size = Vector2(1674, 31)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ya4ey"]
+size = Vector2(23.2083, 26)
 
 [node name="Main" type="Node"]
 
@@ -25,7 +27,7 @@ position = Vector2(1688, 240)
 texture = ExtResource("1_h5eht")
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(56, 104)
+position = Vector2(40, 200)
 scale = Vector2(2, 2.07506)
 fire_ball = SubResource("PackedScene_eb6dy")
 metadata/_edit_group_ = true
@@ -39,7 +41,7 @@ stopped = true
 
 [node name="question block7" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(86, 39)
-items = Array[PackedScene]([ExtResource("8_fs55x"), ExtResource("8_fs55x"), ExtResource("8_fs55x")])
+items = Array[PackedScene]([ExtResource("8_fs55x"), ExtResource("8_fs55x")])
 
 [node name="coin" parent="." instance=ExtResource("8_fs55x")]
 position = Vector2(69, 24)
@@ -69,9 +71,6 @@ position = Vector2(85, 88)
 [node name="castle" parent="." instance=ExtResource("10_ya4ey")]
 position = Vector2(504, 208)
 
-[node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(33, 121)
-
 [node name="FireFlower2" parent="." instance=ExtResource("10_eb6dy")]
 position = Vector2(73, 135)
 
@@ -79,18 +78,14 @@ position = Vector2(73, 135)
 position = Vector2(84, 74)
 avoid_ledge = true
 
-[node name="mushroom2" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(53, 74)
-
 [node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
-position = Vector2(110, 208)
-x_snek = 3488
+position = Vector2(112, 208)
+x_snek = 3480
 x_cam = 3456
-
-[node name="CastleEnd" type="Sprite2D" parent="."]
-position = Vector2(3584, 120)
-scale = Vector2(1.63998, 3)
-texture = ExtResource("12_trceg")
+teleporterable = true
+world = "res://scenes/underground.tscn"
+ID = "000"
+TargetID = "aaa"
 
 [node name="camera_system" parent="." instance=ExtResource("8_85g3d")]
 
@@ -102,3 +97,17 @@ collision_mask = 7
 [node name="CollisionShape2D" type="CollisionShape2D" parent="wall"]
 position = Vector2(-849, -15.5)
 shape = SubResource("RectangleShape2D_is7ar")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(2616, 176)
+
+[node name="pipe2" parent="." instance=ExtResource("12_eb6dy")]
+position = Vector2(928, 208)
+ID = "ccc"
+
+[node name="GOUP" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GOUP"]
+position = Vector2(2624, 197)
+scale = Vector2(0.68941, 1)
+shape = SubResource("RectangleShape2D_ya4ey")

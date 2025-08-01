@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://du6cg6ytddp8g"]
+
+[ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="1_5558j"]
+[ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="2_osycu"]
+[ext_resource type="PackedScene" uid="uid://cpkdjcp5lcxe" path="res://scenes/pipe.tscn" id="3_iubgi"]
+
+[node name="underground" type="Node2D"]
+
+[node name="Snek" parent="." instance=ExtResource("1_5558j")]
+position = Vector2(40, 24)
+START_DIR = 1
+camera = false
+
+[node name="20592Png" type="Sprite2D" parent="."]
+position = Vector2(920, 0)
+texture = ExtResource("2_osycu")
+
+[node name="pipe" parent="." instance=ExtResource("3_iubgi")]
+position = Vector2(272, 192)
+rotation = -1.5708
+x_snek = 2616
+y_snek = 200
+x_cam = 2560
+teleporterable = true
+gotoPipe = true
+world = "res://scenes/main.tscn"
+ID = "aaa"
+TargetID = "bbb"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(128, 120)

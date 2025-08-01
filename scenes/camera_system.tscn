@@ -41,7 +41,7 @@ texture = ExtResource("4_me7dy")
 position = Vector2(-6, 0)
 
 [node name="left" type="CollisionShape2D" parent="oob"]
-position = Vector2(-6574, -1)
+position = Vector2(-6562, 0)
 shape = SubResource("RectangleShape2D_xpg4h")
 debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
 
@@ -52,7 +52,7 @@ scale = Vector2(2.53083, 221.939)
 texture = ExtResource("5_jpr4p")
 
 [node name="top" type="CollisionShape2D" parent="oob"]
-position = Vector2(6, -121)
+position = Vector2(14, -112)
 scale = Vector2(43.5333, 1)
 shape = SubResource("RectangleShape2D_pu1xt")
 debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
@@ -72,9 +72,15 @@ shape = SubResource("RectangleShape2D_pu1xt")
 debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
 
 [node name="right" type="CollisionShape2D" parent="oob"]
-position = Vector2(6837, -75)
+position = Vector2(6838, -72)
 shape = SubResource("RectangleShape2D_xpg4h")
 debug_color = Color(0.286264, 0.0297567, 0.0291884, 0.42)
+
+[node name="EnemyFlag" type="Sprite2D" parent="oob/right"]
+visible = false
+position = Vector2(-6760, 224)
+scale = Vector2(-1.44, 21.84)
+texture = ExtResource("5_jpr4p")
 
 [node name="move_cam" type="Area2D" parent="."]
 position = Vector2(0, -1)
@@ -117,12 +123,6 @@ position = Vector2(37, 5)
 position = Vector2(-112, 0)
 scale = Vector2(5.56, 26.36)
 shape = SubResource("RectangleShape2D_4ljkw")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(129, 120)
-enabled = false
-position_smoothing_enabled = true
-position_smoothing_speed = 1.0
 
 [node name="Ball" type="Sprite2D" parent="."]
 visible = false

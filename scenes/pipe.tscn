@@ -14,7 +14,6 @@ size = Vector2(6.8125, 63)
 
 [node name="pipe" type="Node2D"]
 script = ExtResource("1_78010")
-teleporterable = true
 
 [node name="Pipe" type="Sprite2D" parent="."]
 z_index = 4
@@ -40,8 +39,8 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left wall"]
-position = Vector2(-14, -31)
-scale = Vector2(0.559999, 1)
+position = Vector2(-13, -31)
+scale = Vector2(0.88, 1)
 shape = SubResource("RectangleShape2D_arpqm")
 
 [node name="right wall" type="StaticBody2D" parent="."]
@@ -49,8 +48,8 @@ collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right wall"]
-position = Vector2(14, -32)
-scale = Vector2(0.560001, 1)
+position = Vector2(13, -32)
+scale = Vector2(0.880001, 1)
 shape = SubResource("RectangleShape2D_arpqm")
 
 [node name="PowerDown" type="AudioStreamPlayer2D" parent="."]

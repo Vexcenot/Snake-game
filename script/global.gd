@@ -3,7 +3,7 @@ extends Node
 var snake_status = "small"
 var direction = "left"
 var hitting = false
-var shit = false
+var entranceStopper = false
 var winning = false
 var active_balls = 0
 var visible = true
@@ -14,4 +14,7 @@ var cam_teley = 0
 var bonus_length = 0
 var spawn_facing
 var teleport_all = false
+var teleport_all2 = false
 var camera_limit = 0
+var targetting_pipe : String
+var starting_direction = "right"

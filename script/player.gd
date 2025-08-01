@@ -3,6 +3,7 @@ enum spawn_dir {right,down,left,up}
 @export var tail_segment_scene: PackedScene = preload("res://scenes/tail.tscn")
 @export var fire_ball: PackedScene = preload("res://scenes/fire_ball.tscn")
 @export var START_DIR : spawn_dir
+@export var camera = true
 @onready var up: RayCast2D = $up
 @onready var down: RayCast2D = $down
 @onready var left: RayCast2D = $left
@@ -10,7 +11,7 @@ enum spawn_dir {right,down,left,up}
 @onready var sprite: Sprite2D = $Sprite2D
 
 var snake_speed = 0.3 #adjusts speed of snake I like 0.3
-var snake_length = 2 #+ Global.bonus_length
+var snake_length = 2 + Global.bonus_length
 var direction = Vector2.ZERO
 var timer = 100
 var final_time = snake_speed
@@ -48,15 +49,28 @@ var timer_counter = 0
 var limit_move = "direction which snake cannot go"
 var xLimit = "orientation the snake cant move in"
 var fuck = false
-
-
+var uninvincible = false
+var invincible = false
+var firstMove = false
+var stopInsta = false
 
 func _ready():
-	Global.spawn_facing = START_DIR
+	#if Global.teleportall2:
+		#Global.teleportall2 = false
+		#position.x = Global.teleport_x
+		#position.y = Global.teleport_y
+		
+	#Global.spawn_facing = START_DIR
 	teleport_sequence()
+	update_camera()
 
 func _process(delta):
-	print(move_orders)
+	if stopInsta == false:
+		$Camera.limit_left = Global.camera_limit + 3
+		print("cum")
+	else:
+		print("fuck")
+	untilMove()
 	if move_orders.size() > 3:
 		move_orders.pop_back()
 		if move_orders[0] == move_orders[1]:
@@ -79,11 +93,17 @@ func _process(delta):
 	fucker()
 	teleport()
 var shit 
+var cramp = false
 #snake movement inputs 
+func untilMove():
+	if firstMove == false:
 
+		final_time = 0
+		firstMove = true
 
 
 func _input(event):
+	stopInsta = true
 	#bumps ? block directlyt above
 	#if under_block == true and event.is_action_pressed("k_up"):
 		#hit_block()
@@ -181,7 +201,7 @@ func teleport_sequence():
 			
 
 	move_ready = true
-var invincible = false
+
 #processes adding length to snake mid-game
 func eat(): #prepares to add tail
 	Global.bonus_length += 1
@@ -211,7 +231,8 @@ func spawn_tail_segment():
 var eatAnim2 = false
 func time_reset():
 	if timer >= final_time:
-		$Camera.limit_left = Global.camera_limit + 2
+		cramp = false
+		$Camera.limit_left = Global.camera_limit + 3
 		# Make all tail segments visible
 		for segment in tail_segments:
 			segment.modulate.a = 1
@@ -232,6 +253,9 @@ func time_reset():
 		if eatAnim2 == true:
 			eatAnim2 = false
 			eatAnim = false
+		if uninvincible:
+			uninvincible = false
+			invincible = false
 			
 			
 
@@ -479,6 +503,7 @@ func dead_sprite():
 		sprite.frame = 6
 
 func die():
+	$Die.play()
 	dead = true
 	move_ready = false
 	get_tree().paused = true
@@ -544,6 +569,7 @@ func ignoring_turning():
 func sprinting():
 	if move_ready == true:
 		if Input.is_action_pressed("k_shift"):
+			stopInsta = true
 			#final_time = snake_speed*0.3
 			final_time = 0.07
 		else:
@@ -590,11 +616,10 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		eat()
 	if area.name == "pipe_enter":
 		#$Powerdn.play()
-		position.y = 9999
+		
 		move_orders.clear()
 		player_input = false
 		invincible = true
-		
 		await get_tree().create_timer(1.22).timeout
 		
 		#get_tree().change_scene_to_file("res://scenes/main.tscn")
@@ -605,17 +630,19 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		print("fuck")
 	#if area.name == "pipe_teleport" and player_input == false:
 		#position.y = 9999
+	if area.name == "GOUP":
+		move_orders.append("up")
 		
 func teleport():
 	if Global.teleport_all:
 		position.x = Global.teleport_x
 		position.y = Global.teleport_y
-		player_input = true
-		invincible = false
+		#player_input = true
+		#invincible = false
 
 var crap
 func enter_entrance():
-	if Global.shit == false:
+	if Global.entranceStopper == false:
 		crap = position.x + 135
 	else:
 		$Camera.limit_right = crap 
@@ -682,7 +709,7 @@ func resume_move():
 #win conditions when touching flag pole. position pole in way that snake head will always be inside it & snake head doesnt by pass it.
 func win():
 	move_orders.clear()
-	invincible = true
+	#invincible = true
 	Global.winning = true
 	player_input = false
 	xLimit = "none"
@@ -714,9 +741,8 @@ func win2():
 #if moveorder left then apply camera limit to player currrent possition
 
 func update_camera():
-	var window_width = get_viewport().size.x
-	if move_orders.size() > 0 and move_orders[0] == "right":
-		$Camera.limit_left = window_width
+	if camera == false:
+		$Camera.enabled = false
 
 func move():
 	if move_orders.size() > 0: #make it also check if snake is paused and that next move wouldnt run into itself.
