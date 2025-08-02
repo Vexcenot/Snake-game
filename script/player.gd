@@ -68,9 +68,6 @@ func _ready():
 func _process(delta):
 	if stopInsta == false:
 		$Camera.limit_left = Global.camera_limit + 3
-		print("cum")
-	else:
-		print("fuck")
 	untilMove()
 	if move_orders.size() > 3:
 		move_orders.pop_back()

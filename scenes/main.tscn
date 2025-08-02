@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://pba4v6gle2ea" path="res://scenes/castle.tscn" id="10_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="11_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://cpkdjcp5lcxe" path="res://scenes/pipe.tscn" id="12_eb6dy"]
-[ext_resource type="PackedScene" uid="uid://bbctigtnsajvn" path="res://scenes/koopa.tscn" id="12_trceg"]
+[ext_resource type="PackedScene" uid="uid://cwtcwx8ugmtq8" path="res://scenes/koopa.tscn" id="12_trceg"]
 
 [sub_resource type="PackedScene" id="PackedScene_eb6dy"]
 
@@ -64,7 +64,7 @@ position = Vector2(88, 88)
 
 [node name="question block10" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(72, 88)
-items = Array[PackedScene]([ExtResource("11_ya4ey"), ExtResource("12_trceg"), ExtResource("11_ya4ey")])
+items = Array[PackedScene]([ExtResource("8_fs55x"), ExtResource("8_fs55x"), ExtResource("8_fs55x")])
 
 [node name="brick9" parent="." instance=ExtResource("10_choun")]
 position = Vector2(120, 88)
@@ -73,17 +73,17 @@ position = Vector2(120, 88)
 position = Vector2(504, 208)
 
 [node name="FireFlower2" parent="." instance=ExtResource("10_eb6dy")]
-position = Vector2(176, 200)
+position = Vector2(176, 208)
 
 [node name="FireFlower3" parent="." instance=ExtResource("10_eb6dy")]
 position = Vector2(72, 136)
 
 [node name="Goomba" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(104, 72)
+position = Vector2(112, 80)
 avoid_ledge = true
 
 [node name="Goomba4" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(88, 72)
+position = Vector2(88, 80)
 avoid_ledge = true
 
 [node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
@@ -120,8 +120,9 @@ position = Vector2(2624, 197)
 scale = Vector2(0.68941, 1)
 shape = SubResource("RectangleShape2D_ya4ey")
 
-[node name="Goomba2" parent="." instance=ExtResource("12_trceg")]
-position = Vector2(88, 200)
-
 [node name="Goomba3" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(144, 200)
+position = Vector2(144, 208)
+avoid_ledge = true
+
+[node name="Goomba2" parent="." instance=ExtResource("12_trceg")]
+position = Vector2(56, 184)

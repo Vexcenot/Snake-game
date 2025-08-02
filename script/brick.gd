@@ -32,6 +32,10 @@ func _input(event):
 func spawn_item():
 	if Global.snake_status == "small" and Global.direction == "up" or Global.direction == "left" or Global.direction == "right":
 		$AnimationPlayer.play("bump")
+		$kill/CollisionShape2D.disabled = false
+		await get_tree().create_timer(0.2).timeout
+		$kill/CollisionShape2D.disabled = true
+		
 func keepSpawning():
 	if snake_under == true:
 		spawn_item()

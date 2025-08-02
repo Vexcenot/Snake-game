@@ -51,10 +51,12 @@ _data = {
 script = ExtResource("1_2e132")
 
 [node name="FireFlower" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
 texture = ExtResource("2_tmda7")
 hframes = 4
 
 [node name="flower" type="Area2D" parent="."]
+position = Vector2(0, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="flower"]
 position = Vector2(0, -3)
@@ -62,6 +64,7 @@ scale = Vector2(0.47219, 0.227244)
 shape = SubResource("RectangleShape2D_hejio")
 
 [node name="edible" type="Area2D" parent="."]
+position = Vector2(0, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="edible"]
 scale = Vector2(3.07808, 3.07808)

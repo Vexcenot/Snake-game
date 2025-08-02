@@ -60,7 +60,7 @@ func spawn_item():
 			$bump_sound.play()
 			var spawned_item = items[0].instantiate()
 			add_child(spawned_item)
-			spawned_item.position.y -= 8
+			spawned_item.position.y
 			create_tween().tween_property(spawned_item, "position", Vector2(spawned_item.position.x, spawned_item.position.y - 8), 1.05)
 			items.pop_front()
 	$kill/CollisionShape2D.disabled = false

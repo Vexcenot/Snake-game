@@ -8,8 +8,18 @@ var speed = -speeder
 var activate = false
 var leftfloor = 0
 var rightfloor = 0
+var blockKillable = false
+var timer = 0
 
-
+func _ready() -> void:
+	await get_tree().create_timer(0.3).timeout
+	blockKillable = true
+	
+func spriteOrientation():
+	if speed == speeder:
+		$Sprite.flip_h = true
+	elif speed == -speeder:
+		$Sprite.flip_h = false
 #movement baby!!!!
 func _physics_process(delta: float) -> void:
 	if block == false and activate == true:
@@ -19,7 +29,7 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		ledge_checker()
 		goback()
-
+		spriteOrientation()
 #func _ready():
 	#block_spawn()
 
@@ -53,7 +63,14 @@ func _on_left_side_body_entered(body: Node2D) -> void:
 
 func _on_right_side_body_entered(body: Node2D) -> void:
 	speed = -speeder
+	
+func _on_left_side_area_entered(area: Area2D) -> void:
+	if area.name == "enemy":
+		speed = speeder
 
+func _on_right_side_area_entered(area: Area2D) -> void:
+	if area.name == "enemy":
+		speed = -speeder
 
 
 func set_speed():
@@ -83,7 +100,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 func _on_enemy_area_entered(area: Area2D) -> void:
 	if area.name == "activate_entity":
 		activate = true
-	if area.name == "kill":
+	if area.name == "kill" and blockKillable:
 		queue_free()#unique flip die sprite
 	if area.name == "fireball":
 		queue_free()#turn into cooked state for extra point

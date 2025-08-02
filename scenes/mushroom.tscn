@@ -36,7 +36,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_kd8tc"]
@@ -91,11 +91,12 @@ collision_layer = 2
 script = ExtResource("2_e0v0r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4.90738)
+position = Vector2(0, -3.09262)
 scale = Vector2(0.820104, 0.781477)
 shape = SubResource("RectangleShape2D_v7c8f")
 
 [node name="Mushrooms" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
 texture = ExtResource("2_8mpd3")
 hframes = 2
 
@@ -112,10 +113,11 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Mushrooms/AnimationPlayer"]
+position = Vector2(0, -8)
 stream = ExtResource("3_yysf2")
 
 [node name="left bottom" type="Area2D" parent="."]
-position = Vector2(3.55271e-15, 0)
+position = Vector2(3.55271e-15, -8)
 scale = Vector2(0.820104, 0.781477)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left bottom"]
@@ -125,7 +127,7 @@ scale = Vector2(0.121811, -1)
 shape = SubResource("RectangleShape2D_cpp18")
 
 [node name="right bottom" type="Area2D" parent="."]
-position = Vector2(-5.96046e-08, 0)
+position = Vector2(-5.96046e-08, -8)
 scale = Vector2(0.820104, 0.781477)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="right bottom"]
@@ -134,12 +136,14 @@ shape = SubResource("RectangleShape2D_kg8q6")
 
 [node name="Node2D" type="Node2D" parent="."]
 process_mode = 3
+position = Vector2(0, -8)
 script = ExtResource("1_4125a")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node2D"]
 stream = ExtResource("3_xbh4k")
 
 [node name="left side" type="Area2D" parent="."]
+position = Vector2(0, -8)
 scale = Vector2(1, 0.331275)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left side"]
@@ -148,6 +152,7 @@ scale = Vector2(1, 2.69044)
 shape = SubResource("RectangleShape2D_sjlml")
 
 [node name="right side" type="Area2D" parent="."]
+position = Vector2(0, -8)
 scale = Vector2(0.95107, 0.380408)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right side"]
@@ -156,6 +161,7 @@ scale = Vector2(1, 2.36695)
 shape = SubResource("RectangleShape2D_exsck")
 
 [node name="edible" type="Area2D" parent="."]
+position = Vector2(0, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="edible"]
 scale = Vector2(3.07808, 3.07808)
