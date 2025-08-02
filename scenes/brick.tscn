@@ -52,7 +52,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c34n8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ci8dj"]
-size = Vector2(20, 8)
+size = Vector2(57.1427, 6)
 
 [node name="brick" type="Node2D"]
 script = ExtResource("1_0w5h4")
@@ -127,9 +127,11 @@ frame = 3
 [node name="kill" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="kill"]
-position = Vector2(0, 1)
-scale = Vector2(0.280001, 1)
+position = Vector2(2.38419e-07, -11)
+rotation = 3.14159
+scale = Vector2(0.0399981, -1)
 shape = SubResource("RectangleShape2D_ci8dj")
+disabled = true
 debug_color = Color(0.919403, 0.247321, 0.3578, 0.42)
 
 [connection signal="area_entered" from="brick_area" to="." method="_on_brick_area_area_entered"]

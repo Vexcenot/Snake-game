@@ -33,6 +33,7 @@ var powerup = "current power up goes here"
 var bigsnek = preload("res://sprite/big snake.png")
 var firesnek = preload("res://sprite/fire snake.png")
 var smallsnek = preload("res://sprite/smol snake.png")
+var fireball = preload("res://scenes/fire_ball.tscn")
 var collided = false
 var powered = false
 var sprint = false
@@ -141,20 +142,20 @@ func _input(event):
 			move_orders.append("right")
 #debug1
 	if event.is_action_pressed("k_action") and player_input == true and Global.active_balls <= 1 and Global.snake_status == "fire2": #fix this
-		var fire_ball = fire_ball.instantiate()
+		var fire_ball = fireball.instantiate()
 		get_parent().add_child(fire_ball)
 		if Global.direction == "right":
-			fire_ball.global_position.x = global_position.x + 20
-			fire_ball.global_position.y = global_position.y
+			fire_ball.global_position.x = position.x + 20
+			fire_ball.global_position.y = position.y
 		elif Global.direction == "left":
-					fire_ball.global_position.x = global_position.x - 20
-					fire_ball.global_position.y = global_position.y
+					fire_ball.global_position.x = position.x - 20
+					fire_ball.global_position.y = position.y
 		elif Global.direction == "up":
-					fire_ball.global_position.x = global_position.x
-					fire_ball.global_position.y = global_position.y - 20
+					fire_ball.global_position.x = position.x
+					fire_ball.global_position.y = position.y - 20
 		elif Global.direction == "down":
-					fire_ball.global_position.x = global_position.x
-					fire_ball.global_position.y = global_position.y + 13
+					fire_ball.global_position.x = position.x
+					fire_ball.global_position.y = position.y + 13
 
 
 		#eat()

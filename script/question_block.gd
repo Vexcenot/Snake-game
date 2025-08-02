@@ -13,7 +13,6 @@ func _ready() -> void:
 	pass
 
 func _process(delta: float) -> void:
-
 	#bump_up_detect()
 	visability()
 	rest_block()
@@ -64,9 +63,11 @@ func spawn_item():
 			spawned_item.position.y -= 8
 			create_tween().tween_property(spawned_item, "position", Vector2(spawned_item.position.x, spawned_item.position.y - 8), 1.05)
 			items.pop_front()
-		$kill.position.y = -13
-		await get_tree().create_timer(0.1).timeout
-		$kill.position.y = 0
+	$kill/CollisionShape2D.disabled = false
+	await get_tree().create_timer(0.2).timeout
+	$kill/CollisionShape2D.disabled = true
+	print("shiiid")
+
 
 func keepSpawning():
 	if spawnable and keep:
