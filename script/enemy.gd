@@ -32,6 +32,8 @@ func _physics_process(delta: float) -> void:
 		spriteOrientation()
 #func _ready():
 	#block_spawn()
+func kill():
+	queue_free() #add flip animation
 
 func ledge_checker():
 	pass
@@ -65,11 +67,11 @@ func _on_right_side_body_entered(body: Node2D) -> void:
 	speed = -speeder
 	
 func _on_left_side_area_entered(area: Area2D) -> void:
-	if area.name == "enemy":
+	if area.name == "enemy" or area.name == "shell":
 		speed = speeder
 
 func _on_right_side_area_entered(area: Area2D) -> void:
-	if area.name == "enemy":
+	if area.name == "enemy" or area.name == "shell":
 		speed = -speeder
 
 
@@ -87,8 +89,8 @@ func block_spawn():
 
 #deletes when being touched by head
 func _on_mushroom_area_entered(area: Area2D) -> void:
-	if area.name == "Head Area" and Global.snake_status != "small":
-		queue_free()
+	if area.name == "Head Area" and Global.snake_status != "small" or area.name == "enemy2":
+		kill()
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
@@ -101,10 +103,11 @@ func _on_enemy_area_entered(area: Area2D) -> void:
 	if area.name == "activate_entity":
 		activate = true
 	if area.name == "kill" and blockKillable:
-		queue_free()#unique flip die sprite
+		kill()#unique flip die sprite
 	if area.name == "fireball":
-		queue_free()#turn into cooked state for extra point
-	if area.name == "delete":
+		kill()#turn into cooked state for extra point
+	if area.name == "delete" and activate:
+		print("FUEEKE")
 		queue_free()
 
 #LEDGE DETECTION

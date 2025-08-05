@@ -30,10 +30,11 @@ shape = SubResource("RectangleShape2D_bly62")
 [node name="CastleEnd" type="Sprite2D" parent="."]
 visible = false
 z_index = 100
-position = Vector2(80, -20)
+position = Vector2(18, -20)
 texture = ExtResource("3_njhjj")
+hframes = 5
 vframes = 2
-frame = 1
+frame = 5
 
 [node name="Endpost" parent="." instance=ExtResource("5_7pkwf")]
 position = Vector2(-87, -6)

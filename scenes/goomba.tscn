@@ -160,18 +160,18 @@ scale = Vector2(0.479999, 0.479999)
 scale = Vector2(2.60039, 2.88802)
 shape = SubResource("RectangleShape2D_5lml2")
 
-[connection signal="area_entered" from="Sprite/enemy" to="." method="_on_enemy_area_entered"]
 [connection signal="area_entered" from="Sprite/enemy" to="." method="_on_mushroom_area_entered"]
+[connection signal="area_entered" from="Sprite/enemy" to="." method="_on_enemy_area_entered"]
 [connection signal="area_entered" from="Sprite/enemy" to="Node2D" method="_on_area_2d_area_entered"]
 [connection signal="animation_finished" from="Sprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]
-[connection signal="body_exited" from="left bottom" to="." method="_on_left_bottom_body_exited"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]
+[connection signal="body_exited" from="left bottom" to="." method="_on_left_bottom_body_exited"]
 [connection signal="body_exited" from="left bottom" to="Node2D" method="_on_side_checks_body_exited"]
-[connection signal="body_entered" from="right bottom" to="." method="_on_right_bottom_body_entered"]
 [connection signal="body_entered" from="right bottom" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="right bottom" to="." method="_on_right_bottom_body_exited"]
+[connection signal="body_entered" from="right bottom" to="." method="_on_right_bottom_body_entered"]
 [connection signal="body_exited" from="right bottom" to="." method="_on_side_checks_body_exited"]
+[connection signal="body_exited" from="right bottom" to="." method="_on_right_bottom_body_exited"]
 [connection signal="body_exited" from="right bottom" to="Node2D" method="_on_side_checks_body_exited"]
 [connection signal="area_entered" from="left side" to="." method="_on_left_side_area_entered"]
 [connection signal="body_entered" from="left side" to="." method="_on_left_side_body_entered"]

@@ -1,0 +1,145 @@
+[gd_scene load_steps=13 format=3 uid="uid://h2ccg27eas81"]
+
+[ext_resource type="Script" uid="uid://bauau5bxp0wdq" path="res://script/shell.gd" id="1_8y80q"]
+[ext_resource type="Texture2D" uid="uid://ed1fh4bw1hwm" path="res://sprite/koopa.png" id="2_k7uw7"]
+[ext_resource type="Script" uid="uid://b0y4h2xmmwr2e" path="res://script/mushroom.gd" id="4_vvj04"]
+[ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/power up.wav" id="5_sow7m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
+size = Vector2(9.75486, 7.44074)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cpp18"]
+size = Vector2(10.0103, 1.27963)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kg8q6"]
+size = Vector2(1.21936, 1.27965)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sjlml"]
+size = Vector2(2, 10.0979)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exsck"]
+size = Vector2(2, 9.99548)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euomj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
+size = Vector2(13.0574, 17.8476)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8y80q"]
+size = Vector2(20.1059, 9.81974)
+
+[node name="shell" type="CharacterBody2D"]
+collision_layer = 128
+collision_mask = 128
+script = ExtResource("1_8y80q")
+stopped = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.09262)
+scale = Vector2(1.67193, 0.781477)
+shape = SubResource("RectangleShape2D_v7c8f")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
+texture = ExtResource("2_k7uw7")
+hframes = 4
+frame = 2
+
+[node name="left bottom" type="Area2D" parent="."]
+position = Vector2(3.55271e-15, -8)
+scale = Vector2(0.820104, 0.781477)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left bottom"]
+position = Vector2(-9.14518, 10.8768)
+rotation = -3.14159
+scale = Vector2(0.121811, -1)
+shape = SubResource("RectangleShape2D_cpp18")
+
+[node name="right bottom" type="Area2D" parent="."]
+position = Vector2(-5.96046e-08, -8)
+scale = Vector2(0.820104, 0.781477)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="right bottom"]
+position = Vector2(9.14518, 10.8768)
+shape = SubResource("RectangleShape2D_kg8q6")
+
+[node name="Node2D" type="Node2D" parent="."]
+process_mode = 3
+position = Vector2(0, -8)
+script = ExtResource("4_vvj04")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node2D"]
+stream = ExtResource("5_sow7m")
+
+[node name="left side" type="Area2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(1, 0.331275)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="left side"]
+position = Vector2(-8, 9.05592)
+scale = Vector2(1, 2.69044)
+shape = SubResource("RectangleShape2D_sjlml")
+
+[node name="right side" type="Area2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(0.95107, 0.380408)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="right side"]
+position = Vector2(8.41158, 7.88627)
+scale = Vector2(1, 2.36695)
+shape = SubResource("RectangleShape2D_exsck")
+
+[node name="edible2" type="Area2D" parent="."]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="edible2"]
+scale = Vector2(3.07808, 3.07808)
+shape = SubResource("RectangleShape2D_euomj")
+
+[node name="enemy2" type="Area2D" parent="."]
+position = Vector2(0, -6)
+
+[node name="hurtCollision" type="CollisionShape2D" parent="enemy2"]
+position = Vector2(2.38419e-07, 0.604648)
+scale = Vector2(1.23219, 0.515997)
+shape = SubResource("RectangleShape2D_pmrqf")
+
+[node name="enemy" type="Area2D" parent="."]
+position = Vector2(0, -6)
+monitorable = false
+
+[node name="hurtCollision" type="CollisionShape2D" parent="enemy"]
+position = Vector2(2.38419e-07, 0.604642)
+scale = Vector2(1.07219, 0.515997)
+shape = SubResource("RectangleShape2D_pmrqf")
+
+[node name="top" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
+position = Vector2(9.05975e-07, -15)
+rotation = -3.14159
+scale = Vector2(0.111612, 0.185702)
+shape = SubResource("RectangleShape2D_8y80q")
+
+[node name="shell" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="shell"]
+position = Vector2(-0.0419474, -7)
+rotation = -3.14159
+scale = Vector2(0.711614, 1.4257)
+shape = SubResource("RectangleShape2D_8y80q")
+
+[connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]
+[connection signal="body_exited" from="left bottom" to="Node2D" method="_on_side_checks_body_exited"]
+[connection signal="body_entered" from="right bottom" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="right bottom" to="." method="_on_side_checks_body_exited"]
+[connection signal="body_exited" from="right bottom" to="Node2D" method="_on_side_checks_body_exited"]
+[connection signal="area_entered" from="left side" to="." method="_on_left_side_area_entered"]
+[connection signal="body_entered" from="left side" to="." method="_on_left_side_body_entered"]
+[connection signal="area_entered" from="right side" to="." method="_on_right_side_area_entered"]
+[connection signal="body_entered" from="right side" to="." method="_on_right_side_body_entered"]
+[connection signal="area_entered" from="enemy" to="." method="_on_mushroom_area_entered"]
+[connection signal="area_entered" from="enemy" to="Node2D" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="top" to="." method="_on_top_area_entered"]
+[connection signal="area_exited" from="top" to="." method="_on_top_area_exited"]
+[connection signal="area_entered" from="shell" to="." method="_on_shell_area_entered"]
