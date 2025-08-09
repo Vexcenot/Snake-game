@@ -87,7 +87,8 @@ size = Vector2(2, 2.44695)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euomj"]
 
 [node name="mushroom" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 130
+collision_mask = 129
 script = ExtResource("2_e0v0r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

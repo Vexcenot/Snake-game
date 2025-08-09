@@ -10,7 +10,7 @@
 size = Vector2(16.5839, 2.32223)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
-size = Vector2(16.4952, 16.3732)
+size = Vector2(16.4952, 4.01123)
 
 [sub_resource type="Animation" id="Animation_xfln1"]
 length = 0.001
@@ -75,17 +75,20 @@ size = Vector2(3, 16)
 size = Vector2(3.15434, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5lml2"]
+size = Vector2(20, 33.0839)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xum81"]
-size = Vector2(20, 12)
+size = Vector2(29.7619, 34)
 
 [node name="Koopa" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 134
+collision_mask = 133
 script = ExtResource("1_xum81")
+flippable = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.98023e-08, -1)
-scale = Vector2(0.820104, 0.781477)
+scale = Vector2(0.83364, 0.781477)
 shape = SubResource("RectangleShape2D_v7c8f")
 
 [node name="Sprite" type="Sprite2D" parent="."]
@@ -97,8 +100,8 @@ hframes = 4
 [node name="enemy" type="Area2D" parent="Sprite"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/enemy"]
-position = Vector2(0, 1)
-scale = Vector2(0.848732, 0.855057)
+position = Vector2(0, 4.37733)
+scale = Vector2(1.5174, 3.67834)
 shape = SubResource("RectangleShape2D_pmrqf")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
@@ -114,6 +117,8 @@ stream = ExtResource("3_vo5xu")
 [node name="left bottom" type="Area2D" parent="."]
 position = Vector2(3.55271e-15, -8)
 scale = Vector2(0.820104, 0.781477)
+collision_layer = 129
+collision_mask = 129
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left bottom"]
 position = Vector2(-9.14518, 10.8768)
@@ -124,6 +129,8 @@ shape = SubResource("RectangleShape2D_cpp18")
 [node name="right bottom" type="Area2D" parent="."]
 position = Vector2(-3.55271e-15, -8)
 scale = Vector2(0.820104, 0.781477)
+collision_layer = 129
+collision_mask = 129
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="right bottom"]
 position = Vector2(9.14518, 10.8768)
@@ -142,7 +149,7 @@ position = Vector2(0, -8)
 scale = Vector2(1, 0.331275)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left side"]
-position = Vector2(-7.5, 0)
+position = Vector2(-8, 0)
 scale = Vector2(1, 2.69044)
 shape = SubResource("RectangleShape2D_sjlml")
 
@@ -151,7 +158,7 @@ position = Vector2(0, -8)
 scale = Vector2(0.95107, 0.380408)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right side"]
-position = Vector2(7.88585, 0)
+position = Vector2(7.36013, 0)
 scale = Vector2(1, 2.36695)
 shape = SubResource("RectangleShape2D_exsck")
 
@@ -160,18 +167,19 @@ position = Vector2(0, -8)
 scale = Vector2(0.479999, 0.479999)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="edible2"]
+position = Vector2(0, -18.8933)
 scale = Vector2(2.60039, 2.88802)
 shape = SubResource("RectangleShape2D_5lml2")
 
-[node name="shell" type="Area2D" parent="."]
+[node name="koopa_top" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="shell"]
-position = Vector2(0, -20)
-scale = Vector2(0.839999, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="koopa_top"]
+position = Vector2(-0.5, -16)
+scale = Vector2(0.519998, 1)
 shape = SubResource("RectangleShape2D_xum81")
 
-[connection signal="area_entered" from="Sprite/enemy" to="." method="_on_mushroom_area_entered"]
 [connection signal="area_entered" from="Sprite/enemy" to="." method="_on_enemy_area_entered"]
+[connection signal="area_entered" from="Sprite/enemy" to="." method="_on_mushroom_area_entered"]
 [connection signal="area_entered" from="Sprite/enemy" to="Node2D" method="_on_area_2d_area_entered"]
 [connection signal="animation_finished" from="Sprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]
@@ -187,3 +195,6 @@ shape = SubResource("RectangleShape2D_xum81")
 [connection signal="body_entered" from="left side" to="." method="_on_left_side_body_entered"]
 [connection signal="area_entered" from="right side" to="." method="_on_right_side_area_entered"]
 [connection signal="body_entered" from="right side" to="." method="_on_right_side_body_entered"]
+[connection signal="area_entered" from="koopa_top" to="." method="_on_shell_area_entered"]
+[connection signal="area_entered" from="koopa_top" to="." method="_on_koopa_top_area_entered"]
+[connection signal="area_exited" from="koopa_top" to="." method="_on_koopa_top_area_exited"]

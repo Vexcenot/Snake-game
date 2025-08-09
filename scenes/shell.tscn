@@ -36,7 +36,7 @@ stopped = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.09262)
-scale = Vector2(1.67193, 0.781477)
+scale = Vector2(0.991931, 0.781477)
 shape = SubResource("RectangleShape2D_v7c8f")
 
 [node name="sprite" type="Sprite2D" parent="."]
@@ -58,6 +58,8 @@ shape = SubResource("RectangleShape2D_cpp18")
 [node name="right bottom" type="Area2D" parent="."]
 position = Vector2(-5.96046e-08, -8)
 scale = Vector2(0.820104, 0.781477)
+collision_layer = 129
+collision_mask = 129
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="right bottom"]
 position = Vector2(9.14518, 10.8768)
@@ -74,6 +76,8 @@ stream = ExtResource("5_sow7m")
 [node name="left side" type="Area2D" parent="."]
 position = Vector2(0, -8)
 scale = Vector2(1, 0.331275)
+collision_layer = 129
+collision_mask = 129
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left side"]
 position = Vector2(-8, 9.05592)
@@ -83,6 +87,8 @@ shape = SubResource("RectangleShape2D_sjlml")
 [node name="right side" type="Area2D" parent="."]
 position = Vector2(0, -8)
 scale = Vector2(0.95107, 0.380408)
+collision_layer = 129
+collision_mask = 129
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right side"]
 position = Vector2(8.41158, 7.88627)
@@ -98,10 +104,11 @@ shape = SubResource("RectangleShape2D_euomj")
 
 [node name="enemy2" type="Area2D" parent="."]
 position = Vector2(0, -6)
+monitorable = false
 
 [node name="hurtCollision" type="CollisionShape2D" parent="enemy2"]
-position = Vector2(2.38419e-07, 0.604648)
-scale = Vector2(1.23219, 0.515997)
+position = Vector2(1.00974e-28, -1)
+scale = Vector2(1.79236, 1.21247)
 shape = SubResource("RectangleShape2D_pmrqf")
 
 [node name="enemy" type="Area2D" parent="."]
@@ -116,7 +123,7 @@ shape = SubResource("RectangleShape2D_pmrqf")
 [node name="top" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
-position = Vector2(9.05975e-07, -15)
+position = Vector2(-1.53477e-12, -13)
 rotation = -3.14159
 scale = Vector2(0.111612, 0.185702)
 shape = SubResource("RectangleShape2D_8y80q")

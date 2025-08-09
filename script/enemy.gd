@@ -1,25 +1,29 @@
 extends CharacterBody2D
 
+var shell = preload("res://scenes/shell.tscn")
 @export var speeder = 25
 @export var gravity = 700 
 @export var avoid_ledge = false
 @export var block = false
+@export var flippable = false
 var speed = -speeder
 var activate = false
 var leftfloor = 0
 var rightfloor = 0
 var blockKillable = false
 var timer = 0
+var head = false
 
 func _ready() -> void:
 	await get_tree().create_timer(0.3).timeout
 	blockKillable = true
 	
 func spriteOrientation():
-	if speed == speeder:
-		$Sprite.flip_h = true
-	elif speed == -speeder:
-		$Sprite.flip_h = false
+	if flippable:
+		if speed == speeder:
+			$Sprite.flip_h = true
+		elif speed == -speeder:
+			$Sprite.flip_h = false
 #movement baby!!!!
 func _physics_process(delta: float) -> void:
 	if block == false and activate == true:
@@ -30,6 +34,7 @@ func _physics_process(delta: float) -> void:
 		ledge_checker()
 		goback()
 		spriteOrientation()
+		spawnShell()
 #func _ready():
 	#block_spawn()
 func kill():
@@ -131,3 +136,44 @@ func _on_left_bottom_body_exited(body: Node2D) -> void:
 	
 func _on_right_bottom_body_exited(body: Node2D) -> void:
 	rightfloor -= 1
+	
+func spawnShell():
+	if head and Global.direction == "down":
+		var shellio = shell.instantiate()
+		get_parent().add_child(shellio)
+		shellio.global_position = global_position
+		queue_free()
+	
+	
+#turns to shell if touched ontop
+func _on_shell_area_entered(area: Area2D) -> void:
+	if area.name == "Head Area":
+		if Global.snake_status != "small" and Global.direction == "down":
+			await get_tree().create_timer(0.01).timeout
+			$Sprite/enemy.monitorable = false
+		else:
+			head = true
+			await get_tree().create_timer(0.01).timeout
+			$Sprite/enemy.monitorable = false
+
+
+
+
+
+func _on_koopa_top_area_entered(area: Area2D) -> void:
+	if area.name == "Head Area":
+		if Global.snake_status != "small" and Global.direction == "down":
+			pass
+		else:
+			head = true
+			await get_tree().create_timer(0.01).timeout
+			$Sprite/enemy.monitorable = false
+
+func _on_koopa_top_area_exited(area: Area2D) -> void:
+	if area.name == "Head Area":
+		if Global.snake_status != "small" and Global.direction == "down":
+			queue_free()
+		else:
+			head = false
+			await get_tree().create_timer(0.01).timeout
+			$Sprite/enemy.monitorable = true

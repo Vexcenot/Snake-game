@@ -18,7 +18,10 @@ func _ready() -> void:
 	$pipe_enter.monitorable = teleporterable
 	if teleporterable == true:
 		print("ass")
-		$top_block.queue_free()
+
+		$top_block.set_collision_layer_value(1, false)
+		$top_block.set_collision_layer_value(2, false)
+		
 
 func push_teleport():
 	Global.teleport_x  = x_snek

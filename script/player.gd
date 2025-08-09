@@ -90,6 +90,9 @@ func _process(delta):
 	dead_sprite()
 	fucker()
 	teleport()
+	absolute_stop()
+	print(move_ready)
+
 var shit 
 var cramp = false
 #snake movement inputs 
@@ -286,6 +289,7 @@ func move_tail_segments():
 		if positions.size() > last_index:
 			remove_past_turns(positions[last_index])
 			remove_past_eats(positions[last_index])
+
 func check_eat_segment(segment, eat_coords):
 	var full_sprite = segment.get_node("Sprite2D")
 	for eat_pos in eat_positions:
@@ -500,6 +504,11 @@ func dead_sprite():
 	if dead:
 		sprite.frame = 6
 
+func absolute_stop():
+	if move_ready == false:
+		pause_move()
+		final_time == 99999
+
 func die():
 	$Die.play()
 	dead = true
@@ -612,6 +621,8 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 			eat()
 	if area.name == "coin_area":
 		eat()
+	if area.name == "shell" and Global.snake_status != "small":
+		eat()
 	if area.name == "pipe_enter":
 		#$Powerdn.play()
 		
@@ -630,6 +641,17 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		#position.y = 9999
 	if area.name == "GOUP":
 		move_orders.append("up")
+	if area.name == "koopa_top" and Global.direction == "down" and Global.snake_status != "small":
+		if Global.snake_status != "small":
+			eat() #replace this with full mouth
+		#else:
+			#pause_move()
+			#await get_tree().create_timer(0.05).timeout
+			#if dead == false:
+				#resume_move()
+				
+		
+	
 		
 func teleport():
 	if Global.teleport_all:
@@ -685,9 +707,11 @@ func block_pow():
 #block bumping animation
 func hit_block():
 		sprite.frame = 8
+		pause_move()
 		await get_tree().create_timer(0.2).timeout
 		sprite.frame = 2
 		await get_tree().create_timer(0.2).timeout
+		resume_move()
 
 func pause_move():
 	invincible = true

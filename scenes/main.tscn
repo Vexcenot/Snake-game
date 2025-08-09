@@ -88,17 +88,10 @@ position = Vector2(88, 80)
 avoid_ledge = true
 
 [node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
-position = Vector2(112, 208)
+position = Vector2(64, 208)
 x_snek = 3480
 x_cam = 3456
-world = "res://scenes/underground.tscn"
-ID = "000"
-TargetID = "aaa"
-
-[node name="pipe3" parent="." instance=ExtResource("12_eb6dy")]
-position = Vector2(264, 208)
-x_snek = 3480
-x_cam = 3456
+teleporterable = true
 world = "res://scenes/underground.tscn"
 ID = "000"
 TargetID = "aaa"
@@ -132,7 +125,7 @@ scale = Vector2(0.68941, 1)
 shape = SubResource("RectangleShape2D_ya4ey")
 
 [node name="Goomba3" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(184, 208)
+position = Vector2(144, 176)
 avoid_ledge = true
 
 [node name="Goomba6" parent="." instance=ExtResource("11_ya4ey")]
@@ -140,14 +133,15 @@ position = Vector2(624, 200)
 avoid_ledge = true
 
 [node name="Goomba5" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(216, 208)
+position = Vector2(240, 208)
 avoid_ledge = true
 
-[node name="Goomba2" parent="." instance=ExtResource("12_trceg")]
-position = Vector2(88, 208)
-
 [node name="mushroom2" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(144, 208)
+position = Vector2(24, 208)
 
 [node name="shell" parent="." instance=ExtResource("13_trceg")]
-position = Vector2(112, 144)
+position = Vector2(152, 208)
+
+[node name="Koopa" parent="." instance=ExtResource("12_trceg")]
+position = Vector2(64, 144)
+avoid_ledge = true
