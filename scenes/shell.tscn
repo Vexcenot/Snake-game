@@ -133,7 +133,7 @@ shape = SubResource("RectangleShape2D_8y80q")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="shell"]
 position = Vector2(-0.0419474, -7)
 rotation = -3.14159
-scale = Vector2(0.711614, 1.4257)
+scale = Vector2(1.15161, 2.30723)
 shape = SubResource("RectangleShape2D_8y80q")
 
 [connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]

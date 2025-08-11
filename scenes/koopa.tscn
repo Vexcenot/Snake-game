@@ -1,16 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://cx4c0751brj4m"]
+[gd_scene load_steps=19 format=3 uid="uid://cx4c0751brj4m"]
 
 [ext_resource type="Script" uid="uid://c33skdsqnghbu" path="res://script/enemy.gd" id="1_xum81"]
 [ext_resource type="Texture2D" uid="uid://ed1fh4bw1hwm" path="res://sprite/koopa.png" id="2_xum81"]
 [ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/rise up.wav" id="3_vo5xu"]
 [ext_resource type="Script" uid="uid://b0y4h2xmmwr2e" path="res://script/mushroom.gd" id="4_lxn1o"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/power up.wav" id="5_ot18w"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
-size = Vector2(16.5839, 2.32223)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
-size = Vector2(16.4952, 4.01123)
+[ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="6_grttc"]
 
 [sub_resource type="Animation" id="Animation_xfln1"]
 length = 0.001
@@ -38,6 +33,100 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, -12)]
 }
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:flip_v")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-12, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_vo5xu"]
+resource_name = "die"
+length = 16.6667
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(2, 0, 0, 0, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_v")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(2, 0, 0, 0, 0, 13, 0, 0, 0, 0, 16, 0, 0, 0, 0, 23, 0, 0, 0, 0, 53.1297, -0.25, 0, 0.25, 0, 61, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 1.66667, 2.86667)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-7, 0, 0, 0, 0, -24, 0, 0, 0, 0, -24, 0, 0, 0, 0, -8, 0, 0, 0, 0, 205.287, -0.25, 0, 0.25, 0, 261, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 1.66667, 2.86667)
+}
 
 [sub_resource type="Animation" id="Animation_5lml2"]
 resource_name = "walk"
@@ -59,8 +148,15 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gu7y0"]
 _data = {
 &"RESET": SubResource("Animation_xfln1"),
+&"die": SubResource("Animation_vo5xu"),
 &"walk": SubResource("Animation_5lml2")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
+size = Vector2(16.5839, 2.32223)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
+size = Vector2(16.4952, 4.01123)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpp18"]
 size = Vector2(10.0103, 1.27967)
@@ -81,38 +177,42 @@ size = Vector2(20, 33.0839)
 size = Vector2(29.7619, 34)
 
 [node name="Koopa" type="CharacterBody2D"]
+scale = Vector2(0.991758, 1.00959)
 collision_layer = 134
 collision_mask = 133
 script = ExtResource("1_xum81")
 flippable = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Node2D2/Sprite")
+libraries = {
+&"": SubResource("AnimationLibrary_gu7y0")
+}
+autoplay = "walk"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="AnimationPlayer"]
+position = Vector2(0, -8)
+stream = ExtResource("3_vo5xu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.98023e-08, -1)
 scale = Vector2(0.83364, 0.781477)
 shape = SubResource("RectangleShape2D_v7c8f")
 
-[node name="Sprite" type="Sprite2D" parent="."]
+[node name="Node2D2" type="Node2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Node2D2"]
 z_index = 1
 position = Vector2(0, -12)
 texture = ExtResource("2_xum81")
 hframes = 4
 
-[node name="enemy" type="Area2D" parent="Sprite"]
+[node name="enemy" type="Area2D" parent="Node2D2/Sprite"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/enemy"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/Sprite/enemy"]
 position = Vector2(0, 4.37733)
 scale = Vector2(1.5174, 3.67834)
 shape = SubResource("RectangleShape2D_pmrqf")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-libraries = {
-&"": SubResource("AnimationLibrary_gu7y0")
-}
-autoplay = "walk"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sprite/AnimationPlayer"]
-position = Vector2(0, -8)
-stream = ExtResource("3_vo5xu")
 
 [node name="left bottom" type="Area2D" parent="."]
 position = Vector2(3.55271e-15, -8)
@@ -168,7 +268,7 @@ scale = Vector2(0.479999, 0.479999)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="edible2"]
 position = Vector2(0, -18.8933)
-scale = Vector2(2.60039, 2.88802)
+scale = Vector2(5.03715, 2.88802)
 shape = SubResource("RectangleShape2D_5lml2")
 
 [node name="koopa_top" type="Area2D" parent="."]
@@ -178,18 +278,23 @@ position = Vector2(-0.5, -16)
 scale = Vector2(0.519998, 1)
 shape = SubResource("RectangleShape2D_xum81")
 
-[connection signal="area_entered" from="Sprite/enemy" to="." method="_on_enemy_area_entered"]
-[connection signal="area_entered" from="Sprite/enemy" to="." method="_on_mushroom_area_entered"]
-[connection signal="area_entered" from="Sprite/enemy" to="Node2D" method="_on_area_2d_area_entered"]
-[connection signal="animation_finished" from="Sprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[node name="20592Png" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-247, 32)
+texture = ExtResource("6_grttc")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="Node2D2/Sprite/enemy" to="." method="_on_enemy_area_entered"]
+[connection signal="area_entered" from="Node2D2/Sprite/enemy" to="." method="_on_mushroom_area_entered"]
+[connection signal="area_entered" from="Node2D2/Sprite/enemy" to="Node2D" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]
-[connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_left_bottom_body_exited"]
+[connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]
 [connection signal="body_exited" from="left bottom" to="Node2D" method="_on_side_checks_body_exited"]
-[connection signal="body_entered" from="right bottom" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="right bottom" to="." method="_on_right_bottom_body_entered"]
-[connection signal="body_exited" from="right bottom" to="." method="_on_side_checks_body_exited"]
+[connection signal="body_entered" from="right bottom" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="right bottom" to="." method="_on_right_bottom_body_exited"]
+[connection signal="body_exited" from="right bottom" to="." method="_on_side_checks_body_exited"]
 [connection signal="body_exited" from="right bottom" to="Node2D" method="_on_side_checks_body_exited"]
 [connection signal="area_entered" from="left side" to="." method="_on_left_side_area_entered"]
 [connection signal="body_entered" from="left side" to="." method="_on_left_side_body_entered"]

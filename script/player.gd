@@ -603,9 +603,9 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "enemy" and Global.snake_status == "small":
 		hurt()
 	if area.name == "edible":
-		sprite.frame = 5
+		openJaw += 1
 	if area.name == "edible2" and Global.snake_status != "small":
-		sprite.frame = 5
+		openJaw += 1
 	if area.name == "block_area2" and Global.snake_status == "small":
 		under_block += 1 #make this count up and down insteadd
 	if area.name == "block_area":
@@ -672,12 +672,19 @@ func eat_animation():
 	if eatAnim:
 		sprite.frame = 5
 
+var openJaw = 0
+func openMouth():
+	if dead == false and openJaw == 0:
+		sprite.frame = 2
+	elif openJaw >= 1 and dead == false:
+		sprite.frame = 5
+
 #when leaving area.
 func _on_head_area_area_exited(area: Area2D) -> void:
 	if area.name == "edible":
-		sprite.frame = 2
+		openJaw -= 1
 	if area.name == "edible2" and Global.snake_status != "small":
-		sprite.frame = 2
+		openJaw -= 1
 	if area.name == "block_area2" and Global.snake_status == "small":
 		under_block -= 1
 	if area.name == "block_area":
