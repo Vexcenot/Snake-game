@@ -617,7 +617,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "oob" and Global.winning == false and invincible == false:
 		die()
 	if Global.snake_status != "small":
-		if area.name == "brick_area" or area.name == "enemy":
+		if area.name == "brick_area" or area.name == "left side" or area.name == "right side":
 			eat()
 	if area.name == "coin_area":
 		eat()

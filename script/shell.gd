@@ -7,9 +7,11 @@ var speeder = 200
 var gravity = 700 
 var speed = speeder
 var ignore = false
+var timer = 0
 
 #movement baby!!!!
 func _physics_process(delta: float) -> void:
+	timer += 1
 	print($enemy2.monitorable)
 	velocity.y += gravity * delta  # Apply gravity
 	if stopped == false:

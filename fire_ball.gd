@@ -60,5 +60,5 @@ func _on_side_collision_area_entered(area: Area2D) -> void:
 		
 
 func _on_fireball_area_entered(area: Area2D) -> void:
-	if area.name == "enemy":
+	if area.name == "left side" or area.name == "right side":
 		explode = true

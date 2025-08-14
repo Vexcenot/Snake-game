@@ -10,15 +10,11 @@ var speed = -speeder
 var activate = false
 var leftfloor = 0
 var rightfloor = 0
-var blockKillable = false
 var timer = 0
 var head = false
 var dead = false
 var direction = 0
 
-func _ready() -> void:
-	await get_tree().create_timer(0.3).timeout
-	blockKillable = true
 	
 func spriteOrientation():
 	if flippable:
@@ -45,7 +41,6 @@ func kill():
 	await get_tree().create_timer(0.001).timeout
 	$AnimationPlayer.speed_scale = 1.1
 	$AnimationPlayer.play("die")
-	$Node2D2/Sprite/enemy.monitorable = false
 	$"left bottom".monitorable = false
 	$"right bottom".monitorable = false
 	$"left side".monitorable = false
@@ -85,31 +80,12 @@ func block_spawn():
 		$Mushrooms/AnimationPlayer.play("spawn")
 		$AudioStreamPlayer2D.play()
 
-#deletes when being touched by head
-func _on_mushroom_area_entered(area: Area2D) -> void:
-	if dead == false:
-		if area.name == "Head Area":
-			$Node2D2/Sprite.visible = false
-			await get_tree().create_timer(0.1).timeout
-			queue_free()
-		elif area.name == "enemy2":
-			kill()
+
+
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if dead == false:
 		block = false
-
-func _on_enemy_area_entered(area: Area2D) -> void: #make it flip positions everytime something enters it  
-	if dead == false:
-		if area.name == "activate_entity":
-			activate = true
-		if area.name == "kill" and blockKillable:
-			kill()#unique flip die sprite
-		if area.name == "fireball":
-			kill()#turn into cooked state for extra point
-		if area.name == "delete" and activate:
-			print("FUEEKE")
-			queue_free()
 
 #LEDGE DETECTION
 func goback():
@@ -174,3 +150,29 @@ func _on_koopa_top_area_exited(area: Area2D) -> void:
 				head = false
 				await get_tree().create_timer(0.01).timeout
 				$Node2D2/Sprite/enemy.monitorable = true
+
+
+
+func _on_left_side_area_entered(area: Area2D) -> void:
+	if dead == false:
+		if area.name == "Head Area":
+			$Node2D2/Sprite.visible = false
+			await get_tree().create_timer(0.1).timeout
+			queue_free()
+		elif area.name == "enemy2" or area.name == "fireball" or area.name == "kill":
+			kill()
+		if area.name == "activate_entity":
+			activate = true
+
+func _on_right_side_area_entered(area: Area2D) -> void:
+	if dead == false:
+		if area.name == "Head Area":
+			$Node2D2/Sprite.visible = false
+			await get_tree().create_timer(0.1).timeout
+			queue_free()
+		elif area.name == "enemy2" or area.name == "fireball" or area.name == "kill":
+			global_scale.x = -1
+			kill()
+		if area.name == "delete" and activate:
+			print("FUEEKE")
+			queue_free()

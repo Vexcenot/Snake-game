@@ -134,7 +134,7 @@ scale = Vector2(0.68941, 1)
 shape = SubResource("RectangleShape2D_ya4ey")
 
 [node name="Goomba3" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(208, 208)
+position = Vector2(224, 208)
 avoid_ledge = true
 
 [node name="Goomba6" parent="." instance=ExtResource("11_ya4ey")]

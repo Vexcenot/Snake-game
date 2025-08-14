@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cx4c0751brj4m"]
+[gd_scene load_steps=18 format=3 uid="uid://cx4c0751brj4m"]
 
 [ext_resource type="Script" uid="uid://c33skdsqnghbu" path="res://script/enemy.gd" id="1_xum81"]
 [ext_resource type="Texture2D" uid="uid://ed1fh4bw1hwm" path="res://sprite/koopa.png" id="2_xum81"]
@@ -155,9 +155,6 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
 size = Vector2(16.5839, 2.32223)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
-size = Vector2(16.4952, 4.01123)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpp18"]
 size = Vector2(10.0103, 1.27967)
 
@@ -165,10 +162,10 @@ size = Vector2(10.0103, 1.27967)
 size = Vector2(1.21936, 1.27965)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sjlml"]
-size = Vector2(3, 16)
+size = Vector2(6.04986, 7.91474)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exsck"]
-size = Vector2(3.15434, 16)
+size = Vector2(6.36111, 7.9156)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5lml2"]
 size = Vector2(20, 33.0839)
@@ -202,17 +199,10 @@ shape = SubResource("RectangleShape2D_v7c8f")
 [node name="Node2D2" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite2D" parent="Node2D2"]
-z_index = 1
+z_index = 5
 position = Vector2(0, -12)
 texture = ExtResource("2_xum81")
 hframes = 4
-
-[node name="enemy" type="Area2D" parent="Node2D2/Sprite"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/Sprite/enemy"]
-position = Vector2(0, 4.37733)
-scale = Vector2(1.5174, 3.67834)
-shape = SubResource("RectangleShape2D_pmrqf")
 
 [node name="left bottom" type="Area2D" parent="."]
 position = Vector2(3.55271e-15, -8)
@@ -249,7 +239,7 @@ position = Vector2(0, -8)
 scale = Vector2(1, 0.331275)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left side"]
-position = Vector2(-8, 0)
+position = Vector2(-3.02493, 10.8765)
 scale = Vector2(1, 2.69044)
 shape = SubResource("RectangleShape2D_sjlml")
 
@@ -258,7 +248,7 @@ position = Vector2(0, -8)
 scale = Vector2(0.95107, 0.380408)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right side"]
-position = Vector2(7.36013, 0)
+position = Vector2(3.18056, 9.56768)
 scale = Vector2(1, 2.36695)
 shape = SubResource("RectangleShape2D_exsck")
 
@@ -284,9 +274,6 @@ position = Vector2(-247, 32)
 texture = ExtResource("6_grttc")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="area_entered" from="Node2D2/Sprite/enemy" to="." method="_on_enemy_area_entered"]
-[connection signal="area_entered" from="Node2D2/Sprite/enemy" to="." method="_on_mushroom_area_entered"]
-[connection signal="area_entered" from="Node2D2/Sprite/enemy" to="Node2D" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_left_bottom_body_exited"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]
@@ -300,6 +287,6 @@ texture = ExtResource("6_grttc")
 [connection signal="body_entered" from="left side" to="." method="_on_left_side_body_entered"]
 [connection signal="area_entered" from="right side" to="." method="_on_right_side_area_entered"]
 [connection signal="body_entered" from="right side" to="." method="_on_right_side_body_entered"]
-[connection signal="area_entered" from="koopa_top" to="." method="_on_shell_area_entered"]
 [connection signal="area_entered" from="koopa_top" to="." method="_on_koopa_top_area_entered"]
+[connection signal="area_entered" from="koopa_top" to="." method="_on_shell_area_entered"]
 [connection signal="area_exited" from="koopa_top" to="." method="_on_koopa_top_area_exited"]

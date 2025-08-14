@@ -11,7 +11,7 @@ size = Vector2(16, 14)
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mekc"]
-size = Vector2(16, 65.8338)
+size = Vector2(16, 49.167)
 
 [sub_resource type="Animation" id="Animation_k3qg7"]
 length = 0.001
@@ -52,7 +52,7 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c34n8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ci8dj"]
-size = Vector2(57.1427, 6)
+size = Vector2(299.984, 6)
 
 [node name="brick" type="Node2D"]
 script = ExtResource("1_0w5h4")
@@ -77,7 +77,7 @@ shape = SubResource("RectangleShape2D_mt0q5")
 [node name="block_area2" type="Area2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="block_area2"]
-position = Vector2(0, 12.05)
+position = Vector2(0, 11.05)
 scale = Vector2(0.159999, 0.119999)
 shape = SubResource("RectangleShape2D_7mekc")
 
@@ -127,9 +127,8 @@ frame = 3
 [node name="kill" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="kill"]
-position = Vector2(2.38419e-07, -11)
-rotation = 3.14159
-scale = Vector2(0.0399981, -1)
+position = Vector2(1.19209e-07, -11)
+scale = Vector2(0.0400021, 1)
 shape = SubResource("RectangleShape2D_ci8dj")
 disabled = true
 debug_color = Color(0.919403, 0.247321, 0.3578, 0.42)

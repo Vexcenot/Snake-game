@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bwwi52l72ncsf"]
+[gd_scene load_steps=17 format=3 uid="uid://bwwi52l72ncsf"]
 
 [ext_resource type="Script" uid="uid://c33skdsqnghbu" path="res://script/enemy.gd" id="1_13s4y"]
 [ext_resource type="Texture2D" uid="uid://cyjxthecr7oxv" path="res://sprite/goomba.png" id="2_tdxqk"]
@@ -10,9 +10,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
 size = Vector2(16.5839, 2.32223)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
-size = Vector2(16.4952, 16.3732)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpp18"]
 size = Vector2(10.0103, 1.27967)
 
@@ -20,10 +17,10 @@ size = Vector2(10.0103, 1.27967)
 size = Vector2(1.21936, 1.27965)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sjlml"]
-size = Vector2(3, 16)
+size = Vector2(6, 10.0979)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exsck"]
-size = Vector2(3.15434, 16)
+size = Vector2(6.30868, 9.99548)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5lml2"]
 
@@ -185,17 +182,10 @@ shape = SubResource("RectangleShape2D_v7c8f")
 [node name="Node2D2" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite2D" parent="Node2D2"]
-z_index = 1
+z_index = 5
 position = Vector2(0, -12)
 texture = ExtResource("2_tdxqk")
 hframes = 4
-
-[node name="enemy" type="Area2D" parent="Node2D2/Sprite"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/Sprite/enemy"]
-position = Vector2(0, 1)
-scale = Vector2(0.848732, 0.855057)
-shape = SubResource("RectangleShape2D_pmrqf")
 
 [node name="left bottom" type="Area2D" parent="."]
 position = Vector2(3.55271e-15, -8)
@@ -228,7 +218,7 @@ position = Vector2(0, -8)
 scale = Vector2(1, 0.331275)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left side"]
-position = Vector2(-7.5, 0)
+position = Vector2(-3, 13.5839)
 scale = Vector2(1, 2.69044)
 shape = SubResource("RectangleShape2D_sjlml")
 
@@ -237,7 +227,7 @@ position = Vector2(0, -8)
 scale = Vector2(0.95107, 0.380408)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right side"]
-position = Vector2(7.88585, 0)
+position = Vector2(3.15434, 11.8294)
 scale = Vector2(1, 2.36695)
 shape = SubResource("RectangleShape2D_exsck")
 
@@ -269,9 +259,6 @@ autoplay = "walk"
 position = Vector2(0, -8)
 stream = ExtResource("3_y01q2")
 
-[connection signal="area_entered" from="Node2D2/Sprite/enemy" to="." method="_on_enemy_area_entered"]
-[connection signal="area_entered" from="Node2D2/Sprite/enemy" to="." method="_on_mushroom_area_entered"]
-[connection signal="area_entered" from="Node2D2/Sprite/enemy" to="Node2D" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_left_bottom_body_exited"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]

@@ -63,9 +63,7 @@ func spawn_item():
 			spawned_item.position.y
 			create_tween().tween_property(spawned_item, "position", Vector2(spawned_item.position.x, spawned_item.position.y - 8), 1.05)
 			items.pop_front()
-	$kill/CollisionShape2D.disabled = false
-	await get_tree().create_timer(0.2).timeout
-	$kill/CollisionShape2D.disabled = true
+	
 	print("shiiid")
 
 
@@ -98,6 +96,7 @@ func _on_block_area_area_exited(area: Area2D) -> void:
 		spawnable = false
 		timing = false
 		keep = false
+		$kill/CollisionShape2D.disabled = true
 
 		
 

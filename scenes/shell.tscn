@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://h2ccg27eas81"]
+[gd_scene load_steps=15 format=3 uid="uid://h2ccg27eas81"]
 
 [ext_resource type="Script" uid="uid://bauau5bxp0wdq" path="res://script/shell.gd" id="1_8y80q"]
 [ext_resource type="Texture2D" uid="uid://ed1fh4bw1hwm" path="res://sprite/koopa.png" id="2_k7uw7"]
@@ -28,6 +28,38 @@ size = Vector2(13.0574, 17.8476)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8y80q"]
 size = Vector2(20.1059, 9.81974)
 
+[sub_resource type="Animation" id="Animation_8y80q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -12)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k7uw7"]
+_data = {
+&"RESET": SubResource("Animation_8y80q")
+}
+
 [node name="shell" type="CharacterBody2D"]
 collision_layer = 128
 collision_mask = 128
@@ -40,6 +72,7 @@ scale = Vector2(0.991931, 0.781477)
 shape = SubResource("RectangleShape2D_v7c8f")
 
 [node name="sprite" type="Sprite2D" parent="."]
+z_index = 5
 position = Vector2(0, -12)
 texture = ExtResource("2_k7uw7")
 hframes = 4
@@ -135,6 +168,11 @@ position = Vector2(-0.0419474, -7)
 rotation = -3.14159
 scale = Vector2(1.15161, 2.30723)
 shape = SubResource("RectangleShape2D_8y80q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_k7uw7")
+}
 
 [connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]
 [connection signal="body_exited" from="left bottom" to="Node2D" method="_on_side_checks_body_exited"]
