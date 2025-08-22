@@ -2,12 +2,14 @@ extends CharacterBody2D
 
 @export var avoid_ledge = false
 @export var stopped = false
-
+@export var turtle = true
+var turt = preload("res://scenes/koopa.tscn")
 var speeder = 200
 var gravity = 700 
 var speed = speeder
 var ignore = false
 var timer = 0
+var converted = false 
 
 #movement baby!!!!
 func _physics_process(delta: float) -> void:
@@ -17,9 +19,14 @@ func _physics_process(delta: float) -> void:
 	if stopped == false:
 		velocity.x = speed
 	move_and_slide()
+	if converted:
+		
 
 #func _ready():
 	#spawning()
+func _ready() -> void:
+	if turtle:
+		$AnimationPlayer.play("transform")
 
 #check if on ledge and turns.
 func _on_side_checks_body_exited(body: Node2D) -> void:
@@ -63,7 +70,7 @@ func spawning():
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	stopped = false
+	converted = true
 
 
 func _on_left_side_area_entered(area: Area2D) -> void:

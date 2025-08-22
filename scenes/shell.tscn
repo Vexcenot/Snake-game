@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://h2ccg27eas81"]
+[gd_scene load_steps=16 format=3 uid="uid://h2ccg27eas81"]
 
 [ext_resource type="Script" uid="uid://bauau5bxp0wdq" path="res://script/shell.gd" id="1_8y80q"]
 [ext_resource type="Texture2D" uid="uid://ed1fh4bw1hwm" path="res://sprite/koopa.png" id="2_k7uw7"]
@@ -55,16 +55,35 @@ tracks/1/keys = {
 "values": [Vector2(0, -12)]
 }
 
+[sub_resource type="Animation" id="Animation_k7uw7"]
+resource_name = "spawn"
+length = 4.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.26667, 2.3, 2.46667, 2.63333, 2.8, 2.96667, 3.13333, 3.3, 3.46667, 3.63333, 3.8, 3.96667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k7uw7"]
 _data = {
-&"RESET": SubResource("Animation_8y80q")
+&"RESET": SubResource("Animation_8y80q"),
+&"transform": SubResource("Animation_k7uw7")
 }
 
 [node name="shell" type="CharacterBody2D"]
 collision_layer = 128
 collision_mask = 128
 script = ExtResource("1_8y80q")
+avoid_ledge = null
 stopped = true
+turtle = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.09262)
@@ -188,3 +207,4 @@ libraries = {
 [connection signal="area_entered" from="top" to="." method="_on_top_area_entered"]
 [connection signal="area_exited" from="top" to="." method="_on_top_area_exited"]
 [connection signal="area_entered" from="shell" to="." method="_on_shell_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
