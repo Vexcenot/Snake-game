@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=16 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://pba4v6gle2ea" path="res://scenes/castle.tscn" id="10_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="11_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://cpkdjcp5lcxe" path="res://scenes/pipe.tscn" id="12_eb6dy"]
-[ext_resource type="PackedScene" uid="uid://cx4c0751brj4m" path="res://scenes/koopa.tscn" id="12_trceg"]
 [ext_resource type="PackedScene" uid="uid://h2ccg27eas81" path="res://scenes/shell.tscn" id="13_trceg"]
 
 [sub_resource type="PackedScene" id="PackedScene_eb6dy"]
@@ -38,7 +37,7 @@ metadata/_edit_group_ = true
 visible = false
 
 [node name="mushroom3" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(390, 201)
+position = Vector2(177, 141)
 stopped = true
 
 [node name="question block7" parent="." instance=ExtResource("6_06g6w")]
@@ -61,11 +60,48 @@ blocked = false
 position = Vector2(104, 88)
 
 [node name="brick4" parent="." instance=ExtResource("10_choun")]
-position = Vector2(88, 88)
+position = Vector2(70, 127)
+
+[node name="brick5" parent="." instance=ExtResource("10_choun")]
+position = Vector2(86, 127)
+
+[node name="brick6" parent="." instance=ExtResource("10_choun")]
+position = Vector2(102, 127)
+
+[node name="brick7" parent="." instance=ExtResource("10_choun")]
+position = Vector2(118, 127)
+
+[node name="brick8" parent="." instance=ExtResource("10_choun")]
+position = Vector2(134, 127)
+
+[node name="brick10" parent="." instance=ExtResource("10_choun")]
+position = Vector2(150, 127)
+
+[node name="brick11" parent="." instance=ExtResource("10_choun")]
+position = Vector2(166, 127)
+
+[node name="brick12" parent="." instance=ExtResource("10_choun")]
+position = Vector2(182, 127)
+
+[node name="brick13" parent="." instance=ExtResource("10_choun")]
+position = Vector2(198, 127)
+
+[node name="brick14" parent="." instance=ExtResource("10_choun")]
+position = Vector2(214, 127)
+
+[node name="brick15" parent="." instance=ExtResource("10_choun")]
+position = Vector2(230, 127)
+
+[node name="brick16" parent="." instance=ExtResource("10_choun")]
+position = Vector2(246, 127)
+
+[node name="brick17" parent="." instance=ExtResource("10_choun")]
+position = Vector2(262, 127)
 
 [node name="question block10" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(72, 88)
-items = Array[PackedScene]([ExtResource("8_fs55x"), ExtResource("8_fs55x"), ExtResource("8_fs55x")])
+items = Array[PackedScene]([ExtResource("6_2spgy")])
+false_block = true
 
 [node name="brick9" parent="." instance=ExtResource("10_choun")]
 position = Vector2(120, 88)
@@ -77,33 +113,10 @@ position = Vector2(3272, 208)
 position = Vector2(264, 144)
 
 [node name="FireFlower3" parent="." instance=ExtResource("10_eb6dy")]
-position = Vector2(32, 96)
+position = Vector2(69, 114)
 
-[node name="Goomba" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(112, 80)
-avoid_ledge = true
-
-[node name="Goomba4" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(88, 80)
-avoid_ledge = true
-
-[node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
-position = Vector2(64, 208)
-x_snek = 3480
-x_cam = 3456
-teleporterable = true
-world = "res://scenes/underground.tscn"
-ID = "000"
-TargetID = "aaa"
-
-[node name="pipe3" parent="." instance=ExtResource("12_eb6dy")]
-position = Vector2(176, 208)
-x_snek = 3480
-x_cam = 3456
-teleporterable = true
-world = "res://scenes/underground.tscn"
-ID = "000"
-TargetID = "aaa"
+[node name="FireFlower4" parent="." instance=ExtResource("10_eb6dy")]
+position = Vector2(53, 114)
 
 [node name="camera_system" parent="." instance=ExtResource("8_85g3d")]
 
@@ -133,32 +146,18 @@ position = Vector2(2624, 197)
 scale = Vector2(0.68941, 1)
 shape = SubResource("RectangleShape2D_ya4ey")
 
-[node name="Goomba3" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(224, 208)
-avoid_ledge = true
-
 [node name="Goomba6" parent="." instance=ExtResource("11_ya4ey")]
 position = Vector2(624, 200)
 avoid_ledge = true
-
-[node name="Goomba5" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(240, 208)
-avoid_ledge = true
+turn_shell = true
 
 [node name="mushroom2" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(24, 208)
+position = Vector2(24, 210)
 
 [node name="shell" parent="." instance=ExtResource("13_trceg")]
 position = Vector2(64, 144)
+avoid_ledge = false
+turtle = true
 
-[node name="Koopa3" parent="." instance=ExtResource("12_trceg")]
-position = Vector2(104, 208)
-avoid_ledge = true
-
-[node name="Koopa4" parent="." instance=ExtResource("12_trceg")]
-position = Vector2(128, 208)
-avoid_ledge = true
-
-[node name="Koopa5" parent="." instance=ExtResource("12_trceg")]
-position = Vector2(152, 208)
-avoid_ledge = true
+[node name="Goomba" parent="." instance=ExtResource("11_ya4ey")]
+position = Vector2(129, 175)

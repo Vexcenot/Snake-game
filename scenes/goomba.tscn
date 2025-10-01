@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bwwi52l72ncsf"]
+[gd_scene load_steps=19 format=3 uid="uid://bwwi52l72ncsf"]
 
 [ext_resource type="Script" uid="uid://c33skdsqnghbu" path="res://script/enemy.gd" id="1_13s4y"]
 [ext_resource type="Texture2D" uid="uid://cyjxthecr7oxv" path="res://sprite/goomba.png" id="2_tdxqk"]
@@ -169,6 +169,12 @@ _data = {
 &"walk": SubResource("Animation_5lml2")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3hfl1"]
+size = Vector2(20, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xltp"]
+size = Vector2(20, 8)
+
 [node name="Goomba" type="CharacterBody2D"]
 collision_layer = 130
 collision_mask = 129
@@ -259,6 +265,20 @@ autoplay = "walk"
 position = Vector2(0, -8)
 stream = ExtResource("3_y01q2")
 
+[node name="enemy" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
+position = Vector2(0, -6)
+scale = Vector2(0.6078276, 1)
+shape = SubResource("RectangleShape2D_3hfl1")
+
+[node name="Shell" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shell"]
+position = Vector2(0, -26)
+scale = Vector2(1.2399974, 1)
+shape = SubResource("RectangleShape2D_6xltp")
+
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_left_bottom_body_exited"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]
@@ -272,3 +292,4 @@ stream = ExtResource("3_y01q2")
 [connection signal="body_entered" from="left side" to="." method="_on_left_side_body_entered"]
 [connection signal="area_entered" from="right side" to="." method="_on_right_side_area_entered"]
 [connection signal="body_entered" from="right side" to="." method="_on_right_side_body_entered"]
+[connection signal="area_entered" from="Shell" to="." method="_on_shell_area_entered"]

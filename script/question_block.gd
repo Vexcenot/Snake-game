@@ -10,6 +10,8 @@ var keep = false
 
 
 func _ready() -> void:
+	if false_block or invis_block:
+		$AnimationPlayer.stop()
 	pass
 
 func _process(delta: float) -> void:
@@ -18,22 +20,26 @@ func _process(delta: float) -> void:
 	rest_block()
 	keepSpawning()
 
+#handles block appearence
 func visability():
 	if false_block:
-		$AllTheSmallBlocksTogether.frame = 1
+		$Node2D/AllTheSmallBlocksTogether.frame = 1
 	elif invis_block:
-		$AllTheSmallBlocksTogether.visible = false
+		$Node2D/AllTheSmallBlocksTogether.visible = false
 
 #func _input(event):
 	#if event.is_action_pressed("k_up") and snake_under:
 		#spawn_item()
 
+#turns block into empty brick when empty
 func rest_block():
 	if items.size() == 0:
+		$AnimationPlayer.stop()
+		$Node2D/AllTheSmallBlocksTogether.frame = 7
 		invis_block = false
 		false_block = false
-		$AllTheSmallBlocksTogether.visible = true
-		$AllTheSmallBlocksTogether.frame = 7
+		$Node2D/AllTheSmallBlocksTogether.visible = true
+		$Node2D/AllTheSmallBlocksTogether.frame = 7
 		await get_tree().create_timer(0.8).timeout
 		$block_area.monitorable = false
 		$block_area.monitoring = false
@@ -45,28 +51,30 @@ func spawn_item():
 		await get_tree().create_timer(0.1).timeout
 		var coining = items[0].resource_path == "res://scenes/coin.tscn"
 		var mushrooming = items[0].resource_path == "res://scenes/mushroom.tscn"
+		#handles spawning coin
 		if coining:
-			$AnimationPlayer.play("bump")
+			$Node2D/AnimationPlayer.play("bump")
 			var coin_instance = items[0].instantiate()
 			add_child(coin_instance)
 			items.pop_front()
+		#replaces mushroom with fire flower if snake already big
 		else:
 			if mushrooming and Global.snake_status != "small":
 				print('jack')
 				items[0] = load("res://scenes/fire_flower.tscn")
 			
-			$AnimationPlayer.play("bump")
+		#spawns item normally
+			$Node2D/AnimationPlayer.play("bump")
 			$spawn_sound.play()
 			$bump_sound.play()
 			var spawned_item = items[0].instantiate()
 			add_child(spawned_item)
-			spawned_item.position.y
+			#spawned_item.position.y
 			create_tween().tween_property(spawned_item, "position", Vector2(spawned_item.position.x, spawned_item.position.y - 8), 1.05)
 			items.pop_front()
-	
-	print("shiiid")
+			#when animation finishes play idle again
 
-
+#handles snake staying under block
 func keepSpawning():
 	if spawnable and keep:
 		spawn_item()
@@ -77,6 +85,8 @@ func keepSpawning():
 	elif spawnable:
 		spawn_item()
 		spawnable = false
+
+
 #toggles if snake is under block
 func _on_block_area_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":
@@ -89,7 +99,7 @@ func _on_block_area_area_entered(area: Area2D) -> void:
 
 
 			
-
+#if snake leaves
 func _on_block_area_area_exited(area: Area2D) -> void:
 	if area.name == "Head Area":
 		snake_under = false
@@ -97,16 +107,3 @@ func _on_block_area_area_exited(area: Area2D) -> void:
 		timing = false
 		keep = false
 		$kill/CollisionShape2D.disabled = true
-
-		
-
-		
-func move_up_16_pixels():
-	position.y -= 16
-
-
-	
-
-
-		
-#make it so that if coin scene then use slightly diff function

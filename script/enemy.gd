@@ -6,6 +6,7 @@ var shell = preload("res://scenes/shell.tscn")
 @export var avoid_ledge = false
 @export var block = false
 @export var flippable = false
+@export var turn_shell = false
 var speed = -speeder
 var activate = false
 var leftfloor = 0
@@ -116,19 +117,6 @@ func spawnShell():
 			get_parent().add_child(shellio)
 			shellio.global_position = global_position
 			queue_free()
-	
-
-#turns to shell if touched ontop
-func _on_shell_area_entered(area: Area2D) -> void:
-	if dead == false:
-		if area.name == "Head Area":
-			if Global.snake_status != "small" and Global.direction == "down":
-				await get_tree().create_timer(0.01).timeout
-				$Node2D2/Sprite/enemy.monitorable = false
-			else:
-				head = true
-				await get_tree().create_timer(0.01).timeout
-				$Node2D2/Sprite/enemy.monitorable = false
 
 
 func _on_koopa_top_area_entered(area: Area2D) -> void:
@@ -155,7 +143,7 @@ func _on_koopa_top_area_exited(area: Area2D) -> void:
 
 func _on_left_side_area_entered(area: Area2D) -> void:
 	if dead == false:
-		if area.name == "Head Area":
+		if area.name == "Head Area" and Global.snake_status != "small":
 			$Node2D2/Sprite.visible = false
 			await get_tree().create_timer(0.1).timeout
 			queue_free()
@@ -166,7 +154,7 @@ func _on_left_side_area_entered(area: Area2D) -> void:
 
 func _on_right_side_area_entered(area: Area2D) -> void:
 	if dead == false:
-		if area.name == "Head Area":
+		if area.name == "Head Area" and Global.snake_status != "small":
 			$Node2D2/Sprite.visible = false
 			await get_tree().create_timer(0.1).timeout
 			queue_free()
@@ -176,3 +164,15 @@ func _on_right_side_area_entered(area: Area2D) -> void:
 		if area.name == "delete" and activate:
 			print("FUEEKE")
 			queue_free()
+
+#fix turt just diappearing
+func _on_shell_area_entered(area: Area2D) -> void:
+	if dead == false and turn_shell:
+		if area.name == "Head Area":
+			if Global.direction == "down":
+				await get_tree().create_timer(0.01).timeout
+				$Node2D2/Sprite/enemy.monitorable = false
+			else:
+				head = true
+				await get_tree().create_timer(0.01).timeout
+				$Node2D2/Sprite/enemy.monitorable = false

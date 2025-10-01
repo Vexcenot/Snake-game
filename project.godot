@@ -12,12 +12,17 @@ config_version=5
 
 config/name="idk yet"
 run/main_scene="res://scenes/main.tscn"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
+run/max_fps=60
 config/icon="res://sprite/icon.svg"
 
 [autoload]
 
 Global="*res://script/global.gd"
+
+[debug]
+
+gdscript/warnings/unused_parameter=0
 
 [display]
 
@@ -25,6 +30,7 @@ window/size/viewport_width=256
 window/size/viewport_height=240
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
+window/max_fps=60
 
 [global_group]
 

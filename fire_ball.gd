@@ -1,9 +1,10 @@
 extends Node2D
 @export var move_state = 0
-var bounce_state = false
-var speed = 1.8
+var bounce_state = 0
+var speed = 200
 var explode = false
 var explode2 = true
+var halfSpeed = 0
 func _ready() -> void:
 	Global.active_balls += 1
 	
@@ -19,25 +20,32 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	exploding()
 	if move_state == 0 or move_state == 3:
-		position.x += speed
+		position.x += speed*delta
 	elif move_state == 1:
-		position.x -= speed
+		position.x -= speed*delta
 	elif move_state == 2:
-		position.x -= speed
-		position.y -= speed
+		position.x -= speed*delta
+		position.y -= speed*delta
 		await get_tree().create_timer(0.1).timeout
-		position.y += speed
+		position.y += speed*delta
 	#bounces when hits groundd
-	if bounce_state:
-		position.y -= speed
+	halfSpeed += 850*delta
+	if bounce_state == 2:
+		position.y -= speed*delta
+	elif bounce_state == 1:
+		position.y += halfSpeed*delta
 	else:
-		position.y += speed
+		position.y += speed*delta
+		
 
+#set bounce status
 func _on_bottom_collision_body_entered(body: Node2D) -> void:
 	if body.name != "Snek" or body.name != "tail_collision":
-		bounce_state = true 
+		bounce_state = 2
 		await get_tree().create_timer(0.08).timeout
-		bounce_state = false
+		halfSpeed = 0
+		bounce_state = 1
+		
 
 func exploding():
 	if explode and explode2:

@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var avoid_ledge = false
 @export var stopped = false
 @export var turtle = true
-var turt = preload("res://scenes/koopa.tscn")
+var turt = preload("res://scenes/goomba.tscn")
 var speeder = 200
 var gravity = 700 
 var speed = speeder
@@ -19,7 +19,7 @@ func _physics_process(delta: float) -> void:
 	if stopped == false:
 		velocity.x = speed
 	move_and_slide()
-	if converted:
+		
 		
 
 #func _ready():

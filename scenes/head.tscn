@@ -312,10 +312,12 @@ scale = Vector2(0.295915, 0.295915)
 shape = SubResource("RectangleShape2D_tctuf")
 
 [node name="Camera" type="Camera2D" parent="."]
+position = Vector2(3, 59.5)
+rotation = 0.27837995
 limit_left = 0
 limit_top = 0
 limit_right = 9999
-limit_bottom = 0
+limit_bottom = 240
 position_smoothing_speed = 100.0
 drag_horizontal_offset = -1.0
 drag_left_margin = 1.0
