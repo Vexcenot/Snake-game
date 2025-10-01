@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=17 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://pba4v6gle2ea" path="res://scenes/castle.tscn" id="10_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="11_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://cpkdjcp5lcxe" path="res://scenes/pipe.tscn" id="12_eb6dy"]
+[ext_resource type="PackedScene" uid="uid://dkd651q06i08r" path="res://scenes/koopa.tscn" id="13_a8y0u"]
 [ext_resource type="PackedScene" uid="uid://h2ccg27eas81" path="res://scenes/shell.tscn" id="13_trceg"]
 
 [sub_resource type="PackedScene" id="PackedScene_eb6dy"]
@@ -28,7 +29,7 @@ position = Vector2(1688, 240)
 texture = ExtResource("1_h5eht")
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(56, 104)
+position = Vector2(46, 158)
 scale = Vector2(2, 2.07506)
 fire_ball = SubResource("PackedScene_eb6dy")
 metadata/_edit_group_ = true
@@ -132,6 +133,18 @@ shape = SubResource("RectangleShape2D_is7ar")
 [node name="castle" parent="wall" instance=ExtResource("10_ya4ey")]
 position = Vector2(3, -32)
 
+[node name="coin" parent="wall" instance=ExtResource("8_fs55x")]
+position = Vector2(-280, -176)
+blocked = false
+
+[node name="coin2" parent="wall" instance=ExtResource("8_fs55x")]
+position = Vector2(-257, -176)
+blocked = false
+
+[node name="coin3" parent="wall" instance=ExtResource("8_fs55x")]
+position = Vector2(-232, -176)
+blocked = false
+
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(2616, 176)
 
@@ -156,8 +169,9 @@ position = Vector2(24, 210)
 
 [node name="shell" parent="." instance=ExtResource("13_trceg")]
 position = Vector2(64, 144)
-avoid_ledge = false
-turtle = true
 
 [node name="Goomba" parent="." instance=ExtResource("11_ya4ey")]
 position = Vector2(129, 175)
+
+[node name="koopa" parent="." instance=ExtResource("13_a8y0u")]
+position = Vector2(95, 208)

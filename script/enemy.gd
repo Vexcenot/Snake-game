@@ -26,7 +26,6 @@ func spriteOrientation():
 #movement baby!!!!
 func _physics_process(delta: float) -> void:
 	if block == false and activate == true and dead == false:
-
 		velocity.x = speed
 		velocity.y += gravity * delta  # Apply gravity
 		move_and_slide()
@@ -167,12 +166,8 @@ func _on_right_side_area_entered(area: Area2D) -> void:
 
 #fix turt just diappearing
 func _on_shell_area_entered(area: Area2D) -> void:
-	if dead == false and turn_shell:
-		if area.name == "Head Area":
-			if Global.direction == "down":
-				await get_tree().create_timer(0.01).timeout
-				$Node2D2/Sprite/enemy.monitorable = false
-			else:
-				head = true
-				await get_tree().create_timer(0.01).timeout
-				$Node2D2/Sprite/enemy.monitorable = false
+	if turn_shell and area.name == "Head Area" and Global.direction == "down":
+		var enemy_instance = shell.instantiate()
+		get_tree().root.add_child(enemy_instance)
+		enemy_instance.global_position = position
+		queue_free()
