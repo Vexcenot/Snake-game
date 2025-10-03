@@ -2,15 +2,14 @@ extends CharacterBody2D
 
 @export var avoid_ledge = false
 @export var stopped = false
-@export var turtle = true
+@export var turn2turtle = true
 var turt = preload("res://scenes/goomba.tscn")
 var speeder = 200
 var gravity = 700 
 var speed = speeder
 var ignore = false
 var timer = 0
-var converted = false 
-var live = false
+var converted = false
 
 #movement baby!!!!
 func _physics_process(delta: float) -> void:
@@ -26,37 +25,43 @@ func _physics_process(delta: float) -> void:
 	#spawning()
 func _ready() -> void:
 	#make it not do this when moving
-	if turtle:
+	if turn2turtle:
 		$AnimationPlayer.play("transform")
 
 #check if on edge and turns
 func _on_left_side_body_entered(body: Node2D) -> void:
 	if body.name == "Snek":
 		position.x += 10
-
 		speed = speeder
+		$AnimationPlayer.play("RESET")
+
 	if body.name == "brick":
 		speed = speeder
+		$AnimationPlayer.play("RESET")
 
 
 func _on_right_side_body_entered(body: Node2D) -> void:
 	if body.name == "Snek":
 		position.x -= 10
-
 		speed = -speeder
+		$AnimationPlayer.play("RESET")
+
 	if body.name == "brick" or "":
 		speed = -speeder
+		$AnimationPlayer.play("RESET")
 
 func die():
-	#$"left bottom".monitoring = false
-	#$"right bottom".monitoring = false
-	#$"left side".monitoring = false
-	#$"right side".monitoring = false
-	#$edible2.monitorable = false
-	#$enemy2.monitorable = false
-	#$enemy.monitorable = false
-	#$top.monitorable = false
-	#$shell.monitorable = false
+	$sprite/AnimationPlayer.play("die")
+	$"left bottom".monitoring = false
+	$"right bottom".monitoring = false
+	$"left side".monitoring = false
+	$"right side".monitoring = false
+	$edible2.monitorable = false
+	$enemy2.monitorable = false
+	$enemy.monitorable = false
+	$top.monitorable = false
+	$shell.monitorable = false
+	await get_tree().create_timer(5).timeout
 	queue_free() #add die animation
 
 func set_speed():
@@ -151,3 +156,8 @@ func _on_shell_area_entered(area: Area2D) -> void:
 		print("FUUUUUUUGH")
 		queue_free()
 		
+
+
+func _on_enemy_2_area_entered(area: Area2D) -> void:
+	if area.name == "kill":
+		die()

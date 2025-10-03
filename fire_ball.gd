@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 		await get_tree().create_timer(0.1).timeout
 		position.y += speed*delta
 	#bounces when hits groundd
-	halfSpeed += 850*delta
+	halfSpeed += 855*delta
 	if bounce_state == 2:
 		position.y -= speed*delta
 	elif bounce_state == 1:

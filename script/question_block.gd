@@ -47,6 +47,11 @@ func rest_block():
 
 
 func spawn_item():
+	#make it not kill the enemy coming out of it
+	if Global.snake_status == "small" and Global.direction == "up" or Global.direction == "left" or Global.direction == "right":
+		$kill/CollisionShape2D.disabled = false
+	else:
+		$kill/CollisionShape2D.disabled = true
 	if items.size() > 0:
 		await get_tree().create_timer(0.1).timeout
 		var coining = items[0].resource_path == "res://scenes/coin.tscn"

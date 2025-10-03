@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/rise up.wav" id="6_kqedj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
-size = Vector2(16.5839, 4.999999)
+size = Vector2(16.5839, 8.838884)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpp18"]
 size = Vector2(10.0103, 1.27967)
@@ -58,8 +58,8 @@ tracks/2/path = NodePath(".:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(2, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/3/type = "value"
@@ -249,8 +249,8 @@ flippable = true
 turn_shell = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1.7763568e-15, -2.0463076)
-scale = Vector2(0.820104, 0.781477)
+position = Vector2(1.7763568e-15, -3.5463076)
+scale = Vector2(0.68360394, 0.781477)
 shape = SubResource("RectangleShape2D_v7c8f")
 
 [node name="Node2D2" type="Node2D" parent="."]
@@ -260,6 +260,7 @@ z_index = 5
 position = Vector2(0, -12)
 texture = ExtResource("2_grttc")
 hframes = 4
+frame = 2
 
 [node name="left bottom" type="Area2D" parent="."]
 position = Vector2(3.55271e-15, -8)

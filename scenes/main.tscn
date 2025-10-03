@@ -43,7 +43,7 @@ stopped = true
 
 [node name="question block7" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(97, 33)
-items = Array[PackedScene]([ExtResource("8_fs55x"), ExtResource("8_fs55x")])
+items = Array[PackedScene]([ExtResource("13_a8y0u")])
 
 [node name="coin" parent="." instance=ExtResource("8_fs55x")]
 position = Vector2(69, 24)
@@ -183,13 +183,17 @@ turn_shell = true
 position = Vector2(134, 119)
 
 [node name="Goomba2" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(183, -28)
+position = Vector2(97, 25)
+avoid_ledge = true
 
 [node name="koopa" parent="." instance=ExtResource("13_a8y0u")]
-position = Vector2(129, 25)
+position = Vector2(198, 15)
 
 [node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
 position = Vector2(151, 26)
 
 [node name="shell" parent="." instance=ExtResource("13_trceg")]
-position = Vector2(98, 26)
+position = Vector2(113, 57)
+
+[node name="shell2" parent="." instance=ExtResource("13_trceg")]
+position = Vector2(114, 25)
