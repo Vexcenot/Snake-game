@@ -10,6 +10,7 @@ var speed = speeder
 var ignore = false
 var timer = 0
 var converted = false 
+var live = false
 
 #movement baby!!!!
 func _physics_process(delta: float) -> void:
@@ -20,34 +21,42 @@ func _physics_process(delta: float) -> void:
 		velocity.x = speed
 	move_and_slide()
 		
-		
 
 #func _ready():
 	#spawning()
 func _ready() -> void:
+	#make it not do this when moving
 	if turtle:
 		$AnimationPlayer.play("transform")
-
-#check if on ledge and turns.
-func _on_side_checks_body_exited(body: Node2D) -> void:
-	if speed == speeder and avoid_ledge == true:
-		speed = -speeder
-	elif speed == -speeder and avoid_ledge == true:
-		speed = speeder
 
 #check if on edge and turns
 func _on_left_side_body_entered(body: Node2D) -> void:
 	if body.name == "Snek":
 		position.x += 10
-	speed = speeder
+
+		speed = speeder
+	if body.name == "brick":
+		speed = speeder
 
 
 func _on_right_side_body_entered(body: Node2D) -> void:
 	if body.name == "Snek":
 		position.x -= 10
-	speed = -speeder
+
+		speed = -speeder
+	if body.name == "brick" or "":
+		speed = -speeder
 
 func die():
+	#$"left bottom".monitoring = false
+	#$"right bottom".monitoring = false
+	#$"left side".monitoring = false
+	#$"right side".monitoring = false
+	#$edible2.monitorable = false
+	#$enemy2.monitorable = false
+	#$enemy.monitorable = false
+	#$top.monitorable = false
+	#$shell.monitorable = false
 	queue_free() #add die animation
 
 func set_speed():
@@ -77,12 +86,17 @@ func _on_left_side_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area" and ignore == false and stopped == true:
 		position.x += 10
 		stopped = false
-		await get_tree().create_timer(0.1).timeout
+		$".".set_collision_layer_value(1, false)
+		$enemy2/hurtCollision.disabled = false
+		
+		await get_tree().create_timer(0.01).timeout
+		$enemy2.monitorable = true
 		$enemy2.monitorable = true
 		
 		
 		await get_tree().create_timer(1.22).timeout
 		$enemy.monitorable = true
+		
 	if area.name == "enemy2":
 		die()
 		
@@ -92,7 +106,10 @@ func _on_right_side_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area" and ignore == false and stopped == true:
 		position.x -= 10
 		stopped = false
-		await get_tree().create_timer(0.1).timeout
+		$".".set_collision_layer_value(3, false)
+		$enemy2/hurtCollision.disabled = false
+		
+		await get_tree().create_timer(0.01).timeout
 		$enemy2.monitorable = true
 		$enemy2.monitorable = true
 		
@@ -107,7 +124,10 @@ func _on_top_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area" and ignore == false and stopped == true:
 		position.x += 10
 		stopped = false
-		await get_tree().create_timer(0.1).timeout
+		$".".set_collision_layer_value(1, false)
+		$enemy2/hurtCollision.disabled = false
+		
+		await get_tree().create_timer(0.01).timeout
 		$enemy2.monitorable = true
 		$enemy2.monitorable = true
 		

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://h2ccg27eas81"]
+[gd_scene load_steps=17 format=3 uid="uid://h2ccg27eas81"]
 
 [ext_resource type="Script" uid="uid://bauau5bxp0wdq" path="res://script/shell.gd" id="1_8y80q"]
 [ext_resource type="Texture2D" uid="uid://ed1fh4bw1hwm" path="res://sprite/koopa.png" id="2_k7uw7"]
@@ -23,7 +23,7 @@ size = Vector2(2, 9.99548)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euomj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
-size = Vector2(13.0574, 17.8476)
+size = Vector2(3.9437208, 17.8476)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8y80q"]
 size = Vector2(20.1059, 9.81974)
@@ -54,6 +54,53 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(0, -12)]
 }
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("sprite:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("sprite:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-12, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_qr86p"]
+resource_name = "die"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sprite:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-12, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_k7uw7"]
 resource_name = "spawn"
@@ -74,12 +121,12 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k7uw7"]
 _data = {
 &"RESET": SubResource("Animation_8y80q"),
+&"die": SubResource("Animation_qr86p"),
 &"transform": SubResource("Animation_k7uw7")
 }
 
 [node name="shell" type="CharacterBody2D"]
-collision_layer = 128
-collision_mask = 128
+collision_layer = 4
 script = ExtResource("1_8y80q")
 stopped = true
 
@@ -157,8 +204,8 @@ position = Vector2(0, -6)
 monitorable = false
 
 [node name="hurtCollision" type="CollisionShape2D" parent="enemy2"]
-position = Vector2(1.00974e-28, -1)
-scale = Vector2(1.79236, 1.21247)
+position = Vector2(-9.536743e-07, -1)
+scale = Vector2(1.1605511, -0.782735)
 shape = SubResource("RectangleShape2D_pmrqf")
 
 [node name="enemy" type="Area2D" parent="."]

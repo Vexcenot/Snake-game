@@ -32,30 +32,24 @@ collision_mask = 131
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top_block"]
 position = Vector2(0, -53)
-scale = Vector2(1.6, 1)
+scale = Vector2(1.4, 1)
 shape = SubResource("RectangleShape2D_arayy")
-
-[node name="left wall" type="StaticBody2D" parent="."]
-collision_layer = 135
-collision_mask = 135
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="left wall"]
-position = Vector2(-12, -30)
-scale = Vector2(0.88, 1)
-shape = SubResource("RectangleShape2D_arpqm")
-
-[node name="right wall" type="StaticBody2D" parent="."]
-collision_layer = 135
-collision_mask = 135
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="right wall"]
-position = Vector2(12, -30)
-scale = Vector2(0.880001, 1)
-shape = SubResource("RectangleShape2D_arpqm")
 
 [node name="PowerDown" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-6, 3.5)
 stream = ExtResource("3_8p0di")
 volume_db = 24.0
+
+[node name="brick" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="brick"]
+position = Vector2(-12, -30)
+scale = Vector2(0.88, 1)
+shape = SubResource("RectangleShape2D_arpqm")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="brick"]
+position = Vector2(12, -30)
+scale = Vector2(0.880001, 1)
+shape = SubResource("RectangleShape2D_arpqm")
 
 [connection signal="area_entered" from="pipe_enter" to="." method="_on_enter_pipe_area_entered"]

@@ -602,6 +602,8 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		move_exit = true
 	if area.name == "enemy" and Global.snake_status == "small":
 		hurt()
+	if area.name == "enemyKoopa" and Global.snake_status == "small" and Global.direction != "down":
+		hurt()
 	if area.name == "edible":
 		openJaw += 1
 	if area.name == "edible2" and Global.snake_status != "small":

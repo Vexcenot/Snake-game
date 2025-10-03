@@ -47,6 +47,11 @@ func kill():
 	$"right side".monitorable = false
 	$edible2.monitorable = false
 	$CollisionShape2D.disabled = true
+	#make seperate koopa script
+	#$enemyKoopa.monitorable = false
+	#$enemyKoopa.monitoring = false
+	await get_tree().create_timer(5).timeout
+	queue_free()
 
 	#queue_free() #add flip animation
 func turnMover():
@@ -55,24 +60,6 @@ func turnMover():
 			speed = -speeder
 		elif speed == -speeder:
 			speed = speeder
-#if bumped wall, turns.
-#func _on_left_side_body_entered(body: Node2D) -> void:
-	#if dead == false:
-		#direction += 1 
-#
-#func _on_right_side_body_entered(body: Node2D) -> void:
-	#if dead == false:
-		#direction -= 1 
-	#
-#func _on_left_side_area_entered(area: Area2D) -> void:
-	#if dead == false:
-		#if area.name == "enemy" or area.name == "shell":
-			#direction += 1 
-#
-#func _on_right_side_area_entered(area: Area2D) -> void:
-	#if dead == false:
-		#if area.name == "enemy" or area.name == "shell":
-			#direction -= 1 
 
 #play sprite animation sliding up and enabling movement
 func block_spawn():
@@ -164,8 +151,8 @@ func _on_right_side_area_entered(area: Area2D) -> void:
 			print("FUEEKE")
 			queue_free()
 
-#fix turt just diappearing
-func _on_shell_area_entered(area: Area2D) -> void:
+#turns to shell when snake touches from above
+func _on_enemy_koopa_area_entered(area: Area2D) -> void:
 	if turn_shell and area.name == "Head Area" and Global.direction == "down":
 		var enemy_instance = shell.instantiate()
 		get_tree().root.add_child(enemy_instance)

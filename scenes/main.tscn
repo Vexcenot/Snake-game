@@ -29,7 +29,7 @@ position = Vector2(1688, 240)
 texture = ExtResource("1_h5eht")
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(46, 158)
+position = Vector2(40, 16)
 scale = Vector2(2, 2.07506)
 fire_ball = SubResource("PackedScene_eb6dy")
 metadata/_edit_group_ = true
@@ -42,7 +42,7 @@ position = Vector2(177, 141)
 stopped = true
 
 [node name="question block7" parent="." instance=ExtResource("6_06g6w")]
-position = Vector2(86, 39)
+position = Vector2(97, 33)
 items = Array[PackedScene]([ExtResource("8_fs55x"), ExtResource("8_fs55x")])
 
 [node name="coin" parent="." instance=ExtResource("8_fs55x")]
@@ -58,7 +58,7 @@ position = Vector2(37, 24)
 blocked = false
 
 [node name="brick" parent="." instance=ExtResource("10_choun")]
-position = Vector2(104, 88)
+position = Vector2(113, 33)
 
 [node name="brick4" parent="." instance=ExtResource("10_choun")]
 position = Vector2(70, 127)
@@ -105,7 +105,22 @@ items = Array[PackedScene]([ExtResource("6_2spgy")])
 false_block = true
 
 [node name="brick9" parent="." instance=ExtResource("10_choun")]
-position = Vector2(120, 88)
+position = Vector2(129, 33)
+
+[node name="brick18" parent="." instance=ExtResource("10_choun")]
+position = Vector2(145, 33)
+
+[node name="brick19" parent="." instance=ExtResource("10_choun")]
+position = Vector2(145, 17)
+
+[node name="brick20" parent="." instance=ExtResource("10_choun")]
+position = Vector2(177, 33)
+
+[node name="brick22" parent="." instance=ExtResource("10_choun")]
+position = Vector2(161, 33)
+
+[node name="brick21" parent="." instance=ExtResource("10_choun")]
+position = Vector2(193, 33)
 
 [node name="castle" parent="." instance=ExtResource("10_ya4ey")]
 position = Vector2(3272, 208)
@@ -117,7 +132,7 @@ position = Vector2(264, 144)
 position = Vector2(69, 114)
 
 [node name="FireFlower4" parent="." instance=ExtResource("10_eb6dy")]
-position = Vector2(53, 114)
+position = Vector2(62, 162)
 
 [node name="camera_system" parent="." instance=ExtResource("8_85g3d")]
 
@@ -164,14 +179,17 @@ position = Vector2(624, 200)
 avoid_ledge = true
 turn_shell = true
 
-[node name="mushroom2" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(24, 210)
-
-[node name="shell" parent="." instance=ExtResource("13_trceg")]
-position = Vector2(64, 144)
-
 [node name="Goomba" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(129, 175)
+position = Vector2(134, 119)
+
+[node name="Goomba2" parent="." instance=ExtResource("11_ya4ey")]
+position = Vector2(183, -28)
 
 [node name="koopa" parent="." instance=ExtResource("13_a8y0u")]
-position = Vector2(95, 208)
+position = Vector2(129, 25)
+
+[node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
+position = Vector2(151, 26)
+
+[node name="shell" parent="." instance=ExtResource("13_trceg")]
+position = Vector2(98, 26)

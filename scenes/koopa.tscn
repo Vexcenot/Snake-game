@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dkd651q06i08r"]
+[gd_scene load_steps=18 format=3 uid="uid://dkd651q06i08r"]
 
 [ext_resource type="Script" uid="uid://c33skdsqnghbu" path="res://script/enemy.gd" id="1_4hj56"]
 [ext_resource type="Texture2D" uid="uid://ed1fh4bw1hwm" path="res://sprite/koopa.png" id="2_grttc"]
@@ -8,7 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/rise up.wav" id="6_kqedj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
-size = Vector2(16.5839, 2.32223)
+size = Vector2(16.5839, 4.999999)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpp18"]
 size = Vector2(10.0103, 1.27967)
@@ -23,6 +23,7 @@ size = Vector2(6, 10.0979)
 size = Vector2(6.30868, 9.99548)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5lml2"]
+size = Vector2(20, 35.789883)
 
 [sub_resource type="Animation" id="Animation_xfln1"]
 length = 0.001
@@ -95,6 +96,40 @@ tracks/5/keys = {
 "points": PackedFloat32Array(-12, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("sprite:flip_v")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("sprite:position:x")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("sprite:position:y")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-12, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="Animation" id="Animation_vo5xu"]
 resource_name = "die"
@@ -129,9 +164,9 @@ tracks/2/path = NodePath(".:position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(2, 0, 0, 0, 0, 13, 0, 0, 0, 0, 16, 0, 0, 0, 0, 23, 0, 0, 0, 0, 53.1297, -0.25, 0, 0.25, 0, 61, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 1.66667, 2.86667)
+"handle_modes": PackedInt32Array(0, 0, 0, 1, 0),
+"points": PackedFloat32Array(2, 0, 0, 0, 0, 13, 0, 0, 0, 0, 16, 0, 0, 0, 0, 23, 0, 0, 0, 0, 61, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 2.1)
 }
 tracks/3/type = "bezier"
 tracks/3/imported = false
@@ -140,9 +175,43 @@ tracks/3/path = NodePath(".:position:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(-7, 0, 0, 0, 0, -24, 0, 0, 0, 0, -24, 0, 0, 0, 0, -8, 0, 0, 0, 0, 205.287, -0.25, 0, 0.25, 0, 261, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 1.66667, 2.86667)
+"handle_modes": PackedInt32Array(0, 0, 0, 1, 0),
+"points": PackedFloat32Array(-7, 0, 0, 0, 0, -24, 0, 0, 0, 0, -24, 0, 0, 0, 0, -8, 0, 0, 0, 0, 261, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 2.1)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("sprite:flip_v")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("sprite:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("sprite:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(-1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_5lml2"]
@@ -170,20 +239,17 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hfl1"]
-size = Vector2(20, 12)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xltp"]
-size = Vector2(20, 7.999999)
+size = Vector2(34.54927, 22)
 
 [node name="koopa" type="CharacterBody2D"]
 collision_layer = 130
-collision_mask = 129
+collision_mask = 133
 script = ExtResource("1_4hj56")
 flippable = true
 turn_shell = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.98023e-08, -1)
+position = Vector2(1.7763568e-15, -2.0463076)
 scale = Vector2(0.820104, 0.781477)
 shape = SubResource("RectangleShape2D_v7c8f")
 
@@ -244,7 +310,8 @@ position = Vector2(0, -8)
 scale = Vector2(0.479999, 0.479999)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="edible2"]
-scale = Vector2(2.60039, 2.88802)
+position = Vector2(0, -12.500027)
+scale = Vector2(4.1647367, -3.725456)
 shape = SubResource("RectangleShape2D_5lml2")
 
 [node name="20592Png" type="Sprite2D" parent="."]
@@ -267,19 +334,12 @@ autoplay = "walk"
 position = Vector2(0, -8)
 stream = ExtResource("6_kqedj")
 
-[node name="enemy" type="Area2D" parent="."]
+[node name="enemyKoopa" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
-position = Vector2(0, -6)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemyKoopa"]
+position = Vector2(0.49999976, -11)
 scale = Vector2(0.6078276, 1)
 shape = SubResource("RectangleShape2D_3hfl1")
-
-[node name="Shell" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shell"]
-position = Vector2(0, -26)
-scale = Vector2(1.2399974, 1)
-shape = SubResource("RectangleShape2D_6xltp")
 
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_left_bottom_body_exited"]
@@ -294,4 +354,5 @@ shape = SubResource("RectangleShape2D_6xltp")
 [connection signal="body_entered" from="left side" to="." method="_on_left_side_body_entered"]
 [connection signal="area_entered" from="right side" to="." method="_on_right_side_area_entered"]
 [connection signal="body_entered" from="right side" to="." method="_on_right_side_body_entered"]
-[connection signal="area_entered" from="Shell" to="." method="_on_shell_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="area_entered" from="enemyKoopa" to="." method="_on_enemy_koopa_area_entered"]

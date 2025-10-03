@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://xr7pysod2o11" path="res://sprite/snake flash 3.png" id="5_eios8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_frb71"]
-size = Vector2(10.003, 10.003)
+size = Vector2(10.003, 7.502244)
 
 [sub_resource type="Animation" id="Animation_8dqsq"]
 length = 0.001
@@ -107,11 +107,12 @@ scale = Vector2(2, 2)
 [node name="Sprite2D" parent="." instance=ExtResource("1_wib06")]
 z_index = 2
 
-[node name="tail_collision" type="StaticBody2D" parent="."]
+[node name="brick" type="StaticBody2D" parent="."]
 collision_layer = 3
 collision_mask = 3
 
-[node name="tail_collision_shape" type="CollisionShape2D" parent="tail_collision"]
+[node name="tail_collision_shape" type="CollisionShape2D" parent="brick"]
+position = Vector2(0, 1.0000049)
 scale = Vector2(0.799762, 0.799762)
 shape = SubResource("RectangleShape2D_frb71")
 

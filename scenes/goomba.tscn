@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="6_3hfl1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
-size = Vector2(16.5839, 2.32223)
+size = Vector2(16.5839, 4.999999)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpp18"]
 size = Vector2(10.0103, 1.27967)
@@ -23,6 +23,7 @@ size = Vector2(6, 10.0979)
 size = Vector2(6.30868, 9.99548)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5lml2"]
+size = Vector2(20, 25.87019)
 
 [sub_resource type="Animation" id="Animation_xfln1"]
 length = 0.001
@@ -130,8 +131,8 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(2, 0, 0, 0, 0, 13, 0, 0, 0, 0, 16, 0, 0, 0, 0, 23, 0, 0, 0, 0, 53.1297, -0.25, 0, 0.25, 0, 61, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 1.66667, 2.86667)
+"points": PackedFloat32Array(2, 0, 0, 0, 0, 13, 0, 0, 0, 0, 16, 0, 0, 0, 0, 16, 0, 0, 0, 0, 23, 0, 0, 0, 0, 61, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.6, 2.1)
 }
 tracks/3/type = "bezier"
 tracks/3/imported = false
@@ -141,8 +142,8 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(-7, 0, 0, 0, 0, -24, 0, 0, 0, 0, -24, 0, 0, 0, 0, -8, 0, 0, 0, 0, 205.287, -0.25, 0, 0.25, 0, 261, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.5, 1.66667, 2.86667)
+"points": PackedFloat32Array(-7, 0, 0, 0, 0, -24, 0, 0, 0, 0, -24, 0, 0, 0, 0, -24, 0, 0, 0, 0, -8, 0, 0, 0, 0, 261, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.4, 0.6, 2.1)
 }
 
 [sub_resource type="Animation" id="Animation_5lml2"]
@@ -175,13 +176,13 @@ size = Vector2(20, 12)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6xltp"]
 size = Vector2(20, 8)
 
-[node name="Goomba" type="CharacterBody2D"]
+[node name="goomba" type="CharacterBody2D"]
 collision_layer = 130
-collision_mask = 129
+collision_mask = 133
 script = ExtResource("1_13s4y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.98023e-08, -1)
+position = Vector2(2.98023e-08, -2.0463076)
 scale = Vector2(0.820104, 0.781477)
 shape = SubResource("RectangleShape2D_v7c8f")
 
@@ -242,7 +243,8 @@ position = Vector2(0, -8)
 scale = Vector2(0.479999, 0.479999)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="edible2"]
-scale = Vector2(2.60039, 2.88802)
+position = Vector2(0, 8.476613)
+scale = Vector2(2.60039, 2.8880203)
 shape = SubResource("RectangleShape2D_5lml2")
 
 [node name="20592Png" type="Sprite2D" parent="."]
