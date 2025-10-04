@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://pba4v6gle2ea" path="res://scenes/castle.tscn" id="10_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="11_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://cpkdjcp5lcxe" path="res://scenes/pipe.tscn" id="12_eb6dy"]
-[ext_resource type="PackedScene" uid="uid://dkd651q06i08r" path="res://scenes/koopa2.tscn" id="13_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://dkd651q06i08r" path="res://scenes/koopa.tscn" id="13_a8y0u"]
 [ext_resource type="PackedScene" uid="uid://h2ccg27eas81" path="res://scenes/shell.tscn" id="13_trceg"]
 
 [sub_resource type="PackedScene" id="PackedScene_eb6dy"]
@@ -100,7 +100,7 @@ position = Vector2(246, 127)
 position = Vector2(262, 127)
 
 [node name="question block10" parent="." instance=ExtResource("6_06g6w")]
-position = Vector2(72, 88)
+position = Vector2(72, 200)
 items = Array[PackedScene]([ExtResource("6_2spgy")])
 false_block = true
 
@@ -190,13 +190,16 @@ avoid_ledge = true
 position = Vector2(102, 208)
 
 [node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
-position = Vector2(146, 112)
+position = Vector2(236, 120)
+
+[node name="pipe3" parent="." instance=ExtResource("12_eb6dy")]
+position = Vector2(170, 120)
 
 [node name="shell" parent="." instance=ExtResource("13_trceg")]
-position = Vector2(113, 57)
+position = Vector2(201, 108)
 
 [node name="shell2" parent="." instance=ExtResource("13_trceg")]
-position = Vector2(75, 176)
+position = Vector2(328, 182)
 
 [node name="koopa2" parent="." instance=ExtResource("13_a8y0u")]
 position = Vector2(78, 119)

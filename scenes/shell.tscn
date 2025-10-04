@@ -368,7 +368,6 @@ size = Vector2(20.1059, 9.81974)
 [node name="shell" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_8y80q")
-stopped = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -3.09262)
@@ -395,6 +394,7 @@ stream = ExtResource("3_k7uw7")
 libraries = {
 &"": SubResource("AnimationLibrary_k7uw7")
 }
+autoplay = "transform"
 
 [node name="Node2D2" type="Node2D" parent="."]
 

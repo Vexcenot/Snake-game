@@ -1,22 +1,22 @@
 extends CharacterBody2D
 
 @export var avoid_ledge = false
-@export var stopped = false
+@export var live = false
 @export var turn2turtle = true
-var turt = preload("res://scenes/koopa2.tscn")
+var turt = preload("res://scenes/fuck.tscn")
 var speeder = 200
 var gravity = 700 
 var speed = speeder
 var ignore = false
 var timer = 0
 var converted = false
-var dieing = false
+
 #movement baby!!!!
 func _physics_process(delta: float) -> void:
 	timer += 1
 	velocity.y += gravity * delta  # Apply gravity
-	if stopped == false and dieing == false:
-		velocity.x = speed
+	#if stopped == false and dieing == false:
+	velocity.x = speed
 	move_and_slide()
 		
 
@@ -50,18 +50,17 @@ func _on_right_side_body_entered(body: Node2D) -> void:
 		$AnimationPlayer.play("RESET")
 
 func die():
-	dieing = true
 	$sprite/AnimationPlayer.play("die")
 	speed = 0
 
 func set_speed():
-	if stopped == false:
+
 		speed = speeder
 
 
 #play sprite animation sliding up and enabling movement
 func spawning():
-	if stopped == true:
+
 		$Mushrooms/AnimationPlayer.play("spawn")
 		$Mushrooms/AnimationPlayer/AudioStreamPlayer2D.play()
 
@@ -70,9 +69,9 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_left_side_area_entered(area: Area2D) -> void:
-	if area.name == "Head Area" and ignore == false and stopped == true and dieing == false:
+	if area.name == "Head Area" and ignore == false:
 		position.x += 10
-		stopped = false
+
 		$".".set_collision_layer_value(1, false)
 		$Node2D2/edible2/CollisionShape2D.disabled = false
 		
@@ -90,9 +89,9 @@ func _on_left_side_area_entered(area: Area2D) -> void:
 
 
 func _on_right_side_area_entered(area: Area2D) -> void:
-	if area.name == "Head Area" and ignore == false and stopped == true and dieing == false:
+	if area.name == "Head Area" and ignore == false:
 		position.x -= 10
-		stopped = false
+
 		$".".set_collision_layer_value(3, false)
 		$Node2D2/enemy2/hurtCollision.disabled = false
 		
@@ -108,9 +107,9 @@ func _on_right_side_area_entered(area: Area2D) -> void:
 
 
 func _on_top_area_entered(area: Area2D) -> void:
-	if area.name == "Head Area" and ignore == false and stopped == true:
+	if area.name == "Head Area" and ignore == false:
 		position.x += 10
-		stopped = false
+
 		$".".set_collision_layer_value(1, false)
 		$Node2D2/enemy2/hurtCollision.disabled = false
 		
@@ -140,5 +139,5 @@ func _on_enemy_2_area_entered(area: Area2D) -> void:
 func turnTurtle():
 	var spawnTurt = turt.instantiate()
 	get_tree().root.add_child(spawnTurt)
-	spawnTurt.global_position = position
+	spawnTurt.global_position = global_position
 	queue_free()
