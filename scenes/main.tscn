@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://pba4v6gle2ea" path="res://scenes/castle.tscn" id="10_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="11_ya4ey"]
 [ext_resource type="PackedScene" uid="uid://cpkdjcp5lcxe" path="res://scenes/pipe.tscn" id="12_eb6dy"]
-[ext_resource type="PackedScene" uid="uid://dkd651q06i08r" path="res://scenes/koopa.tscn" id="13_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://dkd651q06i08r" path="res://scenes/koopa2.tscn" id="13_a8y0u"]
 [ext_resource type="PackedScene" uid="uid://h2ccg27eas81" path="res://scenes/shell.tscn" id="13_trceg"]
 
 [sub_resource type="PackedScene" id="PackedScene_eb6dy"]

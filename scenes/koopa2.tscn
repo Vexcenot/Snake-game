@@ -258,7 +258,7 @@ size = Vector2(34.54927, 13)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_grttc"]
 size = Vector2(26.5, 20)
 
-[node name="koopa" type="CharacterBody2D"]
+[node name="koopa2" type="CharacterBody2D"]
 collision_layer = 130
 collision_mask = 133
 script = ExtResource("1_4hj56")

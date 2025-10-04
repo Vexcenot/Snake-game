@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var avoid_ledge = false
 @export var stopped = false
 @export var turn2turtle = true
-var turt = preload("res://scenes/head.tscn")
+var turt = preload("res://scenes/koopa2.tscn")
 var speeder = 200
 var gravity = 700 
 var speed = speeder
