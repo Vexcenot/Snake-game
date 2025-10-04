@@ -185,7 +185,7 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hfl1"]
-size = Vector2(20, 12)
+size = Vector2(20, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6xltp"]
 
@@ -283,13 +283,17 @@ stream = ExtResource("3_y01q2")
 [node name="enemy" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
-position = Vector2(0, -6)
-scale = Vector2(0.6078276, 1)
+position = Vector2(0, -3.5)
+scale = Vector2(0.44782907, 1)
 shape = SubResource("RectangleShape2D_3hfl1")
 
 [node name="top" type="Area2D" parent="."]
+visible = false
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
+visible = false
 position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_6xltp")
 

@@ -362,7 +362,7 @@ shape = SubResource("RectangleShape2D_3hfl1")
 [node name="top" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
-position = Vector2(1.75, -19)
+position = Vector2(0, -18)
 shape = SubResource("RectangleShape2D_grttc")
 
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]

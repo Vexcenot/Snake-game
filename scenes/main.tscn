@@ -29,7 +29,7 @@ position = Vector2(1688, 240)
 texture = ExtResource("1_h5eht")
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(46, 180)
+position = Vector2(46, 170)
 scale = Vector2(2, 2.07506)
 fire_ball = SubResource("PackedScene_eb6dy")
 metadata/_edit_group_ = true
@@ -180,7 +180,7 @@ avoid_ledge = true
 turn_shell = true
 
 [node name="Goomba" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(156, 207)
+position = Vector2(122, 208)
 
 [node name="Goomba2" parent="." instance=ExtResource("11_ya4ey")]
 position = Vector2(171, 25)
