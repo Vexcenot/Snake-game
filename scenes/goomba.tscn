@@ -145,6 +145,20 @@ tracks/3/keys = {
 "points": PackedFloat32Array(-7, 0, 0, 0, 0, -24, 0, 0, 0, 0, -24, 0, 0, 0, 0, -8, 0, 0, 0, 0, 261, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.20000005, 0.29999995, 0.5, 1.8)
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../..")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.8333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_5lml2"]
 resource_name = "walk"
@@ -174,7 +188,6 @@ _data = {
 size = Vector2(20, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6xltp"]
-size = Vector2(20, 8)
 
 [node name="goomba" type="CharacterBody2D"]
 collision_layer = 130
@@ -274,11 +287,10 @@ position = Vector2(0, -6)
 scale = Vector2(0.6078276, 1)
 shape = SubResource("RectangleShape2D_3hfl1")
 
-[node name="Shell" type="Area2D" parent="."]
+[node name="top" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shell"]
-position = Vector2(0, -26)
-scale = Vector2(1.2399974, 1)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
+position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_6xltp")
 
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]
@@ -294,4 +306,4 @@ shape = SubResource("RectangleShape2D_6xltp")
 [connection signal="body_entered" from="left side" to="." method="_on_left_side_body_entered"]
 [connection signal="area_entered" from="right side" to="." method="_on_right_side_area_entered"]
 [connection signal="body_entered" from="right side" to="." method="_on_right_side_body_entered"]
-[connection signal="area_entered" from="Shell" to="." method="_on_shell_area_entered"]
+[connection signal="area_entered" from="enemy" to="." method="_on_enemy_area_entered"]

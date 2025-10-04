@@ -114,6 +114,18 @@ tracks/8/keys = {
 "points": PackedFloat32Array(-12, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../Node2D2:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_vo5xu"]
 resource_name = "die"
@@ -197,6 +209,32 @@ tracks/6/keys = {
 "points": PackedFloat32Array(-1, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("..")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(2.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../Node2D2:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 9999)]
+}
 
 [sub_resource type="Animation" id="Animation_5lml2"]
 resource_name = "walk"
@@ -221,26 +259,6 @@ _data = {
 &"die": SubResource("Animation_vo5xu"),
 &"walk": SubResource("Animation_5lml2")
 }
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cpp18"]
-size = Vector2(10.0103, 1.27963)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kg8q6"]
-size = Vector2(1.21936, 1.27965)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sjlml"]
-size = Vector2(2, 10.0979)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_exsck"]
-size = Vector2(2, 9.99548)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_euomj"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
-size = Vector2(3.9437208, 17.8476)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8y80q"]
-size = Vector2(20.1059, 9.81974)
 
 [sub_resource type="Animation" id="Animation_8y80q"]
 length = 0.001
@@ -306,12 +324,46 @@ tracks/0/keys = {
 "update": 1,
 "values": [2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2, 3, 2]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"turnTurtle"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k7uw7"]
 _data = {
 &"RESET": SubResource("Animation_8y80q"),
 &"transform": SubResource("Animation_k7uw7")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cpp18"]
+size = Vector2(10.0103, 1.27963)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kg8q6"]
+size = Vector2(1.21936, 1.27965)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sjlml"]
+size = Vector2(2, 10.0979)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_exsck"]
+size = Vector2(2, 9.99548)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euomj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
+size = Vector2(3.9437208, 17.8476)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8y80q"]
+size = Vector2(20.1059, 9.81974)
 
 [node name="shell" type="CharacterBody2D"]
 collision_layer = 4
@@ -339,115 +391,116 @@ libraries = {
 position = Vector2(0, -8)
 stream = ExtResource("3_k7uw7")
 
-[node name="left bottom" type="Area2D" parent="."]
-position = Vector2(3.55271e-15, -8)
-scale = Vector2(0.820104, 0.781477)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="left bottom"]
-position = Vector2(-9.14518, 10.8768)
-rotation = -3.14159
-scale = Vector2(0.121811, -1)
-shape = SubResource("RectangleShape2D_cpp18")
-
-[node name="right bottom" type="Area2D" parent="."]
-position = Vector2(-5.96046e-08, -8)
-scale = Vector2(0.820104, 0.781477)
-collision_layer = 129
-collision_mask = 129
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="right bottom"]
-position = Vector2(9.14518, 10.8768)
-shape = SubResource("RectangleShape2D_kg8q6")
-
-[node name="Node2D" type="Node2D" parent="."]
-process_mode = 3
-position = Vector2(0, -8)
-script = ExtResource("4_vvj04")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node2D"]
-stream = ExtResource("5_sow7m")
-
-[node name="left side" type="Area2D" parent="."]
-position = Vector2(0, -8)
-scale = Vector2(1, 0.331275)
-collision_layer = 129
-collision_mask = 129
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="left side"]
-position = Vector2(-8, 9.05592)
-scale = Vector2(1, 2.69044)
-shape = SubResource("RectangleShape2D_sjlml")
-
-[node name="right side" type="Area2D" parent="."]
-position = Vector2(0, -8)
-scale = Vector2(0.95107, 0.380408)
-collision_layer = 129
-collision_mask = 129
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="right side"]
-position = Vector2(8.41158, 7.88627)
-scale = Vector2(1, 2.36695)
-shape = SubResource("RectangleShape2D_exsck")
-
-[node name="edible2" type="Area2D" parent="."]
-position = Vector2(0, -8)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="edible2"]
-scale = Vector2(3.07808, 3.07808)
-shape = SubResource("RectangleShape2D_euomj")
-
-[node name="enemy2" type="Area2D" parent="."]
-position = Vector2(0, -6)
-monitorable = false
-
-[node name="hurtCollision" type="CollisionShape2D" parent="enemy2"]
-position = Vector2(-9.536743e-07, -1)
-scale = Vector2(2.0005536, -0.782735)
-shape = SubResource("RectangleShape2D_pmrqf")
-
-[node name="enemy" type="Area2D" parent="."]
-position = Vector2(0, -6)
-monitorable = false
-
-[node name="hurtCollision" type="CollisionShape2D" parent="enemy"]
-position = Vector2(2.38419e-07, 0.604642)
-scale = Vector2(1.07219, 0.515997)
-shape = SubResource("RectangleShape2D_pmrqf")
-
-[node name="top" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
-position = Vector2(-1.53477e-12, -13)
-rotation = -3.14159
-scale = Vector2(0.111612, 0.185702)
-shape = SubResource("RectangleShape2D_8y80q")
-
-[node name="shell" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="shell"]
-position = Vector2(-0.0419474, -7)
-rotation = -3.14159
-scale = Vector2(1.15161, 2.30723)
-shape = SubResource("RectangleShape2D_8y80q")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_k7uw7")
 }
 
-[connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]
-[connection signal="body_exited" from="left bottom" to="Node2D" method="_on_side_checks_body_exited"]
-[connection signal="body_entered" from="right bottom" to="." method="_on_area_2d_body_entered"]
-[connection signal="body_exited" from="right bottom" to="." method="_on_side_checks_body_exited"]
-[connection signal="body_exited" from="right bottom" to="Node2D" method="_on_side_checks_body_exited"]
-[connection signal="area_entered" from="left side" to="." method="_on_left_side_area_entered"]
-[connection signal="body_entered" from="left side" to="." method="_on_left_side_body_entered"]
-[connection signal="area_entered" from="right side" to="." method="_on_right_side_area_entered"]
-[connection signal="body_entered" from="right side" to="." method="_on_right_side_body_entered"]
-[connection signal="area_entered" from="enemy2" to="." method="_on_enemy_2_area_entered"]
-[connection signal="area_entered" from="enemy" to="." method="_on_mushroom_area_entered"]
-[connection signal="area_entered" from="enemy" to="Node2D" method="_on_area_2d_area_entered"]
-[connection signal="area_entered" from="top" to="." method="_on_top_area_entered"]
-[connection signal="area_exited" from="top" to="." method="_on_top_area_exited"]
-[connection signal="area_entered" from="shell" to="." method="_on_shell_area_entered"]
+[node name="Node2D2" type="Node2D" parent="."]
+
+[node name="left bottom" type="Area2D" parent="Node2D2"]
+position = Vector2(3.55271e-15, -8)
+scale = Vector2(0.820104, 0.781477)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/left bottom"]
+position = Vector2(-9.14518, 10.8768)
+rotation = -3.14159
+scale = Vector2(0.121811, -1)
+shape = SubResource("RectangleShape2D_cpp18")
+
+[node name="right bottom" type="Area2D" parent="Node2D2"]
+position = Vector2(-5.96046e-08, -8)
+scale = Vector2(0.820104, 0.781477)
+collision_layer = 129
+collision_mask = 129
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Node2D2/right bottom"]
+position = Vector2(9.14518, 10.8768)
+shape = SubResource("RectangleShape2D_kg8q6")
+
+[node name="Node2D" type="Node2D" parent="Node2D2"]
+process_mode = 3
+position = Vector2(0, -8)
+script = ExtResource("4_vvj04")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node2D2/Node2D"]
+stream = ExtResource("5_sow7m")
+
+[node name="left side" type="Area2D" parent="Node2D2"]
+position = Vector2(0, -8)
+scale = Vector2(1, 0.331275)
+collision_layer = 129
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/left side"]
+position = Vector2(-8, 9.05592)
+scale = Vector2(1, 2.69044)
+shape = SubResource("RectangleShape2D_sjlml")
+
+[node name="right side" type="Area2D" parent="Node2D2"]
+position = Vector2(0, -8)
+scale = Vector2(0.95107, 0.380408)
+collision_layer = 129
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/right side"]
+position = Vector2(8.41158, 7.88627)
+scale = Vector2(1, 2.36695)
+shape = SubResource("RectangleShape2D_exsck")
+
+[node name="edible2" type="Area2D" parent="Node2D2"]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/edible2"]
+scale = Vector2(3.07808, 3.07808)
+shape = SubResource("RectangleShape2D_euomj")
+
+[node name="enemy2" type="Area2D" parent="Node2D2"]
+position = Vector2(0, -6)
+
+[node name="hurtCollision" type="CollisionShape2D" parent="Node2D2/enemy2"]
+position = Vector2(-9.536743e-07, -1)
+scale = Vector2(2.0005536, -0.782735)
+shape = SubResource("RectangleShape2D_pmrqf")
+
+[node name="enemy" type="Area2D" parent="Node2D2"]
+position = Vector2(0, -6)
+monitorable = false
+
+[node name="hurtCollision" type="CollisionShape2D" parent="Node2D2/enemy"]
+position = Vector2(2.38419e-07, 0.604642)
+scale = Vector2(1.07219, 0.515997)
+shape = SubResource("RectangleShape2D_pmrqf")
+
+[node name="top" type="Area2D" parent="Node2D2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/top"]
+position = Vector2(-1.53477e-12, -13)
+rotation = -3.14159
+scale = Vector2(0.111612, 0.185702)
+shape = SubResource("RectangleShape2D_8y80q")
+
+[node name="shell" type="Area2D" parent="Node2D2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/shell"]
+position = Vector2(-0.0419474, -7)
+rotation = -3.14159
+scale = Vector2(1.15161, 2.30723)
+shape = SubResource("RectangleShape2D_8y80q")
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="body_exited" from="Node2D2/left bottom" to="." method="_on_side_checks_body_exited"]
+[connection signal="body_exited" from="Node2D2/left bottom" to="Node2D2/Node2D" method="_on_side_checks_body_exited"]
+[connection signal="body_entered" from="Node2D2/right bottom" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Node2D2/right bottom" to="." method="_on_side_checks_body_exited"]
+[connection signal="body_exited" from="Node2D2/right bottom" to="Node2D2/Node2D" method="_on_side_checks_body_exited"]
+[connection signal="area_entered" from="Node2D2/left side" to="." method="_on_left_side_area_entered"]
+[connection signal="body_entered" from="Node2D2/left side" to="." method="_on_left_side_body_entered"]
+[connection signal="area_entered" from="Node2D2/right side" to="." method="_on_right_side_area_entered"]
+[connection signal="body_entered" from="Node2D2/right side" to="." method="_on_right_side_body_entered"]
+[connection signal="area_entered" from="Node2D2/enemy2" to="." method="_on_enemy_2_area_entered"]
+[connection signal="area_entered" from="Node2D2/enemy" to="." method="_on_mushroom_area_entered"]
+[connection signal="area_entered" from="Node2D2/enemy" to="Node2D2/Node2D" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Node2D2/top" to="." method="_on_top_area_entered"]
+[connection signal="area_exited" from="Node2D2/top" to="." method="_on_top_area_exited"]
+[connection signal="area_entered" from="Node2D2/shell" to="." method="_on_shell_area_entered"]

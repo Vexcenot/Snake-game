@@ -36,6 +36,7 @@ func _physics_process(delta: float) -> void:
 		print(direction)
 #func _ready():
 	#block_spawn()
+
 func kill():
 	dead = true
 	await get_tree().create_timer(0.001).timeout
@@ -47,11 +48,9 @@ func kill():
 	$"right side".monitorable = false
 	$edible2.monitorable = false
 	$CollisionShape2D.disabled = true
-	#make seperate koopa script
-	#$enemyKoopa.monitorable = false
-	#$enemyKoopa.monitoring = false
-	await get_tree().create_timer(5).timeout
-	queue_free()
+	$enemy.monitorable = false
+	$enemy.monitoring = false
+	$top.monitoring = false
 
 	#queue_free() #add flip animation
 func turnMover():
@@ -115,6 +114,7 @@ func _on_koopa_top_area_entered(area: Area2D) -> void:
 				await get_tree().create_timer(0.01).timeout
 				$Node2D2/Sprite/enemy.monitorable = false
 
+
 func _on_koopa_top_area_exited(area: Area2D) -> void:
 	if dead == false:
 		if area.name == "Head Area":
@@ -124,7 +124,6 @@ func _on_koopa_top_area_exited(area: Area2D) -> void:
 				head = false
 				await get_tree().create_timer(0.01).timeout
 				$Node2D2/Sprite/enemy.monitorable = true
-
 
 
 func _on_left_side_area_entered(area: Area2D) -> void:
@@ -151,8 +150,7 @@ func _on_right_side_area_entered(area: Area2D) -> void:
 			print("FUEEKE")
 			queue_free()
 
-#turns to shell when snake touches from above
-func _on_enemy_koopa_area_entered(area: Area2D) -> void:
+func _on_top_area_entered(area: Area2D) -> void:
 	if turn_shell and area.name == "Head Area" and Global.direction == "down":
 		var enemy_instance = shell.instantiate()
 		get_tree().root.add_child(enemy_instance)

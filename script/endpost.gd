@@ -17,7 +17,7 @@ func _process(delta: float) -> void:
 
 func _on_winarea_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":
-		$brick/StaticBody2D.set_collision_layer_value(1, false)
+		$brick/brick.set_collision_layer_value(1, false)
 		if Global.direction == "left" and shit == true:
 			$AnimationPlayer.play("brick down")
 		

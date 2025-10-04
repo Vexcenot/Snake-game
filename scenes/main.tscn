@@ -29,7 +29,7 @@ position = Vector2(1688, 240)
 texture = ExtResource("1_h5eht")
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(40, 16)
+position = Vector2(46, 180)
 scale = Vector2(2, 2.07506)
 fire_ball = SubResource("PackedScene_eb6dy")
 metadata/_edit_group_ = true
@@ -67,7 +67,7 @@ position = Vector2(70, 127)
 position = Vector2(86, 127)
 
 [node name="brick6" parent="." instance=ExtResource("10_choun")]
-position = Vector2(102, 127)
+position = Vector2(132, 150)
 
 [node name="brick7" parent="." instance=ExtResource("10_choun")]
 position = Vector2(118, 127)
@@ -111,7 +111,7 @@ position = Vector2(129, 33)
 position = Vector2(145, 33)
 
 [node name="brick19" parent="." instance=ExtResource("10_choun")]
-position = Vector2(145, 17)
+position = Vector2(209, 33)
 
 [node name="brick20" parent="." instance=ExtResource("10_choun")]
 position = Vector2(177, 33)
@@ -180,20 +180,24 @@ avoid_ledge = true
 turn_shell = true
 
 [node name="Goomba" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(134, 119)
+position = Vector2(156, 207)
 
 [node name="Goomba2" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(97, 25)
+position = Vector2(171, 25)
 avoid_ledge = true
 
 [node name="koopa" parent="." instance=ExtResource("13_a8y0u")]
-position = Vector2(198, 15)
+position = Vector2(102, 208)
 
 [node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
-position = Vector2(151, 26)
+position = Vector2(146, 112)
 
 [node name="shell" parent="." instance=ExtResource("13_trceg")]
 position = Vector2(113, 57)
 
 [node name="shell2" parent="." instance=ExtResource("13_trceg")]
-position = Vector2(114, 25)
+position = Vector2(75, 176)
+
+[node name="koopa2" parent="." instance=ExtResource("13_a8y0u")]
+position = Vector2(78, 119)
+avoid_ledge = true
