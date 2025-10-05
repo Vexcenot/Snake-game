@@ -25,6 +25,9 @@ func _on_coin_area_area_entered(area: Area2D) -> void:
 		collected = true
 		$Coins.visible = false
 		$coin_sound.play()
+	if area.name == "kill":
+		$AnimationPlayer.play("collect")
+		
 
 
 func _on_coin_sound_finished() -> void:

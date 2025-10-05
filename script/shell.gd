@@ -3,7 +3,7 @@ extends CharacterBody2D
 @export var avoid_ledge = false
 @export var live = false
 @export var turn2turtle = true
-var turt = preload("res://scenes/fuck.tscn")
+#var turt = preload("res://scenes/fuck.tscn")
 var speeder = 200
 var gravity = 700 
 var speed = speeder
@@ -136,8 +136,11 @@ func _on_enemy_2_area_entered(area: Area2D) -> void:
 	if area.name == "kill":
 		die()
 		
+		
+#spawned scene is broken, and all scenes preloaded gets stucl
 func turnTurtle():
-	var spawnTurt = turt.instantiate()
-	get_tree().root.add_child(spawnTurt)
-	spawnTurt.global_position = global_position
-	queue_free()
+	pass
+	#var spawnTurt = turt.instantiate()
+	#get_tree().root.add_child(spawnTurt)
+	#spawnTurt.global_position = global_position
+	#queue_free()

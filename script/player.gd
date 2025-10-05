@@ -66,6 +66,7 @@ func _ready():
 	update_camera()
 
 func _process(delta):
+	print("b ", under_block)
 	if stopInsta == false:
 		$Camera.limit_left = Global.camera_limit + 3
 	untilMove()
@@ -495,6 +496,7 @@ func set_power(power: String):
 			await get_tree().create_timer(blink_sec).timeout
 			Global.snake_status = power
 			await get_tree().create_timer(blink_sec).timeout  # Wait again before switching back
+		under_block = 0
 		resume_move()
 		timer = 0
 		get_tree().paused = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://lhmipeci2e24"]
+[gd_scene load_steps=10 format=3 uid="uid://lhmipeci2e24"]
 
 [ext_resource type="Script" uid="uid://n5ftbeu3taa2" path="res://script/coin.gd" id="1_6qxui"]
 [ext_resource type="Texture2D" uid="uid://by1lwoolytm2w" path="res://sprite/coins.png" id="1_ervcb"]
@@ -83,11 +83,43 @@ tracks/2/keys = {
 "update": 0,
 "values": [3, 4, 5, 6, 3, 4]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.33333334),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_11l1o"]
+resource_name = "idle"
+length = 1.1667
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Coins:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6333333, 0.6666667, 0.8333334, 0.86666673, 1, 1.0333333, 1.1333334, 1.1666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0, 0, 0, 1, 1, 2, 2, 1, 1, 0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bbffo"]
 _data = {
 &"RESET": SubResource("Animation_el3ql"),
-&"collect": SubResource("Animation_rwwey")
+&"collect": SubResource("Animation_rwwey"),
+&"idle": SubResource("Animation_11l1o")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_11l1o"]
@@ -109,6 +141,7 @@ hframes = 7
 libraries = {
 &"": SubResource("AnimationLibrary_bbffo")
 }
+autoplay = "idle"
 
 [node name="coin_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_3ogj1")

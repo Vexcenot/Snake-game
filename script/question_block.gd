@@ -31,6 +31,7 @@ func visability():
 	#if event.is_action_pressed("k_up") and snake_under:
 		#spawn_item()
 
+
 #turns block into empty brick when empty
 func rest_block():
 	if items.size() == 0:
@@ -49,6 +50,7 @@ func rest_block():
 func spawn_item():
 	#make it not kill the enemy coming out of it
 	if Global.snake_status == "small" and Global.direction == "up" or Global.direction == "left" or Global.direction == "right":
+		$Node2D/AnimationPlayer.play("bump")
 		$kill/CollisionShape2D.disabled = false
 	else:
 		$kill/CollisionShape2D.disabled = true
@@ -56,10 +58,12 @@ func spawn_item():
 		await get_tree().create_timer(0.1).timeout
 		var coining = items[0].resource_path == "res://scenes/coin.tscn"
 		var mushrooming = items[0].resource_path == "res://scenes/mushroom.tscn"
+
 		#handles spawning coin
 		if coining:
 			$Node2D/AnimationPlayer.play("bump")
 			var coin_instance = items[0].instantiate()
+			
 			add_child(coin_instance)
 			items.pop_front()
 		#replaces mushroom with fire flower if snake already big
@@ -67,9 +71,8 @@ func spawn_item():
 			if mushrooming and Global.snake_status != "small":
 				print('jack')
 				items[0] = load("res://scenes/fire_flower.tscn")
-			
 		#spawns item normally
-			$Node2D/AnimationPlayer.play("bump")
+			
 			$spawn_sound.play()
 			$bump_sound.play()
 			var spawned_item = items[0].instantiate()
@@ -78,6 +81,8 @@ func spawn_item():
 			create_tween().tween_property(spawned_item, "position", Vector2(spawned_item.position.x, spawned_item.position.y - 8), 1.05)
 			items.pop_front()
 			#when animation finishes play idle again
+
+
 
 #handles snake staying under block
 func keepSpawning():
@@ -92,6 +97,7 @@ func keepSpawning():
 		spawnable = false
 
 
+
 #toggles if snake is under block
 func _on_block_area_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":
@@ -102,8 +108,6 @@ func _on_block_area_area_entered(area: Area2D) -> void:
 			spawnable = true
 
 
-
-			
 #if snake leaves
 func _on_block_area_area_exited(area: Area2D) -> void:
 	if area.name == "Head Area":
