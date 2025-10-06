@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=18 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cpkdjcp5lcxe" path="res://scenes/pipe.tscn" id="12_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://dkd651q06i08r" path="res://scenes/koopa.tscn" id="13_a8y0u"]
 [ext_resource type="PackedScene" uid="uid://h2ccg27eas81" path="res://scenes/shell.tscn" id="13_trceg"]
+[ext_resource type="PackedScene" uid="uid://be66wxyvfxkdr" path="res://scenes/ui.tscn" id="14_a8y0u"]
 
 [sub_resource type="PackedScene" id="PackedScene_eb6dy"]
 
@@ -193,3 +194,5 @@ position = Vector2(328, 182)
 [node name="koopa2" parent="." instance=ExtResource("13_a8y0u")]
 position = Vector2(78, 119)
 avoid_ledge = true
+
+[node name="ui" parent="." instance=ExtResource("14_a8y0u")]
