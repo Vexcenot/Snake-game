@@ -25,7 +25,7 @@ size = Vector2(23.2083, 26)
 [node name="Main" type="Node"]
 
 [node name="bng" type="Sprite2D" parent="."]
-position = Vector2(1688, 240)
+position = Vector2(1464, 240)
 texture = ExtResource("1_h5eht")
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
@@ -38,11 +38,11 @@ metadata/_edit_group_ = true
 visible = false
 
 [node name="question block7" parent="." instance=ExtResource("6_06g6w")]
-position = Vector2(40, 168)
+position = Vector2(136, 88)
 items = Array[PackedScene]([ExtResource("8_fs55x"), ExtResource("8_fs55x"), ExtResource("8_fs55x")])
 
 [node name="question block8" parent="." instance=ExtResource("6_06g6w")]
-position = Vector2(56, 168)
+position = Vector2(120, 152)
 items = Array[PackedScene]([ExtResource("6_2spgy")])
 
 [node name="coin" parent="." instance=ExtResource("8_fs55x")]
@@ -61,48 +61,46 @@ blocked = false
 position = Vector2(113, 33)
 
 [node name="brick4" parent="." instance=ExtResource("10_choun")]
-position = Vector2(70, 127)
+position = Vector2(70, 121)
 
 [node name="brick5" parent="." instance=ExtResource("10_choun")]
-position = Vector2(86, 127)
+position = Vector2(86, 121)
 
 [node name="brick6" parent="." instance=ExtResource("10_choun")]
-position = Vector2(72, 168)
+position = Vector2(104, 152)
 
-[node name="brick7" parent="." instance=ExtResource("10_choun")]
-position = Vector2(118, 127)
+[node name="brick23" parent="." instance=ExtResource("10_choun")]
+position = Vector2(136, 152)
 
-[node name="brick8" parent="." instance=ExtResource("10_choun")]
-position = Vector2(134, 127)
+[node name="brick24" parent="." instance=ExtResource("10_choun")]
+position = Vector2(168, 152)
+
+[node name="brick25" parent="." instance=ExtResource("10_choun")]
+position = Vector2(152, 152)
 
 [node name="brick10" parent="." instance=ExtResource("10_choun")]
-position = Vector2(150, 127)
+position = Vector2(231, 127)
 
 [node name="brick11" parent="." instance=ExtResource("10_choun")]
-position = Vector2(166, 127)
+position = Vector2(247, 127)
 
 [node name="brick12" parent="." instance=ExtResource("10_choun")]
-position = Vector2(182, 127)
+position = Vector2(263, 127)
 
 [node name="brick13" parent="." instance=ExtResource("10_choun")]
-position = Vector2(198, 127)
+position = Vector2(279, 127)
 
 [node name="brick14" parent="." instance=ExtResource("10_choun")]
-position = Vector2(214, 127)
+position = Vector2(295, 127)
 
 [node name="brick15" parent="." instance=ExtResource("10_choun")]
-position = Vector2(230, 127)
+position = Vector2(311, 127)
 
 [node name="brick16" parent="." instance=ExtResource("10_choun")]
-position = Vector2(246, 127)
+position = Vector2(327, 127)
 
 [node name="brick17" parent="." instance=ExtResource("10_choun")]
-position = Vector2(262, 127)
-
-[node name="question block10" parent="." instance=ExtResource("6_06g6w")]
-position = Vector2(72, 200)
-items = Array[PackedScene]([ExtResource("6_2spgy")])
-false_block = true
+position = Vector2(343, 127)
 
 [node name="brick9" parent="." instance=ExtResource("10_choun")]
 position = Vector2(129, 33)
@@ -146,11 +144,11 @@ shape = SubResource("RectangleShape2D_is7ar")
 position = Vector2(3, -32)
 
 [node name="coin" parent="wall" instance=ExtResource("8_fs55x")]
-position = Vector2(-270, -128)
+position = Vector2(-329, -158)
 blocked = false
 
 [node name="coin2" parent="wall" instance=ExtResource("8_fs55x")]
-position = Vector2(-286, -128)
+position = Vector2(-343, -156)
 blocked = false
 
 [node name="coin3" parent="wall" instance=ExtResource("8_fs55x")]
@@ -176,25 +174,18 @@ position = Vector2(624, 200)
 avoid_ledge = true
 turn_shell = true
 
-[node name="Goomba" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(122, 208)
-
 [node name="Goomba2" parent="." instance=ExtResource("11_ya4ey")]
 position = Vector2(171, 25)
-avoid_ledge = true
-
-[node name="koopa" parent="." instance=ExtResource("13_a8y0u")]
-position = Vector2(72, 192)
 avoid_ledge = true
 
 [node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
 position = Vector2(236, 120)
 
 [node name="pipe3" parent="." instance=ExtResource("12_eb6dy")]
-position = Vector2(170, 120)
+position = Vector2(337, 119)
 
 [node name="shell" parent="." instance=ExtResource("13_trceg")]
-position = Vector2(201, 108)
+position = Vector2(294, 99)
 
 [node name="shell2" parent="." instance=ExtResource("13_trceg")]
 position = Vector2(328, 182)

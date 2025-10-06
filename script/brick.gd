@@ -32,9 +32,9 @@ func _input(event):
 func spawn_item():
 	if Global.snake_status == "small" and Global.direction == "up" or Global.direction == "left" or Global.direction == "right":
 		$AnimationPlayer.play("bump")
-		$kill/CollisionShape2D.disabled = false
-	else:
-		$kill/CollisionShape2D.disabled = true
+		#$kill/CollisionShape2D.disabled = false
+	#else:
+		#$kill/CollisionShape2D.disabled = true
 
 		
 		

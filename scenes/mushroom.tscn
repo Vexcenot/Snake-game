@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c5idjgy4afmho"]
+[gd_scene load_steps=17 format=3 uid="uid://c5idjgy4afmho"]
 
 [ext_resource type="Script" uid="uid://b0y4h2xmmwr2e" path="res://script/mushroom.gd" id="1_4125a"]
 [ext_resource type="Texture2D" uid="uid://8j811yk5hue7" path="res://sprite/mushrooms.png" id="2_8mpd3"]
@@ -86,6 +86,9 @@ size = Vector2(2, 2.44695)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euomj"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f4pa7"]
+size = Vector2(20, 33.247185)
+
 [node name="mushroom" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("2_e0v0r")
@@ -167,6 +170,13 @@ position = Vector2(0, -8)
 scale = Vector2(3.07808, 3.07808)
 shape = SubResource("RectangleShape2D_euomj")
 
+[node name="bumpable" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bumpable"]
+position = Vector2(0, -3)
+scale = Vector2(0.41404358, -0.18046641)
+shape = SubResource("RectangleShape2D_f4pa7")
+
 [connection signal="area_entered" from="Mushrooms/mushroom" to="." method="_on_mushroom_area_entered"]
 [connection signal="area_entered" from="Mushrooms/mushroom" to="Node2D" method="_on_area_2d_area_entered"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]
@@ -176,3 +186,4 @@ shape = SubResource("RectangleShape2D_euomj")
 [connection signal="body_exited" from="right bottom" to="Node2D" method="_on_side_checks_body_exited"]
 [connection signal="body_entered" from="left side" to="." method="_on_left_side_body_entered"]
 [connection signal="body_entered" from="right side" to="." method="_on_right_side_body_entered"]
+[connection signal="area_entered" from="bumpable" to="." method="_on_bumpable_area_entered"]
