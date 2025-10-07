@@ -176,7 +176,7 @@ avoid_ledge = true
 turn_shell = true
 
 [node name="Goomba2" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(171, 25)
+position = Vector2(172, 208)
 avoid_ledge = true
 
 [node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
@@ -196,3 +196,6 @@ position = Vector2(78, 119)
 avoid_ledge = true
 
 [node name="ui" parent="." instance=ExtResource("14_a8y0u")]
+
+[node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
+position = Vector2(132, 209)

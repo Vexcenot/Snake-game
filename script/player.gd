@@ -9,7 +9,6 @@ enum spawn_dir {right,down,left,up}
 @onready var left: RayCast2D = $left
 @onready var right: RayCast2D = $right
 @onready var sprite: Sprite2D = $Sprite2D
-
 var snake_speed = 0.3 #adjusts speed of snake I like 0.3
 var snake_length = 2 + Global.bonus_length
 var direction = Vector2.ZERO
@@ -55,6 +54,9 @@ var invincible = false
 var firstMove = false
 var stopInsta = false
 var powering = false
+var cramp = false
+var eatable = 0
+var crap
 
 func _ready():
 	#if Global.teleportall2:
@@ -93,10 +95,8 @@ func _process(delta):
 	fucker()
 	teleport()
 	absolute_stop()
-	print(move_ready)
+	shid()
 
-var shit 
-var cramp = false
 #snake movement inputs 
 func untilMove():
 	if firstMove == false:
@@ -107,12 +107,6 @@ func untilMove():
 
 func _input(event):
 	stopInsta = true
-	#bumps ? block directlyt above
-	#if under_block == true and event.is_action_pressed("k_up"):
-		#hit_block()
-		#pause_move()
-		#await get_tree().create_timer(0.3).timeout
-		#resume_move()
 #move inputs
 	if event.is_action_pressed("k_up") and player_input == true:
 		#await get_tree().create_timer(0.1).timeout
@@ -663,8 +657,9 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 			#if dead == false:
 				#resume_move()
 				
-		
-	
+func shid():
+	if eatable >= 1:
+		eat()
 		
 func teleport():
 	if Global.teleport_all:
@@ -673,7 +668,7 @@ func teleport():
 		#player_input = true
 		#invincible = false
 
-var crap
+
 func enter_entrance():
 	if Global.entranceStopper == false:
 		crap = position.x + 135
