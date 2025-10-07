@@ -1,8 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://cpkdjcp5lcxe"]
 
-[ext_resource type="Script" uid="uid://cltc831160c57" path="res://pipe.gd" id="1_78010"]
+[ext_resource type="Script" uid="uid://cltc831160c57" path="res://script/pipe.gd" id="1_78010"]
 [ext_resource type="Texture2D" uid="uid://bvk5jcpk433v2" path="res://sprite/pipe.png" id="1_bepn3"]
 [ext_resource type="AudioStream" uid="uid://e44f00ph5aem" path="res://sounds/power down.wav" id="3_8p0di"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bepn3"]
 size = Vector2(20, 4)

@@ -18,3 +18,5 @@ var teleport_all2 = false
 var camera_limit = 0
 var targetting_pipe : String
 var starting_direction = "right"
+var stop_moving = false
+var still_stop = false

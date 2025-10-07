@@ -1,8 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://s8kidv16iy81"]
 
-[ext_resource type="Script" uid="uid://dksnvaw6iq2ko" path="res://fire_ball.gd" id="1_gregu"]
+[ext_resource type="Script" uid="uid://dksnvaw6iq2ko" path="res://script/fire_ball.gd" id="1_gregu"]
 [ext_resource type="Texture2D" uid="uid://c31oaxth3qqi" path="res://sprite/fireball.png" id="2_qddq2"]
 [ext_resource type="Texture2D" uid="uid://dgf52usnl0p6e" path="res://sprite/explode.png" id="3_une7w"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xdfro"]
 size = Vector2(20, 4)

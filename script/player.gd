@@ -54,6 +54,7 @@ var uninvincible = false
 var invincible = false
 var firstMove = false
 var stopInsta = false
+var powering = false
 
 func _ready():
 	#if Global.teleportall2:
@@ -468,6 +469,7 @@ func check_turn_segment(segment, turn_coord):
 		tail_sprite.frame = 1
 
 func set_firepower(): 
+	powering = true
 	eat()
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
@@ -482,8 +484,10 @@ func set_firepower():
 		timer = 0
 		get_tree().paused = false
 	powered = true
+	powering = false
 
 func set_power(power: String):
+	powering = true
 	eat()
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
@@ -501,6 +505,7 @@ func set_power(power: String):
 		timer = 0
 		get_tree().paused = false
 	powered = true
+	powering = false
 	
 func dead_sprite():
 	if dead:
@@ -603,9 +608,13 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "endpost":
 		move_exit = true
 	if area.name == "enemy" and Global.snake_status == "small":
-		hurt()
+		await get_tree().create_timer(0.1).timeout
+		if powering == false:
+			hurt()
 	if area.name == "enemyKoopa" and Global.snake_status == "small" and Global.direction != "down":
-		hurt()
+		await get_tree().create_timer(0.1).timeout
+		if powering == false:
+			hurt()
 	if area.name == "edible":
 		openJaw += 1
 	if area.name == "edible2" and Global.snake_status != "small":
