@@ -59,6 +59,9 @@ var eatable = 0
 var crap
 var openJaw = 0
 var eatAnim = false
+var dontTurn = false
+var move_direction = Vector2.ZERO
+var next_move = "the next move the snake will make"
 
 func _ready():
 	#if Global.teleportall2:
@@ -71,7 +74,7 @@ func _ready():
 	update_camera()
 
 func _process(delta):
-	print(openJaw)
+	print(timer_counter)
 	if stopInsta == false:
 		$Camera.limit_left = Global.camera_limit + 3
 	untilMove()
@@ -383,8 +386,6 @@ func interact():
 #runs game over function and (should) clear out all datas
 func hurt():
 	if Global.invincible == false and under_block <= 0:
-		
-		print("OWWWWWWWWWWWWW")
 		if powered:
 			lose_power()
 		else:
@@ -413,7 +414,7 @@ func lose_power():
 	timer = 0
 	get_tree().paused = false
 	powered = false
-	await get_tree().create_timer(3.34).timeout
+	await get_tree().create_timer(2).timeout
 	invincible = false
 	Global.invincible = false
 	
@@ -508,7 +509,7 @@ func absolute_stop():
 		final_time == 99999
 
 func die():
-	
+	Global.invincible = false
 	$Die.play()
 	dead = true
 	move_ready = false
@@ -557,17 +558,12 @@ func check_collide():
 	else:
 		collide_left = false
 
-var move_direction = Vector2.ZERO
-var next_move = "the next move the snake will make"
-
-
-
-
-
-
 
 #prevents turn sprite for a single turn
 func ignoring_turning():
+	if Global.invincible:
+		die()
+	else:
 		ignore_turn = true
 		timer_counter_toggle = true
 
@@ -642,7 +638,6 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		#run this after sound effect
 		#position.x = Global.teleport_x
 		#position.y = Global.teleport_y
-		print("fuck")
 	#if area.name == "pipe_teleport" and player_input == false:
 		#position.y = 9999
 	if area.name == "GOUP":
@@ -757,7 +752,6 @@ func move():
 		else:
 			next_move = move_orders.pop_front()
 		#checks turns
-		#make it not make turn if next move will not run into a wall.
 		if next_move == "up" and up.is_colliding() and up.get_collider() is StaticBody2D:
 			ignoring_turning()
 		elif next_move == "down" and down.is_colliding() and down.get_collider() is StaticBody2D:
