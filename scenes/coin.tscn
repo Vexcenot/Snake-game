@@ -147,6 +147,7 @@ autoplay = "idle"
 stream = ExtResource("3_3ogj1")
 
 [node name="edible" type="Area2D" parent="."]
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="edible"]
 scale = Vector2(3.07808, 3.07808)

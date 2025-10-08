@@ -257,7 +257,7 @@ scale = Vector2(0.479999, 0.479999)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="edible2"]
 position = Vector2(0, 8.476613)
-scale = Vector2(2.60039, 2.8880203)
+scale = Vector2(3.600393, 2.8880203)
 shape = SubResource("RectangleShape2D_5lml2")
 
 [node name="20592Png" type="Sprite2D" parent="."]

@@ -16,6 +16,8 @@ func block_collect():
 	if blocked:
 		$AnimationPlayer.play("collect")
 		$coin_sound.play()
+	else:
+		$edible.monitorable = true
 
 		
 

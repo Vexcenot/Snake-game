@@ -27,7 +27,7 @@ var scanned = {"up": "", "down": "", "left": "", "right": ""}
 var facing = "right"
 var prev_move = "right"
 var movesame = false
-var pending_tail_segment = false  # Flag to track pending tail additionz
+var pending_tail_segment = 0  # Flag to track pending tail additionz
 var powerup = "current power up goes here"
 var bigsnek = preload("res://sprite/big snake.png")
 var firesnek = preload("res://sprite/fire snake.png")
@@ -57,6 +57,7 @@ var powering = false
 var cramp = false
 var eatable = 0
 var crap
+var openJaw = 0
 
 func _ready():
 	#if Global.teleportall2:
@@ -69,7 +70,7 @@ func _ready():
 	update_camera()
 
 func _process(delta):
-	print("b ", under_block)
+	print(openJaw)
 	if stopInsta == false:
 		$Camera.limit_left = Global.camera_limit + 3
 	untilMove()
@@ -95,7 +96,10 @@ func _process(delta):
 	fucker()
 	teleport()
 	absolute_stop()
-	shid()
+	if openJaw <= 0:
+		openJaw = 0
+	openMouth()
+	#shid()
 
 #snake movement inputs 
 func untilMove():
@@ -200,12 +204,13 @@ func teleport_sequence():
 	move_ready = true
 
 #processes adding length to snake mid-game
-func eat(): #prepares to add tail
-	Global.bonus_length += 1
-	eatAnim = true
-	#sprite.frame = 5
-	pending_tail_segment = true
-	eat_positions.push_front(global_position) #adds "full" sprite to tail.
+func eat(): 
+	if eatable >= 1:
+		eatable -= 1
+		Global.bonus_length += 1
+		eatAnim = true
+		pending_tail_segment += 1
+		eat_positions.push_front(global_position) #adds "full" sprite to tail.
 
 #function that spawns tails
 func spawn_tail_segment():
@@ -234,7 +239,9 @@ func time_reset():
 		for segment in tail_segments:
 			segment.modulate.a = 1
 		prev_move = facing  # Save previous facing before updating
+		eat()
 		move()
+		
 		timer = 0
 		if timer_counter_toggle == true:
 			timer_counter += 1
@@ -302,7 +309,7 @@ func remove_past_eats(last_tail_position):
 			
 func remove_past_turns(last_tail_position):
 	for i in range(turn_positions.size() - 1, -1, -1):  # Iterate in reverse to safely remove elements
-		if turn_positions[i][0].distance_to(last_tail_position) < move_distance * 0.5 and pending_tail_segment == false:
+		if turn_positions[i][0].distance_to(last_tail_position) < move_distance * 0.5 and pending_tail_segment == 0:
 			turn_positions.pop_at(i)  # Remove the turn position
 
 func adjust_turn_frame(turn_sprite: Sprite2D, prev_facing: String, new_facing: String):
@@ -464,7 +471,7 @@ func check_turn_segment(segment, turn_coord):
 
 func set_firepower(): 
 	powering = true
-	eat()
+	eatable += 1
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
 	if Global.snake_status != "fire2":
@@ -482,7 +489,7 @@ func set_firepower():
 
 func set_power(power: String):
 	powering = true
-	eat()
+	eatable += 1
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
 	if powered == false:
@@ -623,13 +630,14 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		#$Camera.limit_left = Global.camera_limit
 	if area.name == "oob" and Global.winning == false and invincible == false:
 		die()
-	if Global.snake_status != "small":
-		if area.name == "brick_area" or area.name == "left side" or area.name == "right side":
-			eat()
+	if area.name == "brick_area":
+		eatable += 1
+	if area.name == "enemy":
+		eatable += 1
 	if area.name == "coin_area":
-		eat()
+		eatable += 1
 	if area.name == "shell" and Global.snake_status != "small":
-		eat()
+		eatable += 1
 	if area.name == "pipe_enter":
 		#$Powerdn.play()
 		
@@ -648,18 +656,14 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		#position.y = 9999
 	if area.name == "GOUP":
 		move_orders.append("up")
-	if area.name == "koopa_top" and Global.direction == "down" and Global.snake_status != "small":
-		if Global.snake_status != "small":
-			eat() #replace this with full mouth
+	#if area.name == "koopa_top" and Global.direction == "down" and Global.snake_status != "small":
+		#if Global.snake_status != "small":
+			#eat() #replace this with full mouth
 		#else:
 			#pause_move()
 			#await get_tree().create_timer(0.05).timeout
 			#if dead == false:
 				#resume_move()
-				
-func shid():
-	if eatable >= 1:
-		eat()
 		
 func teleport():
 	if Global.teleport_all:
@@ -680,7 +684,7 @@ func eat_animation():
 	if eatAnim:
 		sprite.frame = 5
 
-var openJaw = 0
+
 func openMouth():
 	if dead == false and openJaw == 0:
 		sprite.frame = 2
@@ -701,6 +705,10 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 		move_exit = false
 	if area.name == "entrance" and Global.winning == true or area.name == "pipe_enter":
 		position.y = 9999
+	#if area.name == "brick_area":
+		#eatable -= 1
+	#if area.name == "enemy":
+		#eatable -= 1
 
 #block constant hitting mechanic
 func block_pow():
@@ -796,7 +804,7 @@ func move():
 			ignoring_turning()
 		elif next_move == "right" and right.is_colliding() and right.get_collider() is StaticBody2D:
 			ignoring_turning()
-			print("fuck")
+
 		elif next_move == "left" and left.is_colliding() and left.get_collider() is StaticBody2D:
 			ignoring_turning()
 
@@ -826,6 +834,6 @@ func move():
 			move_tail_segments()
 
 		# Add tail segment only after moving
-		if pending_tail_segment:
+		if pending_tail_segment >= 1:
+			pending_tail_segment -= 1
 			spawn_tail_segment()
-			pending_tail_segment = false  # Reset flag

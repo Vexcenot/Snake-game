@@ -15,6 +15,7 @@ var timer = 0
 var head = false
 var dead = false
 var direction = 0
+var eatable = 0
 
 	
 func spriteOrientation():
@@ -33,6 +34,7 @@ func _physics_process(delta: float) -> void:
 		spriteOrientation()
 		spawnShell()
 		turnMover()
+		getEaten()
 		print(direction)
 #func _ready():
 	#block_spawn()
@@ -65,9 +67,6 @@ func block_spawn():
 	if block == true:
 		$Mushrooms/AnimationPlayer.play("spawn")
 		$AudioStreamPlayer2D.play()
-
-
-
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if dead == false:
@@ -118,9 +117,9 @@ func _on_koopa_top_area_entered(area: Area2D) -> void:
 func _on_koopa_top_area_exited(area: Area2D) -> void:
 	if dead == false:
 		if area.name == "Head Area":
-			if Global.snake_status != "small" and Global.direction == "down":
-				queue_free()
-			else:
+			#if Global.snake_status != "small" and Global.direction == "down":
+				#queue_free()
+			#else:
 				head = false
 				await get_tree().create_timer(0.01).timeout
 				$Node2D2/Sprite/enemy.monitorable = true
@@ -128,22 +127,22 @@ func _on_koopa_top_area_exited(area: Area2D) -> void:
 
 func _on_left_side_area_entered(area: Area2D) -> void:
 	if dead == false:
-		if area.name == "Head Area" and Global.snake_status != "small":
-			$Node2D2/Sprite.visible = false
-			await get_tree().create_timer(0.1).timeout
-			queue_free()
-		elif area.name == "enemy2" or area.name == "fireball" or area.name == "kill":
+		#if area.name == "Head Area" and Global.snake_status != "small":
+			#$Node2D2/Sprite.visible = false
+			#await get_tree().create_timer(0.1).timeout
+			#queue_free()
+		if area.name == "enemy2" or area.name == "fireball" or area.name == "kill":
 			kill()
 		if area.name == "activate_entity":
 			activate = true
 
 func _on_right_side_area_entered(area: Area2D) -> void:
 	if dead == false:
-		if area.name == "Head Area" and Global.snake_status != "small":
-			$Node2D2/Sprite.visible = false
-			await get_tree().create_timer(0.1).timeout
-			queue_free()
-		elif area.name == "enemy2" or area.name == "fireball" or area.name == "kill":
+		#if area.name == "Head Area" and Global.snake_status != "small":
+			#$Node2D2/Sprite.visible = false
+			#await get_tree().create_timer(0.1).timeout
+			#queue_free()
+		if area.name == "enemy2" or area.name == "fireball" or area.name == "kill":
 			global_scale.x = -1
 			kill()
 		if area.name == "delete" and activate:
@@ -155,4 +154,14 @@ func _on_top_area_entered(area: Area2D) -> void:
 		var enemy_instance = shell.instantiate()
 		get_tree().root.add_child(enemy_instance)
 		enemy_instance.global_position = position
+		queue_free()
+
+
+func _on_enemy_area_entered(area: Area2D) -> void:
+	if area.name == "Head Area":
+		eatable += 1 
+		
+func getEaten():
+	if eatable >= 1 and Global.snake_status != "small":
+		await get_tree().create_timer(0.1).timeout
 		queue_free()
