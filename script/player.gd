@@ -58,6 +58,7 @@ var cramp = false
 var eatable = 0
 var crap
 var openJaw = 0
+var eatAnim = false
 
 func _ready():
 	#if Global.teleportall2:
@@ -85,7 +86,6 @@ func _process(delta):
 	update_sprite_orientation()
 	sprinting()
 	update_global_direction()
-	block_pow()
 	check_collide()
 	enter_entrance()
 	collision_updater()
@@ -378,25 +378,11 @@ func interact():
 		eat()
 		# Record the position where we're adding a new tail segment
 		eat_positions.push_front(global_position)
-
-#invincibility blink
-#func invinciblity_blink():
-	#var blink_sec2 = 0.08
-	#for i in range(57):
-		#Global.visible = false
-		#await get_tree().create_timer(blink_sec2).timeout
-		#Global.visible = true
-		#await get_tree().create_timer(blink_sec2).timeout
 	
 #pain happens here
 #runs game over function and (should) clear out all datas
 func hurt():
-	#if under_block and Global.direction == "up":
-		#invincible = true
-		#await get_tree().create_timer(2).timeout
-		#invincible = false
-	if invincible == false and under_block <= 0:
-		var facing_pain = Global.direction
+	if Global.invincible == false and under_block <= 0:
 		
 		print("OWWWWWWWWWWWWW")
 		if powered:
@@ -404,9 +390,10 @@ func hurt():
 		else:
 			die()
 
-
 func lose_power():
 	invincible = true
+	Global.invincible = true
+	Global.invicible2 = true
 	#invinciblity_blink()
 	Global.snake_status = "big"
 	var blink_sec = 0.1
@@ -428,6 +415,9 @@ func lose_power():
 	powered = false
 	await get_tree().create_timer(3.34).timeout
 	invincible = false
+	Global.invincible = false
+	
+	
 #snake pass through blocks when smalln't
 func collision_updater():
 	if Global.snake_status != "small":
@@ -518,6 +508,7 @@ func absolute_stop():
 		final_time == 99999
 
 func die():
+	
 	$Die.play()
 	dead = true
 	move_ready = false
@@ -591,7 +582,7 @@ func sprinting():
 			final_time = snake_speed
 
 func update_sprite_orientation():
-	#if ignore_turn == false:
+	if ignore_turn == false:
 		update_tail_orientation(self, facing)
 
 #how snake when touch different areas.
@@ -656,22 +647,11 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		#position.y = 9999
 	if area.name == "GOUP":
 		move_orders.append("up")
-	#if area.name == "koopa_top" and Global.direction == "down" and Global.snake_status != "small":
-		#if Global.snake_status != "small":
-			#eat() #replace this with full mouth
-		#else:
-			#pause_move()
-			#await get_tree().create_timer(0.05).timeout
-			#if dead == false:
-				#resume_move()
 		
 func teleport():
 	if Global.teleport_all:
 		position.x = Global.teleport_x
 		position.y = Global.teleport_y
-		#player_input = true
-		#invincible = false
-
 
 func enter_entrance():
 	if Global.entranceStopper == false:
@@ -679,7 +659,7 @@ func enter_entrance():
 	else:
 		$Camera.limit_right = crap 
 
-var eatAnim = false
+
 func eat_animation():
 	if eatAnim:
 		sprite.frame = 5
@@ -705,25 +685,6 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 		move_exit = false
 	if area.name == "entrance" and Global.winning == true or area.name == "pipe_enter":
 		position.y = 9999
-	#if area.name == "brick_area":
-		#eatable -= 1
-	#if area.name == "enemy":
-		#eatable -= 1
-
-#block constant hitting mechanic
-func block_pow():
-	#if Global.direction == "up" and under_block == true and under_under_block == true:
-		#under_block = false
-		#pause_move()
-		#hit_block()
-		#await get_tree().create_timer(0.8).timeout
-		#under_block =true
-		#print("fuck")
-		##make snake turn left if player inputs it and ignore right append
-		#if move_orders.size() > 0 and move_orders[0] != "up" or under_under_block == false:
-			#resume_move()
-			#under_block = false
-	pass
 		
 
 
@@ -799,12 +760,10 @@ func move():
 		#make it not make turn if next move will not run into a wall.
 		if next_move == "up" and up.is_colliding() and up.get_collider() is StaticBody2D:
 			ignoring_turning()
-			#$AnimationPlayer.play("die1")
 		elif next_move == "down" and down.is_colliding() and down.get_collider() is StaticBody2D:
 			ignoring_turning()
 		elif next_move == "right" and right.is_colliding() and right.get_collider() is StaticBody2D:
 			ignoring_turning()
-
 		elif next_move == "left" and left.is_colliding() and left.get_collider() is StaticBody2D:
 			ignoring_turning()
 
@@ -824,9 +783,7 @@ func move():
 	if move_direction != Vector2.ZERO:
 #LOOK INTO THIS!!!!!!!!
 		if is_raycast_blocked(facing):
-			#if next_move == "up" and under_block:
-				#pass
-			#else:
+			if not hurting:
 				hurt()
 		else:
 			position += move_direction * move_distance

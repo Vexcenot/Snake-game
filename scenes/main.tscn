@@ -141,6 +141,10 @@ collision_mask = 135
 position = Vector2(419, -16)
 shape = SubResource("RectangleShape2D_is7ar")
 
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="wall"]
+position = Vector2(408, -65)
+shape = SubResource("RectangleShape2D_is7ar")
+
 [node name="castle" parent="wall" instance=ExtResource("10_ya4ey")]
 position = Vector2(3, -32)
 
@@ -198,4 +202,4 @@ avoid_ledge = true
 [node name="ui" parent="." instance=ExtResource("14_a8y0u")]
 
 [node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(132, 209)
+position = Vector2(56, 205)

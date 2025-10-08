@@ -20,3 +20,5 @@ var targetting_pipe : String
 var starting_direction = "right"
 var stop_moving = false
 var still_stop = false
+var invincible = false
+var invicible2 = false

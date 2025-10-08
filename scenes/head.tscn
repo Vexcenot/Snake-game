@@ -227,6 +227,8 @@ shape = SubResource("RectangleShape2D_sxb1m")
 [node name="Sprite2D" parent="." instance=ExtResource("2_ldr7d")]
 frame = 2
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+
 [node name="Head Area" type="Area2D" parent="."]
 scale = Vector2(1.03715, 1.04205)
 collision_layer = 3

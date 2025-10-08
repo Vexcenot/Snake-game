@@ -8,8 +8,6 @@ var timing = false
 
 
 func _process(delta: float) -> void:
-
-	#bump_up_detect()
 	visability()
 	keepSpawning()
 	
@@ -21,10 +19,6 @@ func visability():
 	elif invis_block:
 		$AllTheSmallBlocksTogether.visible = false
 
-#func bump_up_detect():
-	#if snake_under and Global.direction == "up":
-		#spawnable = true
-
 func _input(event):
 	if snake_under:
 		spawn_item()
@@ -32,10 +26,6 @@ func _input(event):
 func spawn_item():
 	if Global.snake_status == "small" and Global.direction == "up" or Global.direction == "left" or Global.direction == "right":
 		$AnimationPlayer.play("bump")
-		#$kill/CollisionShape2D.disabled = false
-	#else:
-		#$kill/CollisionShape2D.disabled = true
-
 		
 		
 func keepSpawning():
@@ -48,11 +38,6 @@ func keepSpawning():
 func _on_bottom_check_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area" :
 		snake_under = true
-		#if Global.direction == "up":
-			#spawnable = true
-			#timing = true
-		#else: 
-			#snake_under = true
 
 func _on_bottom_check_area_exited(area: Area2D) -> void:
 	if area.name == "Head Area":

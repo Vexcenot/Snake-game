@@ -117,9 +117,6 @@ func _on_koopa_top_area_entered(area: Area2D) -> void:
 func _on_koopa_top_area_exited(area: Area2D) -> void:
 	if dead == false:
 		if area.name == "Head Area":
-			#if Global.snake_status != "small" and Global.direction == "down":
-				#queue_free()
-			#else:
 				head = false
 				await get_tree().create_timer(0.01).timeout
 				$Node2D2/Sprite/enemy.monitorable = true
@@ -138,10 +135,6 @@ func _on_left_side_area_entered(area: Area2D) -> void:
 
 func _on_right_side_area_entered(area: Area2D) -> void:
 	if dead == false:
-		#if area.name == "Head Area" and Global.snake_status != "small":
-			#$Node2D2/Sprite.visible = false
-			#await get_tree().create_timer(0.1).timeout
-			#queue_free()
 		if area.name == "enemy2" or area.name == "fireball" or area.name == "kill":
 			global_scale.x = -1
 			kill()

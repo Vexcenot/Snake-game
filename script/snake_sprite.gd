@@ -4,6 +4,7 @@ var smolsnek = preload("res://sprite/smol snake.png")
 var firesnek = preload("res://sprite/fire 2.png") 
 var midsnek = preload("res://sprite/mid snake.png")
 var touched_pole = false
+var fuck = false
 @onready var sprite = $"."
 
 #func _ready() -> void:
@@ -14,6 +15,7 @@ var touched_pole = false
 func _process(_float) -> void:
 	current_powerup()
 	blinking()
+
 
 func current_powerup():
 	if Global.snake_status == "big":
@@ -26,11 +28,10 @@ func current_powerup():
 		sprite.texture = firesnek
 
 func blinking():
-	if Global.visible == false:
-		$".".visible = false
-	else: 
-		$".".visible = true
-		
+	if Global.invincible:
+		visible = not visible
+	else:
+		visible = true
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.name == "winarea":
