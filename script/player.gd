@@ -64,16 +64,13 @@ var move_direction = Vector2.ZERO
 var next_move = "the next move the snake will make"
 
 func _ready():
-	#if Global.teleportall2:
-		#Global.teleportall2 = false
-		#position.x = Global.teleport_x
-		#position.y = Global.teleport_y
-		
-	#Global.spawn_facing = START_DIR
 	teleport_sequence()
 	update_camera()
 
+
+
 func _process(delta):
+	pausing()
 	print(timer_counter)
 	if stopInsta == false:
 		$Camera.limit_left = Global.camera_limit + 3
@@ -83,6 +80,7 @@ func _process(delta):
 		if move_orders[0] == move_orders[1]:
 			move_orders.pop_front()
 	#print(crap)
+
 	timer += delta
 	time_reset()
 	#interact()
@@ -103,6 +101,13 @@ func _process(delta):
 		openJaw = 0
 	openMouth()
 	#shid()
+
+func pausing():
+	if Global.paused == false:
+		set_process_mode(PROCESS_MODE_INHERIT)
+
+	else:
+		set_process_mode(PROCESS_MODE_ALWAYS)
 
 #snake movement inputs 
 func untilMove():
@@ -394,7 +399,6 @@ func hurt():
 func lose_power():
 	invincible = true
 	Global.invincible = true
-	Global.invicible2 = true
 	#invinciblity_blink()
 	Global.snake_status = "big"
 	var blink_sec = 0.1
@@ -411,8 +415,10 @@ func lose_power():
 		await get_tree().create_timer(blink_sec).timeout
 
 	resume_move()
+	
 	timer = 0
-	get_tree().paused = false
+	if Global.paused == false:
+		get_tree().paused = false
 	powered = false
 	await get_tree().create_timer(2).timeout
 	invincible = false
@@ -474,7 +480,8 @@ func set_firepower():
 		Global.snake_status = "fire2"
 		resume_move()
 		timer = 0
-		get_tree().paused = false
+		if Global.paused == false:
+			get_tree().paused = false
 	powered = true
 	powering = false
 
@@ -495,7 +502,8 @@ func set_power(power: String):
 		under_block = 0
 		resume_move()
 		timer = 0
-		get_tree().paused = false
+		if Global.paused == false:
+			get_tree().paused = false
 	powered = true
 	powering = false
 	

@@ -13,9 +13,16 @@ var fuck = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_float) -> void:
+	pausing()
 	current_powerup()
 	blinking()
 
+func pausing():
+	if Global.paused == false:
+		set_process_mode(PROCESS_MODE_INHERIT)
+
+	else:
+		set_process_mode(PROCESS_MODE_ALWAYS)
 
 func current_powerup():
 	if Global.snake_status == "big":

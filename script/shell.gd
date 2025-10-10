@@ -85,8 +85,6 @@ func _on_left_side_area_entered(area: Area2D) -> void:
 		
 	if area.name == "enemy2":
 		die()
-		
-
 
 func _on_right_side_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area" and ignore == false:
