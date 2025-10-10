@@ -114,7 +114,7 @@ libraries = {
 scale = Vector2(1.33619, 1.33619)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="edible2"]
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.3197432, 1.2)
 shape = SubResource("RectangleShape2D_c34n8")
 
 [node name="BrickParticles" type="Sprite2D" parent="."]

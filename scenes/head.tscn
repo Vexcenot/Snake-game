@@ -273,20 +273,17 @@ position = Vector2(461, 83)
 texture = ExtResource("4_pw8ip")
 
 [node name="Powerup" type="AudioStreamPlayer" parent="."]
-process_mode = 3
 editor_description = "suppose to play da power up sound
 "
 stream = ExtResource("2_ali73")
 
 [node name="Powerdn" type="AudioStreamPlayer" parent="."]
-process_mode = 3
 editor_description = "suppose to play da power up sound
 "
 stream = ExtResource("5_d0mn4")
 volume_db = 15.0
 
 [node name="Die" type="AudioStreamPlayer" parent="."]
-process_mode = 3
 editor_description = "suppose to play da power up sound
 "
 stream = ExtResource("13_emtd3")

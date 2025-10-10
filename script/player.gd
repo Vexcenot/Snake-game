@@ -103,7 +103,7 @@ func _process(delta):
 	#shid()
 
 func pausing():
-	if Global.paused == false:
+	if Global.paused == true:
 		set_process_mode(PROCESS_MODE_INHERIT)
 
 	else:
@@ -752,6 +752,7 @@ func win2():
 func update_camera():
 	if camera == false:
 		$Camera.enabled = false
+
 
 func move():
 	if move_orders.size() > 0: #make it also check if snake is paused and that next move wouldnt run into itself.

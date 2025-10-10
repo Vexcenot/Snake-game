@@ -18,7 +18,7 @@ func _process(_float) -> void:
 	blinking()
 
 func pausing():
-	if Global.paused == false:
+	if Global.paused == true:
 		set_process_mode(PROCESS_MODE_INHERIT)
 
 	else:
