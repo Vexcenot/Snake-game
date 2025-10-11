@@ -5,8 +5,8 @@ extends Node2D
 @export var y_cam = 0 
 @export var teleporterable = false 
 @export var gotoPipe = false 
-@export var world : String
-@export var ID : String
+@export_file var world
+@export_file var ID : String
 @export var TargetID : String
 
 

@@ -30,7 +30,7 @@ position = Vector2(1464, 240)
 texture = ExtResource("1_h5eht")
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(55, 199)
+position = Vector2(43, 56)
 scale = Vector2(2, 2.07506)
 fire_ball = SubResource("PackedScene_eb6dy")
 metadata/_edit_group_ = true
@@ -180,7 +180,9 @@ position = Vector2(172, 208)
 avoid_ledge = true
 
 [node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
-position = Vector2(236, 120)
+position = Vector2(240, 240)
+teleporterable = true
+world = "uid://du6cg6ytddp8g"
 
 [node name="pipe3" parent="." instance=ExtResource("12_eb6dy")]
 position = Vector2(337, 119)
@@ -198,4 +200,4 @@ avoid_ledge = true
 [node name="ui" parent="." instance=ExtResource("14_a8y0u")]
 
 [node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(56, 205)
+position = Vector2(42, 60)

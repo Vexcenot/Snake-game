@@ -34,7 +34,6 @@ var firesnek = preload("res://sprite/fire snake.png")
 var smallsnek = preload("res://sprite/smol snake.png")
 var fireball = preload("res://scenes/fire_ball.tscn")
 var collided = false
-var powered = false
 var sprint = false
 var player_input = true
 var move_exit = false
@@ -68,10 +67,9 @@ func _ready():
 	update_camera()
 
 
-
 func _process(delta):
 	pausing()
-	print(timer_counter)
+	print(invincible)
 	if stopInsta == false:
 		$Camera.limit_left = Global.camera_limit + 3
 	untilMove()
@@ -79,11 +77,9 @@ func _process(delta):
 		move_orders.pop_back()
 		if move_orders[0] == move_orders[1]:
 			move_orders.pop_front()
-	#print(crap)
 
 	timer += delta
 	time_reset()
-	#interact()
 	update_sprite_orientation()
 	sprinting()
 	update_global_direction()
@@ -100,7 +96,6 @@ func _process(delta):
 	if openJaw <= 0:
 		openJaw = 0
 	openMouth()
-	#shid()
 
 func pausing():
 	if Global.paused == true:
@@ -124,11 +119,6 @@ func _input(event):
 		#await get_tree().create_timer(0.1).timeout
 		if under_block > 0:
 			pass
-			#pause_move()
-			#hit_block()
-			#await get_tree().create_timer(0.3).timeout
-			#resume_move()
-			#await get_tree().create_timer(0.1).timeout
 		elif move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0 and limit_move != "up" and xLimit != "vert" and under_block <= 0:
 			xLimit = "vert"
 			limit_move = "down"
@@ -205,7 +195,8 @@ func teleport_sequence():
 			positions.push_front(global_position)
 			orientations.push_front(facing)
 		move_orders.append("down")
-		pause_move()
+		#pause_move()
+		
 
 			
 
@@ -391,7 +382,7 @@ func interact():
 #runs game over function and (should) clear out all datas
 func hurt():
 	if Global.invincible == false and under_block <= 0:
-		if powered:
+		if Global.snake_status != "small":
 			lose_power()
 		else:
 			die()
@@ -419,7 +410,6 @@ func lose_power():
 	timer = 0
 	if Global.paused == false:
 		get_tree().paused = false
-	powered = false
 	await get_tree().create_timer(2).timeout
 	invincible = false
 	Global.invincible = false
@@ -482,7 +472,7 @@ func set_firepower():
 		timer = 0
 		if Global.paused == false:
 			get_tree().paused = false
-	powered = true
+
 	powering = false
 
 func set_power(power: String):
@@ -490,7 +480,7 @@ func set_power(power: String):
 	eatable += 1
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
-	if powered == false:
+	if Global.snake_status == "small":
 		$Powerup.play()
 		get_tree().paused = true
 		pause_move()
@@ -504,7 +494,7 @@ func set_power(power: String):
 		timer = 0
 		if Global.paused == false:
 			get_tree().paused = false
-	powered = true
+
 	powering = false
 	
 func dead_sprite():
@@ -634,20 +624,9 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "shell" and Global.snake_status != "small":
 		eatable += 1
 	if area.name == "pipe_enter":
-		#$Powerdn.play()
-		
 		move_orders.clear()
 		player_input = false
 		invincible = true
-		await get_tree().create_timer(1.22).timeout
-		
-		#get_tree().change_scene_to_file("res://scenes/main.tscn")
-		#position.y = 9999
-		#run this after sound effect
-		#position.x = Global.teleport_x
-		#position.y = Global.teleport_y
-	#if area.name == "pipe_teleport" and player_input == false:
-		#position.y = 9999
 	if area.name == "GOUP":
 		move_orders.append("up")
 		
@@ -674,6 +653,7 @@ func openMouth():
 	elif openJaw >= 1 and dead == false:
 		sprite.frame = 5
 
+
 #when leaving area.
 func _on_head_area_area_exited(area: Area2D) -> void:
 	if area.name == "edible":
@@ -688,6 +668,9 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 		move_exit = false
 	if area.name == "entrance" and Global.winning == true or area.name == "pipe_enter":
 		position.y = 9999
+	if area.name == "pipe_enter":
+		await get_tree().create_timer(1).timeout
+		invincible = false
 		
 
 
@@ -700,16 +683,16 @@ func hit_block():
 		await get_tree().create_timer(0.2).timeout
 		resume_move()
 
+
 func pause_move():
 	invincible = true
 	hurting = true
 	move_ready = false
-
 	timer = 0
 	final_time = 9999
 	
+	
 func resume_move():
-
 	hurting = false
 	move_ready = true
 	final_time = snake_speed
@@ -718,7 +701,6 @@ func resume_move():
 #win conditions when touching flag pole. position pole in way that snake head will always be inside it & snake head doesnt by pass it.
 func win():
 	move_orders.clear()
-	#invincible = true
 	Global.winning = true
 	player_input = false
 	xLimit = "none"
