@@ -65,6 +65,8 @@ var next_move = "the next move the snake will make"
 func _ready():
 	teleport_sequence()
 	update_camera()
+	await get_tree().create_timer(0.1).timeout
+	$Camera/ColorRect.visible = false
 
 
 func _process(delta):
@@ -638,7 +640,7 @@ func teleport():
 func enter_entrance():
 	if Global.entranceStopper == false:
 		crap = position.x + 135
-	else:
+	elif camera == true:
 		$Camera.limit_right = crap 
 
 
