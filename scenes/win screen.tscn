@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuelmtnwm1snl"]
+
+[ext_resource type="AudioStream" uid="uid://c0eyl1emaghlh" path="res://sounds/win song.wav" id="1_64bwf"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 89.0
+offset_top = 99.0
+offset_right = 89.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -107.0
+offset_top = -118.0
+offset_right = 190.0
+offset_bottom = 179.0
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "WIN!"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("1_64bwf")
+autoplay = true

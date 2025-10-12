@@ -39,11 +39,20 @@ metadata/_edit_group_ = true
 visible = false
 
 [node name="question block7" parent="." instance=ExtResource("6_06g6w")]
-position = Vector2(136, 88)
+position = Vector2(40, 152)
 items = Array[PackedScene]([ExtResource("8_fs55x"), ExtResource("8_fs55x"), ExtResource("8_fs55x")])
+false_block = true
 
 [node name="question block8" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(120, 152)
+items = Array[PackedScene]([ExtResource("8_fs55x")])
+
+[node name="question block10" parent="." instance=ExtResource("6_06g6w")]
+position = Vector2(152, 152)
+items = Array[PackedScene]([ExtResource("8_fs55x")])
+
+[node name="question block9" parent="." instance=ExtResource("6_06g6w")]
+position = Vector2(136, 88)
 items = Array[PackedScene]([ExtResource("6_2spgy")])
 
 [node name="coin" parent="." instance=ExtResource("8_fs55x")]
@@ -70,38 +79,17 @@ position = Vector2(86, 121)
 [node name="brick6" parent="." instance=ExtResource("10_choun")]
 position = Vector2(104, 152)
 
+[node name="brick7" parent="." instance=ExtResource("10_choun")]
+position = Vector2(104, 200)
+
+[node name="brick8" parent="." instance=ExtResource("10_choun")]
+position = Vector2(39, 200)
+
 [node name="brick23" parent="." instance=ExtResource("10_choun")]
 position = Vector2(136, 152)
 
 [node name="brick24" parent="." instance=ExtResource("10_choun")]
 position = Vector2(168, 152)
-
-[node name="brick25" parent="." instance=ExtResource("10_choun")]
-position = Vector2(152, 152)
-
-[node name="brick10" parent="." instance=ExtResource("10_choun")]
-position = Vector2(231, 127)
-
-[node name="brick11" parent="." instance=ExtResource("10_choun")]
-position = Vector2(247, 127)
-
-[node name="brick12" parent="." instance=ExtResource("10_choun")]
-position = Vector2(263, 127)
-
-[node name="brick13" parent="." instance=ExtResource("10_choun")]
-position = Vector2(279, 127)
-
-[node name="brick14" parent="." instance=ExtResource("10_choun")]
-position = Vector2(295, 127)
-
-[node name="brick15" parent="." instance=ExtResource("10_choun")]
-position = Vector2(311, 127)
-
-[node name="brick16" parent="." instance=ExtResource("10_choun")]
-position = Vector2(327, 127)
-
-[node name="brick17" parent="." instance=ExtResource("10_choun")]
-position = Vector2(343, 127)
 
 [node name="brick9" parent="." instance=ExtResource("10_choun")]
 position = Vector2(129, 33)
@@ -124,11 +112,8 @@ position = Vector2(193, 33)
 [node name="castle" parent="." instance=ExtResource("10_ya4ey")]
 position = Vector2(3272, 208)
 
-[node name="FireFlower2" parent="." instance=ExtResource("10_eb6dy")]
-position = Vector2(264, 144)
-
 [node name="FireFlower3" parent="." instance=ExtResource("10_eb6dy")]
-position = Vector2(69, 114)
+position = Vector2(85, 114)
 
 [node name="camera_system" parent="." instance=ExtResource("8_85g3d")]
 
@@ -181,23 +166,16 @@ avoid_ledge = true
 
 [node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
 position = Vector2(240, 240)
-teleporterable = true
 world = "uid://du6cg6ytddp8g"
 
-[node name="pipe3" parent="." instance=ExtResource("12_eb6dy")]
-position = Vector2(337, 119)
-
 [node name="shell" parent="." instance=ExtResource("13_trceg")]
-position = Vector2(294, 99)
-
-[node name="shell2" parent="." instance=ExtResource("13_trceg")]
-position = Vector2(328, 182)
+position = Vector2(81, 207)
 
 [node name="koopa2" parent="." instance=ExtResource("13_a8y0u")]
-position = Vector2(78, 119)
+position = Vector2(140, 143)
 avoid_ledge = true
 
 [node name="ui" parent="." instance=ExtResource("14_a8y0u")]
 
 [node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(42, 60)
+position = Vector2(138, 206)

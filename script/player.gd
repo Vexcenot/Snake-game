@@ -65,7 +65,7 @@ var next_move = "the next move the snake will make"
 func _ready():
 	teleport_sequence()
 	update_camera()
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.1                            ).timeout
 	$Camera/ColorRect.visible = false
 
 
@@ -617,7 +617,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		#$Camera.limit_left = Global.camera_limit
 	if area.name == "oob" and Global.winning == false and invincible == false:
 		die()
-	if area.name == "brick_area":
+	if area.name == "brick_area" and Global.snake_status != "small":
 		eatable += 1
 	if area.name == "enemy":
 		eatable += 1
@@ -716,6 +716,8 @@ func win():
 		move_orders.append("down")
 		Global.direction = "down"
 		move_exit2 = true
+	await get_tree().create_timer(2).timeout
+	get_tree().change_scene_to_file("res://scenes/win screen.tscn")
 #second part of win animation
 var 	move_exit2 = false
 func win2():
