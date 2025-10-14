@@ -16,7 +16,7 @@ size = Vector2(3.975852, 63)
 script = ExtResource("1_78010")
 
 [node name="Pipe" type="Sprite2D" parent="."]
-z_index = 4
+z_index = 10
 position = Vector2(0, -32)
 texture = ExtResource("1_bepn3")
 
@@ -33,6 +33,15 @@ collision_mask = 131
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top_block"]
 position = Vector2(0, -53)
 scale = Vector2(1.4, 1)
+shape = SubResource("RectangleShape2D_arayy")
+
+[node name="alwaystop_block" type="StaticBody2D" parent="."]
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="alwaystop_block"]
+position = Vector2(0, -54)
+scale = Vector2(1.6399993, 1)
 shape = SubResource("RectangleShape2D_arayy")
 
 [node name="PowerDown" type="AudioStreamPlayer2D" parent="."]

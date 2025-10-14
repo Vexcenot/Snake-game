@@ -27,7 +27,7 @@ size = Vector2(23.2083, 26)
 [node name="Main" type="Node"]
 
 [node name="bng" type="Sprite2D" parent="."]
-position = Vector2(1464, 240)
+position = Vector2(1688, 240)
 texture = ExtResource("1_h5eht")
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
@@ -146,7 +146,7 @@ blocked = false
 position = Vector2(2616, 176)
 
 [node name="pipe2" parent="." instance=ExtResource("12_eb6dy")]
-position = Vector2(928, 216)
+position = Vector2(2623, 240)
 ID = "ccc"
 
 [node name="GOUP" type="Area2D" parent="."]
@@ -174,7 +174,7 @@ world = "uid://du6cg6ytddp8g"
 position = Vector2(81, 207)
 
 [node name="koopa2" parent="." instance=ExtResource("13_a8y0u")]
-position = Vector2(140, 143)
+position = Vector2(240, 164)
 avoid_ledge = true
 
 [node name="ui" parent="." instance=ExtResource("14_a8y0u")]

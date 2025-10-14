@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://du6cg6ytddp8g"]
+[gd_scene load_steps=7 format=3 uid="uid://du6cg6ytddp8g"]
 
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="1_5558j"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="2_osycu"]
 [ext_resource type="PackedScene" uid="uid://cpkdjcp5lcxe" path="res://scenes/pipe.tscn" id="3_iubgi"]
 [ext_resource type="PackedScene" uid="uid://pba4v6gle2ea" path="res://scenes/castle.tscn" id="4_osycu"]
 [ext_resource type="PackedScene" uid="uid://lhmipeci2e24" path="res://scenes/coin.tscn" id="5_iubgi"]
-[ext_resource type="PackedScene" uid="uid://c5idjgy4afmho" path="res://scenes/mushroom.tscn" id="6_iubgi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6vnne"]
 size = Vector2(1674, 31)
@@ -59,6 +58,3 @@ blocked = false
 [node name="coin3" parent="wall" instance=ExtResource("5_iubgi")]
 position = Vector2(-232, -176)
 blocked = false
-
-[node name="mushroom" parent="." instance=ExtResource("6_iubgi")]
-position = Vector2(38, 37)
