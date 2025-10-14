@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=19 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dkd651q06i08r" path="res://scenes/koopa.tscn" id="13_a8y0u"]
 [ext_resource type="PackedScene" uid="uid://h2ccg27eas81" path="res://scenes/shell.tscn" id="13_trceg"]
 [ext_resource type="PackedScene" uid="uid://be66wxyvfxkdr" path="res://scenes/ui.tscn" id="14_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://mp38m5aijo56" path="res://scenes/soup.tscn" id="15_jkv2x"]
 
 [sub_resource type="PackedScene" id="PackedScene_eb6dy"]
 
@@ -30,7 +31,7 @@ position = Vector2(1464, 240)
 texture = ExtResource("1_h5eht")
 
 [node name="Snek" parent="." instance=ExtResource("2_10edd")]
-position = Vector2(43, 56)
+position = Vector2(104, 168)
 scale = Vector2(2, 2.07506)
 fire_ball = SubResource("PackedScene_eb6dy")
 metadata/_edit_group_ = true
@@ -166,6 +167,7 @@ avoid_ledge = true
 
 [node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
 position = Vector2(240, 240)
+teleporterable = true
 world = "uid://du6cg6ytddp8g"
 
 [node name="shell" parent="." instance=ExtResource("13_trceg")]
@@ -178,4 +180,7 @@ avoid_ledge = true
 [node name="ui" parent="." instance=ExtResource("14_a8y0u")]
 
 [node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(138, 206)
+position = Vector2(102, 175)
+
+[node name="soup" parent="." instance=ExtResource("15_jkv2x")]
+position = Vector2(79, 141)

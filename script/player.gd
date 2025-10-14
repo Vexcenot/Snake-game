@@ -63,9 +63,10 @@ var move_direction = Vector2.ZERO
 var next_move = "the next move the snake will make"
 
 func _ready():
+	$Camera/ColorRect.visible = true
 	teleport_sequence()
 	update_camera()
-	await get_tree().create_timer(0.1                            ).timeout
+	await get_tree().create_timer(0.1).timeout
 	$Camera/ColorRect.visible = false
 
 
@@ -158,8 +159,7 @@ func _input(event):
 					fire_ball.global_position.y = position.y + 13
 
 
-		#eat()
-		#eat_positions.push_front(global_position)
+
 #debug2
 	if event.is_action_pressed("k_action2"):
 		fuck = true
@@ -631,7 +631,9 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		invincible = true
 	if area.name == "GOUP":
 		move_orders.append("up")
-		
+	if area.name == "super_eat":
+		eatable += 1
+	
 func teleport():
 	if Global.teleport_all:
 		position.x = Global.teleport_x
