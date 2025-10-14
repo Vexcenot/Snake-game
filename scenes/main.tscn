@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=20 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://h2ccg27eas81" path="res://scenes/shell.tscn" id="13_trceg"]
 [ext_resource type="PackedScene" uid="uid://be66wxyvfxkdr" path="res://scenes/ui.tscn" id="14_a8y0u"]
 [ext_resource type="PackedScene" uid="uid://mp38m5aijo56" path="res://scenes/soup.tscn" id="15_jkv2x"]
+[ext_resource type="PackedScene" uid="uid://fp1nuui5i0p3" path="res://scenes/ground brick.tscn" id="16_jbj1t"]
 
 [sub_resource type="PackedScene" id="PackedScene_eb6dy"]
 
@@ -162,7 +163,7 @@ avoid_ledge = true
 turn_shell = true
 
 [node name="Goomba2" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(172, 208)
+position = Vector2(142, 143)
 avoid_ledge = true
 
 [node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
@@ -174,7 +175,7 @@ world = "uid://du6cg6ytddp8g"
 position = Vector2(81, 207)
 
 [node name="koopa2" parent="." instance=ExtResource("13_a8y0u")]
-position = Vector2(240, 164)
+position = Vector2(77, 112)
 avoid_ledge = true
 
 [node name="ui" parent="." instance=ExtResource("14_a8y0u")]
@@ -184,3 +185,21 @@ position = Vector2(102, 175)
 
 [node name="soup" parent="." instance=ExtResource("15_jkv2x")]
 position = Vector2(79, 141)
+
+[node name="mushroom2" parent="." instance=ExtResource("6_2spgy")]
+position = Vector2(150, 25)
+
+[node name="AllTheSmallBlocksTogether" parent="." instance=ExtResource("16_jbj1t")]
+position = Vector2(232, 216)
+
+[node name="AllTheSmallBlocksTogether2" parent="." instance=ExtResource("16_jbj1t")]
+position = Vector2(248, 216)
+
+[node name="AllTheSmallBlocksTogether3" parent="." instance=ExtResource("16_jbj1t")]
+position = Vector2(248, 232)
+
+[node name="AllTheSmallBlocksTogether4" parent="." instance=ExtResource("16_jbj1t")]
+position = Vector2(232, 232)
+
+[node name="AllTheSmallBlocksTogether5" parent="." instance=ExtResource("16_jbj1t")]
+position = Vector2(216, 200)

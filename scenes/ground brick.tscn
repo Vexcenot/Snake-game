@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://fp1nuui5i0p3"]
+
+[ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="1_vlub8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uaqj5"]
+
+[node name="AllTheSmallBlocksTogether" type="Sprite2D"]
+z_index = 3
+texture = ExtResource("1_vlub8")
+hframes = 4
+vframes = 3
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 135
+collision_mask = 135
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 1)
+scale = Vector2(0.8095252, 0.8095252)
+shape = SubResource("RectangleShape2D_uaqj5")

@@ -173,7 +173,7 @@ script = ExtResource("1_6qukx")
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="AllTheSmallBlocksTogether" type="Sprite2D" parent="Node2D"]
-z_index = 6
+z_index = 5
 texture = ExtResource("1_se7by")
 hframes = 4
 vframes = 3
