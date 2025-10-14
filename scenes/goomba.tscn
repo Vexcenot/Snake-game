@@ -193,6 +193,7 @@ size = Vector2(20, 7)
 collision_layer = 130
 collision_mask = 133
 script = ExtResource("1_13s4y")
+Super_Food = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.98023e-08, -3.0463073)

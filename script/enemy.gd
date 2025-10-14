@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var shell = preload("res://scenes/shell.tscn")
 var soup = preload("res://scenes/soup.tscn")
-var shitake = preload("res://scenes/shell.tscn")
+var shitake = preload("res://scenes/shitake.tscn")
 enum Sfood {soup, shitake}
 @export var Super_Food: Sfood
 @export var speeder = 25

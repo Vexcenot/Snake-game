@@ -1,8 +1,47 @@
-[gd_scene load_steps=9 format=3 uid="uid://mp38m5aijo56"]
+[gd_scene load_steps=9 format=3 uid="uid://cfvi86goh0ohb"]
 
-[ext_resource type="Texture2D" uid="uid://cl3v23hib0cqe" path="res://sprite/soup.png" id="1_gj4c3"]
-[ext_resource type="Script" uid="uid://cwq2q2bd4dk78" path="res://scenes/super_eat.gd" id="1_lw81e"]
-[ext_resource type="Texture2D" uid="uid://dgf52usnl0p6e" path="res://sprite/explode.png" id="2_lw81e"]
+[ext_resource type="Script" uid="uid://cwq2q2bd4dk78" path="res://scenes/super_eat.gd" id="1_1132s"]
+[ext_resource type="Texture2D" uid="uid://ck60mld5l2ptc" path="res://sprite/cooked mushroom.png" id="2_1132s"]
+[ext_resource type="Texture2D" uid="uid://dgf52usnl0p6e" path="res://sprite/explode.png" id="3_ppdkq"]
+
+[sub_resource type="Animation" id="Animation_k4gy1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Explode:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Explode:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("food:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_dh2wj"]
 resource_name = "spawn"
@@ -44,45 +83,6 @@ tracks/2/keys = {
 "values": [false, false, true]
 }
 
-[sub_resource type="Animation" id="Animation_k4gy1"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Explode:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Explode:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("food:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_hw1dn"]
 _data = {
 &"RESET": SubResource("Animation_k4gy1"),
@@ -91,10 +91,10 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iaecm"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lw81e"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1132s"]
 
 [node name="soup" type="Node2D"]
-script = ExtResource("1_lw81e")
+script = ExtResource("1_1132s")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -105,12 +105,12 @@ autoplay = "spawn"
 [node name="food" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(0, -8)
-texture = ExtResource("1_gj4c3")
+texture = ExtResource("2_1132s")
 
 [node name="Explode" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(0, -6)
-texture = ExtResource("2_lw81e")
+texture = ExtResource("3_ppdkq")
 hframes = 3
 
 [node name="super_eat" type="Area2D" parent="."]
@@ -124,6 +124,6 @@ shape = SubResource("RectangleShape2D_iaecm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="edible"]
 scale = Vector2(3.07808, 3.07808)
-shape = SubResource("RectangleShape2D_lw81e")
+shape = SubResource("RectangleShape2D_1132s")
 
 [connection signal="area_entered" from="super_eat" to="." method="_on_super_eat_area_entered"]
