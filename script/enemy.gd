@@ -21,6 +21,11 @@ var head = false
 var dead = false
 var direction = 0
 var eatable = 0
+var live = false
+
+func _ready():
+	await get_tree().create_timer(0.5).timeout
+	live = true
 
 #spawns food scene
 func spawn_food():
@@ -139,7 +144,7 @@ func _on_koopa_top_area_exited(area: Area2D) -> void:
 #left area detect
 func _on_left_side_area_entered(area: Area2D) -> void:
 	if dead == false:
-		if area.name == "enemy2" or area.name == "kill":
+		if area.name == "enemy2" or area.name == "kill" and live:
 			kill()
 		if area.name == "fireball":
 			spawn_food()
@@ -150,7 +155,7 @@ func _on_left_side_area_entered(area: Area2D) -> void:
 #right are detect
 func _on_right_side_area_entered(area: Area2D) -> void:
 	if dead == false:
-		if area.name == "enemy2" or area.name == "kill":
+		if area.name == "enemy2" or area.name == "kill" and live:
 			global_scale.x = -1
 			kill()
 		if area.name == "fireball":

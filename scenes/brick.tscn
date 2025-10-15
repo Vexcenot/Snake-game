@@ -100,6 +100,7 @@ scale = Vector2(0.506386, 0.506386)
 shape = SubResource("RectangleShape2D_mt0q5")
 
 [node name="block_area2" type="Area2D" parent="."]
+monitorable = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="block_area2"]
 position = Vector2(0, 11.05)
