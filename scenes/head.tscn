@@ -196,8 +196,8 @@ size = Vector2(27.0348, 13.3794)
 [node name="Snek" type="CharacterBody2D"]
 process_mode = 3
 scale = Vector2(2, 2)
-collision_layer = 4
-collision_mask = 4
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_w2ywo")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

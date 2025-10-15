@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=24 format=3 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://be66wxyvfxkdr" path="res://scenes/ui.tscn" id="14_a8y0u"]
 [ext_resource type="PackedScene" uid="uid://mp38m5aijo56" path="res://scenes/soup.tscn" id="15_jkv2x"]
 [ext_resource type="PackedScene" uid="uid://fp1nuui5i0p3" path="res://scenes/ground brick.tscn" id="16_jbj1t"]
+[ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="17_muem4"]
 
 [sub_resource type="PackedScene" id="PackedScene_eb6dy"]
 
@@ -24,6 +25,58 @@ size = Vector2(1674, 31)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ya4ey"]
 size = Vector2(23.2083, 26)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dp3eg"]
+texture = ExtResource("17_muem4")
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/bottom_left_corner = 0
+0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/terrains_peering_bit/top_left_corner = 0
+0:0/0/terrains_peering_bit/top_side = 0
+0:0/0/terrains_peering_bit/top_right_corner = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_muem4"]
+scenes/1/scene = ExtResource("16_jbj1t")
+scenes/2/scene = ExtResource("11_ya4ey")
+scenes/3/scene = ExtResource("8_fs55x")
+scenes/4/scene = ExtResource("10_choun")
+scenes/5/scene = ExtResource("2_10edd")
+scenes/6/scene = ExtResource("13_a8y0u")
+scenes/11/scene = ExtResource("6_2spgy")
+scenes/12/scene = ExtResource("6_06g6w")
+scenes/13/scene = ExtResource("13_trceg")
+scenes/14/scene = ExtResource("10_ya4ey")
+
+[sub_resource type="TileSet" id="TileSet_0ld40"]
+physics_layer_0/collision_layer = 135
+physics_layer_0/collision_mask = 135
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_dp3eg")
+sources/1 = SubResource("TileSetScenesCollectionSource_muem4")
 
 [node name="Main" type="Node"]
 
@@ -36,9 +89,6 @@ position = Vector2(104, 168)
 scale = Vector2(2, 2.07506)
 fire_ball = SubResource("PackedScene_eb6dy")
 metadata/_edit_group_ = true
-
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
-visible = false
 
 [node name="question block7" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(40, 152)
@@ -157,13 +207,8 @@ position = Vector2(2624, 197)
 scale = Vector2(0.68941, 1)
 shape = SubResource("RectangleShape2D_ya4ey")
 
-[node name="Goomba6" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(624, 200)
-avoid_ledge = true
-turn_shell = true
-
 [node name="Goomba2" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(142, 143)
+position = Vector2(189, 206)
 avoid_ledge = true
 
 [node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
@@ -176,6 +221,14 @@ position = Vector2(81, 207)
 
 [node name="koopa2" parent="." instance=ExtResource("13_a8y0u")]
 position = Vector2(77, 112)
+avoid_ledge = true
+
+[node name="koopa3" parent="." instance=ExtResource("13_a8y0u")]
+position = Vector2(111, 143)
+avoid_ledge = true
+
+[node name="koopa4" parent="." instance=ExtResource("13_a8y0u")]
+position = Vector2(167, 143)
 avoid_ledge = true
 
 [node name="ui" parent="." instance=ExtResource("14_a8y0u")]
@@ -203,3 +256,8 @@ position = Vector2(232, 232)
 
 [node name="AllTheSmallBlocksTogether5" parent="." instance=ExtResource("16_jbj1t")]
 position = Vector2(216, 200)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = 3
+tile_map_data = PackedByteArray(0, 0, 7, 0, 12, 0, 1, 0, 0, 0, 0, 0, 1, 0, 7, 0, 11, 0, 1, 0, 0, 0, 0, 0, 1, 0, 7, 0, 10, 0, 1, 0, 0, 0, 0, 0, 1, 0)
+tile_set = SubResource("TileSet_0ld40")

@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var avoid_ledge = false
-@export var live = false
+var live = false
 @export var turn2turtle = true
 #var turt = preload("res://scenes/fuck.tscn")
 var speeder = 200
@@ -23,13 +23,14 @@ func _physics_process(delta: float) -> void:
 #func _ready():
 	#spawning()
 func _ready() -> void:
+	live = true
 	#make it not do this when moving
 	if turn2turtle:
 		$AnimationPlayer.play("transform")
 
 #check if on edge and turns
 func _on_left_side_body_entered(body: Node2D) -> void:
-	if body.name == "Snek":
+	if body.name == "Snek" and live == false:
 		position.x += 10
 		speed = speeder
 		$AnimationPlayer.play("RESET")
@@ -40,7 +41,7 @@ func _on_left_side_body_entered(body: Node2D) -> void:
 
 
 func _on_right_side_body_entered(body: Node2D) -> void:
-	if body.name == "Snek":
+	if body.name == "Snek" and live == false:
 		position.x -= 10
 		speed = -speeder
 		$AnimationPlayer.play("RESET")

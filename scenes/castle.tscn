@@ -10,6 +10,7 @@
 size = Vector2(16, 32)
 
 [node name="castle" type="Node2D"]
+position = Vector2(96, 8)
 script = ExtResource("1_rjj26")
 
 [node name="20592Png" type="Sprite2D" parent="."]
