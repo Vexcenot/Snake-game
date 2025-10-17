@@ -70,6 +70,8 @@ func _ready():
 	$Camera/ColorRect.visible = false
 
 
+
+
 func _process(delta):
 	pausing()
 	print(invincible)
@@ -504,6 +506,7 @@ func absolute_stop():
 		final_time == 99999
 
 func die():
+	
 	Global.invincible = false
 	$Die.play()
 	dead = true

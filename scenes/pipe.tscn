@@ -13,12 +13,14 @@ size = Vector2(20, 4)
 size = Vector2(3.975852, 63)
 
 [node name="pipe" type="Node2D"]
+position = Vector2(43, 73)
 script = ExtResource("1_78010")
 
 [node name="Pipe" type="Sprite2D" parent="."]
 z_index = 4
 position = Vector2(0, -32)
 texture = ExtResource("1_bepn3")
+hframes = 2
 
 [node name="pipe_enter" type="Area2D" parent="."]
 

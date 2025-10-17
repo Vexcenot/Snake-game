@@ -8,11 +8,15 @@ extends Node2D
 @export_file var world
 @export_file var ID : String
 @export var TargetID : String
-
+@export_enum("1", "2")
+var pipe_type: int
+var underground_sprite = load("res://sprite/pipe dark.png")
+var overworld_sprite = load("res://sprite/pipe.png")
 
 
 func _ready() -> void:
-	set_direction()
+	if pipe_type == 1:
+		$Pipe.frame = 1
 	if Global.targetting_pipe == ID:
 		push_teleport()
 		set_direction()
@@ -21,6 +25,10 @@ func _ready() -> void:
 		print("ass")
 		$top_block.set_collision_layer_value(1, false)
 		$top_block.set_collision_layer_value(2, false)
+
+func _process(delta: float) -> void:
+	if Global.world_type == "underground":
+		$Pipe.texture = underground_sprite
 
 
 
@@ -38,9 +46,11 @@ func set_direction():
 		Global.starting_direction == "up"
 	elif rotation == 90:
 		Global.starting_direction == "right"
+		$Pipe.frame = 2
 	elif rotation == 180:
 		Global.starting_direction == "down"
 	elif rotation == -90:
+		$Pipe.frame = 2
 		Global.starting_direction == "right"
 
 

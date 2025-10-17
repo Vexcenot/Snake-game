@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc8ayjdv8nyv2"]
+
+[ext_resource type="Texture2D" uid="uid://dhho5ytiu0vpx" path="res://sprite/pipe stem.png" id="1_bqjtt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lua1j"]
+size = Vector2(28, 48)
+
+[node name="stem" type="Node2D"]
+
+[node name="PipeStem" type="Sprite2D" parent="."]
+position = Vector2(14, 24)
+texture = ExtResource("1_bqjtt")
+
+[node name="brick" type="StaticBody2D" parent="."]
+position = Vector2(-8, 0)
+collision_layer = 135
+collision_mask = 135
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="brick"]
+position = Vector2(14, 24)
+shape = SubResource("RectangleShape2D_lua1j")

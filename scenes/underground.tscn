@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://du6cg6ytddp8g"]
+[gd_scene load_steps=20 format=4 uid="uid://du6cg6ytddp8g"]
 
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="1_5558j"]
 [ext_resource type="Script" uid="uid://3i17aalstqc2" path="res://scenes/underground.gd" id="1_iubgi"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="12_k8mxk"]
 [ext_resource type="PackedScene" uid="uid://dkd651q06i08r" path="res://scenes/koopa.tscn" id="14_ilhyw"]
 [ext_resource type="PackedScene" uid="uid://bywstij4qxlot" path="res://scenes/stair brick.tscn" id="15_e8a6q"]
+[ext_resource type="PackedScene" uid="uid://bc8ayjdv8nyv2" path="res://scenes/pipe stem.tscn" id="16_oo6yi"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qt2jv"]
 texture = ExtResource("6_swjso")
@@ -75,18 +76,19 @@ sources/1 = SubResource("TileSetScenesCollectionSource_bt6ym")
 [node name="underground" type="Node2D"]
 script = ExtResource("1_iubgi")
 
+[node name="bg" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(920, 0)
+texture = ExtResource("2_osycu")
+
 [node name="Snek" parent="." instance=ExtResource("1_5558j")]
 position = Vector2(40, 24)
 START_DIR = 1
 camera = false
 
-[node name="20592Png" type="Sprite2D" parent="."]
-position = Vector2(920, 0)
-texture = ExtResource("2_osycu")
-
 [node name="pipe" parent="." instance=ExtResource("3_iubgi")]
 position = Vector2(272, 192)
-rotation = -1.5708
+rotation = -1.5707964
 x_snek = 2616
 y_snek = 200
 x_cam = 2560
@@ -95,6 +97,7 @@ gotoPipe = true
 world = "res://scenes/main.tscn"
 ID = "aaa"
 TargetID = "bbb"
+pipe_type = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(128, 120)
@@ -110,3 +113,7 @@ offset_top = -10.0
 offset_right = 264.0
 offset_bottom = 245.0
 color = Color(0, 0, 0, 1)
+
+[node name="Node2D" parent="." instance=ExtResource("16_oo6yi")]
+position = Vector2(242, 32)
+scale = Vector2(1, 3.8559537)
