@@ -43,7 +43,6 @@ func rest_block():
 		$block_area.monitoring = false
 
 
-
 func spawn_item():
 	$brick.set_collision_layer_value(1, true)
 	#make it not kill the enemy coming out of it

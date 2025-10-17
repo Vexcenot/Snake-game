@@ -568,7 +568,7 @@ func sprinting():
 		if Input.is_action_pressed("k_shift"):
 			stopInsta = true
 			#final_time = snake_speed*0.3
-			final_time = 0.07
+			final_time = 0.01
 		else:
 			final_time = snake_speed
 
@@ -606,10 +606,6 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		under_block += 1 #make this count up and down insteadd
 	if area.name == "block_area":
 		under_block += 1
-	#if area.name == "move_cam":
-		#var window = 128
-		#var pos = position.x
-		#$Camera.limit_left = Global.camera_limit
 	if area.name == "oob" and Global.winning == false and invincible == false:
 		die()
 	if area.name == "brick_area" and Global.snake_status != "small":
@@ -619,6 +615,8 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "coin_area":
 		eatable += 1
 	if area.name == "shell" and Global.snake_status != "small":
+		eatable += 1
+	if area.name == "flag":
 		eatable += 1
 	if area.name == "pipe_enter":
 		move_orders.clear()
@@ -667,6 +665,8 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 		move_exit = false
 	if area.name == "entrance" and Global.winning == true or area.name == "pipe_enter":
 		position.y = 9999
+		await get_tree().create_timer(3).timeout
+		get_tree().change_scene_to_file("res://scenes/win screen.tscn")
 	if area.name == "pipe_enter":
 		await get_tree().create_timer(1).timeout
 		invincible = false
@@ -713,8 +713,7 @@ func win():
 		move_orders.append("down")
 		Global.direction = "down"
 		move_exit2 = true
-	await get_tree().create_timer(2).timeout
-	get_tree().change_scene_to_file("res://scenes/win screen.tscn")
+	await get_tree().create_timer(5).timeout
 #second part of win animation
 var 	move_exit2 = false
 func win2():
@@ -728,9 +727,6 @@ func win2():
 			move_orders.append("right")
 			move_orders.append("down")
 			move_orders.append("right")
-#take snake position and only update it if its counting up. 
-#apply it to camera limit.w
-#if moveorder left then apply camera limit to player currrent possition
 
 func update_camera():
 	if camera == false:

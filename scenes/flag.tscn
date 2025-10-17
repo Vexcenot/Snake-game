@@ -12,9 +12,9 @@ size = Vector2(6, 8.25)
 texture = ExtResource("1_4nj3v")
 script = ExtResource("2_erh7b")
 
-[node name="flag_1" type="Area2D" parent="."]
+[node name="flag" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="flag_1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="flag"]
 position = Vector2(9, -4.125)
 shape = SubResource("RectangleShape2D_wwxna")
 
@@ -24,5 +24,6 @@ shape = SubResource("RectangleShape2D_wwxna")
 scale = Vector2(3.07808, 3.07808)
 shape = SubResource("RectangleShape2D_kjocn")
 
-[connection signal="area_entered" from="flag_1" to="." method="_on_eat_area_area_entered"]
-[connection signal="body_entered" from="flag_1" to="." method="_on_eat_area_body_entered"]
+[connection signal="area_entered" from="flag" to="." method="_on_flag_area_entered"]
+[connection signal="area_entered" from="flag" to="." method="_on_eat_area_area_entered"]
+[connection signal="body_entered" from="flag" to="." method="_on_eat_area_body_entered"]

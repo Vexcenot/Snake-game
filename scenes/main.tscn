@@ -113,6 +113,7 @@ position = Vector2(3456, 120)
 texture = ExtResource("2_muem4")
 
 [node name="bng" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1688, 240)
 texture = ExtResource("1_h5eht")
 
