@@ -1,15 +1,79 @@
-[gd_scene load_steps=7 format=3 uid="uid://du6cg6ytddp8g"]
+[gd_scene load_steps=19 format=4 uid="uid://du6cg6ytddp8g"]
 
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="1_5558j"]
+[ext_resource type="Script" uid="uid://3i17aalstqc2" path="res://scenes/underground.gd" id="1_iubgi"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="2_osycu"]
 [ext_resource type="PackedScene" uid="uid://cpkdjcp5lcxe" path="res://scenes/pipe.tscn" id="3_iubgi"]
 [ext_resource type="PackedScene" uid="uid://pba4v6gle2ea" path="res://scenes/castle.tscn" id="4_osycu"]
 [ext_resource type="PackedScene" uid="uid://lhmipeci2e24" path="res://scenes/coin.tscn" id="5_iubgi"]
+[ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="6_swjso"]
+[ext_resource type="PackedScene" uid="uid://cixj1ykvju5v2" path="res://scenes/brick.tscn" id="7_6vnne"]
+[ext_resource type="PackedScene" uid="uid://fp1nuui5i0p3" path="res://scenes/ground brick.tscn" id="7_oo6yi"]
+[ext_resource type="PackedScene" uid="uid://c5idjgy4afmho" path="res://scenes/mushroom.tscn" id="8_rx8xm"]
+[ext_resource type="PackedScene" uid="uid://d26kswglulmbs" path="res://scenes/question block.tscn" id="9_3mtlq"]
+[ext_resource type="PackedScene" uid="uid://h2ccg27eas81" path="res://scenes/shell.tscn" id="10_g3l68"]
+[ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="12_k8mxk"]
+[ext_resource type="PackedScene" uid="uid://dkd651q06i08r" path="res://scenes/koopa.tscn" id="14_ilhyw"]
+[ext_resource type="PackedScene" uid="uid://bywstij4qxlot" path="res://scenes/stair brick.tscn" id="15_e8a6q"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vnne"]
-size = Vector2(1674, 31)
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qt2jv"]
+texture = ExtResource("6_swjso")
+use_texture_padding = false
+0:0/0 = 0
+0:0/0/terrain_set = 0
+0:0/0/terrain = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/terrains_peering_bit/right_side = 0
+0:0/0/terrains_peering_bit/bottom_right_corner = 0
+0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/terrains_peering_bit/bottom_left_corner = 0
+0:0/0/terrains_peering_bit/left_side = 0
+0:0/0/terrains_peering_bit/top_left_corner = 0
+0:0/0/terrains_peering_bit/top_side = 0
+0:0/0/terrains_peering_bit/top_right_corner = 0
+1:0/0 = 0
+1:0/0/terrain_set = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:0/0 = 0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_bt6ym"]
+scenes/1/scene = ExtResource("7_oo6yi")
+scenes/2/scene = ExtResource("12_k8mxk")
+scenes/3/scene = ExtResource("5_iubgi")
+scenes/4/scene = ExtResource("7_6vnne")
+scenes/5/scene = ExtResource("1_5558j")
+scenes/6/scene = ExtResource("14_ilhyw")
+scenes/7/scene = ExtResource("3_iubgi")
+scenes/8/scene = ExtResource("15_e8a6q")
+scenes/11/scene = ExtResource("8_rx8xm")
+scenes/12/scene = ExtResource("9_3mtlq")
+scenes/13/scene = ExtResource("10_g3l68")
+scenes/14/scene = ExtResource("4_osycu")
+
+[sub_resource type="TileSet" id="TileSet_pxrnm"]
+physics_layer_0/collision_layer = 135
+physics_layer_0/collision_mask = 135
+terrain_set_0/mode = 0
+terrain_set_0/terrain_0/name = "Terrain 0"
+terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
+sources/0 = SubResource("TileSetAtlasSource_qt2jv")
+sources/1 = SubResource("TileSetScenesCollectionSource_bt6ym")
 
 [node name="underground" type="Node2D"]
+script = ExtResource("1_iubgi")
 
 [node name="Snek" parent="." instance=ExtResource("1_5558j")]
 position = Vector2(40, 24)
@@ -35,26 +99,14 @@ TargetID = "bbb"
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(128, 120)
 
-[node name="wall" type="StaticBody2D" parent="."]
-position = Vector2(405, 240)
-collision_layer = 135
-collision_mask = 135
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+z_index = 3
+tile_map_data = PackedByteArray("AAAAAAwAAQAAAAAABAAAAAsAAQAAAAAABAAAAAoAAQAAAAAABAAAAAkAAQAAAAAABAAAAAgAAQAAAAAABAAAAAcAAQAAAAAABAAAAAYAAQAAAAAABAAAAAUAAQAAAAAABAAAAAQAAQAAAAAABAAAAAMAAQAAAAAABAAAAAIAAQAAAAAABAAAAA0AAQAAAAAAAQABAA0AAQAAAAAAAQACAA0AAQAAAAAAAQADAA0AAQAAAAAAAQAEAA0AAQAAAAAAAQAFAA0AAQAAAAAAAQAGAA0AAQAAAAAAAQAHAA0AAQAAAAAAAQAIAA0AAQAAAAAAAQAJAA0AAQAAAAAAAQAKAA0AAQAAAAAAAQALAA0AAQAAAAAAAQAMAA0AAQAAAAAAAQANAA0AAQAAAAAAAQAOAA0AAQAAAAAAAQAPAA0AAQAAAAAAAQAPAA4AAQAAAAAAAQAOAA4AAQAAAAAAAQANAA4AAQAAAAAAAQAMAA4AAQAAAAAAAQALAA4AAQAAAAAAAQAKAA4AAQAAAAAAAQAJAA4AAQAAAAAAAQAIAA4AAQAAAAAAAQAHAA4AAQAAAAAAAQAGAA4AAQAAAAAAAQAFAA4AAQAAAAAAAQAEAA4AAQAAAAAAAQADAA4AAQAAAAAAAQACAA4AAQAAAAAAAQABAA4AAQAAAAAAAQAAAA4AAQAAAAAAAQAEAAIAAQAAAAAABAAEAAcAAQAAAAAAAwAEAAkAAQAAAAAAAwAEAAoAAQAAAAAABAAEAAsAAQAAAAAABAAEAAwAAQAAAAAABAAFAAIAAQAAAAAABAAFAAUAAQAAAAAAAwAFAAcAAQAAAAAAAwAFAAkAAQAAAAAAAwAFAAoAAQAAAAAABAAFAAsAAQAAAAAABAAFAAwAAQAAAAAABAAGAAIAAQAAAAAABAAGAAUAAQAAAAAAAwAGAAcAAQAAAAAAAwAGAAkAAQAAAAAAAwAGAAoAAQAAAAAABAAGAAsAAQAAAAAABAAGAAwAAQAAAAAABAAHAAIAAQAAAAAABAAHAAUAAQAAAAAAAwAHAAcAAQAAAAAAAwAHAAkAAQAAAAAAAwAHAAoAAQAAAAAABAAHAAsAAQAAAAAABAAHAAwAAQAAAAAABAAIAAIAAQAAAAAABAAIAAUAAQAAAAAAAwAIAAcAAQAAAAAAAwAIAAkAAQAAAAAAAwAIAAoAAQAAAAAABAAIAAsAAQAAAAAABAAIAAwAAQAAAAAABAAJAAIAAQAAAAAABAAJAAUAAQAAAAAAAwAJAAcAAQAAAAAAAwAJAAkAAQAAAAAAAwAJAAoAAQAAAAAABAAJAAsAAQAAAAAABAAJAAwAAQAAAAAABAAKAAIAAQAAAAAABAAKAAcAAQAAAAAAAwAKAAkAAQAAAAAAAwAKAAoAAQAAAAAABAAKAAsAAQAAAAAABAAKAAwAAQAAAAAABAA=")
+tile_set = SubResource("TileSet_pxrnm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="wall"]
-position = Vector2(419, -16)
-shape = SubResource("RectangleShape2D_6vnne")
-
-[node name="castle" parent="wall" instance=ExtResource("4_osycu")]
-position = Vector2(3, -32)
-
-[node name="coin" parent="wall" instance=ExtResource("5_iubgi")]
-position = Vector2(-329, -158)
-blocked = false
-
-[node name="coin2" parent="wall" instance=ExtResource("5_iubgi")]
-position = Vector2(-343, -156)
-blocked = false
-
-[node name="coin3" parent="wall" instance=ExtResource("5_iubgi")]
-position = Vector2(-232, -176)
-blocked = false
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -10.0
+offset_right = 264.0
+offset_bottom = 245.0
+color = Color(0, 0, 0, 1)

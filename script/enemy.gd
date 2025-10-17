@@ -156,7 +156,6 @@ func _on_left_side_area_entered(area: Area2D) -> void:
 func _on_right_side_area_entered(area: Area2D) -> void:
 	if dead == false:
 		if area.name == "enemy2" or area.name == "kill" and live:
-			global_scale.x = -1
 			kill()
 		if area.name == "fireball":
 			spawn_food()
@@ -177,9 +176,8 @@ func _on_top_area_entered(area: Area2D) -> void:
 func _on_enemy_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":
 		eatable += 1 
-		
+
 #deletes itself if eaten by snake
 func getEaten():
 	if eatable >= 1 and Global.snake_status != "small":
-		await get_tree().create_timer(0.1).timeout
 		queue_free()

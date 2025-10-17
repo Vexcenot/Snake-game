@@ -1,5 +1,7 @@
 extends Node2D
 @export var blocked = false
+var underground_sprite = load("res://sprite/dark coin.png")
+var overworld_sprite = load("res://sprite/coins.png")
 var collected = false
 
 # Called when the node enters the scene tree for the first time.
@@ -9,7 +11,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Global.world_type == "underground":
+		$Coins.texture = underground_sprite
+
 
 #runs when coin spawns from block
 func block_collect():
@@ -19,7 +23,6 @@ func block_collect():
 	else:
 		$edible.monitorable = true
 
-		
 
 #get collected if touched by snakes
 func _on_coin_area_area_entered(area: Area2D) -> void:
@@ -29,7 +32,6 @@ func _on_coin_area_area_entered(area: Area2D) -> void:
 		$coin_sound.play()
 	if area.name == "kill":
 		$AnimationPlayer.play("collect")
-		
 
 
 func _on_coin_sound_finished() -> void:

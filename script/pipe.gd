@@ -10,6 +10,7 @@ extends Node2D
 @export var TargetID : String
 
 
+
 func _ready() -> void:
 	set_direction()
 	if Global.targetting_pipe == ID:
@@ -18,18 +19,17 @@ func _ready() -> void:
 	$pipe_enter.monitorable = teleporterable
 	if teleporterable == true:
 		print("ass")
-
 		$top_block.set_collision_layer_value(1, false)
 		$top_block.set_collision_layer_value(2, false)
-		
+
+
 
 func push_teleport():
 	Global.teleport_x  = x_snek
 	Global.teleport_y = y_snek
 	Global.cam_telex = x_cam
 	Global.cam_teley = y_cam
-	
-		
+
 
 
 #theory that snake should be instated through spawn point instead of base world, and given starting directions from spawn points instead of base player script.
@@ -44,6 +44,7 @@ func set_direction():
 		Global.starting_direction == "right"
 
 
+
 func _on_enter_pipe_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area" and teleporterable == true:
 		$PowerDown.play()
@@ -53,5 +54,3 @@ func _on_enter_pipe_area_entered(area: Area2D) -> void:
 		push_teleport()
 		if gotoPipe:
 			Global.teleport_all = true
-		
-		

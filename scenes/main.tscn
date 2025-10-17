@@ -1,5 +1,6 @@
-[gd_scene load_steps=22 format=4 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=23 format=4 uid="uid://jfm302t7cx8d"]
 
+[ext_resource type="Script" uid="uid://33wsmjudqgvw" path="res://scenes/main.gd" id="1_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="2_10edd"]
 [ext_resource type="Texture2D" uid="uid://7qbc5n6j6imp" path="res://sprite/looping bg w1.png" id="2_muem4"]
@@ -51,7 +52,7 @@ use_texture_padding = false
 2:2/0 = 0
 3:0/0 = 0
 
-[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_muem4"]
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_0ld40"]
 scenes/1/scene = ExtResource("16_jbj1t")
 scenes/2/scene = ExtResource("11_ya4ey")
 scenes/3/scene = ExtResource("8_fs55x")
@@ -72,12 +73,13 @@ terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/0 = SubResource("TileSetAtlasSource_dp3eg")
-sources/1 = SubResource("TileSetScenesCollectionSource_muem4")
+sources/1 = SubResource("TileSetScenesCollectionSource_0ld40")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ya4ey"]
 size = Vector2(23.2083, 26)
 
 [node name="Main" type="Node"]
+script = ExtResource("1_dp3eg")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 40.0
@@ -117,38 +119,18 @@ texture = ExtResource("1_h5eht")
 [node name="camera_system" parent="." instance=ExtResource("8_85g3d")]
 visible = false
 
-[node name="pipe2" parent="." instance=ExtResource("12_eb6dy")]
-position = Vector2(2623, 240)
-ID = "ccc"
-
-[node name="Marker2D" type="Marker2D" parent="pipe2"]
-position = Vector2(-7, -64)
-
-[node name="GOUP" type="Area2D" parent="pipe2"]
-position = Vector2(-2623, -240)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="pipe2/GOUP"]
-position = Vector2(2624, 197)
-scale = Vector2(0.68941, 1)
-shape = SubResource("RectangleShape2D_ya4ey")
-
-[node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
-position = Vector2(928, 208)
-teleporterable = true
-world = "uid://du6cg6ytddp8g"
-
 [node name="ui" parent="." instance=ExtResource("14_a8y0u")]
-
-[node name="question block" parent="." instance=ExtResource("6_06g6w")]
-position = Vector2(344, 152)
-items = Array[PackedScene]([ExtResource("8_fs55x")])
-
-[node name="question block2" parent="." instance=ExtResource("6_06g6w")]
-position = Vector2(360, 88)
-items = Array[PackedScene]([ExtResource("8_fs55x")])
 
 [node name="question block3" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(264, 152)
+items = Array[PackedScene]([ExtResource("8_fs55x")])
+
+[node name="question block16" parent="." instance=ExtResource("6_06g6w")]
+position = Vector2(344, 152)
+items = Array[PackedScene]([ExtResource("8_fs55x")])
+
+[node name="question block17" parent="." instance=ExtResource("6_06g6w")]
+position = Vector2(360, 88)
 items = Array[PackedScene]([ExtResource("8_fs55x")])
 
 [node name="question block4" parent="." instance=ExtResource("6_06g6w")]
@@ -216,3 +198,23 @@ position = Vector2(624, 224)
 
 [node name="pipe6" parent="." instance=ExtResource("12_eb6dy")]
 position = Vector2(464, 240)
+
+[node name="pipe2" parent="." instance=ExtResource("12_eb6dy")]
+position = Vector2(2623, 240)
+ID = "ccc"
+
+[node name="Marker2D" type="Marker2D" parent="pipe2"]
+position = Vector2(-7, -64)
+
+[node name="GOUP" type="Area2D" parent="pipe2"]
+position = Vector2(-2623, -240)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pipe2/GOUP"]
+position = Vector2(2624, 197)
+scale = Vector2(0.68941, 1)
+shape = SubResource("RectangleShape2D_ya4ey")
+
+[node name="pipe" parent="." instance=ExtResource("12_eb6dy")]
+position = Vector2(928, 208)
+teleporterable = true
+world = "uid://du6cg6ytddp8g"

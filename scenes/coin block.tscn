@@ -1,8 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://lhmipeci2e24"]
+[gd_scene load_steps=10 format=3 uid="uid://d24yg48cmuww3"]
 
-[ext_resource type="Script" uid="uid://n5ftbeu3taa2" path="res://script/coin.gd" id="1_6qxui"]
-[ext_resource type="Texture2D" uid="uid://by1lwoolytm2w" path="res://sprite/coins.png" id="1_ervcb"]
-[ext_resource type="AudioStream" uid="uid://sytrfv5uaavu" path="res://sounds/coin.wav" id="3_3ogj1"]
+[ext_resource type="Script" uid="uid://n5ftbeu3taa2" path="res://script/coin.gd" id="1_x2rhn"]
+[ext_resource type="Texture2D" uid="uid://by1lwoolytm2w" path="res://sprite/coins.png" id="2_yqryf"]
+[ext_resource type="AudioStream" uid="uid://sytrfv5uaavu" path="res://sounds/coin.wav" id="3_stl8c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_povfb"]
 size = Vector2(10, 14)
@@ -125,7 +125,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_11l1o"]
 
 [node name="coin" type="Node2D"]
-script = ExtResource("1_6qxui")
+position = Vector2(0, -8)
+script = ExtResource("1_x2rhn")
+blocked = true
 
 [node name="coin_area" type="Area2D" parent="."]
 
@@ -133,7 +135,7 @@ script = ExtResource("1_6qxui")
 shape = SubResource("RectangleShape2D_povfb")
 
 [node name="Coins" type="Sprite2D" parent="."]
-texture = ExtResource("1_ervcb")
+texture = ExtResource("2_yqryf")
 hframes = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -143,7 +145,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="coin_sound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("3_3ogj1")
+stream = ExtResource("3_stl8c")
 
 [node name="edible" type="Area2D" parent="."]
 monitorable = false

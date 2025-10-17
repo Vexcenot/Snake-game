@@ -93,7 +93,7 @@ position = Vector2(-9, -2)
 texture = ExtResource("4_rncqr")
 hframes = 4
 vframes = 3
-frame = 2
+frame = 3
 
 [node name="brick" type="StaticBody2D" parent="brick"]
 position = Vector2(9, 2)

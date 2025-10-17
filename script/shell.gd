@@ -56,7 +56,7 @@ func die():
 
 func set_speed():
 
-		speed = speeder
+	speed = speeder
 
 
 #play sprite animation sliding up and enabling movement
@@ -127,7 +127,6 @@ func _on_top_area_exited(area: Area2D) -> void:
 
 func _on_shell_area_entered(area: Area2D) -> void:
 	if area.name == "delete" or area.name == "Head Area" and Global.snake_status != "small":
-		print("FUUUUUUUGH")
 		queue_free()
 		
 

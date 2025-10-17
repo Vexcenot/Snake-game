@@ -12,7 +12,8 @@ var keep = false
 func _ready() -> void:
 	if false_block or invis_block:
 		$AnimationPlayer.stop()
-	pass
+	if invis_block:
+		$brick.set_collision_layer_value(1, false)
 
 func _process(delta: float) -> void:
 	#bump_up_detect()
@@ -26,10 +27,6 @@ func visability():
 		$Node2D/AllTheSmallBlocksTogether.frame = 1
 	elif invis_block:
 		$Node2D/AllTheSmallBlocksTogether.visible = false
-
-#func _input(event):
-	#if event.is_action_pressed("k_up") and snake_under:
-		#spawn_item()
 
 
 #turns block into empty brick when empty
@@ -48,6 +45,7 @@ func rest_block():
 
 
 func spawn_item():
+	$brick.set_collision_layer_value(1, true)
 	#make it not kill the enemy coming out of it
 	if Global.snake_status == "small" and Global.direction == "up" or Global.direction == "left" or Global.direction == "right":
 		$Node2D/AnimationPlayer.play("bump")
@@ -58,21 +56,20 @@ func spawn_item():
 		await get_tree().create_timer(0.1).timeout
 		var coining = items[0].resource_path == "res://scenes/coin.tscn"
 		var mushrooming = items[0].resource_path == "res://scenes/mushroom.tscn"
+		var coin_block = "res://scenes/coin block.tscn"
 
 		#handles spawning coin
 		if coining:
 			$Node2D/AnimationPlayer.play("bump")
+			items[0] = load(coin_block)
 			var coin_instance = items[0].instantiate()
-			
 			add_child(coin_instance)
 			items.pop_front()
 		#replaces mushroom with fire flower if snake already big
 		else:
 			if mushrooming and Global.snake_status != "small":
-				print('jack')
 				items[0] = load("res://scenes/fire_flower.tscn")
 		#spawns item normally
-			
 			$spawn_sound.play()
 			$bump_sound.play()
 			var spawned_item = items[0].instantiate()
@@ -80,7 +77,6 @@ func spawn_item():
 			#spawned_item.position.y
 			create_tween().tween_property(spawned_item, "position", Vector2(spawned_item.position.x, spawned_item.position.y - 8), 1.05)
 			items.pop_front()
-			#when animation finishes play idle again
 
 
 
@@ -115,4 +111,3 @@ func _on_block_area_area_exited(area: Area2D) -> void:
 		spawnable = false
 		timing = false
 		keep = false
-		#$kill/CollisionShape2D.disabled = true

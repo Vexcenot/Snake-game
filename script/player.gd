@@ -197,11 +197,6 @@ func teleport_sequence():
 			positions.push_front(global_position)
 			orientations.push_front(facing)
 		move_orders.append("down")
-		#pause_move()
-		
-
-			
-
 	move_ready = true
 
 #processes adding length to snake mid-game

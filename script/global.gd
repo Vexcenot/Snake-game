@@ -22,3 +22,4 @@ var stop_moving = false
 var still_stop = false
 var invincible = false
 var paused = false
+var world_type = "default"
