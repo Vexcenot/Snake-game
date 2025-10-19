@@ -55,13 +55,14 @@ var firstMove = false
 var stopInsta = false
 var powering = false
 var cramp = false
-var eatable = 0
 var crap
 var openJaw = 0
 var eatAnim = false
 var dontTurn = false
 var move_direction = Vector2.ZERO
 var next_move = "the next move the snake will make"
+var weakening = false
+
 
 func _ready():
 	$Camera/ColorRect.visible = true
@@ -71,11 +72,9 @@ func _ready():
 	$Camera/ColorRect.visible = false
 
 
-
-
 func _process(delta):
 	pausing()
-	print(invincible)
+	print(weakening)
 	if stopInsta == false:
 		$Camera.limit_left = Global.camera_limit + 3
 	untilMove()
@@ -102,6 +101,7 @@ func _process(delta):
 	if openJaw <= 0:
 		openJaw = 0
 	openMouth()
+
 
 func pausing():
 	if Global.paused == true:
@@ -165,7 +165,7 @@ func _input(event):
 
 #debug2
 	if event.is_action_pressed("k_action2"):
-		get_tree().reload_current_scene()
+		Global.resetAll()
 	if event.is_action_released("k_action2"):
 		fuck = false
 func painful_turn():
@@ -204,8 +204,8 @@ func teleport_sequence():
 
 #processes adding length to snake mid-game
 func eat(): 
-	if eatable >= 1:
-		eatable -= 1
+	if Global.eatable >= 1:
+		Global.eatable -= 1
 		Global.bonus_length += 1
 		eatAnim = true
 		pending_tail_segment += 1
@@ -381,6 +381,7 @@ func interact():
 #pain happens here
 #runs game over function and (should) clear out all datas
 func hurt():
+
 	if Global.invincible == false and under_block <= 0:
 		if Global.snake_status != "small":
 			lose_power()
@@ -388,6 +389,7 @@ func hurt():
 			die()
 
 func lose_power():
+	weakening = true
 	invincible = true
 	Global.invincible = true
 	#invinciblity_blink()
@@ -404,15 +406,14 @@ func lose_power():
 		await get_tree().create_timer(blink_sec).timeout
 		Global.snake_status = "small"
 		await get_tree().create_timer(blink_sec).timeout
-
 	resume_move()
-	
 	timer = 0
 	if Global.paused == false:
 		get_tree().paused = false
 	await get_tree().create_timer(2).timeout
 	invincible = false
 	Global.invincible = false
+	weakening = true
 	
 	
 #snake pass through blocks when smalln't
@@ -458,7 +459,7 @@ func check_turn_segment(segment, turn_coord):
 
 func set_firepower(): 
 	powering = true
-	eatable += 1
+	Global.eatable += 1
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
 	if Global.snake_status != "fire2":
@@ -477,7 +478,7 @@ func set_firepower():
 
 func set_power(power: String):
 	powering = true
-	eatable += 1
+	Global.eatable += 1
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
 	if Global.snake_status == "small":
@@ -530,6 +531,7 @@ func die():
 			# Wait before playing the next segment's animation
 		if i < all_segments.size() - 1:  # Don't wait after the last segment
 			await get_tree().create_timer(delay_between_segments).timeout
+	Global.resetAll()
 
 func update_global_direction():
 	if not move_orders.is_empty():
@@ -584,7 +586,7 @@ func starEat():
 	#var Inv = invArea.instantiate()
 	#get_parent().add_child(Inv)
 	#Inv.global_position = global_position
-	eatable += 2
+	Global.eatable += 2
 
 #how snake when touch different areas.
 var aah = 0
@@ -623,15 +625,15 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "oob" and Global.winning == false and invincible == false:
 		die()
 	if area.name == "brick_area" and Global.snake_status != "small":
-		eatable += 1
-	if area.name == "enemy":
-		eatable += 1
+		Global.eatable += 1
+	if area.name == "enemy" and Global.snake_status != "small":
+		Global.eatable += 1
 	if area.name == "coin_area":
-		eatable += 1
+		Global.eatable += 1
 	if area.name == "shell" and Global.snake_status != "small":
-		eatable += 1
+		Global.eatable += 1
 	if area.name == "flag":
-		eatable += 1
+		Global.eatable += 1
 	if area.name == "pipe_enter":
 		move_orders.clear()
 		player_input = false
@@ -639,7 +641,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "GOUP":
 		move_orders.append("up")
 	if area.name == "super_eat":
-		eatable += 1
+		Global.eatable += 1
 	
 func teleport():
 	if Global.teleport_all:
@@ -774,7 +776,8 @@ func move():
 	if turn_positions.size() >= length:
 		turn_positions.pop_back()
 		#runs hurt mechanic if facing is the same as raycast
-		
+
+
 #real moves
 	if move_direction != Vector2.ZERO:
 #LOOK INTO THIS!!!!!!!!

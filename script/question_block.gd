@@ -14,12 +14,18 @@ func _ready() -> void:
 		$AnimationPlayer.stop()
 	if invis_block:
 		$brick.set_collision_layer_value(1, false)
+		$brick.set_collision_layer_value(2, false)
+		$brick.set_collision_layer_value(8, false)
 
 func _process(delta: float) -> void:
 	#bump_up_detect()
 	visability()
 	rest_block()
 	keepSpawning()
+	if not invis_block:
+		$brick.set_collision_layer_value(1, true)
+		$brick.set_collision_layer_value(2, true)
+		$brick.set_collision_layer_value(8, true)
 
 #handles block appearence
 func visability():
@@ -64,6 +70,8 @@ func spawn_item():
 			var coin_instance = items[0].instantiate()
 			add_child(coin_instance)
 			items.pop_front()
+			Global.eatable += 1
+
 		#replaces mushroom with fire flower if snake already big
 		else:
 			if mushrooming and Global.snake_status != "small":
