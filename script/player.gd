@@ -2,6 +2,7 @@ extends CharacterBody2D
 enum spawn_dir {right,down,left,up}
 @export var tail_segment_scene: PackedScene = preload("res://scenes/tail.tscn")
 @export var fire_ball: PackedScene = preload("res://scenes/fire_ball.tscn")
+@export var invArea: PackedScene = preload("res://scenes/invincible_frame.tscn")
 @export var START_DIR : spawn_dir
 @export var camera = true
 @onready var up: RayCast2D = $up
@@ -89,7 +90,7 @@ func _process(delta):
 	sprinting()
 	update_global_direction()
 	check_collide()
-	enter_entrance()
+	enter_entrance() 
 	collision_updater()
 	eat_animation()
 	painful_turn()
@@ -144,7 +145,7 @@ func _input(event):
 			limit_move = "left"
 			move_orders.append("right")
 #debug1
-	if event.is_action_pressed("k_action") and player_input == true and Global.active_balls <= 1 and Global.snake_status == "fire2": #fix this
+	if event.is_action_pressed("k_action") and player_input == true and Global.active_balls <= 1 and Global.snake_status == "fire2": 
 		var fire_ball = fireball.instantiate()
 		get_parent().add_child(fire_ball)
 		if Global.direction == "right":
@@ -164,7 +165,7 @@ func _input(event):
 
 #debug2
 	if event.is_action_pressed("k_action2"):
-		fuck = true
+		get_tree().reload_current_scene()
 	if event.is_action_released("k_action2"):
 		fuck = false
 func painful_turn():
@@ -579,11 +580,21 @@ func update_sprite_orientation():
 	if ignore_turn == false:
 		update_tail_orientation(self, facing)
 
+func starEat():
+	#var Inv = invArea.instantiate()
+	#get_parent().add_child(Inv)
+	#Inv.global_position = global_position
+	eatable += 2
+
 #how snake when touch different areas.
 var aah = 0
 func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "mushroom":
 		set_power("big")
+	if area.name == "1up":
+		eat()#change this to custom 1up code
+	if area.name == "star":
+		starEat()
 	if area.name == "flower": #add proper power up trans
 		if Global.snake_status == "small":
 			set_power("big")

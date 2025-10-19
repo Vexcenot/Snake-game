@@ -23,3 +23,7 @@ var still_stop = false
 var invincible = false
 var paused = false
 var world_type = "default"
+var reset = false
+
+#func _process(delta: float) -> void:
+	#if reset

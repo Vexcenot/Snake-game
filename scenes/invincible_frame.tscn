@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://xfdxdevbu8wj"]
+
+[ext_resource type="Texture2D" uid="uid://dk80yoyld1dbi" path="res://sprite/ball.png" id="1_ly2ox"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8ydh"]
+
+[node name="invisible frame" type="Node2D"]
+
+[node name="inv_area" type="Area2D" parent="."]
+scale = Vector2(0.23609875, 0.23609875)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="inv_area"]
+scale = Vector2(0.8400004, 0.8400004)
+shape = SubResource("RectangleShape2D_h8ydh")
+
+[node name="Ball" type="Sprite2D" parent="."]
+scale = Vector2(0.52000064, 0.5199995)
+texture = ExtResource("1_ly2ox")

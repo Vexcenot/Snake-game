@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=24 format=4 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Script" uid="uid://33wsmjudqgvw" path="res://scenes/main.gd" id="1_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://fp1nuui5i0p3" path="res://scenes/ground brick.tscn" id="16_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://bywstij4qxlot" path="res://scenes/stair brick.tscn" id="17_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="17_muem4"]
+[ext_resource type="PackedScene" uid="uid://dmbesh4pmkuuo" path="res://scenes/star.tscn" id="19_0ld40"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dp3eg"]
 texture = ExtResource("17_muem4")
@@ -123,7 +124,7 @@ visible = false
 [node name="ui" parent="." instance=ExtResource("14_a8y0u")]
 
 [node name="question block3" parent="." instance=ExtResource("6_06g6w")]
-position = Vector2(264, 152)
+position = Vector2(104, 152)
 items = Array[PackedScene]([ExtResource("8_fs55x")])
 
 [node name="question block16" parent="." instance=ExtResource("6_06g6w")]
@@ -153,6 +154,7 @@ items = Array[PackedScene]([ExtResource("6_2spgy")])
 
 [node name="PUT STAR HERE" parent="." instance=ExtResource("6_06g6w")]
 position = Vector2(1624, 152)
+items = Array[PackedScene]([ExtResource("19_0ld40")])
 false_block = true
 
 [node name="question block7" parent="." instance=ExtResource("6_06g6w")]

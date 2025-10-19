@@ -1,0 +1,114 @@
+[gd_scene load_steps=10 format=3 uid="uid://dmbesh4pmkuuo"]
+
+[ext_resource type="Script" uid="uid://cenq57j0fptt1" path="res://scenes/star.gd" id="1_j6vao"]
+[ext_resource type="Texture2D" uid="uid://cwey3aue58nl" path="res://sprite/super star.png" id="1_mcqwg"]
+
+[sub_resource type="Animation" id="Animation_ef0hr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_j6vao"]
+resource_name = "idle"
+length = 0.13333668
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8d8bx"]
+_data = {
+&"RESET": SubResource("Animation_ef0hr"),
+&"idle": SubResource("Animation_j6vao")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ef0hr"]
+size = Vector2(20, 8.623167)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6vao"]
+size = Vector2(20, 3)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lrp4"]
+size = Vector2(19.5238, 43.447086)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sxbdi"]
+
+[node name="Star" type="Node2D"]
+script = ExtResource("1_j6vao")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+floor_constant_speed = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterBody2D"]
+root_node = NodePath("../SuperStar")
+libraries = {
+&"": SubResource("AnimationLibrary_8d8bx")
+}
+autoplay = "idle"
+
+[node name="SuperStar" type="Sprite2D" parent="CharacterBody2D"]
+z_index = 1000
+position = Vector2(0, -8)
+texture = ExtResource("1_mcqwg")
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -2.8684769)
+scale = Vector2(0.40630478, 0.72630477)
+shape = SubResource("RectangleShape2D_ef0hr")
+
+[node name="bottom" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(0, -1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/bottom"]
+scale = Vector2(0.43275467, 1)
+shape = SubResource("RectangleShape2D_j6vao")
+
+[node name="side" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(0, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/side"]
+rotation = 3.1415927
+scale = Vector2(0.53638595, -1)
+shape = SubResource("RectangleShape2D_j6vao")
+
+[node name="star" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(0, 9)
+scale = Vector2(2.4217038, 2.4217038)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/star"]
+position = Vector2(0, -6.6069183)
+scale = Vector2(0.37574887, 0.18187055)
+shape = SubResource("RectangleShape2D_8lrp4")
+
+[node name="edible" type="Area2D" parent="CharacterBody2D"]
+position = Vector2(0, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/edible"]
+scale = Vector2(3.07808, 3.07808)
+shape = SubResource("RectangleShape2D_sxbdi")
+
+[connection signal="area_entered" from="CharacterBody2D/bottom" to="." method="_on_bottom_area_entered"]
+[connection signal="body_entered" from="CharacterBody2D/bottom" to="." method="_on_bottom_body_entered"]
+[connection signal="area_entered" from="CharacterBody2D/side" to="." method="_on_side_area_entered"]
+[connection signal="body_entered" from="CharacterBody2D/side" to="." method="_on_side_body_entered"]
+[connection signal="area_entered" from="CharacterBody2D/star" to="." method="_on_star_area_entered"]
