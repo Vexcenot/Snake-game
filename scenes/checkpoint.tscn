@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhfga03tj43h2"]
+
+[ext_resource type="Script" uid="uid://bruw77e0dfelc" path="res://script/checkpoint.gd" id="1_ywqth"]
+[ext_resource type="Texture2D" uid="uid://i70ofguicb50" path="res://sprite/brick particles.png" id="2_vsimk"]
+
+[node name="checkpoint" type="Node2D"]
+script = ExtResource("1_ywqth")
+
+[node name="BrickParticles" type="Sprite2D" parent="."]
+scale = Vector2(-0.6369498, -0.6369498)
+texture = ExtResource("2_vsimk")

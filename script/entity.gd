@@ -7,7 +7,7 @@ var gravity = 700
 var speed = speeder
 var killable = false
 var jump_force = 150
-#movement baby!!!!
+#movement baby!!!! 
 func _physics_process(delta: float) -> void:
 	if stopped == false:
 		velocity.x = speed
@@ -54,10 +54,6 @@ func spawning():
 func _on_mushroom_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":
 		queue_free()
-
-			
-		
-
 
 
 

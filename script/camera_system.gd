@@ -2,6 +2,8 @@ extends Node2D
 var move_toggle = false
 
 func _ready() -> void:
+	if Global.checkPointable:
+		position.x = Global.spawnCoordx - 56
 	if Global.teleport_all:
 		#Global.teleport_all = false
 		position.x = Global.cam_telex

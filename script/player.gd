@@ -65,6 +65,8 @@ var weakening = false
 
 
 func _ready():
+	if Global.checkPointable:
+		position.x = Global.spawnCoordx 
 	$Camera/ColorRect.visible = true
 	teleport_sequence()
 	update_camera()
@@ -165,7 +167,7 @@ func _input(event):
 
 #debug2
 	if event.is_action_pressed("k_action2"):
-		Global.resetAll()
+		Global.reset()
 	if event.is_action_released("k_action2"):
 		fuck = false
 func painful_turn():
@@ -508,7 +510,8 @@ func absolute_stop():
 		final_time == 99999
 
 func die():
-	
+	if Global.checkPointable2:
+		Global.checkPointable = true
 	Global.invincible = false
 	$Die.play()
 	dead = true
@@ -531,7 +534,7 @@ func die():
 			# Wait before playing the next segment's animation
 		if i < all_segments.size() - 1:  # Don't wait after the last segment
 			await get_tree().create_timer(delay_between_segments).timeout
-	Global.resetAll()
+	Global.reset()
 
 func update_global_direction():
 	if not move_orders.is_empty():
@@ -574,7 +577,7 @@ func sprinting():
 		if Input.is_action_pressed("k_shift"):
 			stopInsta = true
 			#final_time = snake_speed*0.3
-			final_time = 0.01
+			final_time = 0.02
 		else:
 			final_time = snake_speed
 
@@ -638,6 +641,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		move_orders.clear()
 		player_input = false
 		invincible = true
+		Global.checkPointable = false
 	if area.name == "GOUP":
 		move_orders.append("up")
 	if area.name == "super_eat":
@@ -750,6 +754,7 @@ func update_camera():
 
 
 func move():
+	Global.snakePosX = global_position.x
 	if move_orders.size() > 0: #make it also check if snake is paused and that next move wouldnt run into itself.
 		if move_orders[0] == next_move or move_orders[0] == limit_move or move_orders[0] == "up" and under_block > 0:
 			move_orders.pop_front()

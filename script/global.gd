@@ -7,15 +7,15 @@ var entranceStopper : bool = false
 var winning : bool = false
 var active_balls : int = 0
 var visible : bool = true
-var teleport_x : int = 0
-var teleport_y : int = 0
-var cam_telex : int = 0
-var cam_teley : int = 0
+var teleport_x : float = 0
+var teleport_y : float = 0
+var cam_telex : float = 0
+var cam_teley : float = 0
 var bonus_length : int = 0
 var spawn_facing : String = ""
 var teleport_all : bool = false
 var teleport_all2 : bool  = false
-var camera_limit : int  = 0
+var camera_limit : float  = 0
 var targetting_pipe : String
 var starting_direction : String = "right"
 var stop_moving : bool = false
@@ -25,10 +25,14 @@ var paused : bool = false
 var world_type : String = "default"
 var eatable : int = 0
 var loadedWorld : String = ""
-var spawnCoordx : int = 0
-var spawnCoordy : int = 0
+var spawnCoordx : float = 0
+var spawnCoordy : float = 0
+var camCoordy : float = 0
+var snakePosX : float = 0
+var checkPointable : bool = false
+var checkPointable2 : bool = false
 
-func resetAll():
+func reset():
 	snake_status = "small"
 	direction = "left"
 	hitting = false
@@ -53,6 +57,19 @@ func resetAll():
 	paused = false
 	world_type = "default"
 	eatable = 0
+	die()
+
+func resetAll():
+	reset()
+	loadedWorld = ""
+	spawnCoordx = 0
+	spawnCoordy = 0
+	camCoordy = 0
+	snakePosX = 0
+	checkPointable = false
+	checkPointable2 = false
+
+func die():
 	get_tree().paused = false
 	if loadedWorld != "":
 		get_tree().change_scene_to_file(loadedWorld)
