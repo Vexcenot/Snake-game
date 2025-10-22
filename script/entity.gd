@@ -32,10 +32,8 @@ func _on_left_side_body_entered(body: Node2D) -> void:
 	speed = speeder
 	print("shit")
 
-
 func _on_right_side_body_entered(body: Node2D) -> void:
 	speed = -speeder
-
 
 
 func set_speed():

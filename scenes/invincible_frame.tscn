@@ -1,18 +1,125 @@
-[gd_scene load_steps=3 format=3 uid="uid://xfdxdevbu8wj"]
+[gd_scene load_steps=9 format=3 uid="uid://xfdxdevbu8wj"]
 
-[ext_resource type="Texture2D" uid="uid://dk80yoyld1dbi" path="res://sprite/ball.png" id="1_ly2ox"]
+[ext_resource type="Script" uid="uid://c6peqluj0vqmm" path="res://scenes/invincible_frame.gd" id="1_rlp8g"]
+[ext_resource type="Texture2D" uid="uid://cpgqyga26gtxo" path="res://sprite/inv smol.png" id="3_5eb4d"]
+
+[sub_resource type="Animation" id="Animation_eios8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D/sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_hd0vu"]
+resource_name = "invincible"
+length = 0.13333668
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.016666666),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody2D/sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2xphg"]
+_data = {
+&"RESET": SubResource("Animation_eios8"),
+&"invincible": SubResource("Animation_hd0vu")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j1ffk"]
+size = Vector2(20, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rlp8g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8ydh"]
 
 [node name="invisible frame" type="Node2D"]
+script = ExtResource("1_rlp8g")
 
-[node name="inv_area" type="Area2D" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2xphg")
+}
+autoplay = "invincible"
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(4.973799e-14, 8)
+rotation = -3.1415925
+scale = Vector2(0.29888028, -0.14545485)
+shape = SubResource("RectangleShape2D_j1ffk")
+
+[node name="sprite" type="Sprite2D" parent="CharacterBody2D"]
+visible = false
+z_index = 100
+scale = Vector2(2.060347, 2.060347)
+texture = ExtResource("3_5eb4d")
+hframes = 4
+
+[node name="kill" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/kill"]
+scale = Vector2(0.8400005, 0.8400005)
+shape = SubResource("RectangleShape2D_rlp8g")
+
+[node name="inv_area" type="Area2D" parent="CharacterBody2D"]
 scale = Vector2(0.23609875, 0.23609875)
+monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="inv_area"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/inv_area"]
 scale = Vector2(0.8400004, 0.8400004)
 shape = SubResource("RectangleShape2D_h8ydh")
 
-[node name="Ball" type="Sprite2D" parent="."]
-scale = Vector2(0.52000064, 0.5199995)
-texture = ExtResource("1_ly2ox")
+[node name="tailDetector" type="Area2D" parent="CharacterBody2D"]
+scale = Vector2(0.23609875, 0.23609875)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/tailDetector"]
+scale = Vector2(0.8400004, 0.8400004)
+shape = SubResource("RectangleShape2D_h8ydh")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+autoplay = true
+
+[connection signal="area_entered" from="CharacterBody2D/tailDetector" to="." method="_on_tail_detector_area_entered"]
+[connection signal="area_exited" from="CharacterBody2D/tailDetector" to="." method="_on_tail_detector_area_exited"]

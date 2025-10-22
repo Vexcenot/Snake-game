@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 		position.y += halfSpeed*delta
 	else:
 		position.y += speed*delta
-		
+
 
 #set bounce status
 func _on_bottom_collision_body_entered(body: Node2D) -> void:
@@ -45,7 +45,7 @@ func _on_bottom_collision_body_entered(body: Node2D) -> void:
 		await get_tree().create_timer(0.08).timeout
 		halfSpeed = 0
 		bounce_state = 1
-		
+
 
 func exploding():
 	if explode and explode2:

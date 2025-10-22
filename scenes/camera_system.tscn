@@ -99,7 +99,6 @@ shape = SubResource("RectangleShape2D_uyavn")
 debug_color = Color(5.58317e-06, 0.809802, 0.941832, 0.42)
 
 [node name="activate_entity" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="activate_entity"]
 position = Vector2(144.5, 73.5)

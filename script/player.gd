@@ -571,6 +571,7 @@ func ignoring_turning():
 		ignore_turn = true
 		timer_counter_toggle = true
 
+
 #vroom.
 func sprinting():
 	if move_ready == true:
@@ -586,10 +587,10 @@ func update_sprite_orientation():
 		update_tail_orientation(self, facing)
 
 func starEat():
-	#var Inv = invArea.instantiate()
-	#get_parent().add_child(Inv)
-	#Inv.global_position = global_position
-	Global.eatable += 2
+	var Inv = invArea.instantiate()
+	get_parent().add_child(Inv)
+	Inv.global_position = global_position
+	pending_tail_segment += 1
 
 #how snake when touch different areas.
 var aah = 0
