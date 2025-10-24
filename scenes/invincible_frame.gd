@@ -27,3 +27,6 @@ func _on_tail_detector_area_exited(area: Area2D) -> void:
 	if area.name == "tail area":
 		poop = true
 		$CharacterBody2D/sprite.texture = poopSprite
+		$CharacterBody2D/AudioStreamPlayer2D.playing = false
+		$AudioStreamPlayer.play()
+		

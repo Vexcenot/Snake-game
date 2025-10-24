@@ -24,6 +24,7 @@ config/icon="res://sprite/icon.svg"
 [autoload]
 
 Global="*res://script/global.gd"
+GlobalTimer="*res://scenes/GOD.tscn"
 
 [debug]
 

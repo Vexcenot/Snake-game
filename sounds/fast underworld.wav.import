@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://voieiqw78guq"
+path="res://.godot/imported/fast underworld.wav-9bfbe78f4da458a5c196a5e2d44a965d.sample"
+
+[deps]
+
+source_file="res://sounds/fast underworld.wav"
+dest_files=["res://.godot/imported/fast underworld.wav-9bfbe78f4da458a5c196a5e2d44a965d.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

@@ -70,7 +70,7 @@ func spawn_item():
 			var coin_instance = items[0].instantiate()
 			add_child(coin_instance)
 			items.pop_front()
-			Global.eatable += 1
+			#Global.eatable += 1
 
 		#replaces mushroom with fire flower if snake already big
 		else:

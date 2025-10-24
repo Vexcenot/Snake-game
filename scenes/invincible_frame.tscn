@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://xfdxdevbu8wj"]
+[gd_scene load_steps=11 format=3 uid="uid://xfdxdevbu8wj"]
 
 [ext_resource type="Script" uid="uid://c6peqluj0vqmm" path="res://scenes/invincible_frame.gd" id="1_rlp8g"]
 [ext_resource type="Texture2D" uid="uid://cpgqyga26gtxo" path="res://sprite/inv smol.png" id="3_5eb4d"]
+[ext_resource type="AudioStream" uid="uid://cf18w6r3u4wp8" path="res://sounds/invinsibility muffled.wav" id="3_j1ffk"]
+[ext_resource type="AudioStream" uid="uid://chhy42b001hm4" path="res://sounds/bump.wav" id="4_j1ffk"]
 
 [sub_resource type="Animation" id="Animation_eios8"]
 length = 0.001
@@ -99,7 +101,7 @@ hframes = 4
 [node name="kill" type="Area2D" parent="CharacterBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/kill"]
-scale = Vector2(0.8400005, 0.8400005)
+scale = Vector2(0.75999945, 0.75999945)
 shape = SubResource("RectangleShape2D_rlp8g")
 
 [node name="inv_area" type="Area2D" parent="CharacterBody2D"]
@@ -119,7 +121,11 @@ scale = Vector2(0.8400004, 0.8400004)
 shape = SubResource("RectangleShape2D_h8ydh")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
+stream = ExtResource("3_j1ffk")
 autoplay = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_j1ffk")
 
 [connection signal="area_entered" from="CharacterBody2D/tailDetector" to="." method="_on_tail_detector_area_entered"]
 [connection signal="area_exited" from="CharacterBody2D/tailDetector" to="." method="_on_tail_detector_area_exited"]

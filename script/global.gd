@@ -31,6 +31,8 @@ var camCoordy : float = 0
 var snakePosX : float = 0
 var checkPointable : bool = false
 var checkPointable2 : bool = false
+var lowTimer = false
+var playMusic = false
 
 func reset():
 	snake_status = "small"

@@ -223,3 +223,6 @@ shape = SubResource("RectangleShape2D_ya4ey")
 position = Vector2(912, 224)
 teleporterable = true
 world = "uid://du6cg6ytddp8g"
+
+[node name="Star" parent="." instance=ExtResource("19_0ld40")]
+position = Vector2(72, 208)
