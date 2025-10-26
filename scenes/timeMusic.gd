@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 				$"BG music".stream = overworld
 			store = Global.music
 		elif Global.music == "underground":
-			$"BG music".stream = overworld #change to under ground
+			$"BG music".stream = underworld #change to under ground
 			store = Global.music
 		elif Global.music == "invincible":
 			$"BG music".stream = invincible
