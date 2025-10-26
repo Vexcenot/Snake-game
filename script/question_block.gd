@@ -60,11 +60,12 @@ func spawn_item():
 	if items.size() > 0:
 		await get_tree().create_timer(0.1).timeout
 		var coining = items[0].resource_path == "res://scenes/coin.tscn"
+		var coining2 = items[0].resource_path == "res://scenes/coin block.tscn"
 		var mushrooming = items[0].resource_path == "res://scenes/mushroom.tscn"
 		var coin_block = "res://scenes/coin block.tscn"
 
 		#handles spawning coin
-		if coining:
+		if coining or coining2:
 			$Node2D/AnimationPlayer.play("bump")
 			items[0] = load(coin_block)
 			var coin_instance = items[0].instantiate()

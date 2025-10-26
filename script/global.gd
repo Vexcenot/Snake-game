@@ -31,8 +31,10 @@ var camCoordy : float = 0
 var snakePosX : float = 0
 var checkPointable : bool = false
 var checkPointable2 : bool = false
-var lowTimer = false
-var playMusic = false
+var lowTimer : bool = false
+var playMusic : bool = false
+var music : String = "none"
+var dead : bool = false
 
 func reset():
 	snake_status = "small"
@@ -59,6 +61,8 @@ func reset():
 	paused = false
 	world_type = "default"
 	eatable = 0
+	dead = false
+
 	die()
 
 func resetAll():

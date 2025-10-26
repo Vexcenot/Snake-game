@@ -51,7 +51,6 @@ var xLimit = "orientation the snake cant move in"
 var fuck = false
 var uninvincible = false
 var invincible = false
-var firstMove = false
 var stopInsta = false
 var powering = false
 var cramp = false
@@ -76,10 +75,6 @@ func _ready():
 
 func _process(delta):
 	pausing()
-	print(weakening)
-	if stopInsta == false:
-		$Camera.limit_left = Global.camera_limit + 3
-	untilMove()
 	if move_orders.size() > 3:
 		move_orders.pop_back()
 		if move_orders[0] == move_orders[1]:
@@ -112,12 +107,6 @@ func pausing():
 	else:
 		set_process_mode(PROCESS_MODE_ALWAYS)
 
-#snake movement inputs 
-func untilMove():
-	if firstMove == false:
-
-		final_time = 0
-		firstMove = true
 
 
 func _input(event):
@@ -235,7 +224,7 @@ var eatAnim2 = false
 func time_reset():
 	if timer >= final_time:
 		cramp = false
-		$Camera.limit_left = Global.camera_limit + 3
+		$Camera.limit_left = Global.camera_limit
 		# Make all tail segments visible
 		for segment in tail_segments:
 			segment.modulate.a = 1
@@ -513,7 +502,9 @@ func die():
 	if Global.checkPointable2:
 		Global.checkPointable = true
 	Global.invincible = false
-	$Die.play()
+	Global.music = "die"
+	Global.playMusic = true
+	Global.dead = true
 	dead = true
 	move_ready = false
 	get_tree().paused = true
@@ -534,6 +525,7 @@ func die():
 			# Wait before playing the next segment's animation
 		if i < all_segments.size() - 1:  # Don't wait after the last segment
 			await get_tree().create_timer(delay_between_segments).timeout
+	await get_tree().create_timer(3).timeout
 	Global.reset()
 
 func update_global_direction():

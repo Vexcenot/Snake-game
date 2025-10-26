@@ -71,10 +71,12 @@ _data = {
 size = Vector2(20, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rlp8g"]
+size = Vector2(20, 20.526323)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h8ydh"]
 
 [node name="invisible frame" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_rlp8g")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -92,7 +94,6 @@ scale = Vector2(0.29888028, -0.14545485)
 shape = SubResource("RectangleShape2D_j1ffk")
 
 [node name="sprite" type="Sprite2D" parent="CharacterBody2D"]
-visible = false
 z_index = 100
 scale = Vector2(2.060347, 2.060347)
 texture = ExtResource("3_5eb4d")
@@ -101,7 +102,8 @@ hframes = 4
 [node name="kill" type="Area2D" parent="CharacterBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/kill"]
-scale = Vector2(0.75999945, 0.75999945)
+position = Vector2(0, -0.20000271)
+scale = Vector2(0.19999886, 0.75999945)
 shape = SubResource("RectangleShape2D_rlp8g")
 
 [node name="inv_area" type="Area2D" parent="CharacterBody2D"]
@@ -122,7 +124,6 @@ shape = SubResource("RectangleShape2D_h8ydh")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="CharacterBody2D"]
 stream = ExtResource("3_j1ffk")
-autoplay = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_j1ffk")
