@@ -35,6 +35,9 @@ var lowTimer : bool = false
 var playMusic : bool = false
 var music : String = "none"
 var dead : bool = false
+var play = false
+var multiplayers = true
+var title = false
 
 func reset():
 	snake_status = "small"

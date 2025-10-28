@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b045cetgi6mol"
-path="res://.godot/imported/snake poos lolol.png-539fc69bf4b8035e6f42534fb2c7c9b1.ctex"
+uid="uid://ce8ttuhhgag4x"
+path="res://.godot/imported/logo.png-7ab59d55f205a7eab3fb69c2212b8a2d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/snake poos lolol.png"
-dest_files=["res://.godot/imported/snake poos lolol.png-539fc69bf4b8035e6f42534fb2c7c9b1.ctex"]
+source_file="res://sprite/logo.png"
+dest_files=["res://.godot/imported/logo.png-7ab59d55f205a7eab3fb69c2212b8a2d.ctex"]
 
 [params]
 

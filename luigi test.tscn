@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://cswl3f0pdo2w6"]
+
+[ext_resource type="PackedScene" uid="uid://mt2ylxx61b70" path="res://scenes/head2.tscn" id="1_w5dw0"]
+[ext_resource type="PackedScene" uid="uid://c5idjgy4afmho" path="res://scenes/mushroom.tscn" id="2_u6tou"]
+[ext_resource type="PackedScene" uid="uid://dtxpx2ar41ngs" path="res://scenes/fire_flower.tscn" id="3_xco3m"]
+[ext_resource type="PackedScene" uid="uid://dmbesh4pmkuuo" path="res://scenes/star.tscn" id="4_3dwgw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u6tou"]
+size = Vector2(296, 121)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="mushroom" parent="." instance=ExtResource("2_u6tou")]
+position = Vector2(122, 67)
+
+[node name="Snek" parent="." instance=ExtResource("1_w5dw0")]
+position = Vector2(38, 103)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 129
+collision_mask = 129
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(131, 170)
+shape = SubResource("RectangleShape2D_u6tou")
+
+[node name="FireFlower" parent="StaticBody2D" instance=ExtResource("3_xco3m")]
+position = Vector2(84, 105)
+
+[node name="Star" parent="StaticBody2D" instance=ExtResource("4_3dwgw")]
+position = Vector2(57, 110)

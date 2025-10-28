@@ -1,69 +1,76 @@
-[gd_scene load_steps=26 format=3 uid="uid://disfsrloilqua"]
+[gd_scene load_steps=25 format=3 uid="uid://mt2ylxx61b70"]
 
-[ext_resource type="Script" uid="uid://cggccwq77ls3n" path="res://script/player.gd" id="1_w2ywo"]
-[ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/power up.wav" id="2_ali73"]
-[ext_resource type="PackedScene" uid="uid://vfnjnj2mu8yd" path="res://scenes/snake sprite.tscn" id="2_ldr7d"]
-[ext_resource type="Texture2D" uid="uid://lyka1lvcg202" path="res://sprite/fire 2.png" id="3_emtd3"]
-[ext_resource type="Texture2D" uid="uid://c5lwc826jjh1r" path="res://sprite/snake flash 1.png" id="4_3l1wl"]
-[ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="4_pw8ip"]
-[ext_resource type="AudioStream" uid="uid://e44f00ph5aem" path="res://sounds/power down.wav" id="5_d0mn4"]
-[ext_resource type="Texture2D" uid="uid://spoj5e0o0m44" path="res://sprite/snake flash 2.png" id="5_x1llb"]
-[ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="6_480qb"]
-[ext_resource type="Texture2D" uid="uid://xr7pysod2o11" path="res://sprite/snake flash 3.png" id="6_emtd3"]
-[ext_resource type="Texture2D" uid="uid://bc7qh15aako70" path="res://sprite/smol snake.png" id="7_tctuf"]
-[ext_resource type="Texture2D" uid="uid://cyvq3674ylf7x" path="res://sprite/mid snake.png" id="7_x1llb"]
-[ext_resource type="Texture2D" uid="uid://bbyqmdj4gc06g" path="res://sprite/big snake.png" id="8_emtd3"]
-[ext_resource type="AudioStream" uid="uid://buof28pst6l6n" path="res://sounds/Die.wav" id="13_emtd3"]
+[ext_resource type="Script" uid="uid://3ojg4xhrk60l" path="res://script/player2.gd" id="1_bbu2a"]
+[ext_resource type="Texture2D" uid="uid://c0lbmddyaouu8" path="res://sprite/smol luigi.png" id="2_07b4o"]
+[ext_resource type="Texture2D" uid="uid://bc7qh15aako70" path="res://sprite/smol snake.png" id="2_lmgot"]
+[ext_resource type="Texture2D" uid="uid://lyka1lvcg202" path="res://sprite/fire 2.png" id="3_tchbc"]
+[ext_resource type="Texture2D" uid="uid://c5lwc826jjh1r" path="res://sprite/snake flash 1.png" id="4_t4aqh"]
+[ext_resource type="Texture2D" uid="uid://spoj5e0o0m44" path="res://sprite/snake flash 2.png" id="5_xk3nt"]
+[ext_resource type="Texture2D" uid="uid://xr7pysod2o11" path="res://sprite/snake flash 3.png" id="6_ksf5w"]
+[ext_resource type="PackedScene" uid="uid://igkvu8xfuvxa" path="res://scenes/snake sprite2.tscn" id="8_g4rqf"]
+[ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="10_xv6nb"]
+[ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/power up.wav" id="11_bp8jb"]
+[ext_resource type="AudioStream" uid="uid://e44f00ph5aem" path="res://sounds/power down.wav" id="12_fvphi"]
+[ext_resource type="AudioStream" uid="uid://buof28pst6l6n" path="res://sounds/Die.wav" id="13_i7ij1"]
+[ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="14_5kj1b"]
 
 [sub_resource type="Animation" id="Animation_8dqsq"]
 length = 0.001
-tracks/0/type = "value"
+tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.466667),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
-tracks/1/type = "value"
+tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/path = NodePath("Sprite2D:position:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.001),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [2, 2]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
-tracks/2/type = "value"
+tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/path = NodePath("Sprite2D:position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("7_tctuf")]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
-tracks/3/type = "value"
+tracks/3/type = "bezier"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("Sprite2D:z_index")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(4096, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [1]
+"values": [ExtResource("2_07b4o")]
 }
 
 [sub_resource type="Animation" id="Animation_wgeep"]
@@ -73,36 +80,46 @@ step = 0.0153
 tracks/0/type = "bezier"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:position:x")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.4, 2.49231)
+"handle_modes": PackedInt32Array(2),
+"points": PackedFloat32Array(6, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:position:y")
+tracks/1/path = NodePath("Sprite2D:position:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -58.905, -0.25, 0, 0.25, 0, 200, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.4, 2.49231)
 }
-tracks/2/type = "value"
+tracks/2/type = "bezier"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:z_index")
+tracks/2/path = NodePath("Sprite2D:position:y")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.00427227),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [1, 4096]
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -58.905, -0.25, 0, 0.25, 0, 200, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 2.49231)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(4096, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 
 [sub_resource type="Animation" id="Animation_a62mm"]
@@ -120,46 +137,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [false, true]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:offset")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(4, -0.365)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -1.5708]
-}
 
 [sub_resource type="Animation" id="Animation_tctuf"]
 resource_name = "eat"
 length = 0.100003
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [5, 2]
-}
 
 [sub_resource type="Animation" id="Animation_n8xhp"]
 resource_name = "fire_up"
@@ -175,25 +156,13 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("3_emtd3"), ExtResource("4_3l1wl"), ExtResource("5_x1llb"), ExtResource("6_emtd3")]
+"values": [ExtResource("3_tchbc"), ExtResource("4_t4aqh"), ExtResource("5_xk3nt"), ExtResource("6_ksf5w")]
 }
 
 [sub_resource type="Animation" id="Animation_a80fa"]
 resource_name = "grow up"
 length = 0.800002
 step = 0.0166667
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.233333, 0.3, 0.366667, 0.466667, 0.533333, 0.633333, 0.7, 0.766667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("7_tctuf"), ExtResource("7_x1llb"), ExtResource("7_tctuf"), ExtResource("8_emtd3"), ExtResource("7_tctuf"), ExtResource("7_x1llb"), ExtResource("8_emtd3"), ExtResource("7_tctuf"), ExtResource("7_x1llb"), ExtResource("8_emtd3"), ExtResource("7_tctuf")]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f3nah"]
 _data = {
@@ -222,7 +191,7 @@ process_mode = 3
 scale = Vector2(2, 2)
 collision_layer = 5
 collision_mask = 5
-script = ExtResource("1_w2ywo")
+script = ExtResource("1_bbu2a")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -247,10 +216,6 @@ debug_color = Color(0, 0, 0, 1)
 position = Vector2(-5.24521e-06, 0)
 scale = Vector2(0.795498, 0.795498)
 shape = SubResource("RectangleShape2D_sxb1m")
-
-[node name="Sprite2D" parent="." instance=ExtResource("2_ldr7d")]
-z_index = 1
-frame = 2
 
 [node name="Head Area" type="Area2D" parent="."]
 scale = Vector2(1.03715, 1.04205)
@@ -293,35 +258,35 @@ collision_mask = 3
 [node name="20592Png" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(461, 83)
-texture = ExtResource("4_pw8ip")
+texture = ExtResource("10_xv6nb")
 
 [node name="Powerup" type="AudioStreamPlayer" parent="."]
 editor_description = "suppose to play da power up sound
 "
-stream = ExtResource("2_ali73")
+stream = ExtResource("11_bp8jb")
 
 [node name="Powerdn" type="AudioStreamPlayer" parent="."]
 editor_description = "suppose to play da power up sound
 "
-stream = ExtResource("5_d0mn4")
+stream = ExtResource("12_fvphi")
 volume_db = 15.0
 
 [node name="Die" type="AudioStreamPlayer" parent="."]
 editor_description = "suppose to play da power up sound
 "
-stream = ExtResource("13_emtd3")
+stream = ExtResource("13_i7ij1")
 volume_db = 5.705
 
 [node name="AllTheSmallBlocksTogether" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(0, -7)
 scale = Vector2(0.0544305, 0.0544305)
-texture = ExtResource("6_480qb")
+texture = ExtResource("14_5kj1b")
 
 [node name="neck sprite" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-2.5, 0)
-texture = ExtResource("7_tctuf")
+texture = ExtResource("2_lmgot")
 hframes = 21
 frame = 1
 
@@ -357,6 +322,11 @@ offset_bottom = -108.22815
 rotation = -0.2557316
 scale = Vector2(34.64984, 13.776627)
 color = Color(0, 0, 0, 1)
+
+[node name="Sprite2D" parent="." instance=ExtResource("8_g4rqf")]
+z_index = 4096
+position = Vector2(0, -1)
+frame = 2
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Head Area" to="." method="_on_head_area_area_entered"]

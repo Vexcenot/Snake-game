@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://du6cg6ytddp8g"]
+[gd_scene load_steps=21 format=4 uid="uid://du6cg6ytddp8g"]
 
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="1_5558j"]
 [ext_resource type="Script" uid="uid://3i17aalstqc2" path="res://scenes/underground.gd" id="1_iubgi"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dkd651q06i08r" path="res://scenes/koopa.tscn" id="14_ilhyw"]
 [ext_resource type="PackedScene" uid="uid://bywstij4qxlot" path="res://scenes/stair brick.tscn" id="15_e8a6q"]
 [ext_resource type="PackedScene" uid="uid://bc8ayjdv8nyv2" path="res://scenes/pipe stem.tscn" id="16_oo6yi"]
+[ext_resource type="PackedScene" uid="uid://mt2ylxx61b70" path="res://scenes/head2.tscn" id="16_rx8xm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qt2jv"]
 texture = ExtResource("6_swjso")
@@ -59,6 +60,7 @@ scenes/5/scene = ExtResource("1_5558j")
 scenes/6/scene = ExtResource("14_ilhyw")
 scenes/7/scene = ExtResource("3_iubgi")
 scenes/8/scene = ExtResource("15_e8a6q")
+scenes/9/scene = ExtResource("16_rx8xm")
 scenes/11/scene = ExtResource("8_rx8xm")
 scenes/12/scene = ExtResource("9_3mtlq")
 scenes/13/scene = ExtResource("10_g3l68")
@@ -115,5 +117,9 @@ offset_bottom = 245.0
 color = Color(0, 0, 0, 1)
 
 [node name="Node2D" parent="." instance=ExtResource("16_oo6yi")]
-position = Vector2(242, 32)
+position = Vector2(248, 32)
 scale = Vector2(1, 3.8559537)
+
+[node name="Snek2" parent="." instance=ExtResource("1_5558j")]
+position = Vector2(24, 88)
+START_DIR = 1

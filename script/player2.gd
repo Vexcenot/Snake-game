@@ -1,11 +1,11 @@
 extends CharacterBody2D
 enum spawn_dir {right,down,left,up}
-@export var tail_segment_scene: PackedScene = preload("res://scenes/tail.tscn")
+@export var tail_segment_scene: PackedScene = preload("res://scenes/tail2.tscn")
 @export var fire_ball: PackedScene = preload("res://scenes/fire_ball.tscn")
 @export var invArea: PackedScene = preload("res://scenes/invincible_frame.tscn")
 @export var START_DIR : spawn_dir
 @export var camera = true
-@export var luigi = false
+@export var player2 = false
 @onready var up: RayCast2D = $up
 @onready var down: RayCast2D = $down
 @onready var left: RayCast2D = $left
@@ -31,9 +31,9 @@ var prev_move = "right"
 var movesame = false
 var pending_tail_segment = 0  # Flag to track pending tail additionz
 var powerup = "current power up goes here"
-var bigsnek = preload("res://sprite/big snake.png")
+var bigsnek = preload("res://sprite/big luigi.png")
 var firesnek = preload("res://sprite/fire snake.png")
-var smallsnek = preload("res://sprite/smol snake.png")
+var smallsnek = preload("res://sprite/smol luigi.png")
 var fireball = preload("res://scenes/fire_ball.tscn")
 var collided = false
 var sprint = false
@@ -66,7 +66,7 @@ var updateCam = 2
 
 
 func _ready():
-	if Global.multiplayers and luigi:
+	if Global.multiplayers == false:
 		queue_free()
 	if Global.checkPointable:
 		position.x = Global.spawnCoordx 
@@ -78,6 +78,8 @@ func _ready():
 
 
 func _process(delta):
+	if Global.multiplayers == false:
+		queue_free()
 	#fixes off camera when pipe warping, but makes camera rubber bands
 	if updateCam >= 0:
 		$Camera.limit_left = Global.camera_limit 

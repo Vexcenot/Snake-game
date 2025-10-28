@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://g3mv6ksvx5pp"
-path="res://.godot/imported/snek poo smol.png-1f9fef10178cb68f78306f523ea59b98.ctex"
+uid="uid://b7b7518c6wxqo"
+path="res://.godot/imported/big luigi.png-ed2a8266b55a1c1755e0f36b37341bbe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/snek poo smol.png"
-dest_files=["res://.godot/imported/snek poo smol.png-1f9fef10178cb68f78306f523ea59b98.ctex"]
+source_file="res://sprite/big luigi.png"
+dest_files=["res://.godot/imported/big luigi.png-ed2a8266b55a1c1755e0f36b37341bbe.ctex"]
 
 [params]
 

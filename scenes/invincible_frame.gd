@@ -14,6 +14,7 @@ func _ready() -> void:
 		Global.playMusic = true
 
 func _process(delta: float) -> void:
+	print(tailing)
 	if Global.snake_status != "small" and poop == false:
 		$CharacterBody2D/sprite.texture = bigsnek
 	else:
@@ -21,7 +22,6 @@ func _process(delta: float) -> void:
 			$CharacterBody2D/sprite.texture = smolsnek
 	if Global.dead:
 		visible = false
-	
 
 
 func _physics_process(delta: float) -> void:
@@ -32,16 +32,16 @@ func _physics_process(delta: float) -> void:
 
 func _on_tail_detector_area_exited(area: Area2D) -> void:
 	if area.name == "Head Area":
-		$CharacterBody2D/sprite.visible = true
+		visible = true
 	if area.name == "tail area":
 		tailing -= 1
+		await get_tree().process_frame
+		await get_tree().process_frame
 		await get_tree().process_frame
 		if tailing <= 0 and poop == false:
 			poop = true
 			$CharacterBody2D/sprite.texture = poopSprite
-			#$CharacterBody2D/AudioStreamPlayer2D.playing = false
 			$AudioStreamPlayer.play()
-			#Global.music = "invincible"
 			Global.playMusic = true
 		
 
