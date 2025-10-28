@@ -134,6 +134,7 @@ scale = Vector2(0.453191, 0.453191)
 shape = SubResource("RectangleShape2D_wne8n")
 
 [node name="Sprite2D" parent="." instance=ExtResource("2_pa3ch")]
+z_index = 1
 position = Vector2(0, -1)
 
 [connection signal="area_entered" from="tail area" to="." method="_on_tail_area_area_entered"]

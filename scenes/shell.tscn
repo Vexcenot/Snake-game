@@ -366,8 +366,7 @@ size = Vector2(3.9437208, 17.8476)
 size = Vector2(20.1059, 9.81974)
 
 [node name="shell" type="CharacterBody2D"]
-collision_layer = 132
-collision_mask = 129
+collision_layer = 4
 script = ExtResource("1_8y80q")
 avoid_ledge = true
 turn2turtle = false

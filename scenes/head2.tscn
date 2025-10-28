@@ -301,6 +301,7 @@ shape = SubResource("RectangleShape2D_tctuf")
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(0, 59.5)
 rotation = 0.27837995
+enabled = false
 limit_left = 0
 limit_top = 0
 limit_bottom = 240
@@ -325,6 +326,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="Sprite2D" parent="." instance=ExtResource("8_g4rqf")]
 z_index = 4096
+z_as_relative = false
 position = Vector2(0, -1)
 frame = 2
 
