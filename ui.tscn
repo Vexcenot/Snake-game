@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://d22csvsu2vx3u"]
+[gd_scene load_steps=3 format=3 uid="uid://d22csvsu2vx3u"]
+
+[ext_resource type="Script" uid="uid://cv3l1an3nre4g" path="res://script/ui.gd" id="1_m6e0p"]
+[ext_resource type="AudioStream" uid="uid://sytrfv5uaavu" path="res://sounds/coin.wav" id="2_27fn8"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -7,11 +10,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_m6e0p")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -57.5
+offset_top = -101.0
+offset_right = 57.5
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+
+[node name="1 player" type="MenuButton" parent="VBoxContainer"]
+layout_mode = 2
+text = "1 PLAYER GAME"
+
+[node name="2 player" type="MenuButton" parent="VBoxContainer"]
+layout_mode = 2
+text = "2 PLAYER GAME"
+
+[node name="achievements" type="MenuButton" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "dwadwadwad"
+
+[node name="Panel" type="Panel" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "TOP- 000000"
+horizontal_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_27fn8")

@@ -5,7 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://e44f00ph5aem" path="res://sounds/power down.wav" id="3_8p0di"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bepn3"]
-size = Vector2(20, 4)
+size = Vector2(20, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_arayy"]
 
@@ -23,9 +23,11 @@ texture = ExtResource("1_bepn3")
 hframes = 2
 
 [node name="pipe_enter" type="Area2D" parent="."]
+z_index = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pipe_enter"]
-position = Vector2(0, -61)
+position = Vector2(0, -57)
+scale = Vector2(1.5600024, 1)
 shape = SubResource("RectangleShape2D_bepn3")
 
 [node name="top_block" type="StaticBody2D" parent="."]
