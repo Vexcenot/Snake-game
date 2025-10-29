@@ -37,7 +37,7 @@ var music : String = "none"
 var dead : bool = false
 var play = false
 var multiplayers = true
-var title = false
+var title = true
 
 func reset():
 	snake_status = "small"

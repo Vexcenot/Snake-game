@@ -576,6 +576,7 @@ func ignoring_turning():
 		timer_counter_toggle = true
 
 
+
 #vroom.
 func sprinting():
 	if move_ready == true:
@@ -586,15 +587,18 @@ func sprinting():
 		else:
 			final_time = snake_speed
 
+
 func update_sprite_orientation():
 	if ignore_turn == false:
 		update_tail_orientation(self, facing)
+
 
 func starEat():
 	var Inv = invArea.instantiate()
 	get_parent().add_child(Inv)
 	Inv.global_position = global_position
 	pending_tail_segment += 1
+
 
 #how snake when touch different areas.
 var aah = 0
@@ -651,7 +655,8 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		move_orders.append("up")
 	if area.name == "super_eat":
 		Global.eatable += 1
-	
+
+
 func teleport():
 	if Global.teleport_all:
 		position.x = Global.teleport_x
@@ -752,6 +757,7 @@ func win2():
 			move_orders.append("right")
 			move_orders.append("down")
 			move_orders.append("right")
+
 
 func update_camera():
 	if camera == false:

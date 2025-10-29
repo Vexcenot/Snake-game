@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=27 format=4 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Script" uid="uid://33wsmjudqgvw" path="res://scenes/main.gd" id="1_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
@@ -21,7 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://dmbesh4pmkuuo" path="res://scenes/star.tscn" id="19_0ld40"]
 [ext_resource type="PackedScene" uid="uid://bhfga03tj43h2" path="res://scenes/checkpoint.tscn" id="20_gqmmt"]
 [ext_resource type="PackedScene" uid="uid://d24yg48cmuww3" path="res://scenes/coin block.tscn" id="20_yc10j"]
-[ext_resource type="Texture2D" uid="uid://ce8ttuhhgag4x" path="res://sprite/logo.png" id="22_jscy8"]
 [ext_resource type="PackedScene" uid="uid://mt2ylxx61b70" path="res://scenes/head2.tscn" id="23_pm3ni"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dp3eg"]
@@ -227,7 +226,3 @@ shape = SubResource("RectangleShape2D_ya4ey")
 position = Vector2(928, 208)
 teleporterable = true
 world = "uid://du6cg6ytddp8g"
-
-[node name="logotitle" type="Sprite2D" parent="."]
-position = Vector2(129, 80)
-texture = ExtResource("22_jscy8")
