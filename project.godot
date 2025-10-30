@@ -25,6 +25,7 @@ config/icon="res://sprite/icon.svg"
 
 Global="*res://script/global.gd"
 GlobalTimer="*res://scenes/TimeMusic.tscn"
+UiTop="*res://scenes/ui_top.tscn"
 
 [debug]
 

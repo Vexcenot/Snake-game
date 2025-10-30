@@ -7,23 +7,6 @@ func _ready() -> void:
 	$"VBoxContainer/1 player".grab_focus()
 	
 
-#pauses game
-func _input(event):
-	if event.is_action_pressed("esc") and Global.title == false:
-		if Global.paused:
-			unpause()
-		else:
-			pause()
-
-func pause():
-	get_tree().paused = true
-	Global.paused = true
-	$AudioStreamPlayer.play()
-
-func unpause():
-	get_tree().paused = false
-	Global.paused = false
-	$AudioStreamPlayer.play()
 	
 
 

@@ -36,7 +36,7 @@ var playMusic : bool = false
 var music : String = "none"
 var dead : bool = false
 var play = false
-var multiplayers = true
+var multiplayers = false
 var title = true
 
 func reset():

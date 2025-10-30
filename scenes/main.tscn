@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://cpkdjcp5lcxe" path="res://scenes/pipe.tscn" id="12_eb6dy"]
 [ext_resource type="PackedScene" uid="uid://dkd651q06i08r" path="res://scenes/koopa.tscn" id="13_a8y0u"]
 [ext_resource type="PackedScene" uid="uid://h2ccg27eas81" path="res://scenes/shell.tscn" id="13_trceg"]
-[ext_resource type="PackedScene" uid="uid://be66wxyvfxkdr" path="res://scenes/ui.tscn" id="14_a8y0u"]
+[ext_resource type="PackedScene" uid="uid://be66wxyvfxkdr" path="res://scenes/main menu.tscn" id="14_a8y0u"]
 [ext_resource type="PackedScene" uid="uid://fp1nuui5i0p3" path="res://scenes/ground brick.tscn" id="16_jbj1t"]
 [ext_resource type="PackedScene" uid="uid://bywstij4qxlot" path="res://scenes/stair brick.tscn" id="17_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="17_muem4"]
