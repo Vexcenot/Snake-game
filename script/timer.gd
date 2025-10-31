@@ -14,7 +14,8 @@ func _process(delta: float) -> void:
 		
 	
 	
-	if Global.timer <= 100 and low == false:
-		low = true
-		$AudioStreamPlayer.play()
+	#if Global.timer <= 100 and low == false:
+		#low = true
+		#$AudioStreamPlayer.play()
+		#Global.lowTimer = true
 	

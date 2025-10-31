@@ -96,3 +96,5 @@ stream = ExtResource("2_y12ax")
 stream = ExtResource("3_mfc1r")
 
 [node name="BG music" type="AudioStreamPlayer" parent="."]
+
+[connection signal="finished" from="warning timer" to="." method="_on_warning_timer_finished"]

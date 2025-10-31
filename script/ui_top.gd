@@ -73,16 +73,15 @@ func _process(delta: float) -> void:
 		$"BG music".stream_paused = false
 		
 	#plays double time & mutes main audio
-	#if $Timer.time_left <= 100 and lowTime == false:
-		#$"BG music".volume_db = -80
-		#lowTime = true
-		#$"warning timer".play()
-	#if $Timer.time_left <= 0:
-		#await get_tree().create_timer(1).timeout
-		#Global.timeUp = true
+	if Global.timer <= 100 and lowTime == false:
+		$"BG music".volume_db = -80
+		lowTime = true
+		$"warning timer".play()
+	if Global.timer <= 0:
+		await get_tree().create_timer(1).timeout
+		Global.timeUp = true
 
 
 func _on_warning_timer_finished() -> void:
-	Global.timeLive = false
 	Global.playMusic = true
 	$"BG music".volume_db = 0

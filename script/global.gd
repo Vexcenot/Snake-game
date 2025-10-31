@@ -43,7 +43,7 @@ var timeLive = false
 var timeStart = false
 var demo = false
 var pausable = false
-var ogTime = 400
+var ogTime = 3
 var timer = ogTime
 
 

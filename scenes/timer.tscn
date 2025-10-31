@@ -15,3 +15,9 @@ script = ExtResource("1_5lxq6")
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_g5y8c")
 volume_db = 0.96
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "oh yeah time is happening"
