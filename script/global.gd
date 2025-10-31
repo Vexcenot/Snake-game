@@ -38,6 +38,14 @@ var dead : bool = false
 var play = false
 var multiplayers = false
 var title = true
+var timeUp = false
+var timeLive = false
+var timeStart = false
+var demo = false
+var pausable = false
+var ogTime = 400
+var timer = ogTime
+
 
 func reset():
 	snake_status = "small"
@@ -78,9 +86,9 @@ func resetAll():
 	checkPointable = false
 	checkPointable2 = false
 
-func die():
+func die(): #make it load gameover first
 	get_tree().paused = false
 	if loadedWorld != "":
-		get_tree().change_scene_to_file(loadedWorld)
+		get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 	else:
 		get_tree().reload_current_scene()

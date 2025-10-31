@@ -63,7 +63,7 @@ var move_direction = Vector2.ZERO
 var next_move = "the next move the snake will make"
 var weakening = false
 var updateCam = 2
-
+var timeDed = false
 
 func _ready():
 	if Global.multiplayers and luigi:
@@ -81,7 +81,9 @@ func _process(delta):
 	#fixes off camera when pipe warping, but makes camera rubber bands
 	if updateCam >= 0:
 		$Camera.limit_left = Global.camera_limit 
-		
+	if Global.timeUp and timeDed == false:
+		timeDed = true
+		die()
 	pausing()
 	if move_orders.size() > 3:
 		move_orders.pop_back()
@@ -118,55 +120,55 @@ func pausing():
 
 
 func _input(event):
-	stopInsta = true
-#move inputs
-	if event.is_action_pressed("k_up") and player_input == true:
-		#await get_tree().create_timer(0.1).timeout
-		if under_block > 0:
-			pass
-		elif move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0 and limit_move != "up" and xLimit != "vert" and under_block <= 0:
-			xLimit = "vert"
-			limit_move = "down"
-			move_orders.append("up")
-	elif event.is_action_pressed("k_down") and player_input == true and limit_move != "down" and xLimit != "vert":
-		if move_orders.size() > 0 and move_orders[0] != "up" or move_orders.size() == 0:
-			xLimit = "vert"
-			limit_move = "up"
-			move_orders.append("down")
-	elif event.is_action_pressed("k_left") and player_input == true and limit_move != "left" and xLimit != "hori":
-		if move_orders.size() > 0 and move_orders[0] != "right" or move_orders.size() == 0:
-			xLimit = "hori"
-			limit_move = "right"
-			move_orders.append("left")
-	elif event.is_action_pressed("k_right") and player_input == true and limit_move != "right" and xLimit != "hori":
-		if move_orders.size() > 0 and move_orders[0] != "left" or move_orders.size() == 0:
-			xLimit = "hori"
-			limit_move = "left"
-			move_orders.append("right")
-#debug1
-	if event.is_action_pressed("k_action") and player_input == true and Global.active_balls <= 1 and Global.snake_status == "fire2": 
-		var fire_ball = fireball.instantiate()
-		get_parent().add_child(fire_ball)
-		if Global.direction == "right":
-			fire_ball.global_position.x = position.x + 20
-			fire_ball.global_position.y = position.y
-		elif Global.direction == "left":
-					fire_ball.global_position.x = position.x - 20
-					fire_ball.global_position.y = position.y
-		elif Global.direction == "up":
-					fire_ball.global_position.x = position.x
-					fire_ball.global_position.y = position.y - 20
-		elif Global.direction == "down":
-					fire_ball.global_position.x = position.x
-					fire_ball.global_position.y = position.y + 13
+	if Global.title == false:
+		stopInsta = true
+	#move inputs
+		if event.is_action_pressed("k_up") and player_input == true:
+			#await get_tree().create_timer(0.1).timeout
+			if under_block > 0:
+				pass
+			elif move_orders.size() > 0 and move_orders[0] != "down" or move_orders.size() == 0 and limit_move != "up" and xLimit != "vert" and under_block <= 0:
+				xLimit = "vert"
+				limit_move = "down"
+				move_orders.append("up")
+		elif event.is_action_pressed("k_down") and player_input == true and limit_move != "down" and xLimit != "vert":
+			if move_orders.size() > 0 and move_orders[0] != "up" or move_orders.size() == 0:
+				xLimit = "vert"
+				limit_move = "up"
+				move_orders.append("down")
+		elif event.is_action_pressed("k_left") and player_input == true and limit_move != "left" and xLimit != "hori":
+			if move_orders.size() > 0 and move_orders[0] != "right" or move_orders.size() == 0:
+				xLimit = "hori"
+				limit_move = "right"
+				move_orders.append("left")
+		elif event.is_action_pressed("k_right") and player_input == true and limit_move != "right" and xLimit != "hori":
+			if move_orders.size() > 0 and move_orders[0] != "left" or move_orders.size() == 0:
+				xLimit = "hori"
+				limit_move = "left"
+				move_orders.append("right")
+	#debug1
+		if event.is_action_pressed("k_action") and player_input == true and Global.active_balls <= 1 and Global.snake_status == "fire2": 
+			var fire_ball = fireball.instantiate()
+			get_parent().add_child(fire_ball)
+			if Global.direction == "right":
+				fire_ball.global_position.x = position.x + 20
+				fire_ball.global_position.y = position.y
+			elif Global.direction == "left":
+						fire_ball.global_position.x = position.x - 20
+						fire_ball.global_position.y = position.y
+			elif Global.direction == "up":
+						fire_ball.global_position.x = position.x
+						fire_ball.global_position.y = position.y - 20
+			elif Global.direction == "down":
+						fire_ball.global_position.x = position.x
+						fire_ball.global_position.y = position.y + 13
 
+	#debug2
+		if event.is_action_pressed("k_action2"):
+			Global.reset()
+		if event.is_action_released("k_action2"):
+			fuck = false
 
-
-#debug2
-	if event.is_action_pressed("k_action2"):
-		Global.reset()
-	if event.is_action_released("k_action2"):
-		fuck = false
 func painful_turn():
 	if ignore_turn and Global.snake_status != "small":
 		sprite.frame = 9
@@ -508,6 +510,7 @@ func absolute_stop():
 		final_time == 99999
 
 func die():
+	Global.timeLive = false
 	if Global.winning == false:
 		if Global.checkPointable2:
 			Global.checkPointable = true
@@ -641,6 +644,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "flag":
 		Global.eatable += 1
 	if area.name == "pipe_enter":
+		Global.timeLive = false
 		move_orders.clear()
 		player_input = false
 		invincible = true
@@ -659,7 +663,7 @@ func enter_entrance():
 	if Global.entranceStopper == false:
 		crap = position.x + 135
 	elif camera == true:
-		$Camera.limit_right = crap 
+		$Camera.limit_right = crap  #this is causing a crash apparently
 
 
 func eat_animation():
@@ -693,6 +697,7 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 	if area.name == "pipe_enter":
 		await get_tree().create_timer(1).timeout
 		invincible = false
+		Global.timeLive = true
 		
 
 
@@ -722,6 +727,7 @@ func resume_move():
 
 #win conditions when touching flag pole. position pole in way that snake head will always be inside it & snake head doesnt by pass it.
 func win():
+	Global.timeLive = false
 	move_orders.clear()
 	Global.winning = true
 	player_input = false

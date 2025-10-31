@@ -1,6 +1,69 @@
-[gd_scene load_steps=2 format=3 uid="uid://dc3te3v3tek6h"]
+[gd_scene load_steps=7 format=3 uid="uid://dc3te3v3tek6h"]
 
+[ext_resource type="Script" uid="uid://tt7ca4k1yx2d" path="res://scenes/gameover.gd" id="1_2mkfd"]
 [ext_resource type="FontFile" uid="uid://cvv5f6lv4eikk" path="res://super-mario.otf" id="1_4nh4k"]
+[ext_resource type="AudioStream" uid="uid://b2cxeav6r54sp" path="res://sounds/game over.wav" id="3_h8i2o"]
+
+[sub_resource type="Animation" id="Animation_h8i2o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("timeup:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("gameover:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.033333335),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_2mkfd"]
+resource_name = "timeup"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("timeup:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("gameover:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mt7yr"]
+_data = {
+&"RESET": SubResource("Animation_h8i2o"),
+&"timeup": SubResource("Animation_2mkfd")
+}
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,6 +72,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_2mkfd")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
@@ -19,7 +83,8 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="gameover" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +92,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="gameover"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("1_4nh4k")
 theme_override_font_sizes/font_size = 8
@@ -44,3 +109,42 @@ text = "
 GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="timeup" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="timeup"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_4nh4k")
+theme_override_font_sizes/font_size = 8
+text = "
+
+
+
+
+
+
+
+
+
+TIME UP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_h8i2o")
+autoplay = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mt7yr")
+}
+autoplay = "timeup"
+
+[connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

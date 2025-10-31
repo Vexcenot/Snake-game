@@ -4,3 +4,4 @@ func _ready() -> void:
 	Global.world_type = "underground"
 	Global.music = "underground"
 	Global.playMusic = true
+	Global.timeLive = true

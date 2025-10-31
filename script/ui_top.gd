@@ -21,21 +21,31 @@ func _input(event):
 func pause():
 	get_tree().paused = true
 	Global.paused = true
-	$AudioStreamPlayer.play()
+	Global.timeLive = false
+	$"pause sound".play()
 
 func unpause():
 	get_tree().paused = false
 	Global.paused = false
-	$AudioStreamPlayer.play()
+	Global.timeLive = true
+	$"pause sound".play()
 	
 	
 	
 	
 
 
-
+#timer
 func _process(delta: float) -> void:
-	if Global.playMusic == true:
+	#print($Timer.time_left)
+	#if Global.timeStart:
+		#Global.timeStart = false
+		#$Timer.start()
+	#if Global.timeLive or Global.title == false:
+		#$Timer.paused = false
+
+#music handler
+	if Global.playMusic == true and Global.title == false:
 		Global.playMusic = false
 		if Global.music == "overworld":
 			if lowTime:
@@ -63,12 +73,16 @@ func _process(delta: float) -> void:
 		$"BG music".stream_paused = false
 		
 	#plays double time & mutes main audio
-	if $Timer.time_left <= 100 and lowTime == false:
-		$"BG music".volume_db = -80
-		lowTime = true
-		$"warning timer".play()
+	#if $Timer.time_left <= 100 and lowTime == false:
+		#$"BG music".volume_db = -80
+		#lowTime = true
+		#$"warning timer".play()
+	#if $Timer.time_left <= 0:
+		#await get_tree().create_timer(1).timeout
+		#Global.timeUp = true
 
 
 func _on_warning_timer_finished() -> void:
+	Global.timeLive = false
 	Global.playMusic = true
 	$"BG music".volume_db = 0

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dul5iyiqxm40"]
+
+[ext_resource type="Script" uid="uid://bvunq4ge742yl" path="res://script/timer.gd" id="1_5lxq6"]
+[ext_resource type="AudioStream" uid="uid://wj622osutpu5" path="res://sounds/warning.wav" id="2_g5y8c"]
+
+[node name="timer" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5lxq6")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_g5y8c")
+volume_db = 0.96
