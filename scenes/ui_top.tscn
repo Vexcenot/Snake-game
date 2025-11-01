@@ -7,6 +7,7 @@
 
 [node name="ui top" type="Control"]
 process_mode = 3
+z_index = 1000
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,63 +21,103 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -94.0
-offset_right = 94.0
-offset_bottom = 21.0
+offset_left = -104.0
+offset_top = 15.0
+offset_right = 113.0
+offset_bottom = 48.0
 grow_horizontal = 2
+theme_override_constants/separation = 19
 
-[node name="points" type="VBoxContainer" parent="HBoxContainer"]
+[node name="POINTS" type="VBoxContainer" parent="HBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = -1
 
-[node name="Label" type="Label" parent="HBoxContainer/points"]
-layout_mode = 2
-theme_override_constants/line_spacing = -1
-theme_override_fonts/font = ExtResource("2_x2jp4")
-theme_override_font_sizes/font_size = 8
-text = "
-
-SNEK
-000000"
-
-[node name="coins" type="VBoxContainer" parent="HBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="HBoxContainer/coins"]
+[node name="Label" type="Label" parent="HBoxContainer/POINTS"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
-text = "
+text = "SNEK"
 
-
-  @x01"
-
-[node name="world" type="VBoxContainer" parent="HBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="HBoxContainer/world"]
+[node name="counter" type="Label" parent="HBoxContainer/POINTS"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
-text = "
+text = "000000"
 
-  WORLD
-  1-1"
+[node name="COINS" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="empty" type="Label" parent="HBoxContainer/COINS"]
+layout_mode = 2
+theme_override_constants/line_spacing = -1
+theme_override_fonts/font = ExtResource("2_x2jp4")
+theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 
-[node name="time" type="VBoxContainer" parent="HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/COINS"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="HBoxContainer/time"]
+[node name="Label2" type="Label" parent="HBoxContainer/COINS/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
-text = "
+text = "@"
 
-  TIME
- 400"
+[node name="Label4" type="Label" parent="HBoxContainer/COINS/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = -1
+theme_override_fonts/font = ExtResource("2_x2jp4")
+theme_override_font_sizes/font_size = 8
+text = "x"
+
+[node name="Label3" type="Label" parent="HBoxContainer/COINS/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = -1
+theme_override_fonts/font = ExtResource("2_x2jp4")
+theme_override_font_sizes/font_size = 8
+text = "00"
+
+[node name="WORLD" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="Label" type="Label" parent="HBoxContainer/WORLD"]
+layout_mode = 2
+theme_override_constants/line_spacing = -1
+theme_override_fonts/font = ExtResource("2_x2jp4")
+theme_override_font_sizes/font_size = 8
+text = "WORLD"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/WORLD"]
+layout_mode = 2
+theme_override_constants/line_spacing = -1
+theme_override_fonts/font = ExtResource("2_x2jp4")
+theme_override_font_sizes/font_size = 8
+text = "1-1"
+horizontal_alignment = 1
+
+[node name="TIME" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="time label" type="Label" parent="HBoxContainer/TIME"]
+layout_mode = 2
+theme_override_constants/line_spacing = -1
+theme_override_fonts/font = ExtResource("2_x2jp4")
+theme_override_font_sizes/font_size = 8
+text = "TIME"
+horizontal_alignment = 2
+
+[node name="counter" type="Label" parent="HBoxContainer/TIME"]
+layout_mode = 2
+theme_override_constants/line_spacing = -1
+theme_override_fonts/font = ExtResource("2_x2jp4")
+theme_override_font_sizes/font_size = 8
 horizontal_alignment = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]

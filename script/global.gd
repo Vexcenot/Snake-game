@@ -43,9 +43,10 @@ var timeLive = false
 var timeStart = false
 var demo = false
 var pausable = false
-var ogTime = 3
+var ogTime = 100
 var timer = ogTime
-
+var points = 0
+var lowTime = false
 
 func reset():
 	snake_status = "small"

@@ -537,7 +537,7 @@ func die():
 				anim_player.play("die")
 				# Wait before playing the next segment's animation
 			if i < all_segments.size() - 1:  # Don't wait after the last segment
-				await get_tree().create_timer(delay_between_segments).timeout
+				await get_tree().create_timer(delay_between_segments).timeout #this causes crash when both snakes die
 		await get_tree().create_timer(3).timeout
 		Global.reset()
 

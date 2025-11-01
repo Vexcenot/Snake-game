@@ -8,7 +8,7 @@ var overworldFast = preload("res://sounds/fast overworld.wav")
 var underworldFast = preload("res://sounds/fast underworld.wav")
 var invincibleFast = preload("res://sounds/fast invincible.wav")
 var die = preload("res://sounds/Die.wav")
-var lowTime = false
+
 
 #pauses game
 func _input(event):
@@ -37,24 +37,21 @@ func unpause():
 
 #timer
 func _process(delta: float) -> void:
-	#print($Timer.time_left)
-	#if Global.timeStart:
-		#Global.timeStart = false
-		#$Timer.start()
-	#if Global.timeLive or Global.title == false:
-		#$Timer.paused = false
 
 #music handler
 	if Global.playMusic == true and Global.title == false:
 		Global.playMusic = false
 		if Global.music == "overworld":
-			if lowTime:
+			if Global.lowTime:
 				$"BG music".stream = overworldFast
 			else:
 				$"BG music".stream = overworld
 			store = Global.music
 		elif Global.music == "underground":
-			$"BG music".stream = underworld #change to under ground
+			if Global.lowTime:
+				$"BG music".stream = underworldFast
+			else:
+				$"BG music".stream = underworld
 			store = Global.music
 		elif Global.music == "invincible":
 			$"BG music".stream = invincible
@@ -72,14 +69,16 @@ func _process(delta: float) -> void:
 		$"warning timer".stream_paused = false
 		$"BG music".stream_paused = false
 		
-	#plays double time & mutes main audio
-	if Global.timer <= 100 and lowTime == false:
+	#WHEN ON LOW TIMER 
+	if Global.timer <= 100 and Global.lowTime == false and Global.title == false:
 		$"BG music".volume_db = -80
-		lowTime = true
+		Global.lowTime = true
 		$"warning timer".play()
 	if Global.timer <= 0:
 		await get_tree().create_timer(1).timeout
 		Global.timeUp = true
+	$HBoxContainer/TIME/counter.text = str(int(Global.timer)).pad_zeros(3)
+	$HBoxContainer/POINTS/counter.text = str(Global.points).pad_zeros(3)
 
 
 func _on_warning_timer_finished() -> void:
