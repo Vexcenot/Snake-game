@@ -37,16 +37,20 @@ var music : String = "none"
 var dead : bool = false
 var play = false
 var multiplayers = false
-var title = true
+var title = true #remember to true this
 var timeUp = false
 var timeLive = false
 var timeStart = false
 var demo = false
 var pausable = false
-var ogTime = 100
+var ogTime = 400
 var timer = ogTime
 var points = 0
+var playerCombo = 0
+var shellCombo = 0
 var lowTime = false
+var hud
+var debug : bool = false
 
 func reset():
 	snake_status = "small"

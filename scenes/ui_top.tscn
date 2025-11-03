@@ -7,7 +7,7 @@
 
 [node name="ui top" type="Control"]
 process_mode = 3
-z_index = 1000
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,8 +16,18 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fx8tn")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 1
+[node name="pause sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_y12ax")
+
+[node name="warning timer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_mfc1r")
+
+[node name="BG music" type="AudioStreamPlayer" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -28,64 +38,64 @@ offset_bottom = 48.0
 grow_horizontal = 2
 theme_override_constants/separation = 19
 
-[node name="POINTS" type="VBoxContainer" parent="HBoxContainer"]
+[node name="POINTS" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = -1
 
-[node name="Label" type="Label" parent="HBoxContainer/POINTS"]
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/POINTS"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
 text = "SNEK"
 
-[node name="counter" type="Label" parent="HBoxContainer/POINTS"]
+[node name="counter" type="Label" parent="CanvasLayer/HBoxContainer/POINTS"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
 text = "000000"
 
-[node name="COINS" type="VBoxContainer" parent="HBoxContainer"]
+[node name="COINS" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = -1
 
-[node name="empty" type="Label" parent="HBoxContainer/COINS"]
+[node name="empty" type="Label" parent="CanvasLayer/HBoxContainer/COINS"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/COINS"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HBoxContainer/COINS"]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="HBoxContainer/COINS/HBoxContainer"]
+[node name="Label2" type="Label" parent="CanvasLayer/HBoxContainer/COINS/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
 text = "@"
 
-[node name="Label4" type="Label" parent="HBoxContainer/COINS/HBoxContainer"]
+[node name="Label4" type="Label" parent="CanvasLayer/HBoxContainer/COINS/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
 text = "x"
 
-[node name="Label3" type="Label" parent="HBoxContainer/COINS/HBoxContainer"]
+[node name="Label3" type="Label" parent="CanvasLayer/HBoxContainer/COINS/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
 text = "00"
 
-[node name="WORLD" type="VBoxContainer" parent="HBoxContainer"]
+[node name="WORLD" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = -1
 
-[node name="Label" type="Label" parent="HBoxContainer/WORLD"]
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/WORLD"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
@@ -93,7 +103,7 @@ theme_override_font_sizes/font_size = 8
 text = "WORLD"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="HBoxContainer/WORLD"]
+[node name="Label2" type="Label" parent="CanvasLayer/HBoxContainer/WORLD"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
@@ -101,11 +111,11 @@ theme_override_font_sizes/font_size = 8
 text = "1-1"
 horizontal_alignment = 1
 
-[node name="TIME" type="VBoxContainer" parent="HBoxContainer"]
+[node name="TIME" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = -1
 
-[node name="time label" type="Label" parent="HBoxContainer/TIME"]
+[node name="time label" type="Label" parent="CanvasLayer/HBoxContainer/TIME"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
@@ -113,29 +123,20 @@ theme_override_font_sizes/font_size = 8
 text = "TIME"
 horizontal_alignment = 2
 
-[node name="counter" type="Label" parent="HBoxContainer/TIME"]
+[node name="counter" type="Label" parent="CanvasLayer/HBoxContainer/TIME"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 visible = false
-layout_mode = 0
 offset_left = -62.0
 offset_top = -11.0
 offset_right = -22.0
 offset_bottom = 29.0
 scale = Vector2(95.48, 6.8296285)
 color = Color(0, 0, 0, 1)
-
-[node name="pause sound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_y12ax")
-
-[node name="warning timer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_mfc1r")
-
-[node name="BG music" type="AudioStreamPlayer" parent="."]
 
 [connection signal="finished" from="warning timer" to="." method="_on_warning_timer_finished"]

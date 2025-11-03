@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cswl3f0pdo2w6"]
+[gd_scene load_steps=9 format=3 uid="uid://cswl3f0pdo2w6"]
 
 [ext_resource type="Script" uid="uid://cqcqef0utc7ik" path="res://luigi_test.gd" id="1_70a3o"]
 [ext_resource type="PackedScene" uid="uid://mt2ylxx61b70" path="res://scenes/head2.tscn" id="1_w5dw0"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://dmbesh4pmkuuo" path="res://scenes/star.tscn" id="4_3dwgw"]
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="5_jf1l0"]
 [ext_resource type="PackedScene" uid="uid://h2ccg27eas81" path="res://scenes/shell.tscn" id="6_70a3o"]
-[ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="8_23k0g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u6tou"]
 size = Vector2(296, 121)
@@ -51,6 +50,3 @@ position = Vector2(136, 104)
 active = true
 
 [node name="hud" type="CanvasLayer" parent="."]
-
-[node name="Snek2" parent="." instance=ExtResource("8_23k0g")]
-position = Vector2(32, 56)

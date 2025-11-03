@@ -299,6 +299,9 @@ visible = false
 position = Vector2(0, -14)
 shape = SubResource("RectangleShape2D_6xltp")
 
+[node name="hud" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_left_bottom_body_exited"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_side_checks_body_exited"]

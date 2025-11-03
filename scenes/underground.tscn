@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://du6cg6ytddp8g"]
+[gd_scene load_steps=22 format=4 uid="uid://du6cg6ytddp8g"]
 
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="1_5558j"]
 [ext_resource type="Script" uid="uid://3i17aalstqc2" path="res://script/underground.gd" id="1_iubgi"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bywstij4qxlot" path="res://scenes/stair brick.tscn" id="15_e8a6q"]
 [ext_resource type="PackedScene" uid="uid://bc8ayjdv8nyv2" path="res://scenes/pipe stem.tscn" id="16_oo6yi"]
 [ext_resource type="PackedScene" uid="uid://mt2ylxx61b70" path="res://scenes/head2.tscn" id="16_rx8xm"]
+[ext_resource type="PackedScene" uid="uid://cy551qtx4c1c8" path="res://scenes/score.tscn" id="18_3mtlq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qt2jv"]
 texture = ExtResource("6_swjso")
@@ -78,17 +79,26 @@ sources/1 = SubResource("TileSetScenesCollectionSource_bt6ym")
 [node name="underground" type="Node2D"]
 script = ExtResource("1_iubgi")
 
-[node name="bg" type="Sprite2D" parent="."]
+[node name="BG Color" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -10.0
+offset_right = 264.0
+offset_bottom = 245.0
+color = Color(0, 0, 0, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="bg" type="Sprite2D" parent="CanvasLayer"]
 visible = false
 position = Vector2(920, 0)
 texture = ExtResource("2_osycu")
 
-[node name="Snek" parent="." instance=ExtResource("1_5558j")]
+[node name="Snek" parent="CanvasLayer" instance=ExtResource("1_5558j")]
 position = Vector2(40, 24)
 START_DIR = 1
 camera = false
 
-[node name="pipe" parent="." instance=ExtResource("3_iubgi")]
+[node name="pipe" parent="CanvasLayer" instance=ExtResource("3_iubgi")]
 position = Vector2(272, 192)
 rotation = -1.5707964
 x_snek = 2616
@@ -101,25 +111,22 @@ ID = "aaa"
 TargetID = "bbb"
 pipe_type = 1
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="CanvasLayer"]
 position = Vector2(128, 120)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="CanvasLayer"]
 z_index = 3
 tile_map_data = PackedByteArray("AAAAAAwAAQAAAAAABAAAAAsAAQAAAAAABAAAAAoAAQAAAAAABAAAAAkAAQAAAAAABAAAAAgAAQAAAAAABAAAAAcAAQAAAAAABAAAAAYAAQAAAAAABAAAAAUAAQAAAAAABAAAAAQAAQAAAAAABAAAAAMAAQAAAAAABAAAAAIAAQAAAAAABAAAAA0AAQAAAAAAAQABAA0AAQAAAAAAAQACAA0AAQAAAAAAAQADAA0AAQAAAAAAAQAEAA0AAQAAAAAAAQAFAA0AAQAAAAAAAQAGAA0AAQAAAAAAAQAHAA0AAQAAAAAAAQAIAA0AAQAAAAAAAQAJAA0AAQAAAAAAAQAKAA0AAQAAAAAAAQALAA0AAQAAAAAAAQAMAA0AAQAAAAAAAQANAA0AAQAAAAAAAQAOAA0AAQAAAAAAAQAPAA0AAQAAAAAAAQAPAA4AAQAAAAAAAQAOAA4AAQAAAAAAAQANAA4AAQAAAAAAAQAMAA4AAQAAAAAAAQALAA4AAQAAAAAAAQAKAA4AAQAAAAAAAQAJAA4AAQAAAAAAAQAIAA4AAQAAAAAAAQAHAA4AAQAAAAAAAQAGAA4AAQAAAAAAAQAFAA4AAQAAAAAAAQAEAA4AAQAAAAAAAQADAA4AAQAAAAAAAQACAA4AAQAAAAAAAQABAA4AAQAAAAAAAQAAAA4AAQAAAAAAAQAEAAIAAQAAAAAABAAEAAcAAQAAAAAAAwAEAAkAAQAAAAAAAwAEAAoAAQAAAAAABAAEAAsAAQAAAAAABAAEAAwAAQAAAAAABAAFAAIAAQAAAAAABAAFAAUAAQAAAAAAAwAFAAcAAQAAAAAAAwAFAAkAAQAAAAAAAwAFAAoAAQAAAAAABAAFAAsAAQAAAAAABAAFAAwAAQAAAAAABAAGAAIAAQAAAAAABAAGAAUAAQAAAAAAAwAGAAcAAQAAAAAAAwAGAAkAAQAAAAAAAwAGAAoAAQAAAAAABAAGAAsAAQAAAAAABAAGAAwAAQAAAAAABAAHAAIAAQAAAAAABAAHAAUAAQAAAAAAAwAHAAcAAQAAAAAAAwAHAAkAAQAAAAAAAwAHAAoAAQAAAAAABAAHAAsAAQAAAAAABAAHAAwAAQAAAAAABAAIAAIAAQAAAAAABAAIAAUAAQAAAAAAAwAIAAcAAQAAAAAAAwAIAAkAAQAAAAAAAwAIAAoAAQAAAAAABAAIAAsAAQAAAAAABAAIAAwAAQAAAAAABAAJAAIAAQAAAAAABAAJAAUAAQAAAAAAAwAJAAcAAQAAAAAAAwAJAAkAAQAAAAAAAwAJAAoAAQAAAAAABAAJAAsAAQAAAAAABAAJAAwAAQAAAAAABAAKAAIAAQAAAAAABAAKAAcAAQAAAAAAAwAKAAkAAQAAAAAAAwAKAAoAAQAAAAAABAAKAAsAAQAAAAAABAAKAAwAAQAAAAAABAD+////AQAAAAAAAQD+/wAAAQAAAAAAAQD+/wEAAQAAAAAAAQD+/wIAAQAAAAAAAQD+/wMAAQAAAAAAAQD+/wQAAQAAAAAAAQD+/wUAAQAAAAAAAQD+/wYAAQAAAAAAAQD+/wcAAQAAAAAAAQD+/wgAAQAAAAAAAQD+/wkAAQAAAAAAAQD+/woAAQAAAAAAAQD+/wsAAQAAAAAAAQD+/wwAAQAAAAAAAQD+/w0AAQAAAAAAAQD+/w4AAQAAAAAAAQD+/w8AAQAAAAAAAQD//w8AAQAAAAAAAQAAAA8AAQAAAAAAAQABAA8AAQAAAAAAAQACAA8AAQAAAAAAAQADAA8AAQAAAAAAAQAEAA8AAQAAAAAAAQAFAA8AAQAAAAAAAQAGAA8AAQAAAAAAAQAHAA8AAQAAAAAAAQAIAA8AAQAAAAAAAQAJAA8AAQAAAAAAAQAKAA8AAQAAAAAAAQALAA8AAQAAAAAAAQAMAA8AAQAAAAAAAQANAA8AAQAAAAAAAQAOAA8AAQAAAAAAAQAPAA8AAQAAAAAAAQAQAA8AAQAAAAAAAQAQAA4AAQAAAAAAAQAQAA0AAQAAAAAAAQAQAAwAAQAAAAAAAQAQAAsAAQAAAAAAAQAQAAoAAQAAAAAAAQAQAAkAAQAAAAAAAQAQAAgAAQAAAAAAAQAQAAcAAQAAAAAAAQAQAAYAAQAAAAAAAQAQAAUAAQAAAAAAAQAQAAQAAQAAAAAAAQAQAAMAAQAAAAAAAQAQAAIAAQAAAAAAAQAQAAEAAQAAAAAAAQAQAAAAAQAAAAAAAQAQAP//AQAAAAAAAQAPAP//AQAAAAAAAQAOAP//AQAAAAAAAQANAP//AQAAAAAAAQAMAP//AQAAAAAAAQALAP//AQAAAAAAAQAKAP//AQAAAAAAAQAJAP//AQAAAAAAAQAIAP//AQAAAAAAAQAHAP//AQAAAAAAAQAGAP//AQAAAAAAAQAFAP//AQAAAAAAAQAEAP//AQAAAAAAAQADAP//AQAAAAAAAQACAP//AQAAAAAAAQABAP//AQAAAAAAAQAAAP//AQAAAAAAAQD/////AQAAAAAAAQA=")
 tile_set = SubResource("TileSet_pxrnm")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_left = -20.0
-offset_top = -10.0
-offset_right = 264.0
-offset_bottom = 245.0
-color = Color(0, 0, 0, 1)
-
-[node name="Node2D" parent="." instance=ExtResource("16_oo6yi")]
+[node name="Node2D" parent="CanvasLayer" instance=ExtResource("16_oo6yi")]
 position = Vector2(248, 32)
 scale = Vector2(1, 3.8559537)
 
-[node name="Snek2" parent="." instance=ExtResource("16_rx8xm")]
+[node name="Snek2" parent="CanvasLayer" instance=ExtResource("16_rx8xm")]
 position = Vector2(24, 56)
 START_DIR = 1
+
+[node name="score" parent="." instance=ExtResource("18_3mtlq")]
+offset = Vector2(60.76, 119.93)
+transform = Transform2D(1, 0, 0, 1, 60.76, 119.93)

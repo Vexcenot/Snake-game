@@ -37,8 +37,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fyqef")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+z_index = 1000
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -50,7 +53,8 @@ offset_right = 70.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="1 player" type="Button" parent="VBoxContainer"]
+[node name="1 player" type="Button" parent="CanvasLayer/VBoxContainer"]
+z_index = 1000
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
@@ -70,7 +74,8 @@ keep_pressed_outside = true
 text = "1 PLAYER GAME"
 icon = ExtResource("4_p7vwb")
 
-[node name="2 player" type="Button" parent="VBoxContainer"]
+[node name="2 player" type="Button" parent="CanvasLayer/VBoxContainer"]
+z_as_relative = false
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_focus_color = Color(1, 1, 1, 1)
@@ -87,21 +92,21 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_oy07q")
 text = "2 PLAYER GAME"
 icon = ExtResource("4_p7vwb")
 
-[node name="Panel" type="Panel" parent="VBoxContainer"]
+[node name="Panel" type="Panel" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_gdt2y")
 theme_override_font_sizes/font_size = 8
 text = " TOP- 000000"
 horizontal_alignment = 1
 
-[node name="logotitle" type="Sprite2D" parent="."]
+[node name="logotitle" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(129, 80)
 texture = ExtResource("4_wm3ai")
 
-[connection signal="mouse_entered" from="VBoxContainer/1 player" to="." method="_on__player_mouse_entered1"]
-[connection signal="pressed" from="VBoxContainer/1 player" to="." method="_on__player_pressed"]
-[connection signal="mouse_entered" from="VBoxContainer/2 player" to="." method="_on__player_mouse_entered2"]
-[connection signal="pressed" from="VBoxContainer/2 player" to="." method="_on__player_pressed2"]
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/1 player" to="." method="_on__player_mouse_entered1"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/1 player" to="." method="_on__player_pressed"]
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/2 player" to="." method="_on__player_mouse_entered2"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/2 player" to="." method="_on__player_pressed2"]

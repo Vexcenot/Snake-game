@@ -3,6 +3,7 @@ extends CharacterBody2D
 var shell = preload("res://scenes/shell.tscn")
 var soup = preload("res://scenes/soup.tscn")
 var shitake = preload("res://scenes/shitake.tscn")
+
 enum Sfood {soup, shitake}
 @export var Super_Food: Sfood
 @export var speeder = 25
@@ -24,6 +25,7 @@ var eatable = 0
 var live = false
 
 func _ready():
+	Global.hud = $"../../../../hud"
 	await get_tree().create_timer(0.5).timeout
 	live = true
 
@@ -40,6 +42,12 @@ func spawn_food():
 	get_tree().root.add_child(instance)
 	instance.global_position = position
 
+var point = preload("res://scenes/score.tscn")
+func spawn_score():
+	var spawn = point.instantiate()
+	spawn.global_position = position
+	Global.hud.add_child(spawn)
+	
 
 #direction reverser
 func turnMover():
@@ -72,6 +80,7 @@ func _physics_process(delta: float) -> void:
 
 #disabled everything and dies
 func kill():
+	spawn_score()
 	dead = true
 	await get_tree().create_timer(0.001).timeout
 	$AnimationPlayer.speed_scale = 1.1
@@ -123,6 +132,7 @@ func spawnShell():
 			get_parent().add_child(shellio)
 			shellio.global_position = global_position
 			queue_free()
+
 func _on_koopa_top_area_entered(area: Area2D) -> void:
 	if dead == false:
 		if area.name == "Head Area":
@@ -180,4 +190,5 @@ func _on_enemy_area_entered(area: Area2D) -> void:
 #deletes itself if eaten by snake
 func getEaten():
 	if eatable >= 1 and Global.snake_status != "small":
+		spawn_score()
 		queue_free()

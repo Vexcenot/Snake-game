@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://63nce7ccldud"]
 
 [ext_resource type="FontFile" uid="uid://cvv5f6lv4eikk" path="res://super-mario.otf" id="1_c3a6t"]
-[ext_resource type="Script" uid="uid://bew4kqfg50dv1" path="res://lvltrans.gd" id="1_k2gk8"]
+[ext_resource type="Script" uid="uid://bew4kqfg50dv1" path="res://script/lvltrans.gd" id="1_k2gk8"]
 
 [node name="lvltrans" type="Control"]
 layout_mode = 3

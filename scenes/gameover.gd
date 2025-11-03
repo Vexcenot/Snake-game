@@ -2,6 +2,7 @@ extends Control
 var skip = false
 
 func _ready() -> void:
+	#Global.world_type = "transition"
 	Global.title = true
 	if Global.timeUp:
 		$timeup.visible = true

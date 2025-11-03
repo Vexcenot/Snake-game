@@ -1,9 +1,10 @@
 extends CharacterBody2D
 
 @export var avoid_ledge = false
-var live = false
+@export var active = false
 @export var turn2turtle = true
 #var turt = preload("res://scenes/fuck.tscn")
+var live = false
 var speeder = 200
 var gravity = 700 
 var speed = speeder
@@ -27,6 +28,9 @@ func _ready() -> void:
 	#make it not do this when moving
 	if turn2turtle:
 		$AnimationPlayer.play("transform")
+	if active:
+		position.x -= 10
+		speed = -speeder
 
 #check if on edge and turns
 func _on_left_side_body_entered(body: Node2D) -> void:
@@ -54,14 +58,9 @@ func die():
 	$sprite/AnimationPlayer.play("die")
 	speed = 0
 
-func set_speed():
-
-	speed = speeder
-
 
 #play sprite animation sliding up and enabling movement
 func spawning():
-
 		$Mushrooms/AnimationPlayer.play("spawn")
 		$Mushrooms/AnimationPlayer/AudioStreamPlayer2D.play()
 

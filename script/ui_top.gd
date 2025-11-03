@@ -77,8 +77,8 @@ func _process(delta: float) -> void:
 	if Global.timer <= 0:
 		await get_tree().create_timer(1).timeout
 		Global.timeUp = true
-	$HBoxContainer/TIME/counter.text = str(int(Global.timer)).pad_zeros(3)
-	$HBoxContainer/POINTS/counter.text = str(Global.points).pad_zeros(3)
+	$CanvasLayer/HBoxContainer/TIME/counter.text = str(int(Global.timer)).pad_zeros(3)
+	$CanvasLayer/HBoxContainer/POINTS/counter.text = str(Global.points).pad_zeros(3)
 
 
 func _on_warning_timer_finished() -> void:
