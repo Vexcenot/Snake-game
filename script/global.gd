@@ -54,6 +54,7 @@ var hud
 var debug : bool = false
 
 func _process(delta: float) -> void:
+	print(score)
 	if playerComboTimer > 0:
 		playerComboTimer -= 1 * delta
 	if playerComboTimer <= 0:

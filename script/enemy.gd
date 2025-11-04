@@ -23,6 +23,7 @@ var dead = false
 var direction = 0
 var eatable = 0
 var live = false
+var shellArmed = false
 #make var here that assosciates palyer combo to an arrayt with list of points to give out
 
 func _ready():
@@ -31,6 +32,7 @@ func _ready():
 
 #movement baby!!!!
 func _physics_process(delta: float) -> void:
+	shellTrans()
 	if block == false and activate == true and dead == false:
 		velocity.x = speed
 		velocity.y += gravity * delta  # Apply gravity
@@ -184,14 +186,21 @@ func disable():
 
 #becomes shell if snake touches its top
 func _on_top_area_entered(area: Area2D) -> void:
-	var enemy_instance = shell.instantiate()
-	if turn_shell and area.name == "Head Area" and Global.direction == "down":
-		turn_shell = false
+	if turn_shell and area.name == "Head Area":
+		shellArmed = true
+func _on_top_area_exited(area: Area2D) -> void:
+	if turn_shell and area.name == "Head Area":
+		shellArmed = false
+		
+func shellTrans():
+	if shellArmed and Global.direction == "down":
+		var enemy_instance = shell.instantiate()
 		disable()
 		get_parent().add_child(enemy_instance)  # Changed from get_tree().root
 		enemy_instance.global_position = position
 		global_position.y = 99999
-		#queue_free()
+		await get_tree().create_timer(0.1).timeout
+		queue_free()
 
 #becomes eatad if snake eats it
 func _on_enemy_area_entered(area: Area2D) -> void:

@@ -16,6 +16,8 @@ var score = [
 
 func _ready() -> void:
 	var label = score[value]
+	if value < 11:
+		Global.score += label
 	$Label.text = str(label)
 
 
