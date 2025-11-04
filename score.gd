@@ -11,14 +11,17 @@ var score = [
 	4000,
 	5000,
 	8000,
-	"1up"
 ]
 
 func _ready() -> void:
-	var label = score[value]
-	if value < 11:
-		Global.score += label
-	$Label.text = str(label)
+	if value < score.size():
+		var label = score[value]
+		if value <= 9:
+			Global.score += label
+			$Label.text = str(label)
+	else:
+		# Handle the case where value is out of bounds
+		$Label.text = str("0up")
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

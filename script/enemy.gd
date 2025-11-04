@@ -57,7 +57,7 @@ func spawn_food():
 
 #spawn score with snake
 func spawn_scoreSnake():
-	if Global.playerComboTimer > 0 and Global.playerCombo <= 11:
+	if Global.playerComboTimer > 0 and Global.playerCombo <= 10:
 		Global.playerCombo += 1
 	Global.playerComboTimer = 1 
 	var spawn = point.instantiate()
@@ -194,6 +194,7 @@ func _on_top_area_exited(area: Area2D) -> void:
 		
 func shellTrans():
 	if shellArmed and Global.direction == "down":
+		spawn_score(1)
 		var enemy_instance = shell.instantiate()
 		disable()
 		get_parent().add_child(enemy_instance)  # Changed from get_tree().root

@@ -31,7 +31,7 @@ position = Vector2(131, 170)
 shape = SubResource("RectangleShape2D_u6tou")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(319, 60)
+position = Vector2(408, 64)
 shape = SubResource("RectangleShape2D_u6tou")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
@@ -44,20 +44,41 @@ position = Vector2(84, 105)
 [node name="Star" parent="StaticBody2D" instance=ExtResource("4_3dwgw")]
 position = Vector2(57, 110)
 
-[node name="goomba" parent="." instance=ExtResource("5_jf1l0")]
+[node name="Node2D3" type="Node2D" parent="."]
 position = Vector2(40, 104)
 
-[node name="goomba2" parent="." instance=ExtResource("5_jf1l0")]
-position = Vector2(56, 104)
+[node name="goomba" parent="Node2D3" instance=ExtResource("5_jf1l0")]
+position = Vector2(0, 0)
 
-[node name="goomba3" parent="." instance=ExtResource("5_jf1l0")]
-position = Vector2(72, 104)
+[node name="goomba2" parent="Node2D3" instance=ExtResource("5_jf1l0")]
+position = Vector2(16, 0)
 
-[node name="goomba4" parent="." instance=ExtResource("5_jf1l0")]
-position = Vector2(88, 104)
+[node name="goomba3" parent="Node2D3" instance=ExtResource("5_jf1l0")]
+position = Vector2(32, 0)
 
-[node name="goomba5" parent="." instance=ExtResource("5_jf1l0")]
-position = Vector2(104, 104)
+[node name="goomba4" parent="Node2D3" instance=ExtResource("5_jf1l0")]
+position = Vector2(48, 0)
+
+[node name="goomba5" parent="Node2D3" instance=ExtResource("5_jf1l0")]
+position = Vector2(64, 0)
+
+[node name="goomba6" parent="Node2D3" instance=ExtResource("5_jf1l0")]
+position = Vector2(80, 0)
+
+[node name="goomba7" parent="Node2D3" instance=ExtResource("5_jf1l0")]
+position = Vector2(96, 0)
+
+[node name="goomba8" parent="Node2D3" instance=ExtResource("5_jf1l0")]
+position = Vector2(112, 0)
+
+[node name="goomba9" parent="Node2D3" instance=ExtResource("5_jf1l0")]
+position = Vector2(128, 0)
+
+[node name="goomba10" parent="Node2D3" instance=ExtResource("5_jf1l0")]
+position = Vector2(144, 0)
+
+[node name="goomba11" parent="Node2D3" instance=ExtResource("5_jf1l0")]
+position = Vector2(160, 0)
 
 [node name="Snek2" parent="." instance=ExtResource("8_23k0g")]
 position = Vector2(32, 56)
