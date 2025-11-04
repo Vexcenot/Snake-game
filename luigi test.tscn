@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cswl3f0pdo2w6"]
+[gd_scene load_steps=11 format=3 uid="uid://cswl3f0pdo2w6"]
 
 [ext_resource type="Script" uid="uid://cqcqef0utc7ik" path="res://luigi_test.gd" id="1_70a3o"]
 [ext_resource type="PackedScene" uid="uid://mt2ylxx61b70" path="res://scenes/head2.tscn" id="1_w5dw0"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="5_jf1l0"]
 [ext_resource type="PackedScene" uid="uid://h2ccg27eas81" path="res://scenes/shell.tscn" id="6_70a3o"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="8_23k0g"]
+[ext_resource type="Script" uid="uid://mdevubq4s10" path="res://scenes/hud.gd" id="9_rgvg3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u6tou"]
 size = Vector2(296, 121)
@@ -16,7 +17,7 @@ size = Vector2(296, 121)
 script = ExtResource("1_70a3o")
 
 [node name="mushroom" parent="." instance=ExtResource("2_u6tou")]
-position = Vector2(122, 67)
+position = Vector2(32, 64)
 
 [node name="Snek" parent="." instance=ExtResource("1_w5dw0")]
 position = Vector2(36, 35)
@@ -46,11 +47,26 @@ position = Vector2(57, 110)
 [node name="goomba" parent="." instance=ExtResource("5_jf1l0")]
 position = Vector2(40, 104)
 
-[node name="shell" parent="." instance=ExtResource("6_70a3o")]
-position = Vector2(136, 104)
-active = true
+[node name="goomba2" parent="." instance=ExtResource("5_jf1l0")]
+position = Vector2(56, 104)
 
-[node name="hud" type="CanvasLayer" parent="."]
+[node name="goomba3" parent="." instance=ExtResource("5_jf1l0")]
+position = Vector2(72, 104)
+
+[node name="goomba4" parent="." instance=ExtResource("5_jf1l0")]
+position = Vector2(88, 104)
+
+[node name="goomba5" parent="." instance=ExtResource("5_jf1l0")]
+position = Vector2(104, 104)
 
 [node name="Snek2" parent="." instance=ExtResource("8_23k0g")]
 position = Vector2(32, 56)
+
+[node name="shell" parent="." instance=ExtResource("6_70a3o")]
+position = Vector2(-48, 144)
+active = true
+
+[node name="hud" type="CanvasLayer" parent="."]
+layer = 5
+follow_viewport_enabled = true
+script = ExtResource("9_rgvg3")

@@ -37,7 +37,7 @@ var music : String = "none"
 var dead : bool = false
 var play = false
 var multiplayers = false
-var title = true #remember to true this
+var title = false #remember to true this
 var timeUp = false
 var timeLive = false
 var timeStart = false
@@ -45,12 +45,19 @@ var demo = false
 var pausable = false
 var ogTime = 400
 var timer = ogTime
-var points = 0
+var score = 0
+var playerComboTimer = 0
 var playerCombo = 0
 var shellCombo = 0
 var lowTime = false
 var hud
 var debug : bool = false
+
+func _process(delta: float) -> void:
+	if playerComboTimer > 0:
+		playerComboTimer -= 1 * delta
+	if playerComboTimer <= 0:
+		playerCombo = 0
 
 func reset():
 	snake_status = "small"

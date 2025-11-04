@@ -1,13 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://h2ccg27eas81"]
+[gd_scene load_steps=22 format=3 uid="uid://h2ccg27eas81"]
 
 [ext_resource type="Script" uid="uid://bauau5bxp0wdq" path="res://script/shell.gd" id="1_8y80q"]
 [ext_resource type="Texture2D" uid="uid://ed1fh4bw1hwm" path="res://sprite/koopa.png" id="2_k7uw7"]
 [ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/rise up.wav" id="3_k7uw7"]
 [ext_resource type="Script" uid="uid://b0y4h2xmmwr2e" path="res://script/mushroom.gd" id="4_vvj04"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/power up.wav" id="5_sow7m"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
-size = Vector2(9.75486, 7.44074)
 
 [sub_resource type="Animation" id="Animation_xfln1"]
 length = 0.001
@@ -260,6 +257,9 @@ _data = {
 &"walk": SubResource("Animation_5lml2")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
+size = Vector2(9.75486, 7.44074)
+
 [sub_resource type="Animation" id="Animation_8y80q"]
 length = 0.001
 tracks/0/type = "value"
@@ -360,21 +360,18 @@ size = Vector2(2, 9.99548)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euomj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmrqf"]
-size = Vector2(3.9437208, 17.8476)
+size = Vector2(10.365894, 17.8476)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8y80q"]
 size = Vector2(20.1059, 9.81974)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7uw7"]
+size = Vector2(20, 11.411467)
+
 [node name="shell" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_8y80q")
-avoid_ledge = true
 turn2turtle = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3.09262)
-scale = Vector2(1.3519312, 0.781477)
-shape = SubResource("RectangleShape2D_v7c8f")
 
 [node name="sprite" type="Sprite2D" parent="."]
 z_index = 5
@@ -391,6 +388,11 @@ libraries = {
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="sprite/AnimationPlayer"]
 position = Vector2(0, -8)
 stream = ExtResource("3_k7uw7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.09262)
+scale = Vector2(1.3519312, 0.781477)
+shape = SubResource("RectangleShape2D_v7c8f")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -435,7 +437,7 @@ collision_layer = 129
 collision_mask = 129
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/left side"]
-position = Vector2(-8, 9.05592)
+position = Vector2(-8, 9.055921)
 scale = Vector2(1, 2.69044)
 shape = SubResource("RectangleShape2D_sjlml")
 
@@ -462,7 +464,7 @@ position = Vector2(0, -6)
 
 [node name="hurtCollision" type="CollisionShape2D" parent="Node2D2/enemy2"]
 position = Vector2(-9.536743e-07, -1)
-scale = Vector2(2.0005536, -0.782735)
+scale = Vector2(1.2805532, -0.782735)
 shape = SubResource("RectangleShape2D_pmrqf")
 
 [node name="enemy" type="Area2D" parent="Node2D2"]
@@ -470,7 +472,7 @@ position = Vector2(0, -6)
 monitorable = false
 
 [node name="hurtCollision" type="CollisionShape2D" parent="Node2D2/enemy"]
-position = Vector2(2.38419e-07, 0.604642)
+position = Vector2(0, 1)
 scale = Vector2(1.07219, 0.515997)
 shape = SubResource("RectangleShape2D_pmrqf")
 
@@ -489,6 +491,13 @@ position = Vector2(-0.0419474, -7)
 rotation = -3.14159
 scale = Vector2(1.15161, 2.30723)
 shape = SubResource("RectangleShape2D_8y80q")
+
+[node name="deadly shell" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="deadly shell"]
+position = Vector2(0, -7)
+scale = Vector2(1.6906408, 1.2268362)
+shape = SubResource("RectangleShape2D_k7uw7")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_exited" from="Node2D2/left bottom" to="." method="_on_side_checks_body_exited"]

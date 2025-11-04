@@ -600,6 +600,8 @@ func starEat():
 #how snake when touch different areas.
 var aah = 0
 func _on_head_area_area_entered(area: Area2D) -> void:
+	if not area:
+		return
 	if area.name == "mushroom":
 		set_power("big")
 	if area.name == "1up":
@@ -619,10 +621,18 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		await get_tree().create_timer(0.1).timeout
 		if powering == false:
 			hurt()
+	if area.name == "deadly shell" and Global.snake_status == "small":
+		#await get_tree().create_timer(0.1).timeout
+		if powering == false:
+			hurt()
+			
+#this causes crash apparently when turning koopa into shell and getting hit
 	if area.name == "enemyKoopa" and Global.snake_status == "small" and Global.direction != "down":
+		
 		await get_tree().create_timer(0.1).timeout
 		if powering == false:
 			hurt()
+#############
 	if area.name == "edible":
 		openJaw += 1
 	if area.name == "edible2" and Global.snake_status != "small":

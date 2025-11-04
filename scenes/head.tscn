@@ -209,10 +209,10 @@ _data = {
 size = Vector2(4.07919, 5.53036)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sxb1m"]
-size = Vector2(10.0566, 5.0283)
+size = Vector2(7.5424547, 4.245005)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vq0g"]
-size = Vector2(9.70178, 6.94361)
+size = Vector2(10.321633, 7.574846)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tctuf"]
 size = Vector2(27.0348, 13.3794)
@@ -244,8 +244,8 @@ disabled = true
 debug_color = Color(0, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-5.24521e-06, 0)
-scale = Vector2(0.795498, 0.795498)
+position = Vector2(-1.0000038, 0.45254788)
+scale = Vector2(0.795498, 1.1554983)
 shape = SubResource("RectangleShape2D_sxb1m")
 
 [node name="Sprite2D" parent="." instance=ExtResource("2_ldr7d")]
@@ -258,7 +258,7 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Head Area"]
-position = Vector2(0, 0.239912)
+position = Vector2(-0.16386722, 8.150916e-07)
 scale = Vector2(0.5287293, 0.760132)
 shape = SubResource("RectangleShape2D_5vq0g")
 debug_color = Color(0.803934, 0.392138, 0.389069, 0.42)

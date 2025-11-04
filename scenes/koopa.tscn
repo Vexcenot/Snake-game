@@ -253,10 +253,10 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3hfl1"]
-size = Vector2(22.330044, 13)
+size = Vector2(22.330044, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_grttc"]
-size = Vector2(26.5, 20)
+size = Vector2(26.5, 14)
 
 [node name="koopa" type="CharacterBody2D"]
 position = Vector2(0, 8)
@@ -355,14 +355,15 @@ stream = ExtResource("6_kqedj")
 [node name="enemy" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
-position = Vector2(-2.3841858e-07, -6.5)
+position = Vector2(-2.3841858e-07, -5)
 scale = Vector2(0.44782716, 1)
 shape = SubResource("RectangleShape2D_3hfl1")
 
 [node name="top" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
-position = Vector2(0, -18)
+position = Vector2(0, -15)
+scale = Vector2(0.6787159, 1)
 shape = SubResource("RectangleShape2D_grttc")
 
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]

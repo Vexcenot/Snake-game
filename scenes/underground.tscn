@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://du6cg6ytddp8g"]
+[gd_scene load_steps=21 format=4 uid="uid://du6cg6ytddp8g"]
 
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="1_5558j"]
 [ext_resource type="Script" uid="uid://3i17aalstqc2" path="res://script/underground.gd" id="1_iubgi"]
@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://bywstij4qxlot" path="res://scenes/stair brick.tscn" id="15_e8a6q"]
 [ext_resource type="PackedScene" uid="uid://bc8ayjdv8nyv2" path="res://scenes/pipe stem.tscn" id="16_oo6yi"]
 [ext_resource type="PackedScene" uid="uid://mt2ylxx61b70" path="res://scenes/head2.tscn" id="16_rx8xm"]
-[ext_resource type="PackedScene" uid="uid://cy551qtx4c1c8" path="res://scenes/score.tscn" id="18_3mtlq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qt2jv"]
 texture = ExtResource("6_swjso")
@@ -126,7 +125,3 @@ scale = Vector2(1, 3.8559537)
 [node name="Snek2" parent="CanvasLayer" instance=ExtResource("16_rx8xm")]
 position = Vector2(24, 56)
 START_DIR = 1
-
-[node name="score" parent="." instance=ExtResource("18_3mtlq")]
-offset = Vector2(60.76, 119.93)
-transform = Transform2D(1, 0, 0, 1, 60.76, 119.93)

@@ -3,7 +3,7 @@ extends CharacterBody2D
 var shell = preload("res://scenes/shell.tscn")
 var soup = preload("res://scenes/soup.tscn")
 var shitake = preload("res://scenes/shitake.tscn")
-
+var point = preload("res://scenes/score.tscn")
 enum Sfood {soup, shitake}
 @export var Super_Food: Sfood
 @export var speeder = 25
@@ -23,11 +23,22 @@ var dead = false
 var direction = 0
 var eatable = 0
 var live = false
+#make var here that assosciates palyer combo to an arrayt with list of points to give out
 
 func _ready():
-	Global.hud = $"../../../../hud"
 	await get_tree().create_timer(0.5).timeout
 	live = true
+
+#movement baby!!!!
+func _physics_process(delta: float) -> void:
+	if block == false and activate == true and dead == false:
+		velocity.x = speed
+		velocity.y += gravity * delta  # Apply gravity
+		move_and_slide()
+		goback()
+		spriteOrientation()
+		turnMover()
+		getEaten()
 
 #spawns food scene
 func spawn_food():
@@ -42,9 +53,21 @@ func spawn_food():
 	get_tree().root.add_child(instance)
 	instance.global_position = position
 
-var point = preload("res://scenes/score.tscn")
-func spawn_score():
+#spawn score with snake
+func spawn_scoreSnake():
+	if Global.playerComboTimer > 0 and Global.playerCombo <= 11:
+		Global.playerCombo += 1
+	Global.playerComboTimer = 1 
 	var spawn = point.instantiate()
+	spawn.value = Global.playerCombo
+	spawn.global_position = position
+	Global.hud.add_child(spawn)
+	
+#spawn score normally
+func spawn_score(score):
+	var spawn2 = score
+	var spawn = point.instantiate()
+	spawn.value = spawn2
 	spawn.global_position = position
 	Global.hud.add_child(spawn)
 	
@@ -65,35 +88,16 @@ func spriteOrientation():
 		elif speed == -speeder:
 			$Node2D2/Sprite.flip_h = false
 		
-#movement baby!!!!
-func _physics_process(delta: float) -> void:
-	if block == false and activate == true and dead == false:
-		velocity.x = speed
-		velocity.y += gravity * delta  # Apply gravity
-		move_and_slide()
-		goback()
-		spriteOrientation()
-		spawnShell()
-		turnMover()
-		getEaten()
-		print(direction)
+
 
 #disabled everything and dies
 func kill():
-	spawn_score()
+	spawn_score(0)
 	dead = true
 	await get_tree().create_timer(0.001).timeout
 	$AnimationPlayer.speed_scale = 1.1
 	$AnimationPlayer.play("die")
-	$"left bottom".monitorable = false
-	$"right bottom".monitorable = false
-	$"left side".monitorable = false
-	$"right side".monitorable = false
-	$edible2.monitorable = false
-	$CollisionShape2D.disabled = true
-	$enemy.monitorable = false
-	$enemy.monitoring = false
-	$top.monitoring = false
+	disable()
 
 
 #play sprite animation sliding up and enabling movement
@@ -124,14 +128,6 @@ func _on_left_bottom_body_exited(body: Node2D) -> void:
 func _on_right_bottom_body_exited(body: Node2D) -> void:
 	rightfloor -= 1
 	
-#spawns shell when snake touches top
-func spawnShell():
-	if dead == false:
-		if head and Global.direction == "down":
-			var shellio = shell.instantiate()
-			get_parent().add_child(shellio)
-			shellio.global_position = global_position
-			queue_free()
 
 func _on_koopa_top_area_entered(area: Area2D) -> void:
 	if dead == false:
@@ -174,15 +170,30 @@ func _on_right_side_area_entered(area: Area2D) -> void:
 			print("FUEEKE")
 			queue_free()
 
+#disable layers to not interact with anything
+func disable():
+	$"left bottom".monitorable = false
+	$"right bottom".monitorable = false
+	$"left side".monitorable = false
+	$"right side".monitorable = false
+	$edible2.monitorable = false
+	$CollisionShape2D.disabled = true
+	$enemy.monitorable = false
+	$enemy.monitoring = false
+	$top.monitoring = false
+
 #becomes shell if snake touches its top
 func _on_top_area_entered(area: Area2D) -> void:
+	var enemy_instance = shell.instantiate()
 	if turn_shell and area.name == "Head Area" and Global.direction == "down":
-		var enemy_instance = shell.instantiate()
-		get_tree().root.add_child(enemy_instance)
+		turn_shell = false
+		disable()
+		get_parent().add_child(enemy_instance)  # Changed from get_tree().root
 		enemy_instance.global_position = position
-		queue_free()
+		global_position.y = 99999
+		#queue_free()
 
-#becomes eatable if snake eats it
+#becomes eatad if snake eats it
 func _on_enemy_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":
 		eatable += 1 
@@ -190,5 +201,5 @@ func _on_enemy_area_entered(area: Area2D) -> void:
 #deletes itself if eaten by snake
 func getEaten():
 	if eatable >= 1 and Global.snake_status != "small":
-		spawn_score()
+		spawn_scoreSnake()
 		queue_free()
