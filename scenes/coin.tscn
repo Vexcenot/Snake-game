@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://lhmipeci2e24"]
+[gd_scene load_steps=11 format=3 uid="uid://lhmipeci2e24"]
 
 [ext_resource type="Script" uid="uid://n5ftbeu3taa2" path="res://script/coin.gd" id="1_6qxui"]
 [ext_resource type="Texture2D" uid="uid://by1lwoolytm2w" path="res://sprite/coins.png" id="1_ervcb"]
 [ext_resource type="AudioStream" uid="uid://sytrfv5uaavu" path="res://sounds/coin.wav" id="3_3ogj1"]
+[ext_resource type="PackedScene" uid="uid://cixj1ykvju5v2" path="res://scenes/brick.tscn" id="4_d14el"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_povfb"]
 size = Vector2(10, 14)
@@ -47,10 +48,10 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_rwwey"]
 resource_name = "collect"
-length = 0.36
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("Coins:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -68,8 +69,8 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(-32, 0, 0, 0, 0, -64, -0.1, 0, 0.1, 0, -32, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.166667, 0.333333)
+"points": PackedFloat32Array(-9, 0, 0, 0, 0, -46.84, -0.1, 0, 0.1, 0, -3, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3, 0.5)
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -78,14 +79,14 @@ tracks/2/path = NodePath("Coins:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333),
+"times": PackedFloat32Array(0, 0.0666667, 0.16666667, 0.26666668, 0.36666667, 0.46666667),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [3, 4, 5, 6, 3, 4]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
@@ -151,6 +152,14 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="edible"]
 scale = Vector2(1.7180809, 1.7180809)
 shape = SubResource("RectangleShape2D_11l1o")
+
+[node name="brick" parent="." instance=ExtResource("4_d14el")]
+visible = false
+position = Vector2(16, -8)
+
+[node name="brick2" parent="." instance=ExtResource("4_d14el")]
+visible = false
+position = Vector2(16, -24)
 
 [connection signal="area_entered" from="coin_area" to="." method="_on_coin_area_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

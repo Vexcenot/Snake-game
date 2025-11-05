@@ -352,10 +352,10 @@ size = Vector2(10.0103, 1.27963)
 size = Vector2(1.21936, 1.27965)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sjlml"]
-size = Vector2(2, 10.0979)
+size = Vector2(4, 10.0979)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exsck"]
-size = Vector2(2, 9.99548)
+size = Vector2(4.15434, 9.99548)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euomj"]
 
@@ -437,7 +437,7 @@ collision_layer = 129
 collision_mask = 129
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/left side"]
-position = Vector2(-8, 9.055921)
+position = Vector2(-9, 9.055921)
 scale = Vector2(1, 2.69044)
 shape = SubResource("RectangleShape2D_sjlml")
 
@@ -448,8 +448,8 @@ collision_layer = 129
 collision_mask = 129
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/right side"]
-position = Vector2(8.41158, 7.88627)
-scale = Vector2(1, 2.36695)
+position = Vector2(9.4887495, 7.8862696)
+scale = Vector2(0.99999994, 2.36695)
 shape = SubResource("RectangleShape2D_exsck")
 
 [node name="edible2" type="Area2D" parent="Node2D2"]
@@ -475,6 +475,7 @@ monitorable = false
 position = Vector2(0, 1)
 scale = Vector2(1.07219, 0.515997)
 shape = SubResource("RectangleShape2D_pmrqf")
+disabled = true
 
 [node name="top" type="Area2D" parent="Node2D2"]
 

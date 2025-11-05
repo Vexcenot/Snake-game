@@ -150,6 +150,10 @@ visible = false
 position = Vector2(264, 152)
 items = Array[PackedScene]([ExtResource("20_yc10j")])
 
+[node name="question block18" parent="level/lvl" instance=ExtResource("6_06g6w")]
+position = Vector2(8, 40)
+items = Array[PackedScene]([ExtResource("20_yc10j")])
+
 [node name="question block16" parent="level/lvl" instance=ExtResource("6_06g6w")]
 position = Vector2(376, 152)
 items = Array[PackedScene]([ExtResource("8_fs55x")])
@@ -251,3 +255,24 @@ position = Vector2(536, 208)
 [node name="shell2" parent="level/lvl" instance=ExtResource("13_trceg")]
 position = Vector2(496, 200)
 active = true
+
+[node name="coin" parent="." instance=ExtResource("8_fs55x")]
+position = Vector2(264, 136)
+
+[node name="coin2" parent="." instance=ExtResource("8_fs55x")]
+position = Vector2(328, 136)
+
+[node name="coin3" parent="." instance=ExtResource("8_fs55x")]
+position = Vector2(360, 136)
+
+[node name="coin4" parent="." instance=ExtResource("8_fs55x")]
+position = Vector2(392, 136)
+
+[node name="brick" parent="." instance=ExtResource("10_choun")]
+position = Vector2(344, 136)
+
+[node name="brick2" parent="." instance=ExtResource("10_choun")]
+position = Vector2(344, 120)
+
+[node name="brick3" parent="." instance=ExtResource("10_choun")]
+position = Vector2(344, 120)

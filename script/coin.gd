@@ -31,8 +31,21 @@ func _on_coin_area_area_entered(area: Area2D) -> void:
 		$Coins.visible = false
 		$coin_sound.play()
 	if area.name == "kill":
+
 		$AnimationPlayer.play("collect")
 
 
 func _on_coin_sound_finished() -> void:
+	queue_free()
+
+var point = preload("res://scenes/score.tscn")
+func spawn_score(score):
+	var spawn2 = score
+	var spawn = point.instantiate()
+	spawn.value = spawn2
+	spawn.global_position = global_position
+	Global.hud.add_child(spawn)
+	
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	spawn_score(1)
 	queue_free()

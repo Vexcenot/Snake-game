@@ -65,6 +65,18 @@ func spawn_scoreSnake():
 	spawn.global_position = position
 	Global.hud.add_child(spawn)
 	
+#spawn score with shell
+func spawn_scoreShell():
+	if Global.playerComboTimer > 0 and Global.playerCombo <= 10:
+		Global.shellCombo += 1
+	if Global.shellCombo < 4:
+		Global.shellCombo = 3
+	#Global.playerComboTimer = 1 
+	var spawn = point.instantiate()
+	spawn.value = Global.shellCombo
+	spawn.global_position = position
+	Global.hud.add_child(spawn)
+
 #spawn score normally
 func spawn_score(score):
 	var spawn2 = score
@@ -163,7 +175,10 @@ func _on_left_side_area_entered(area: Area2D) -> void:
 #right are detect
 func _on_right_side_area_entered(area: Area2D) -> void:
 	if dead == false:
-		if area.name == "enemy2" or area.name == "kill" and live:
+		if area.name == "enemy2":
+			kill()
+		if area.name == "kill" and live:
+			spawn_score(0)
 			kill()
 		if area.name == "fireball":
 			spawn_food()
@@ -194,7 +209,7 @@ func _on_top_area_exited(area: Area2D) -> void:
 		
 func shellTrans():
 	if shellArmed and Global.direction == "down":
-		spawn_score(1)
+		spawn_score(0)
 		var enemy_instance = shell.instantiate()
 		disable()
 		get_parent().add_child(enemy_instance)  # Changed from get_tree().root
@@ -213,3 +228,4 @@ func getEaten():
 	if eatable >= 1 and Global.snake_status != "small":
 		spawn_scoreSnake()
 		queue_free()
+		

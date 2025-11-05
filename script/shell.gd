@@ -10,6 +10,7 @@ var speed = speeder
 var ignore = false
 var timer = 0
 var converted = false
+var bounced = 0
 
 #movement baby!!!!
 func _physics_process(delta: float) -> void:
@@ -124,7 +125,13 @@ func _on_top_area_exited(area: Area2D) -> void:
 		
 
 func _on_shell_area_entered(area: Area2D) -> void:
-	if area.name == "delete" or area.name == "Head Area" and Global.snake_status != "small":
+	if area.name == "delete":
+		queue_free()
+	elif area.name == "Head Area" and Global.snake_status != "small":
+		bounced += 1
+		if Global.playerCombo < 3:
+			Global.playerCombo = 2
+		spawn_scoreSnake()
 		queue_free()
 		
 
@@ -140,3 +147,23 @@ func turnTurtle():
 	#get_tree().root.add_child(spawnTurt)
 	#spawnTurt.global_position = global_position
 	#queue_free()
+
+
+var point = preload("res://scenes/score.tscn")
+#spawn score with snake
+func spawn_scoreSnake():
+	if Global.playerComboTimer > 0 and Global.playerCombo <= 10:
+		Global.playerCombo += 1
+	Global.playerComboTimer = 1 
+	var spawn = point.instantiate()
+	spawn.value = Global.playerCombo
+	spawn.global_position = position
+	Global.hud.add_child(spawn)
+	
+#spawn score normally
+func spawn_score(score):
+	var spawn2 = score
+	var spawn = point.instantiate()
+	spawn.value = spawn2
+	spawn.global_position = position
+	Global.hud.add_child(spawn)
