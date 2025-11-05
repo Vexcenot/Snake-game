@@ -47,7 +47,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_rwwey"]
 resource_name = "collect"
-length = 0.36
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = false
@@ -67,9 +67,9 @@ tracks/1/path = NodePath("Coins:offset:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(-32, 0, 0, 0, 0, -64, -0.1, 0, 0.1, 0, -20, 0, 0, 0, 0),
-"times": PackedFloat32Array(0, 0.166667, 0.33333334)
+"handle_modes": PackedInt32Array(1, 1, 1),
+"points": PackedFloat32Array(-9, 0, 0, 0, 0, -46.84, -0.1, 0, 0.1, 0, -3, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.3, 0.5)
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -136,9 +136,9 @@ shape = SubResource("RectangleShape2D_povfb")
 
 [node name="Coins" type="Sprite2D" parent="."]
 texture = ExtResource("2_yqryf")
-offset = Vector2(0, -20)
+offset = Vector2(0, -9)
 hframes = 7
-frame = 4
+frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

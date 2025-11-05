@@ -68,8 +68,8 @@ tracks/1/path = NodePath("Coins:offset:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(-9, 0, 0, 0, 0, -46.84, -0.1, 0, 0.1, 0, -3, 0, 0, 0, 0),
+"handle_modes": PackedInt32Array(0, 1, 1),
+"points": PackedFloat32Array(-9, 0, 0, 0, 0, -46.84, -0.1, 0, 0.1, 0, -13, 0, 0, 0, 0),
 "times": PackedFloat32Array(0, 0.3, 0.5)
 }
 tracks/2/type = "value"
