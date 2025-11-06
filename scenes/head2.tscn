@@ -192,6 +192,7 @@ scale = Vector2(2, 2)
 collision_layer = 5
 collision_mask = 5
 script = ExtResource("1_bbu2a")
+camera = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

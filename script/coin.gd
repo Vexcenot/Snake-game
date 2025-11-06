@@ -30,8 +30,9 @@ func _on_coin_area_area_entered(area: Area2D) -> void:
 		collected = true
 		$Coins.visible = false
 		$coin_sound.play()
+		print("poo")
 	if area.name == "kill":
-
+		print("balls ")
 		$AnimationPlayer.play("collect")
 
 
@@ -44,7 +45,7 @@ func spawn_score(score):
 	var spawn = point.instantiate()
 	spawn.value = spawn2
 	spawn.global_position = global_position
-	Global.hud.add_child(spawn)
+	Global.hud.add_child(spawn) #crashing when underground
 	
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	spawn_score(1)

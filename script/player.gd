@@ -645,6 +645,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		die()
 	if area.name == "brick_area" and Global.snake_status != "small":
 		Global.eatable += 1
+		print("fuck")
 	if area.name == "enemy" and Global.snake_status != "small":
 		Global.eatable += 1
 	if area.name == "coin_area":
@@ -669,13 +670,16 @@ func teleport():
 		position.x = Global.teleport_x
 		position.y = Global.teleport_y
 
-func enter_entrance():
+
+#stop camera moving when castle goes on screen
+func enter_entrance(): 
 	if Global.entranceStopper == false:
 		crap = position.x + 135
-	elif camera == true:
-		$Camera.limit_right = crap  #this is causing a crash apparently
+	else:
+		if crap != null:
+			$Camera.limit_right = crap  #this is causing a crash apparently after game ends and main is reloaded
 
-
+#opens jaws
 func eat_animation():
 	if eatAnim:
 		sprite.frame = 5

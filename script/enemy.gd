@@ -43,6 +43,7 @@ func _physics_process(delta: float) -> void:
 		getEaten()
 
 #spawns food scene
+#spawns food scene
 func spawn_food():
 	var scene_to_spawn
 	match Super_Food:
@@ -52,8 +53,9 @@ func spawn_food():
 			scene_to_spawn = shitake
 	
 	var instance = scene_to_spawn.instantiate()
-	get_tree().root.add_child(instance)
-	instance.global_position = position
+	# Spawn in the same parent as this enemy
+	get_parent().add_child(instance)
+	instance.global_position = global_position
 
 #spawn score with snake
 func spawn_scoreSnake():
@@ -168,6 +170,7 @@ func _on_left_side_area_entered(area: Area2D) -> void:
 			kill()
 		if area.name == "fireball":
 			spawn_food()
+			spawn_score(1)
 			queue_free()
 		if area.name == "activate_entity":
 			activate = true
@@ -228,4 +231,3 @@ func getEaten():
 	if eatable >= 1 and Global.snake_status != "small":
 		spawn_scoreSnake()
 		queue_free()
-		

@@ -36,7 +36,7 @@ var playMusic : bool = false
 var music : String = "none"
 var dead : bool = false
 var play = false
-var multiplayers = false
+var multiplayers = false #remember to false this
 var title = false #remember to true this
 var timeUp = false
 var timeLive = false
@@ -54,7 +54,7 @@ var hud
 var debug : bool = false
 
 func _process(delta: float) -> void:
-	print(score)
+	#print(score)
 	if playerComboTimer > 0:
 		playerComboTimer -= 1 * delta
 	if playerComboTimer <= 0:
@@ -83,7 +83,7 @@ func reset():
 	still_stop = false
 	invincible = false
 	paused = false
-	world_type = "default"
+	#world_type = "default"
 	eatable = 0
 	dead = false
 

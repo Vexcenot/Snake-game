@@ -4,6 +4,21 @@
 [ext_resource type="Script" uid="uid://d1uuivhdgk67i" path="res://script/win_screen.gd" id="1_h5m4k"]
 [ext_resource type="FontFile" uid="uid://cvv5f6lv4eikk" path="res://super-mario.otf" id="2_dms08"]
 
+[sub_resource type="Animation" id="Animation_p7clc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-105, 35)]
+}
+
 [sub_resource type="Animation" id="Animation_h5m4k"]
 resource_name = "reveal"
 length = 26.666672
@@ -18,21 +33,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 0, 0, 0, 0, 1, 1, 1),
 "update": 1,
 "values": [Vector2(-109, -128), Vector2(-112, 21), Vector2(-105, 35), Vector2(-115, 56), Vector2(-120, 75), Vector2(-114, 92), Vector2(-114, 106), Vector2(-112, 120)]
-}
-
-[sub_resource type="Animation" id="Animation_p7clc"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect2:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-105, 35)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_urka4"]
@@ -73,6 +73,7 @@ stream = ExtResource("1_64bwf")
 autoplay = true
 
 [node name="1p msg" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

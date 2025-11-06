@@ -47,10 +47,18 @@ func spawning():
 		$Mushrooms/AnimationPlayer.play("spawn")
 		$Mushrooms/AnimationPlayer/AudioStreamPlayer2D.play()
 
+var point = preload("res://scenes/score.tscn")
+func spawn_score(score):
+	var spawn2 = score
+	var spawn = point.instantiate()
+	spawn.value = spawn2
+	spawn.global_position = global_position
+	Global.hud.add_child(spawn)
 
 #deletes when being touched by head
 func _on_mushroom_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":
+		spawn_score(5)
 		queue_free()
 
 
