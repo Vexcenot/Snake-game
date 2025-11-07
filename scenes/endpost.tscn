@@ -91,7 +91,7 @@ scale = Vector2(4.49333, 2.16)
 texture = ExtResource("3_e08ka")
 
 [node name="brick" type="Sprite2D" parent="."]
-z_index = 3
+z_index = 2
 position = Vector2(-9, -2)
 texture = ExtResource("4_rncqr")
 hframes = 4

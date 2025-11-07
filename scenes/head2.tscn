@@ -51,14 +51,14 @@ tracks/2/keys = {
 }
 tracks/3/type = "bezier"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("Sprite2D:z_index")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(4096, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"handle_modes": PackedInt32Array(0, 2),
+"points": PackedFloat32Array(4096, -0.25, 0, 0.25, 0, 1, -0.00016666666, 682.50006, 0, 0),
+"times": PackedFloat32Array(0, 0.0009999999)
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -326,7 +326,6 @@ scale = Vector2(34.64984, 13.776627)
 color = Color(0, 0, 0, 1)
 
 [node name="Sprite2D" parent="." instance=ExtResource("8_g4rqf")]
-z_index = 4096
 position = Vector2(0, -1)
 frame = 2
 
