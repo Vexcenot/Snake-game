@@ -1,6 +1,7 @@
 extends Sprite2D
 var shit
 
+
 func _on_eat_area_body_entered(body: Node2D) -> void:
 	if body.name == "snek":
 		Sprite2D.visible = false

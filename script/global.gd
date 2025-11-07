@@ -1,5 +1,5 @@
 extends Node
-
+#var invArea: PackedScene = preload("res://scenes/invincible_frame.tscn")
 var snake_status : String = "small"
 var direction : String = "left"
 var hitting : bool = false
@@ -36,22 +36,24 @@ var playMusic : bool = false
 var music : String = "none"
 var dead : bool = false
 var play = false
-var multiplayers = false #remember to false this
-var title = false #remember to true this
-var timeUp = false
-var timeLive = false
-var timeStart = false
-var demo = false
-var pausable = false
-var ogTime = 400
-var timer = ogTime
-var score = 0
+var multiplayers : bool = false #remember to false this
+var title : bool = false #remember to true this
+var timeUp : bool = false
+var timeLive : bool = false
+var timeStart : bool = false
+var demo : bool = false
+var pausable : bool = false
+var ogTime = 400 #dont need rest
+var timer = ogTime #dont need rest
+var score = 0 #dont reset until new game
 var playerComboTimer = 0
 var playerCombo = 0
 var shellCombo = 0
-var lowTime = false
+var lowTime : bool = false
 var hud
 var debug : bool = false
+var topScore = 0 #dont reset
+
 
 func _process(delta: float) -> void:
 	#print(score)
@@ -61,6 +63,14 @@ func _process(delta: float) -> void:
 		playerCombo = 0
 
 func reset():
+	lowTime = false
+	pausable = false
+	demo = false
+	timeStart = false
+	timeLive = false
+	timeUp = false
+	title = false
+	multiplayers = false
 	snake_status = "small"
 	direction = "left"
 	hitting = false
@@ -86,9 +96,10 @@ func reset():
 	#world_type = "default"
 	eatable = 0
 	dead = false
+	if score > topScore:
+		topScore = score
 
-	die()
-
+#for when checkpoints get added
 func resetAll():
 	reset()
 	loadedWorld = ""

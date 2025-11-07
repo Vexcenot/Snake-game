@@ -539,6 +539,7 @@ func die():
 				await get_tree().create_timer(delay_between_segments).timeout
 		await get_tree().create_timer(3).timeout
 		Global.reset()
+		Global.die()
 
 func update_global_direction():
 	if not move_orders.is_empty():

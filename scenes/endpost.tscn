@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cdbmv0psdbx0l"]
+[gd_scene load_steps=15 format=3 uid="uid://cdbmv0psdbx0l"]
 
 [ext_resource type="Script" uid="uid://dfgnrao7h28wa" path="res://script/endpost.gd" id="1_5o4dw"]
 [ext_resource type="Texture2D" uid="uid://v723k288mi0g" path="res://sprite/flag pole.png" id="1_nypt7"]
@@ -57,6 +57,9 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e08ka"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xn5dt"]
+size = Vector2(19.99995, 19.565887)
 
 [node name="Endpost" type="Node2D"]
 position = Vector2(9, -6)
@@ -118,6 +121,46 @@ position = Vector2(-17, -144)
 position = Vector2(-9, -158)
 scale = Vector2(0.400001, 0.400001)
 shape = SubResource("RectangleShape2D_e08ka")
+
+[node name="5000" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="5000"]
+position = Vector2(-9, -154)
+scale = Vector2(2.6917183, 1.6726081)
+shape = SubResource("RectangleShape2D_xn5dt")
+debug_color = Color(0.6585092, 0.38110954, 0.8835248, 0.41960785)
+
+[node name="2000" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2000"]
+position = Vector2(-9, -122)
+scale = Vector2(2.6917183, 1.6726081)
+shape = SubResource("RectangleShape2D_xn5dt")
+debug_color = Color(0.6585092, 0.38110954, 0.8835248, 0.41960785)
+
+[node name="800" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="800"]
+position = Vector2(-9, -90)
+scale = Vector2(2.6917183, 1.6726081)
+shape = SubResource("RectangleShape2D_xn5dt")
+debug_color = Color(0.6585092, 0.38110954, 0.8835248, 0.41960785)
+
+[node name="400" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="400"]
+position = Vector2(-9, -58)
+scale = Vector2(2.6917183, 1.6726081)
+shape = SubResource("RectangleShape2D_xn5dt")
+debug_color = Color(0.6585092, 0.38110954, 0.8835248, 0.41960785)
+
+[node name="100" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="100"]
+position = Vector2(-9, -26.000002)
+scale = Vector2(2.6917183, 1.6726081)
+shape = SubResource("RectangleShape2D_xn5dt")
+debug_color = Color(0.6585092, 0.38110954, 0.8835248, 0.41960785)
 
 [connection signal="area_entered" from="winarea" to="." method="_on_winarea_area_entered"]
 [connection signal="body_entered" from="winarea" to="." method="_on_winarea_body_entered"]
