@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=31 format=4 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Script" uid="uid://33wsmjudqgvw" path="res://scenes/main.gd" id="1_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
@@ -23,6 +23,9 @@
 [ext_resource type="PackedScene" uid="uid://d24yg48cmuww3" path="res://scenes/coin block.tscn" id="20_yc10j"]
 [ext_resource type="Script" uid="uid://mdevubq4s10" path="res://scenes/hud.gd" id="22_pm3ni"]
 [ext_resource type="PackedScene" uid="uid://mt2ylxx61b70" path="res://scenes/head2.tscn" id="23_pm3ni"]
+[ext_resource type="Script" uid="uid://b3w8l24uvdgbt" path="res://scenes/node_2d.gd" id="24_2wyq8"]
+[ext_resource type="FontFile" uid="uid://cvv5f6lv4eikk" path="res://super-mario.otf" id="24_y6deb"]
+[ext_resource type="Script" uid="uid://67qykmmhui3n" path="res://scenes/label.gd" id="25_og1vs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dp3eg"]
 texture = ExtResource("17_muem4")
@@ -243,3 +246,59 @@ position = Vector2(624, 224)
 
 [node name="koopa" parent="level/lvl" instance=ExtResource("13_a8y0u")]
 position = Vector2(536, 208)
+
+[node name="Node2D" type="Node2D" parent="level/lvl"]
+process_mode = 3
+visible = false
+position = Vector2(2544, 112)
+script = ExtResource("24_2wyq8")
+
+[node name="Label" type="Label" parent="level/lvl/Node2D"]
+process_mode = 3
+offset_left = -24.0
+offset_right = 184.0
+offset_bottom = 21.0
+theme_override_fonts/font = ExtResource("24_y6deb")
+theme_override_font_sizes/font_size = 8
+text = "but you are already dead. "
+horizontal_alignment = 1
+script = ExtResource("25_og1vs")
+
+[node name="ColorRect" type="ColorRect" parent="level/lvl/Node2D"]
+z_index = -11
+offset_left = -408.0
+offset_top = -280.0
+offset_right = -368.0
+offset_bottom = -240.0
+scale = Vector2(26.36001, 26.36001)
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="level/lvl/Node2D"]
+visible = false
+z_index = 6
+offset_left = -432.0
+offset_top = 96.0
+offset_right = -392.0
+offset_bottom = 136.0
+scale = Vector2(26.36001, 26.36001)
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="level/lvl/Node2D"]
+visible = false
+z_index = 8
+offset_left = -1048.0
+offset_top = 16.0
+offset_right = -1008.0
+offset_bottom = 56.0
+scale = Vector2(26.36001, 26.36001)
+color = Color(0, 0, 0, 1)
+
+[node name="ColorRect4" type="ColorRect" parent="level/lvl/Node2D"]
+visible = false
+z_index = 8
+offset_left = 128.0
+offset_top = 24.0
+offset_right = 168.0
+offset_bottom = 64.0
+scale = Vector2(26.36001, 26.36001)
+color = Color(0, 0, 0, 1)

@@ -23,6 +23,7 @@ stream = ExtResource("2_y12ax")
 stream = ExtResource("3_mfc1r")
 
 [node name="BG music" type="AudioStreamPlayer" parent="."]
+autoplay = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0

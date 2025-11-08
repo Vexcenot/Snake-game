@@ -52,7 +52,8 @@ var shellCombo = 0
 var lowTime : bool = false
 var hud
 var debug : bool = false
-var topScore = 0 #dont reset
+var topScore : int = 0 #dont reset
+var purgatory : bool = false
 
 
 func _process(delta: float) -> void:
@@ -63,13 +64,14 @@ func _process(delta: float) -> void:
 		playerCombo = 0
 
 func reset():
+	#purgatory = false
 	lowTime = false
 	pausable = false
 	demo = false
 	timeStart = false
 	timeLive = false
 	timeUp = false
-	title = false
+	title = true
 	multiplayers = false
 	snake_status = "small"
 	direction = "left"
@@ -102,6 +104,7 @@ func reset():
 #for when checkpoints get added
 func resetAll():
 	reset()
+	purgatory = false
 	loadedWorld = ""
 	spawnCoordx = 0
 	spawnCoordy = 0
