@@ -2,6 +2,7 @@ extends Control
 var skip = false
 
 func _ready() -> void:
+	Global.world_type = "transition"
 	skip = true
 	if Global.multiplayers:
 		$"2p msg".visible = true

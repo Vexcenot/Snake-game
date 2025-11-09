@@ -55,7 +55,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("Sprite2D:z_index")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
@@ -246,7 +246,7 @@ scale = Vector2(0.795498, 1.1554983)
 shape = SubResource("RectangleShape2D_sxb1m")
 
 [node name="Sprite2D" parent="." instance=ExtResource("2_ldr7d")]
-z_index = 1
+z_index = 2
 frame = 2
 
 [node name="Head Area" type="Area2D" parent="."]

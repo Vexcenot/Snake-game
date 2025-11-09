@@ -8,7 +8,9 @@ var overworldFast = preload("res://sounds/fast overworld.wav")
 var underworldFast = preload("res://sounds/fast underworld.wav")
 var invincibleFast = preload("res://sounds/fast invincible.wav")
 var die = preload("res://sounds/Die.wav")
-
+var undercoin = preload("res://sprite/under coin top ui.png")
+var overcoin = preload("res://sprite/coin top ui.png")
+var transcoin = preload("res://sprite/trans coin.png")
 
 #pauses game
 func _input(event):
@@ -29,14 +31,17 @@ func unpause():
 	Global.paused = false
 	Global.timeLive = true
 	$"pause sound".play()
-	
-	
-	
-	
 
 
 #timer
 func _process(delta: float) -> void:
+	if Global.world_type == "transition":
+		$CanvasLayer/HBoxContainer/COINS/CoinTopUi.texture = transcoin
+	elif Global.world_type == "underground":
+		$CanvasLayer/HBoxContainer/COINS/CoinTopUi.texture = undercoin
+	else:
+		$CanvasLayer/HBoxContainer/COINS/CoinTopUi.texture = overcoin
+		
 	if Global.purgatory:
 		$"BG music".volume_db = -80
 #music handler

@@ -2,6 +2,7 @@ extends Control
 var skip = false
 
 func _ready() -> void:
+	Global.world_type = "transition"
 	if Global.purgatory:
 		$ColorRect2.visible = true
 	#Global.world_type = "transition"
