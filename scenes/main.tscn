@@ -278,3 +278,19 @@ text = "but you are already dead."
 stream = ExtResource("26_2wyq8")
 volume_db = -4.725
 pitch_scale = 0.3
+
+[node name="coin" parent="." instance=ExtResource("8_fs55x")]
+visible = false
+position = Vector2(1416, 231)
+
+[node name="coin2" parent="." instance=ExtResource("8_fs55x")]
+visible = false
+position = Vector2(1416, 231)
+
+[node name="coin3" parent="." instance=ExtResource("8_fs55x")]
+visible = false
+position = Vector2(1416, 231)
+
+[node name="coin4" parent="." instance=ExtResource("8_fs55x")]
+visible = false
+position = Vector2(1416, 231)
