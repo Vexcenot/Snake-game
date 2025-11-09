@@ -54,7 +54,8 @@ var hud
 var debug : bool = false
 var topScore = 0 #dont reset
 var purgatory : bool = false
-
+var eaten : int = 0
+var snake_speed = 0.3
 
 func _process(delta: float) -> void:
 	#print(score)
@@ -62,6 +63,10 @@ func _process(delta: float) -> void:
 		playerComboTimer -= 1 * delta
 	if playerComboTimer <= 0:
 		playerCombo = 0
+	if eaten >= 3:
+		eaten = 0
+		snake_speed -= 0.02
+		
 
 func reset():
 	lowTime = false

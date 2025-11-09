@@ -37,6 +37,7 @@ func unpause():
 func _process(delta: float) -> void:
 	if Global.world_type == "transition":
 		$CanvasLayer/HBoxContainer/COINS/CoinTopUi.texture = transcoin
+		$"BG music".stop()
 	elif Global.world_type == "underground":
 		$CanvasLayer/HBoxContainer/COINS/CoinTopUi.texture = undercoin
 	else:

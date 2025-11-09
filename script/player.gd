@@ -15,7 +15,7 @@ var snake_speed = 0.3 #adjusts speed of snake I like 0.3
 var snake_length = 2 + Global.bonus_length
 var direction = Vector2.ZERO
 var timer = 100
-var final_time = snake_speed
+var final_time = Global.snake_speed
 var move_distance = 16
 var turn_positions = []  # Stores turn positions and directions
 var eat_positions = []  # Stores eat positions and directions
@@ -211,6 +211,11 @@ func eat():
 		eatAnim = true
 		pending_tail_segment += 1
 		eat_positions.push_front(global_position) #adds "full" sprite to tail.
+		Global.eaten += 1
+		
+#func speedup():
+	#if Global.eaten += 1:
+		
 
 #function that spawns tails
 func spawn_tail_segment():
@@ -583,10 +588,9 @@ func sprinting():
 	if move_ready == true:
 		if Input.is_action_pressed("k_shift"):
 			stopInsta = true
-			#final_time = snake_speed*0.3
 			final_time = 0.02
 		else:
-			final_time = snake_speed
+			final_time = Global.snake_speed
 
 func update_sprite_orientation():
 	if ignore_turn == false:
@@ -646,7 +650,6 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		die()
 	if area.name == "brick_area" and Global.snake_status != "small":
 		Global.eatable += 1
-		print("fuck")
 	if area.name == "enemy" and Global.snake_status != "small":
 		Global.eatable += 1
 	if area.name == "coin_area":
@@ -737,7 +740,7 @@ func pause_move():
 func resume_move():
 	hurting = false
 	move_ready = true
-	final_time = snake_speed
+	final_time = Global.snake_speed
 	invincible = false
 
 #win conditions when touching flag pole. position pole in way that snake head will always be inside it & snake head doesnt by pass it.

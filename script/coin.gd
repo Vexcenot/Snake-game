@@ -30,9 +30,7 @@ func _on_coin_area_area_entered(area: Area2D) -> void:
 		collected = true
 		$Coins.visible = false
 		$coin_sound.play()
-		print("poo")
 	if area.name == "kill":
-		print("balls ")
 		$AnimationPlayer.play("collect")
 
 
