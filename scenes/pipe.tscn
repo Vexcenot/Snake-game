@@ -13,6 +13,7 @@ size = Vector2(20, 12)
 size = Vector2(3.975852, 63)
 
 [node name="pipe" type="Node2D"]
+z_index = 1
 position = Vector2(43, 73)
 script = ExtResource("1_78010")
 
