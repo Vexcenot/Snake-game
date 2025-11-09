@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=31 format=4 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Script" uid="uid://33wsmjudqgvw" path="res://scenes/main.gd" id="1_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
@@ -23,6 +23,9 @@
 [ext_resource type="PackedScene" uid="uid://d24yg48cmuww3" path="res://scenes/coin block.tscn" id="20_yc10j"]
 [ext_resource type="Script" uid="uid://mdevubq4s10" path="res://scenes/hud.gd" id="22_pm3ni"]
 [ext_resource type="PackedScene" uid="uid://mt2ylxx61b70" path="res://scenes/head2.tscn" id="23_pm3ni"]
+[ext_resource type="Script" uid="uid://bvhscx83oy37b" path="res://scenes/lol.gd" id="24_y6deb"]
+[ext_resource type="FontFile" uid="uid://cvv5f6lv4eikk" path="res://super-mario.otf" id="25_og1vs"]
+[ext_resource type="AudioStream" uid="uid://b35th5mfsxiw7" path="res://sounds/low.mp3" id="26_2wyq8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dp3eg"]
 texture = ExtResource("17_muem4")
@@ -141,6 +144,7 @@ position = Vector2(1688, 240)
 texture = ExtResource("1_h5eht")
 
 [node name="camera_system" parent="level/lvl" instance=ExtResource("8_85g3d")]
+visible = false
 
 [node name="question block3" parent="level/lvl" instance=ExtResource("6_06g6w")]
 position = Vector2(264, 152)
@@ -243,3 +247,34 @@ position = Vector2(624, 224)
 
 [node name="koopa" parent="level/lvl" instance=ExtResource("13_a8y0u")]
 position = Vector2(536, 208)
+
+[node name="lol" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("24_y6deb")
+
+[node name="ColorRect" type="ColorRect" parent="lol"]
+layout_mode = 0
+offset_left = 2392.0
+offset_top = -108.0
+offset_right = 2432.0
+offset_bottom = -68.0
+scale = Vector2(12.503791, 12.503791)
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="lol"]
+layout_mode = 0
+offset_left = 2523.0
+offset_top = 75.0
+offset_right = 2725.0
+offset_bottom = 98.0
+theme_override_fonts/font = ExtResource("25_og1vs")
+theme_override_font_sizes/font_size = 8
+text = "but you are already dead."
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="lol"]
+stream = ExtResource("26_2wyq8")
+volume_db = -4.725
+pitch_scale = 0.3

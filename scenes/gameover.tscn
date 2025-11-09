@@ -94,19 +94,11 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="gameover"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("1_4nh4k")
 theme_override_font_sizes/font_size = 8
-text = "
-
-
-
-
-
-
-
-
-
-GAME OVER"
+text = "GAME OVER"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -121,19 +113,11 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="timeup"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
 theme_override_fonts/font = ExtResource("1_4nh4k")
 theme_override_font_sizes/font_size = 8
-text = "
-
-
-
-
-
-
-
-
-
-TIME UP"
+text = "TIME UP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -146,5 +130,13 @@ libraries = {
 &"": SubResource("AnimationLibrary_mt7yr")
 }
 autoplay = "timeup"
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(6.6336174, 6.6336174)
+color = Color(0, 0, 0, 1)
 
 [connection signal="finished" from="AudioStreamPlayer" to="." method="_on_audio_stream_player_finished"]

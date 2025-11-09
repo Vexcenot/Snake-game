@@ -37,7 +37,8 @@ func unpause():
 
 #timer
 func _process(delta: float) -> void:
-
+	if Global.purgatory:
+		$"BG music".volume_db = -80
 #music handler
 	if Global.playMusic == true and Global.title == false:
 		Global.playMusic = false

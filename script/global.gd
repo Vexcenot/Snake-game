@@ -53,6 +53,7 @@ var lowTime : bool = false
 var hud
 var debug : bool = false
 var topScore = 0 #dont reset
+var purgatory : bool = false
 
 
 func _process(delta: float) -> void:
@@ -69,7 +70,7 @@ func reset():
 	timeStart = false
 	timeLive = false
 	timeUp = false
-	title = false
+	title = true
 	multiplayers = false
 	snake_status = "small"
 	direction = "left"
@@ -109,6 +110,7 @@ func resetAll():
 	snakePosX = 0
 	checkPointable = false
 	checkPointable2 = false
+	purgatory = false
 
 func die(): #make it load gameover first
 	get_tree().paused = false
