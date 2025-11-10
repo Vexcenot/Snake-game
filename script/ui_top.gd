@@ -35,6 +35,10 @@ func unpause():
 
 #timer
 func _process(delta: float) -> void:
+	if Global.resetCoinAnim:
+		Global.resetCoinAnim = false
+		$CanvasLayer/HBoxContainer/COINS/AnimationPlayer.stop()
+		$CanvasLayer/HBoxContainer/COINS/AnimationPlayer.play("idle")
 	if Global.world_type == "transition":
 		$CanvasLayer/HBoxContainer/COINS/CoinTopUi.texture = transcoin
 		$"BG music".stop()

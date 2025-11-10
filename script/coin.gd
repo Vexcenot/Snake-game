@@ -27,13 +27,14 @@ func block_collect():
 #get collected if touched by snakes
 func _on_coin_area_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area" and not collected:
+		Global.score += 200
 		collected = true
 		$Coins.visible = false
 		$coin_sound.play()
 	if area.name == "kill":
 		$AnimationPlayer.play("collect")
 
-
+#deletes coin
 func _on_coin_sound_finished() -> void:
 	queue_free()
 

@@ -56,6 +56,7 @@ var topScore = 0 #dont reset
 var purgatory : bool = false
 var eaten : int = 0
 var snake_speed = 0.3
+var resetCoinAnim = false
 
 func _process(delta: float) -> void:
 	#print(score)

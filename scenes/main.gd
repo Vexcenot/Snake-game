@@ -9,3 +9,4 @@ func _ready() -> void:
 	Global.loadedWorld = "res://scenes/main.tscn"
 	Global.music = "overworld"
 	Global.playMusic = true
+	Global.resetCoinAnim = true
