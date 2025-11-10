@@ -24,6 +24,7 @@ func _on__player_pressed2() -> void:
 
 func start():
 	Global.score = 0
+	Global.coin = 0
 	get_tree().change_scene_to_file("res://scenes/lvltrans.tscn")
 	
 

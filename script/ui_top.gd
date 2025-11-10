@@ -90,7 +90,7 @@ func _process(delta: float) -> void:
 		Global.timeUp = true
 	$CanvasLayer/HBoxContainer/TIME/counter.text = str(int(Global.timer)).pad_zeros(3)
 	$CanvasLayer/HBoxContainer/POINTS/counter.text = str(Global.score).pad_zeros(6)
-
+	$CanvasLayer/HBoxContainer/COINS/HBoxContainer/counter.text = str(int(Global.coin)).pad_zeros(2)
 
 func _on_warning_timer_finished() -> void:
 	Global.playMusic = true

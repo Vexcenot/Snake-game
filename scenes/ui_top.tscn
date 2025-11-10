@@ -137,7 +137,7 @@ theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
 text = "x"
 
-[node name="Label3" type="Label" parent="CanvasLayer/HBoxContainer/COINS/HBoxContainer"]
+[node name="counter" type="Label" parent="CanvasLayer/HBoxContainer/COINS/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
