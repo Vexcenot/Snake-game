@@ -53,4 +53,5 @@ func _on_bottom_check_area_exited(area: Area2D) -> void:
 
 func _on_brick_area_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area" and Global.snake_status != "small":
+		Global.score += 50
 		queue_free()

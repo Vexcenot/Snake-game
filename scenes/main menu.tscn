@@ -95,11 +95,22 @@ icon = ExtResource("4_p7vwb")
 [node name="Panel" type="Panel" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="top-" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_gdt2y")
 theme_override_font_sizes/font_size = 8
-text = " TOP- 000000"
+text = " TOP-"
+horizontal_alignment = 1
+
+[node name="score" type="Label" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_gdt2y")
+theme_override_font_sizes/font_size = 8
+text = "000000"
 horizontal_alignment = 1
 
 [node name="logotitle" type="Sprite2D" parent="CanvasLayer"]

@@ -187,7 +187,6 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="tail_collision_shape" type="CollisionShape2D" parent="brick"]
-position = Vector2(0, 1.0000049)
 scale = Vector2(0.799762, 0.799762)
 shape = SubResource("RectangleShape2D_frb71")
 
