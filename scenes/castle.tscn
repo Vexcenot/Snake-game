@@ -11,22 +11,6 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bly62"]
 size = Vector2(16, 32)
 
-[sub_resource type="Animation" id="Animation_lbl1g"]
-resource_name = "win"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CastleFlag:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, -66.945), Vector2(0, -88)]
-}
-
 [sub_resource type="Animation" id="Animation_uplxu"]
 length = 0.001
 tracks/0/type = "value"
@@ -42,6 +26,22 @@ tracks/0/keys = {
 "values": [Vector2(0, -68)]
 }
 
+[sub_resource type="Animation" id="Animation_lbl1g"]
+resource_name = "win"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CastleFlag:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -66.945), Vector2(0, -88)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_feow2"]
 _data = {
 &"RESET": SubResource("Animation_uplxu"),
@@ -51,6 +51,9 @@ _data = {
 [node name="castle" type="Node2D"]
 position = Vector2(96, 8)
 script = ExtResource("1_rjj26")
+
+[node name="timer down" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_7pkwf")
 
 [node name="20592Png" type="Sprite2D" parent="."]
 visible = false
@@ -78,9 +81,6 @@ frame = 5
 
 [node name="Endpost" parent="." instance=ExtResource("5_7pkwf")]
 position = Vector2(-87, -6)
-
-[node name="timer down" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_7pkwf")
 
 [node name="CastleFlag" type="Sprite2D" parent="."]
 z_index = -1

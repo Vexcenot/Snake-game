@@ -697,8 +697,6 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 		move_exit = false
 	if area.name == "entrance" and Global.winning == true or area.name == "pipe_enter":
 		position.y = 9999
-		await get_tree().create_timer(3).timeout
-		get_tree().change_scene_to_file("res://scenes/win screen.tscn")
 	if area.name == "pipe_enter":
 		await get_tree().create_timer(1).timeout
 		invincible = false

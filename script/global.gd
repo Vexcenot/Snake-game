@@ -43,7 +43,7 @@ var timeLive : bool = false
 var timeStart : bool = false
 var demo : bool = false
 var pausable : bool = false
-var ogTime = 4 #dont need rest
+var ogTime = 101 #dont need rest
 var timer = ogTime #dont need rest
 var score = 0 #dont reset until new game
 var playerComboTimer = 0
@@ -59,6 +59,7 @@ var snake_speed : float = 0.3
 var resetCoinAnim : bool = false #resets in world load
 var coin : int = 0 #resets in menu script
 var timerDown : bool = false
+var winEnd : bool = false
 
 func _process(delta: float) -> void:
 	#print(score)
@@ -72,8 +73,10 @@ func _process(delta: float) -> void:
 		
 
 func reset():
+	winEnd = false
 	timerDown = false
 	lowTime = false
+	lowTimer = false
 	pausable = false
 	demo = false
 	timeStart = false

@@ -753,7 +753,7 @@ func win():
 	xLimit = "none"
 	limit_move = "none"
 	pause_move()
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(1.1).timeout
 	resume_move()
 	if move_exit == true:
 		move_exit2 = true

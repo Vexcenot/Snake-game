@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://cdbmv0psdbx0l"]
+[gd_scene load_steps=16 format=3 uid="uid://cdbmv0psdbx0l"]
 
 [ext_resource type="Script" uid="uid://dfgnrao7h28wa" path="res://script/endpost.gd" id="1_5o4dw"]
 [ext_resource type="Texture2D" uid="uid://v723k288mi0g" path="res://sprite/flag pole.png" id="1_nypt7"]
 [ext_resource type="PackedScene" uid="uid://d0yh13wsoj6jf" path="res://scenes/flag.tscn" id="2_eyagw"]
 [ext_resource type="Texture2D" uid="uid://i70ofguicb50" path="res://sprite/brick particles.png" id="3_e08ka"]
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="4_rncqr"]
+[ext_resource type="FontFile" uid="uid://cvv5f6lv4eikk" path="res://super-mario.otf" id="6_xn5dt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8p4uc"]
 size = Vector2(3.91512, 152.343)
@@ -29,6 +30,42 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(-9, -2)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(40, 23)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-6, -150)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Label:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_rncqr"]
 resource_name = "brick down"
@@ -47,7 +84,43 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_qetf1"]
 resource_name = "flagdown"
-length = 1.13
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-6, -30), Vector2(-6, -146)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Label:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b5ljr"]
 _data = {
@@ -162,9 +235,24 @@ scale = Vector2(2.6917183, 1.6726081)
 shape = SubResource("RectangleShape2D_xn5dt")
 debug_color = Color(0.6585092, 0.38110954, 0.8835248, 0.41960785)
 
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -6.0
+offset_top = -150.0
+offset_right = 34.0
+offset_bottom = -127.0
+theme_override_fonts/font = ExtResource("6_xn5dt")
+theme_override_font_sizes/font_size = 8
+text = "100"
+
 [connection signal="area_entered" from="winarea" to="." method="_on_winarea_area_entered"]
 [connection signal="body_entered" from="winarea" to="." method="_on_winarea_body_entered"]
 [connection signal="area_entered" from="endpost" to="." method="_on_endpost_area_entered"]
 [connection signal="area_exited" from="endpost" to="." method="_on_endpost_area_exited"]
 [connection signal="area_entered" from="ball" to="." method="_on_ball_area_entered"]
 [connection signal="area_exited" from="ball" to="." method="_on_ball_area_exited"]
+[connection signal="area_entered" from="5000" to="." method="_on__area_entered5k"]
+[connection signal="area_entered" from="2000" to="." method="_on__area_entered2k"]
+[connection signal="area_entered" from="800" to="." method="_on__area_entered8c"]
+[connection signal="area_entered" from="400" to="." method="_on__area_entered4c"]
+[connection signal="area_entered" from="100" to="." method="_on__area_entered1c"]

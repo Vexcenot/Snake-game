@@ -116,7 +116,9 @@ func _on_warning_timer_finished() -> void:
 	Global.playMusic = true
 	$"BG music".volume_db = 0
 
-
 func _on_bg_music_finished() -> void:
-	if lowTime:
+	if lowTime and Global.winning == false:
+		lowTime = false
 		Global.playMusic = true
+	elif Global.winning:
+		Global.winEnd = true
