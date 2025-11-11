@@ -97,6 +97,7 @@ stream = ExtResource("1_64bwf")
 autoplay = true
 
 [node name="1p msg" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

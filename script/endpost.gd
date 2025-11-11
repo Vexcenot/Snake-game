@@ -4,6 +4,8 @@ var shit = false
 
 func _on_winarea_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":
+		Global.playMusic = true
+		Global.music = "flag"
 		$brick/brick.set_collision_layer_value(1, false)
 		if Global.direction == "left" and shit == true:
 			$AnimationPlayer.play("brick down")

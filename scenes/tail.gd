@@ -8,6 +8,8 @@ func pausing():
 		set_process_mode(PROCESS_MODE_ALWAYS)
 		
 func _process(delta: float) -> void:
+	if Global.dead:
+		z_index = 400
 	#if Global.multiplayers == false:
 		#queue_free()
 	pausing()

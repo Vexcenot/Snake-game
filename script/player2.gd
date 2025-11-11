@@ -510,6 +510,7 @@ func absolute_stop():
 		final_time == 99999
 
 func die():
+	z_index = 400
 	if Global.winning == false:
 		if Global.checkPointable2:
 			Global.checkPointable = true

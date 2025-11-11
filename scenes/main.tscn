@@ -131,6 +131,9 @@ texture = ExtResource("2_muem4")
 layer = 2
 follow_viewport_enabled = true
 
+[node name="castle" parent="level" instance=ExtResource("10_ya4ey")]
+position = Vector2(232, 208)
+
 [node name="lvl" type="Node2D" parent="level"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="level/lvl"]

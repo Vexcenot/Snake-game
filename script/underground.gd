@@ -5,3 +5,4 @@ func _ready() -> void:
 	Global.music = "underground"
 	Global.playMusic = true
 	Global.timeLive = true
+	Global.resetCoinAnim = true

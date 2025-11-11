@@ -11,6 +11,10 @@ var die = preload("res://sounds/Die.wav")
 var undercoin = preload("res://sprite/under coin top ui.png")
 var overcoin = preload("res://sprite/coin top ui.png")
 var transcoin = preload("res://sprite/trans coin.png")
+var flag = preload("res://sounds/win flag.wav")
+var warning = preload("res://sounds/warning.wav")
+var end = false
+var lowTime = false
 
 #pauses game
 func _input(event):
@@ -31,10 +35,18 @@ func unpause():
 	Global.paused = false
 	Global.timeLive = true
 	$"pause sound".play()
-
-
 #timer
 func _process(delta: float) -> void:
+	#if Global.timerDown and Global.timer > 0:
+		#Global.timer -= 1
+		#Global.score += 50
+		#$"timer down".play()
+	#if Global.timer == 0:
+		#Global.timerDown = false
+		#await get_tree().create_timer(2.36).timeout
+		#
+		#
+		#get_tree().change_scene_to_file("res://scenes/win screen.tscn")
 	if Global.resetCoinAnim:
 		Global.resetCoinAnim = false
 		$CanvasLayer/HBoxContainer/COINS/AnimationPlayer.stop()
@@ -69,8 +81,14 @@ func _process(delta: float) -> void:
 			Global.music = store
 		elif Global.music == "die":
 			$"BG music".stream = die
+		elif Global.music == "flag":
+			$"BG music".stream = flag
 		elif Global.music == "none":
 			$"BG music".stop()
+		elif Global.music == "warning":
+			$"BG music".stream = warning
+			lowTime = true
+			Global.music = store
 
 		$"BG music".play()
 	if Global.paused:
@@ -81,11 +99,13 @@ func _process(delta: float) -> void:
 		$"BG music".stream_paused = false
 		
 	#WHEN ON LOW TIMER 
-	if Global.timer <= 100 and Global.lowTime == false and Global.title == false:
-		$"BG music".volume_db = -80
+	if Global.timer <= 100 and Global.lowTime == false and Global.title == false and Global.winning == false:
+		#$"BG music".volume_db = -80
 		Global.lowTime = true
-		$"warning timer".play()
-	if Global.timer <= 0:
+		#$"warning timer".play()
+		Global.music = "warning"
+		Global.playMusic = true
+	if Global.timer <= 0 and Global.winning == false and Global.timerDown == false:
 		await get_tree().create_timer(1).timeout
 		Global.timeUp = true
 	$CanvasLayer/HBoxContainer/TIME/counter.text = str(int(Global.timer)).pad_zeros(3)
@@ -95,3 +115,8 @@ func _process(delta: float) -> void:
 func _on_warning_timer_finished() -> void:
 	Global.playMusic = true
 	$"BG music".volume_db = 0
+
+
+func _on_bg_music_finished() -> void:
+	if lowTime:
+		Global.playMusic = true

@@ -111,6 +111,9 @@ process_mode = 3
 scale = Vector2(2, 2)
 script = ExtResource("1_tf7m7")
 
+[node name="Sprite2D" parent="." instance=ExtResource("2_pa3ch")]
+position = Vector2(0, -1)
+
 [node name="brick" type="StaticBody2D" parent="."]
 collision_layer = 3
 collision_mask = 3
@@ -132,9 +135,5 @@ position = Vector2(-1.0356e-08, 2.98023e-08)
 rotation = -3.14159
 scale = Vector2(0.453191, 0.453191)
 shape = SubResource("RectangleShape2D_wne8n")
-
-[node name="Sprite2D" parent="." instance=ExtResource("2_pa3ch")]
-z_index = 1
-position = Vector2(0, -1)
 
 [connection signal="area_entered" from="tail area" to="." method="_on_tail_area_area_entered"]

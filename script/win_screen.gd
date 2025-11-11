@@ -2,6 +2,7 @@ extends Control
 var skip = false
 
 func _ready() -> void:
+	Global.timer = Global.ogTime
 	Global.world_type = "transition"
 	skip = true
 	if Global.multiplayers:

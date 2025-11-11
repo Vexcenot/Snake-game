@@ -37,13 +37,13 @@ var music : String = "none"
 var dead : bool = false
 var play = false
 var multiplayers : bool = false #remember to false this
-var title : bool = true #remember to true this ##################################################
+var title : bool = false #remember to true this ##################################################
 var timeUp : bool = false
 var timeLive : bool = false
 var timeStart : bool = false
 var demo : bool = false
 var pausable : bool = false
-var ogTime = 400 #dont need rest
+var ogTime = 4 #dont need rest
 var timer = ogTime #dont need rest
 var score = 0 #dont reset until new game
 var playerComboTimer = 0
@@ -55,9 +55,10 @@ var debug : bool = false
 var topScore = 0 #dont reset
 var purgatory : bool = false
 var eaten : int = 0
-var snake_speed = 0.3
-var resetCoinAnim = false
-var coin = 0
+var snake_speed : float = 0.3
+var resetCoinAnim : bool = false #resets in world load
+var coin : int = 0 #resets in menu script
+var timerDown : bool = false
 
 func _process(delta: float) -> void:
 	#print(score)
@@ -71,6 +72,7 @@ func _process(delta: float) -> void:
 		
 
 func reset():
+	timerDown = false
 	lowTime = false
 	pausable = false
 	demo = false
