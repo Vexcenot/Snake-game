@@ -19,12 +19,10 @@ func _physics_process(delta: float) -> void:
 	#if stopped == false and dieing == false:
 	velocity.x = speed
 	move_and_slide()
-		
 
 #func _ready():
 	#spawning()
 func _ready() -> void:
-	
 	#make it not do this when moving
 	if turn2turtle:
 		$AnimationPlayer.play("transform")
@@ -43,7 +41,6 @@ func _on_left_side_body_entered(body: Node2D) -> void:
 		speed = speeder
 		$AnimationPlayer.play("RESET")
 
-
 func _on_right_side_body_entered(body: Node2D) -> void:
 	if body.name == "Snek":
 		position.x -= 10
@@ -57,7 +54,6 @@ func _on_right_side_body_entered(body: Node2D) -> void:
 func die():
 	$sprite/AnimationPlayer.play("die")
 	speed = 0
-
 
 #play sprite animation sliding up and enabling movement
 func spawning():
@@ -132,7 +128,7 @@ func _on_shell_area_entered(area: Area2D) -> void:
 		if Global.playerCombo < 3:
 			Global.playerCombo = 2
 		spawn_scoreSnake()
-		queue_free()
+		#queue_free()
 		
 
 func _on_enemy_2_area_entered(area: Area2D) -> void:

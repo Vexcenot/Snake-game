@@ -14,7 +14,7 @@ func _ready() -> void:
 	
 	await get_tree().create_timer(1.1).timeout
 	skip = true
-	await get_tree().create_timer(50).timeout
+	await get_tree().create_timer(5).timeout
 	next()
 	
 
