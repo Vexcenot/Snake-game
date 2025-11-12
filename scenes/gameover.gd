@@ -12,9 +12,9 @@ func _ready() -> void:
 	else:
 		$gameover.visible = true
 	
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(1.1).timeout
 	skip = true
-	await get_tree().create_timer(5).timeout
+	await get_tree().create_timer(50).timeout
 	next()
 	
 

@@ -326,7 +326,6 @@ scale = Vector2(34.64984, 13.776627)
 color = Color(0, 0, 0, 1)
 
 [node name="Sprite2D" parent="." instance=ExtResource("8_g4rqf")]
-z_index = 2
 position = Vector2(0, -1)
 frame = 2
 

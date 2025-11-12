@@ -7,7 +7,6 @@ func _on_entrance_area_entered(area: Area2D) -> void:
 		$CastleEnd.visible = true
 		Global.timerDown = true
 		open = false
-
 		
 func _process(delta: float) -> void:
 	if Global.timerDown and Global.timer > 0:
@@ -20,7 +19,6 @@ func _process(delta: float) -> void:
 	if Global.winEnd and active == false:
 		get_tree().change_scene_to_file("res://scenes/win screen.tscn")
 		set_process(false) 
-		
 
 func change_to_win_scene():
 	get_tree().change_scene_to_file("res://scenes/win screen.tscn")

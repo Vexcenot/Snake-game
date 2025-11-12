@@ -91,18 +91,13 @@ size = Vector2(23.2083, 26)
 [node name="Main" type="Node"]
 script = ExtResource("1_dp3eg")
 
+[node name="mainmenu" parent="." instance=ExtResource("14_a8y0u")]
+
 [node name="BG color" type="ColorRect" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(85, 6.08)
 color = Color(0.57254905, 0.5647059, 1, 1)
-
-[node name="hud" type="CanvasLayer" parent="."]
-layer = 5
-follow_viewport_enabled = true
-script = ExtResource("22_pm3ni")
-
-[node name="mainmenu" parent="hud" instance=ExtResource("14_a8y0u")]
 
 [node name="bg" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
@@ -297,3 +292,8 @@ position = Vector2(1416, 231)
 [node name="coin4" parent="." instance=ExtResource("8_fs55x")]
 visible = false
 position = Vector2(1416, 231)
+
+[node name="hud" type="CanvasLayer" parent="."]
+layer = 5
+follow_viewport_enabled = true
+script = ExtResource("22_pm3ni")

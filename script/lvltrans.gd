@@ -1,5 +1,5 @@
 extends Control
-
+var skip = false
 
 func _ready() -> void:
 	if Global.multiplayers:
@@ -9,5 +9,12 @@ func _ready() -> void:
 	Global.world_type = "transition"
 	Global.timeLive = false
 	await get_tree().create_timer(2.3).timeout
+	switch()
+
+#func _input(event):
+	#switch()
+
+
+func switch():
 	Global.title = false
 	get_tree().change_scene_to_file("res://scenes/main.tscn")

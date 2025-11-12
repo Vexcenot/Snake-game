@@ -8,12 +8,10 @@ var collected = false
 func _ready() -> void:
 	block_collect()
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if Global.world_type == "underground":
 		$Coins.texture = underground_sprite
-
 
 #runs when coin spawns from block
 func block_collect():
