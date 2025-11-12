@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2wqyaoh8sjb2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rxy3k"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="moveDown" type="Area2D" parent="."]
+rotation = 3.1434016
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="moveDown"]
+position = Vector2(1.1641532e-10, 0)
+scale = Vector2(0.77376425, 0.77376425)
+shape = SubResource("RectangleShape2D_rxy3k")
+debug_color = Color(0.6917638, 0.31311613, 0.9596898, 0.41960785)
+
+[node name="RayCast2D" type="RayCast2D" parent="moveDown/CollisionShape2D"]
+position = Vector2(0, 9.84849)
+scale = Vector2(3.1781127, -0.4521717)
+target_position = Vector2(0, 33.213097)

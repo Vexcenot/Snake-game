@@ -64,6 +64,7 @@ var next_move = "the next move the snake will make"
 var weakening = false
 var updateCam = 2
 var timeDed = false
+var demo = false
 
 func _ready():
 	if Global.multiplayers and luigi:
@@ -75,6 +76,12 @@ func _ready():
 	update_camera()
 	await get_tree().create_timer(0.1).timeout
 	$Camera/ColorRect.visible = false
+	if Global.title:
+		await get_tree().create_timer(1).timeout
+		Global.demo = true
+		move_orders.append("right")
+		xLimit = "none"
+		limit_move = "none"
 
 
 func _process(delta):
@@ -639,8 +646,14 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		#await get_tree().create_timer(0.1).timeout
 		if powering == false:
 			hurt()
-			
-#this causes crash apparently when turning koopa into shell and getting hit
+	if area.name == "moveUp" and Global.demo:
+		move_orders.append("up")
+	if area.name == "moveDown" and Global.demo:
+		move_orders.append("down")
+	if area.name == "moveLeft" and Global.demo:
+		move_orders.append("left")
+	if area.name == "moveRight" and Global.demo:
+		move_orders.append("right")
 	if area.name == "enemyKoopa" and Global.snake_status == "small" and Global.direction != "down":
 		
 		await get_tree().create_timer(0.1).timeout

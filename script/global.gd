@@ -61,6 +61,7 @@ var coin : int = 0 #resets in menu script
 var timerDown : bool = false
 var winEnd : bool = false
 
+
 func _process(delta: float) -> void:
 	#print(score)
 	if playerComboTimer > 0:
