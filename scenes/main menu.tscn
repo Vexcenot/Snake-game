@@ -69,8 +69,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_7dvkv")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_8dubc")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_p7vwb")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ktti3")
-toggle_mode = true
-keep_pressed_outside = true
+button_mask = 0
 text = "1 PLAYER GAME"
 icon = ExtResource("4_p7vwb")
 
@@ -89,6 +88,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_km7eu")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_5a6dn")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_ljdde")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_oy07q")
+button_mask = 0
 text = "2 PLAYER GAME"
 icon = ExtResource("4_p7vwb")
 
