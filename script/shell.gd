@@ -118,7 +118,6 @@ func _on_top_area_entered(area: Area2D) -> void:
 func _on_top_area_exited(area: Area2D) -> void:
 	if area.name == "Head Area":
 		ignore = false
-		
 
 func _on_shell_area_entered(area: Area2D) -> void:
 	if area.name == "delete":
@@ -128,8 +127,8 @@ func _on_shell_area_entered(area: Area2D) -> void:
 		if Global.playerCombo < 3:
 			Global.playerCombo = 2
 		spawn_scoreSnake()
-		#queue_free()
-		
+		if bounced >= 10:
+			queue_free()
 
 func _on_enemy_2_area_entered(area: Area2D) -> void:
 	if area.name == "kill":

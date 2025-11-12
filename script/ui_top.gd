@@ -16,6 +16,7 @@ var warning = preload("res://sounds/warning.wav")
 var end = false
 var lowTime = false
 
+
 #pauses game
 func _input(event):
 	if event.is_action_pressed("esc") and Global.title == false:
@@ -37,6 +38,10 @@ func unpause():
 	$"pause sound".play()
 #timer
 func _process(delta: float) -> void:
+	if Global.world_type == "transition":
+		$CanvasLayer/HBoxContainer/TIME/counter.visible = false
+	else:
+		$CanvasLayer/HBoxContainer/TIME/counter.visible = true
 	if Global.multiplayers:
 		$CanvasLayer/HBoxContainer/POINTS/name.text = str("SNEKS")
 	else:

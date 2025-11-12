@@ -2,6 +2,7 @@ extends Control
 var skip = false
 
 func _ready() -> void:
+	skip = true
 	Global.world_type = "transition"
 	if Global.purgatory:
 		$ColorRect2.visible = true
@@ -11,9 +12,6 @@ func _ready() -> void:
 		$timeup.visible = true
 	else:
 		$gameover.visible = true
-	
-	await get_tree().create_timer(1.1).timeout
-	skip = true
 	await get_tree().create_timer(5).timeout
 	next()
 	
