@@ -58,7 +58,7 @@ func spawn_score(score):
 #deletes when being touched by head
 func _on_mushroom_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":
-		spawn_score(5)
+		#spawn_score(5)
 		queue_free()
 
 

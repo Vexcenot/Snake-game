@@ -292,6 +292,3 @@ position = Vector2(1416, 231)
 [node name="hud" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 script = ExtResource("22_pm3ni")
-
-[node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
-position = Vector2(55, 204)

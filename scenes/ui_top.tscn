@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbcvw8oku7npa"]
+[gd_scene load_steps=11 format=3 uid="uid://dbcvw8oku7npa"]
 
 [ext_resource type="Script" uid="uid://d0negxyl6jyrh" path="res://script/ui_top.gd" id="1_fx8tn"]
 [ext_resource type="FontFile" uid="uid://cvv5f6lv4eikk" path="res://super-mario.otf" id="2_x2jp4"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://wj622osutpu5" path="res://sounds/warning.wav" id="3_mfc1r"]
 [ext_resource type="AudioStream" uid="uid://vdj2lhwx8lg2" path="res://sounds/timer down.wav" id="4_8cppg"]
 [ext_resource type="Texture2D" uid="uid://b2wt431fesi7n" path="res://sprite/coin top ui.png" id="5_k6t77"]
+[ext_resource type="Texture2D" uid="uid://b2m8263v1aep3" path="res://sprite/x.png" id="7_lhryq"]
 
 [sub_resource type="Animation" id="Animation_8cppg"]
 length = 0.001
@@ -100,59 +101,82 @@ theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
 text = "000000"
 
-[node name="COINS" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -43.0
+offset_top = 15.0
+offset_right = 174.0
+offset_bottom = 48.0
+grow_horizontal = 2
+theme_override_constants/separation = 19
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer2"]
+visible = false
+layout_mode = 2
+
+[node name="COINS" type="VBoxContainer" parent="CanvasLayer/HBoxContainer2"]
 process_mode = 1
 layout_mode = 2
 theme_override_constants/separation = -1
 
-[node name="CoinTopUi" type="Sprite2D" parent="CanvasLayer/HBoxContainer/COINS"]
-position = Vector2(6, 12)
+[node name="CoinTopUi" type="Sprite2D" parent="CanvasLayer/HBoxContainer2/COINS"]
+position = Vector2(6, 13)
 texture = ExtResource("5_k6t77")
 hframes = 4
 frame = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/HBoxContainer/COINS"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/HBoxContainer2/COINS"]
 libraries = {
 &"": SubResource("AnimationLibrary_lhryq")
 }
 autoplay = "idle"
 
-[node name="empty" type="Label" parent="CanvasLayer/HBoxContainer/COINS"]
+[node name="empty" type="Label" parent="CanvasLayer/HBoxContainer2/COINS"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HBoxContainer/COINS"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HBoxContainer2/COINS"]
 layout_mode = 2
 
-[node name="empty space" type="Label" parent="CanvasLayer/HBoxContainer/COINS/HBoxContainer"]
+[node name="empty space" type="Label" parent="CanvasLayer/HBoxContainer2/COINS/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
 text = " "
 
-[node name="Label4" type="Label" parent="CanvasLayer/HBoxContainer/COINS/HBoxContainer"]
+[node name="X" type="Sprite2D" parent="CanvasLayer/HBoxContainer2/COINS/HBoxContainer"]
+position = Vector2(15, 5)
+texture = ExtResource("7_lhryq")
+
+[node name="Label4" type="Label" parent="CanvasLayer/HBoxContainer2/COINS/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
-theme_override_font_sizes/font_size = 8
-text = "x"
+theme_override_font_sizes/font_size = 5
+text = " "
 
-[node name="counter" type="Label" parent="CanvasLayer/HBoxContainer/COINS/HBoxContainer"]
+[node name="counter" type="Label" parent="CanvasLayer/HBoxContainer2/COINS/HBoxContainer"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
 theme_override_font_sizes/font_size = 8
 text = "00"
 
-[node name="WORLD" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+[node name="WORLD" type="VBoxContainer" parent="CanvasLayer/HBoxContainer2"]
 layout_mode = 2
 theme_override_constants/separation = -1
 
-[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/WORLD"]
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer2/WORLD"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
@@ -160,7 +184,7 @@ theme_override_font_sizes/font_size = 8
 text = "WORLD"
 horizontal_alignment = 1
 
-[node name="Label2" type="Label" parent="CanvasLayer/HBoxContainer/WORLD"]
+[node name="Label2" type="Label" parent="CanvasLayer/HBoxContainer2/WORLD"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
@@ -168,11 +192,11 @@ theme_override_font_sizes/font_size = 8
 text = "1-1"
 horizontal_alignment = 1
 
-[node name="TIME" type="VBoxContainer" parent="CanvasLayer/HBoxContainer"]
+[node name="TIME" type="VBoxContainer" parent="CanvasLayer/HBoxContainer2"]
 layout_mode = 2
 theme_override_constants/separation = -1
 
-[node name="time label" type="Label" parent="CanvasLayer/HBoxContainer/TIME"]
+[node name="time label" type="Label" parent="CanvasLayer/HBoxContainer2/TIME"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")
@@ -180,7 +204,7 @@ theme_override_font_sizes/font_size = 8
 text = "TIME"
 horizontal_alignment = 2
 
-[node name="counter" type="Label" parent="CanvasLayer/HBoxContainer/TIME"]
+[node name="counter" type="Label" parent="CanvasLayer/HBoxContainer2/TIME"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")

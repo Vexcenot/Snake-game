@@ -16,9 +16,9 @@ func _ready() -> void:
 	next()
 	
 
-func _input(event):
-	if skip:
-		next()
+#func _input(event):
+	#if skip:
+		#next()
 		
 func next():
 	Global.resetAll()

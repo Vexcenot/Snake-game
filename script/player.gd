@@ -603,6 +603,13 @@ func starEat():
 	Inv.global_position = global_position
 	pending_tail_segment += 1
 
+var point = preload("res://scenes/score.tscn")
+func spawn_score(score):
+	var spawn2 = score
+	var spawn = point.instantiate()
+	spawn.value = spawn2
+	spawn.global_position = global_position
+	Global.hud.add_child(spawn)
 #how snake when touch different areas.
 var aah = 0
 func _on_head_area_area_entered(area: Area2D) -> void:
@@ -610,6 +617,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		return
 	if area.name == "mushroom":
 		set_power("big")
+		spawn_score(5)
 	if area.name == "1up":
 		eat()#change this to custom 1up code
 	if area.name == "star":

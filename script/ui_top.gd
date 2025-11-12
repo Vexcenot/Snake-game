@@ -39,9 +39,9 @@ func unpause():
 #timer
 func _process(delta: float) -> void:
 	if Global.world_type == "transition":
-		$CanvasLayer/HBoxContainer/TIME/counter.visible = false
+		$CanvasLayer/HBoxContainer2/TIME/counter.visible = false
 	else:
-		$CanvasLayer/HBoxContainer/TIME/counter.visible = true
+		$CanvasLayer/HBoxContainer2/TIME/counter.visible = true
 	if Global.multiplayers:
 		$CanvasLayer/HBoxContainer/POINTS/name.text = str("SNEKS")
 	else:
@@ -58,15 +58,15 @@ func _process(delta: float) -> void:
 		#get_tree().change_scene_to_file("res://scenes/win screen.tscn")
 	if Global.resetCoinAnim:
 		Global.resetCoinAnim = false
-		$CanvasLayer/HBoxContainer/COINS/AnimationPlayer.stop()
-		$CanvasLayer/HBoxContainer/COINS/AnimationPlayer.play("idle")
+		$CanvasLayer/HBoxContainer2/COINS/AnimationPlayer.stop()
+		$CanvasLayer/HBoxContainer2/COINS/AnimationPlayer.play("idle")
 	if Global.world_type == "transition":
-		$CanvasLayer/HBoxContainer/COINS/CoinTopUi.texture = transcoin
+		$CanvasLayer/HBoxContainer2/COINS/CoinTopUi.texture = transcoin
 		$"BG music".stop()
 	elif Global.world_type == "underground":
-		$CanvasLayer/HBoxContainer/COINS/CoinTopUi.texture = undercoin
+		$CanvasLayer/HBoxContainer2/COINS/CoinTopUi.texture = undercoin
 	else:
-		$CanvasLayer/HBoxContainer/COINS/CoinTopUi.texture = overcoin
+		$CanvasLayer/HBoxContainer2/COINS/CoinTopUi.texture = overcoin
 		
 	if Global.purgatory:
 		$"BG music".volume_db = -80
@@ -117,9 +117,9 @@ func _process(delta: float) -> void:
 	if Global.timer <= 0 and Global.winning == false and Global.timerDown == false:
 		await get_tree().create_timer(1).timeout
 		Global.timeUp = true
-	$CanvasLayer/HBoxContainer/TIME/counter.text = str(int(Global.timer)).pad_zeros(3)
+	$CanvasLayer/HBoxContainer2/TIME/counter.text = str(int(Global.timer)).pad_zeros(3)
 	$CanvasLayer/HBoxContainer/POINTS/counter.text = str(Global.score).pad_zeros(6)
-	$CanvasLayer/HBoxContainer/COINS/HBoxContainer/counter.text = str(int(Global.coin)).pad_zeros(2)
+	$CanvasLayer/HBoxContainer2/COINS/HBoxContainer/counter.text = str(int(Global.coin)).pad_zeros(2)
 
 func _on_warning_timer_finished() -> void:
 	Global.playMusic = true
