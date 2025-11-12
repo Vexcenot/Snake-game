@@ -196,13 +196,5 @@ offset_bottom = 29.0
 scale = Vector2(95.48, 6.8296285)
 color = Color(0, 0, 0, 1)
 
-[node name="timemask" type="ColorRect" parent="CanvasLayer"]
-visible = false
-offset_left = 204.0
-offset_top = 23.0
-offset_right = 244.0
-offset_bottom = 63.0
-color = Color(0, 0, 0, 1)
-
 [connection signal="finished" from="warning timer" to="." method="_on_warning_timer_finished"]
 [connection signal="finished" from="BG music" to="." method="_on_bg_music_finished"]

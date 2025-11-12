@@ -19,6 +19,9 @@ func _physics_process(delta: float) -> void:
 	#if stopped == false and dieing == false:
 	velocity.x = speed
 	move_and_slide()
+	if velocity.x == 0:
+			Global.eatable += 1
+			queue_free()
 
 #func _ready():
 	#spawning()
@@ -66,7 +69,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 
 func _on_left_side_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area" and ignore == false:
-		position.x += 10
+		#position.x += 10
 
 		$".".set_collision_layer_value(1, false)
 		$Node2D2/edible2/CollisionShape2D.disabled = false
@@ -84,7 +87,7 @@ func _on_left_side_area_entered(area: Area2D) -> void:
 
 func _on_right_side_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area" and ignore == false:
-		position.x -= 10
+		#position.x -= 10
 
 		$".".set_collision_layer_value(3, false)
 		$Node2D2/enemy2/hurtCollision.disabled = false
@@ -127,8 +130,7 @@ func _on_shell_area_entered(area: Area2D) -> void:
 		if Global.playerCombo < 3:
 			Global.playerCombo = 2
 		spawn_scoreSnake()
-		if bounced >= 10:
-			queue_free()
+
 
 func _on_enemy_2_area_entered(area: Area2D) -> void:
 	if area.name == "kill":

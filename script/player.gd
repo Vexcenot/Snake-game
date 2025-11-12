@@ -586,7 +586,7 @@ func ignoring_turning():
 
 #vroom.
 func sprinting():
-	if move_ready == true:
+	if move_ready == true and powering == false:
 		if Input.is_action_pressed("k_shift"):
 			stopInsta = true
 			final_time = 0.02
@@ -655,8 +655,8 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		Global.eatable += 1
 	if area.name == "coin_area":
 		Global.eatable += 1
-	if area.name == "shell" and Global.snake_status != "small":
-		Global.eatable += 1
+	#if area.name == "shell" and Global.snake_status != "small":
+		#Global.eatable += 1
 	if area.name == "flag":
 		Global.eatable += 1
 	if area.name == "pipe_enter":

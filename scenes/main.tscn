@@ -139,7 +139,6 @@ position = Vector2(1688, 240)
 texture = ExtResource("1_h5eht")
 
 [node name="camera_system" parent="level/lvl" instance=ExtResource("8_85g3d")]
-visible = false
 
 [node name="question block3" parent="level/lvl" instance=ExtResource("6_06g6w")]
 position = Vector2(264, 152)
@@ -291,6 +290,8 @@ visible = false
 position = Vector2(1416, 231)
 
 [node name="hud" type="CanvasLayer" parent="."]
-layer = 5
 follow_viewport_enabled = true
 script = ExtResource("22_pm3ni")
+
+[node name="mushroom" parent="." instance=ExtResource("6_2spgy")]
+position = Vector2(55, 204)

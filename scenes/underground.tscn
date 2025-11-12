@@ -128,6 +128,5 @@ position = Vector2(24, 56)
 START_DIR = 1
 
 [node name="hud" type="CanvasLayer" parent="."]
-layer = 5
 follow_viewport_enabled = true
 script = ExtResource("18_g3l68")
