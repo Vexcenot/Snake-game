@@ -86,7 +86,7 @@ theme_override_constants/separation = 19
 layout_mode = 2
 theme_override_constants/separation = -1
 
-[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/POINTS"]
+[node name="name" type="Label" parent="CanvasLayer/HBoxContainer/POINTS"]
 layout_mode = 2
 theme_override_constants/line_spacing = -1
 theme_override_fonts/font = ExtResource("2_x2jp4")

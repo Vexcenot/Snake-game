@@ -37,6 +37,10 @@ func unpause():
 	$"pause sound".play()
 #timer
 func _process(delta: float) -> void:
+	if Global.multiplayers:
+		$CanvasLayer/HBoxContainer/POINTS/name.text = str("SNEKS")
+	else:
+		$CanvasLayer/HBoxContainer/POINTS/name.text = str("SNEK")
 	#if Global.timerDown and Global.timer > 0:
 		#Global.timer -= 1
 		#Global.score += 50
