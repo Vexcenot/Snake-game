@@ -64,9 +64,13 @@ var next_move = "the next move the snake will make"
 var weakening = false
 var updateCam = 2
 var timeDed = false
-var demo = false
+var demo = true
 
 func _ready():
+	if Global.title == false:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if Global.multiplayers and luigi:
 		queue_free()
 	if Global.checkPointable:
@@ -76,15 +80,15 @@ func _ready():
 	update_camera()
 	await get_tree().create_timer(0.1).timeout
 	$Camera/ColorRect.visible = false
-	if Global.title:
-		await get_tree().create_timer(1).timeout
-		Global.demo = true
+
+
+func _process(delta):
+	if Global.demo and demo:
+		demo = false
 		move_orders.append("right")
 		xLimit = "none"
 		limit_move = "none"
 
-
-func _process(delta):
 	#fixes off camera when pipe warping, but makes camera rubber bands
 	if updateCam >= 0:
 		$Camera.limit_left = Global.camera_limit 
@@ -552,8 +556,12 @@ func die():
 			if i < all_segments.size() - 1:  # Don't wait after the last segment
 				await get_tree().create_timer(delay_between_segments).timeout #this causes crash when both snakes die
 		await get_tree().create_timer(3).timeout
-		Global.reset()
-		Global.die()
+		if Global.demo:
+			Global.reset()
+			get_tree().reload_current_scene()
+		else:
+			Global.reset()
+			Global.die()
 
 func update_global_direction():
 	if not move_orders.is_empty():

@@ -60,6 +60,7 @@ var resetCoinAnim : bool = false #resets in world load
 var coin : int = 0 #resets in menu script
 var timerDown : bool = false
 var winEnd : bool = false
+var demoTimer = 8
 
 
 func _process(delta: float) -> void:

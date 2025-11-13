@@ -11,8 +11,9 @@ func _ready() -> void:
 	await get_tree().create_timer(2.3).timeout
 	switch()
 
-#func _input(event):
-	#switch()
+func _input(event):
+	if event.is_action_pressed("ui_accept"):
+		switch()
 
 
 func switch():

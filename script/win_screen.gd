@@ -11,7 +11,7 @@ func _ready() -> void:
 		$"1p msg".visible = true
 
 func _input(event):
-	if event.is_action_pressed("ui_accept") and skip:
+	if event.is_action_pressed("ui_accept"):
 		Global.title = true
 		Global.entranceStopper = false
 		Global.winning = false

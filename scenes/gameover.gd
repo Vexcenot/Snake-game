@@ -12,14 +12,16 @@ func _ready() -> void:
 		$timeup.visible = true
 	else:
 		$gameover.visible = true
-	await get_tree().create_timer(5).timeout
-	next()
 	
 
-#func _input(event):
-	#if skip:
-		#next()
+func _input(event):
+	if event.is_action_pressed("ui_accept"):
+		next()
 		
 func next():
 	Global.resetAll()
 	get_tree().change_scene_to_file("res://scenes/main.tscn")
+
+
+func _on_audio_stream_player_finished() -> void:
+	next()
