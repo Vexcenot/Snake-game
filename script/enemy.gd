@@ -108,6 +108,7 @@ func spriteOrientation():
 
 #disabled everything and dies
 func kill():
+	$kill.play()
 	spawn_score(0)
 	dead = true
 	await get_tree().create_timer(0.001).timeout

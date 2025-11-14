@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bwwi52l72ncsf"]
+[gd_scene load_steps=20 format=3 uid="uid://bwwi52l72ncsf"]
 
 [ext_resource type="Script" uid="uid://c33skdsqnghbu" path="res://script/enemy.gd" id="1_13s4y"]
 [ext_resource type="Texture2D" uid="uid://cyjxthecr7oxv" path="res://sprite/goomba.png" id="2_tdxqk"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://b0y4h2xmmwr2e" path="res://script/mushroom.gd" id="4_b12ce"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/power up.wav" id="5_h7tmd"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="6_3hfl1"]
+[ext_resource type="AudioStream" uid="uid://bj0g8a7ie8lod" path="res://sounds/kill.wav" id="7_6xltp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
 size = Vector2(16.5839, 7.559255)
@@ -301,6 +302,9 @@ shape = SubResource("RectangleShape2D_6xltp")
 
 [node name="hud" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
+
+[node name="kill" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_6xltp")
 
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_left_bottom_body_exited"]

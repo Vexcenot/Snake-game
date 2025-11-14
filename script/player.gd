@@ -481,7 +481,7 @@ func set_firepower():
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
 	if Global.snake_status != "fire2":
-		$Powerup.play()
+		#$Powerup.play()
 		get_tree().paused = true
 		pause_move()
 		Global.snake_status = "fire"
@@ -500,7 +500,7 @@ func set_power(power: String):
 	var current_power = Global.snake_status
 	var blink_sec = 0.1
 	if Global.snake_status == "small":
-		$Powerup.play()
+		#$Powerup.play()
 		get_tree().paused = true
 		pause_move()
 		for i in range(4):
@@ -631,6 +631,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if not area:
 		return
 	if area.name == "mushroom":
+		$Powerup.play()
 		set_power("big")
 		spawn_score(5)
 	if area.name == "1up":
@@ -639,6 +640,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "star":
 		starEat()
 	if area.name == "flower": #add proper power up trans
+		$Powerup.play()
 		if Global.snake_status == "small":
 			set_power("big")
 		else:
@@ -680,13 +682,15 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "oob" and Global.winning == false and invincible == false:
 		die()
 	if area.name == "brick_area" and Global.snake_status != "small":
+		$"brick break".play()
 		Global.eatable += 1
 	if area.name == "enemy" and Global.snake_status != "small":
+		$eat.play()
 		Global.eatable += 1
 	if area.name == "coin_area":
 		Global.eatable += 1
-	#if area.name == "shell" and Global.snake_status != "small":
-		#Global.eatable += 1
+	if area.name == "shell" and Global.snake_status != "small":
+		$eat.play()
 	if area.name == "flag":
 		Global.eatable += 1
 	if area.name == "pipe_enter":
@@ -698,6 +702,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "GOUP":
 		move_orders.append("up")
 	if area.name == "super_eat":
+		$eat.play()
 		Global.eatable += 1
 	
 func teleport():
@@ -814,7 +819,7 @@ func update_camera():
 func move():
 	Global.snakePosX = global_position.x
 	if move_orders.size() > 0: #make it also check if snake is paused and that next move wouldnt run into itself.
-		if move_orders[0] == next_move or move_orders[0] == limit_move or move_orders[0] == "up" and under_block > 0:
+		if move_orders[0] == next_move or move_orders[0] == limit_move:
 			move_orders.pop_front()
 		else:
 			next_move = move_orders.pop_front()

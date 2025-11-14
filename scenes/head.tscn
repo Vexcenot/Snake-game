@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://disfsrloilqua"]
+[gd_scene load_steps=28 format=3 uid="uid://disfsrloilqua"]
 
 [ext_resource type="Script" uid="uid://cggccwq77ls3n" path="res://script/player.gd" id="1_w2ywo"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/power up.wav" id="2_ali73"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://bbyqmdj4gc06g" path="res://sprite/big snake.png" id="8_emtd3"]
 [ext_resource type="AudioStream" uid="uid://buof28pst6l6n" path="res://sounds/Die.wav" id="13_emtd3"]
 [ext_resource type="AudioStream" uid="uid://0oknervp8b1n" path="res://sounds/1 up.wav" id="15_n8xhp"]
+[ext_resource type="AudioStream" uid="uid://cnoc5daq21kk0" path="res://sounds/stomp.wav" id="16_a80fa"]
+[ext_resource type="AudioStream" uid="uid://dr7sgdb282iie" path="res://sounds/brick break.wav" id="17_aeddr"]
 
 [sub_resource type="Animation" id="Animation_8dqsq"]
 length = 0.001
@@ -347,6 +349,12 @@ color = Color(0, 0, 0, 1)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("15_n8xhp")
+
+[node name="eat" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_a80fa")
+
+[node name="brick break" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("17_aeddr")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Head Area" to="." method="_on_head_area_area_entered"]

@@ -26,10 +26,12 @@ func _physics_process(delta: float) -> void:
 #func _ready():
 	#spawning()
 func _ready() -> void:
+	$kill.play()
 	#make it not do this when moving
 	if turn2turtle:
 		$AnimationPlayer.play("transform")
 	if active:
+		
 		position.x -= 10
 		speed = -speeder
 

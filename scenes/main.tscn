@@ -308,6 +308,3 @@ position = Vector2(1416, 231)
 [node name="hud" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 script = ExtResource("22_pm3ni")
-
-[node name="1up" parent="." instance=ExtResource("31_tel4y")]
-position = Vector2(88, 208)

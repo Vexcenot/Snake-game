@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dkd651q06i08r"]
+[gd_scene load_steps=20 format=3 uid="uid://dkd651q06i08r"]
 
 [ext_resource type="Script" uid="uid://c33skdsqnghbu" path="res://script/enemy.gd" id="1_4hj56"]
 [ext_resource type="Texture2D" uid="uid://ed1fh4bw1hwm" path="res://sprite/koopa.png" id="2_grttc"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/power up.wav" id="4_aueqg"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="5_tolb6"]
 [ext_resource type="AudioStream" uid="uid://bfhk31y2khk5s" path="res://sounds/rise up.wav" id="6_kqedj"]
+[ext_resource type="AudioStream" uid="uid://bj0g8a7ie8lod" path="res://sounds/kill.wav" id="7_vo5xu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
 size = Vector2(16.5839, 8.838884)
@@ -365,6 +366,9 @@ shape = SubResource("RectangleShape2D_3hfl1")
 position = Vector2(0, -15)
 scale = Vector2(0.6787159, 1)
 shape = SubResource("RectangleShape2D_grttc")
+
+[node name="kill" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_vo5xu")
 
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_left_bottom_body_exited"]
