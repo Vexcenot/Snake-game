@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=4 uid="uid://jfm302t7cx8d"]
+[gd_scene load_steps=36 format=4 uid="uid://jfm302t7cx8d"]
 
 [ext_resource type="Script" uid="uid://33wsmjudqgvw" path="res://scenes/main.gd" id="1_dp3eg"]
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="1_h5eht"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" uid="uid://bvhscx83oy37b" path="res://scenes/lol.gd" id="24_y6deb"]
 [ext_resource type="FontFile" uid="uid://cvv5f6lv4eikk" path="res://super-mario.otf" id="25_og1vs"]
 [ext_resource type="AudioStream" uid="uid://b35th5mfsxiw7" path="res://sounds/low.mp3" id="26_2wyq8"]
+[ext_resource type="PackedScene" uid="uid://dwwxvo1q0cwix" path="res://scenes/1up.tscn" id="31_tel4y"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dp3eg"]
 texture = ExtResource("17_muem4")
@@ -180,6 +181,10 @@ items = Array[PackedScene]([ExtResource("6_2spgy")])
 position = Vector2(1752, 88)
 items = Array[PackedScene]([ExtResource("6_2spgy")])
 
+[node name="question block18" parent="level/lvl" instance=ExtResource("6_06g6w")]
+position = Vector2(120, 152)
+items = Array[PackedScene]([ExtResource("6_2spgy")])
+
 [node name="PUT STAR HERE" parent="level/lvl" instance=ExtResource("6_06g6w")]
 position = Vector2(1624, 152)
 items = Array[PackedScene]([ExtResource("19_0ld40")])
@@ -303,3 +308,6 @@ position = Vector2(1416, 231)
 [node name="hud" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 script = ExtResource("22_pm3ni")
+
+[node name="1up" parent="." instance=ExtResource("31_tel4y")]
+position = Vector2(88, 208)

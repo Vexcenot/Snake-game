@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cswl3f0pdo2w6"]
+[gd_scene load_steps=13 format=3 uid="uid://cswl3f0pdo2w6"]
 
 [ext_resource type="Script" uid="uid://cqcqef0utc7ik" path="res://luigi_test.gd" id="1_70a3o"]
 [ext_resource type="PackedScene" uid="uid://mt2ylxx61b70" path="res://scenes/head2.tscn" id="1_w5dw0"]
@@ -7,8 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://dmbesh4pmkuuo" path="res://scenes/star.tscn" id="4_3dwgw"]
 [ext_resource type="PackedScene" uid="uid://bwwi52l72ncsf" path="res://scenes/goomba.tscn" id="5_jf1l0"]
 [ext_resource type="PackedScene" uid="uid://h2ccg27eas81" path="res://scenes/shell.tscn" id="6_70a3o"]
+[ext_resource type="PackedScene" uid="uid://c8rpn5napbsdu" path="res://scenes/tail.tscn" id="6_e77pj"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="8_23k0g"]
 [ext_resource type="Script" uid="uid://mdevubq4s10" path="res://scenes/hud.gd" id="9_rgvg3"]
+[ext_resource type="PackedScene" uid="uid://d26kswglulmbs" path="res://scenes/question block.tscn" id="10_vwgyb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u6tou"]
 size = Vector2(296, 121)
@@ -17,7 +19,7 @@ size = Vector2(296, 121)
 script = ExtResource("1_70a3o")
 
 [node name="mushroom" parent="." instance=ExtResource("2_u6tou")]
-position = Vector2(32, 64)
+position = Vector2(248, 104)
 
 [node name="Snek" parent="." instance=ExtResource("1_w5dw0")]
 position = Vector2(36, 35)
@@ -31,7 +33,8 @@ position = Vector2(131, 170)
 shape = SubResource("RectangleShape2D_u6tou")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(408, 64)
+position = Vector2(408.00003, 56)
+scale = Vector2(0.8930313, 0.9196674)
 shape = SubResource("RectangleShape2D_u6tou")
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="StaticBody2D"]
@@ -43,6 +46,9 @@ position = Vector2(84, 105)
 
 [node name="Star" parent="StaticBody2D" instance=ExtResource("4_3dwgw")]
 position = Vector2(57, 110)
+
+[node name="tail" parent="StaticBody2D" instance=ExtResource("6_e77pj")]
+position = Vector2(264, 104)
 
 [node name="Node2D3" type="Node2D" parent="."]
 position = Vector2(40, 104)
@@ -91,3 +97,6 @@ active = true
 layer = 5
 follow_viewport_enabled = true
 script = ExtResource("9_rgvg3")
+
+[node name="question block" parent="." instance=ExtResource("10_vwgyb")]
+position = Vector2(232, 104)

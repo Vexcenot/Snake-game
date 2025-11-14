@@ -21,8 +21,8 @@ func _ready() -> void:
 			$Label.text = str(label)
 	else:
 		# Handle the case where value is out of bounds
-		$Label.text = str("0up")
-
+		$Label.text = str("L0L")
+		$"1up".play()
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	queue_free()

@@ -8,17 +8,11 @@ var speed = speeder
 var killable = false
 var jump_force = 150
 #movement baby!!!! 
-func _physics_process(delta: float) -> void: 
+func _physics_process(delta: float) -> void:
 	if stopped == false:
 		velocity.x = speed
 		velocity.y += gravity * delta  # Apply gravity
 		move_and_slide()
-		#if velocity.x == 0 :
-			#if speed == -speeder:
-				#speed = speeder
-			#if speed == speeder:
-				#speed = -speeder
-
 
 func _ready():
 	await get_tree().create_timer(0.1).timeout
@@ -28,12 +22,15 @@ func _ready():
 func _on_side_checks_body_exited(body: Node2D) -> void:
 	if speed == speeder and avoid_ledge == true:
 		speed = -speeder
-	if speed == -speeder and avoid_ledge == true:
+		print("fuck1")
+	elif speed == -speeder and avoid_ledge == true:
 		speed = speeder
+		print("fuck2")
 
 #check if on edge and turns
 func _on_left_side_body_entered(body: Node2D) -> void:
 	speed = speeder
+	print("shit")
 
 func _on_right_side_body_entered(body: Node2D) -> void:
 	speed = -speeder
@@ -58,13 +55,6 @@ func spawn_score(score):
 	spawn.global_position = global_position
 	Global.hud.add_child(spawn)
 
-#deletes when being touched by head
-func _on_mushroom_area_entered(area: Area2D) -> void:
-	if area.name == "Head Area":
-		#spawn_score(5)
-		queue_free()
-
-
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	stopped = false
@@ -77,3 +67,9 @@ func _on_bumpable_area_entered(area: Area2D) -> void:
 			speed = -speeder
 		elif speed == -speeder:
 			speed = speeder
+
+
+func _on_up_area_entered(area: Area2D) -> void:
+	if area.name == "Head Area":
+		#spawn_score(5)
+		queue_free()

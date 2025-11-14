@@ -634,7 +634,8 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		set_power("big")
 		spawn_score(5)
 	if area.name == "1up":
-		eat()#change this to custom 1up code
+		Global.eatable += 1 
+		spawn_score(10)
 	if area.name == "star":
 		starEat()
 	if area.name == "flower": #add proper power up trans

@@ -334,6 +334,7 @@ editor_draw_drag_margin = true
 metadata/_edit_group_ = true
 
 [node name="ColorRect" type="ColorRect" parent="Camera"]
+visible = false
 z_index = 4096
 offset_left = -654.947
 offset_top = -148.22815
