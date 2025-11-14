@@ -170,7 +170,7 @@ items = Array[PackedScene]([ExtResource("6_2spgy")])
 
 [node name="question block5" parent="level/lvl" instance=ExtResource("6_06g6w")]
 position = Vector2(1032, 136)
-items = Array[PackedScene]([ExtResource("6_2spgy")])
+items = Array[PackedScene]([ExtResource("31_tel4y")])
 invis_block = true
 
 [node name="question block6" parent="level/lvl" instance=ExtResource("6_06g6w")]
