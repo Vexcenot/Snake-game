@@ -25,4 +25,7 @@ func _ready() -> void:
 		$"1up".play()
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	visible = false
+	await get_tree().create_timer(5).timeout
 	queue_free()
+	
