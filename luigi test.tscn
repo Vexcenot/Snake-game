@@ -90,7 +90,7 @@ position = Vector2(160, 0)
 position = Vector2(32, 56)
 
 [node name="shell" parent="." instance=ExtResource("6_70a3o")]
-position = Vector2(-48, 144)
+position = Vector2(216, 80)
 active = true
 
 [node name="hud" type="CanvasLayer" parent="."]

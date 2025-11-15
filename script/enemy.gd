@@ -67,13 +67,14 @@ func spawn_scoreSnake():
 	spawn.global_position = position
 	Global.hud.add_child(spawn)
 	
+	
 #spawn score with shell
 func spawn_scoreShell():
-	if Global.playerComboTimer > 0 and Global.playerCombo <= 10:
+	if Global.shellComboTimer > 0 and Global.shellCombo <= 10:
 		Global.shellCombo += 1
 	if Global.shellCombo < 4:
 		Global.shellCombo = 3
-	#Global.playerComboTimer = 1 
+	Global.shellComboTimer = 1 
 	var spawn = point.instantiate()
 	spawn.value = Global.shellCombo
 	spawn.global_position = position
@@ -109,7 +110,6 @@ func spriteOrientation():
 #disabled everything and dies
 func kill():
 	$kill.play()
-	spawn_score(0)
 	dead = true
 	await get_tree().create_timer(0.001).timeout
 	$AnimationPlayer.speed_scale = 1.1
@@ -167,8 +167,12 @@ func _on_koopa_top_area_exited(area: Area2D) -> void:
 #left area detect
 func _on_left_side_area_entered(area: Area2D) -> void:
 	if dead == false:
-		if area.name == "enemy2" or area.name == "kill" and live:
+		if area.name == "enemy2":
 			kill()
+			spawn_scoreShell()
+		if area.name == "kill" and live:
+			kill()
+			spawn_score(0)
 		if area.name == "fireball":
 			spawn_food()
 			spawn_score(1)
@@ -181,6 +185,7 @@ func _on_right_side_area_entered(area: Area2D) -> void:
 	if dead == false:
 		if area.name == "enemy2":
 			kill()
+			spawn_scoreShell()
 		if area.name == "kill" and live:
 			spawn_score(0)
 			kill()

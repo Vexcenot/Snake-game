@@ -421,6 +421,7 @@ collision_mask = 129
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Node2D2/right bottom"]
 position = Vector2(9.14518, 10.8768)
+scale = Vector2(1.003534, 1.0220705)
 shape = SubResource("RectangleShape2D_kg8q6")
 
 [node name="Node2D" type="Node2D" parent="Node2D2"]
@@ -498,7 +499,7 @@ shape = SubResource("RectangleShape2D_8y80q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="deadly shell"]
 position = Vector2(0, -7)
-scale = Vector2(1.2106402, 1.2268362)
+scale = Vector2(0.9297928, 1.2268362)
 shape = SubResource("RectangleShape2D_k7uw7")
 
 [node name="kill" type="AudioStreamPlayer" parent="."]

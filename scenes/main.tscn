@@ -256,7 +256,7 @@ world = "uid://du6cg6ytddp8g"
 position = Vector2(624, 224)
 
 [node name="koopa" parent="level/lvl" instance=ExtResource("13_a8y0u")]
-position = Vector2(536, 208)
+position = Vector2(184, 208)
 
 [node name="lol" type="Control" parent="."]
 process_mode = 3
@@ -308,3 +308,15 @@ position = Vector2(1416, 231)
 [node name="hud" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 script = ExtResource("22_pm3ni")
+
+[node name="Star" parent="." instance=ExtResource("19_0ld40")]
+position = Vector2(96, 208)
+
+[node name="goomba" parent="." instance=ExtResource("11_ya4ey")]
+position = Vector2(216, 208)
+
+[node name="goomba2" parent="." instance=ExtResource("11_ya4ey")]
+position = Vector2(240, 208)
+
+[node name="goomba3" parent="." instance=ExtResource("11_ya4ey")]
+position = Vector2(264, 208)

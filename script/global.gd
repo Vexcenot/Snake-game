@@ -48,6 +48,7 @@ var timer = ogTime #dont need rest
 var score = 0 #dont reset until new game
 var playerComboTimer = 0
 var playerCombo = 0
+var shellComboTimer = 0
 var shellCombo = 0
 var lowTime : bool = false
 var hud
@@ -69,6 +70,10 @@ func _process(delta: float) -> void:
 		playerComboTimer -= 1 * delta
 	if playerComboTimer <= 0:
 		playerCombo = 0
+	if shellComboTimer > 0:
+		shellComboTimer -= 1 * delta
+	if shellComboTimer <= 0:
+		shellCombo = 0
 	if eaten >= 3:
 		eaten = 0
 		snake_speed -= 0.02
