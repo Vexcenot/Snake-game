@@ -183,7 +183,7 @@ items = Array[PackedScene]([ExtResource("6_2spgy")])
 
 [node name="question block18" parent="level/lvl" instance=ExtResource("6_06g6w")]
 position = Vector2(120, 152)
-items = Array[PackedScene]([ExtResource("6_2spgy")])
+items = Array[PackedScene]([ExtResource("31_tel4y")])
 
 [node name="PUT STAR HERE" parent="level/lvl" instance=ExtResource("6_06g6w")]
 position = Vector2(1624, 152)
