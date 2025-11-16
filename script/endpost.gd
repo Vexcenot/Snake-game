@@ -1,9 +1,11 @@
 extends Node2D
 var shit = false
 var point = 0
+var live = true
 
 func _on_winarea_area_entered(area: Area2D) -> void:
-	if area.name == "Head Area":
+	if area.name == "Head Area" and live:
+		live = false
 		Global.playMusic = true
 		Global.music = "flag"
 		$brick/brick.set_collision_layer_value(1, false)
