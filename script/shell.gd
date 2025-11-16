@@ -41,20 +41,24 @@ func _on_left_side_body_entered(body: Node2D) -> void:
 		position.x += 10
 		speed = speeder
 		$AnimationPlayer.play("RESET")
+		$bump.play()
 
 	if body.name == "brick" or "":
 		speed = speeder
 		$AnimationPlayer.play("RESET")
+		$bump.play()
 
 func _on_right_side_body_entered(body: Node2D) -> void:
 	if body.name == "Snek":
 		position.x -= 10
 		speed = -speeder
 		$AnimationPlayer.play("RESET")
+		$bump.play()
 
 	if body.name == "brick" or "":
 		speed = -speeder
 		$AnimationPlayer.play("RESET")
+		$bump.play()
 
 func die():
 	$sprite/AnimationPlayer.play("die")

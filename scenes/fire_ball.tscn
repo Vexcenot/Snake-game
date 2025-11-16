@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://s8kidv16iy81"]
+[gd_scene load_steps=12 format=3 uid="uid://s8kidv16iy81"]
 
 [ext_resource type="Script" uid="uid://dksnvaw6iq2ko" path="res://script/fire_ball.gd" id="1_gregu"]
 [ext_resource type="Texture2D" uid="uid://c31oaxth3qqi" path="res://sprite/fireball.png" id="2_qddq2"]
 [ext_resource type="Texture2D" uid="uid://dgf52usnl0p6e" path="res://sprite/explode.png" id="3_une7w"]
+[ext_resource type="AudioStream" uid="uid://chhy42b001hm4" path="res://sounds/bump.wav" id="4_kry06"]
+[ext_resource type="AudioStream" uid="uid://ofd258kiqdn2" path="res://sounds/fireball spawn.wav" id="5_0voa0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xdfro"]
 size = Vector2(20, 4)
@@ -164,6 +166,12 @@ visible = false
 z_index = 5
 texture = ExtResource("3_une7w")
 hframes = 3
+
+[node name="bump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_kry06")
+
+[node name="fireball2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_0voa0")
 
 [connection signal="area_entered" from="Icon/side collision" to="." method="_on_side_collision_area_entered"]
 [connection signal="body_entered" from="Icon/side collision" to="." method="_on_side_collision_body_entered"]

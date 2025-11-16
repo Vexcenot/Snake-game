@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://cixj1ykvju5v2"]
+[gd_scene load_steps=13 format=3 uid="uid://cixj1ykvju5v2"]
 
 [ext_resource type="Script" uid="uid://dmdkbtc7oi0gh" path="res://script/brick.gd" id="1_0w5h4"]
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="2_7mekc"]
 [ext_resource type="Texture2D" uid="uid://i70ofguicb50" path="res://sprite/brick particles.png" id="3_7mekc"]
+[ext_resource type="AudioStream" uid="uid://chhy42b001hm4" path="res://sounds/bump.wav" id="4_c34n8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5p85m"]
 size = Vector2(16, 14)
@@ -158,6 +159,9 @@ scale = Vector2(0.032598194, 0.89866734)
 shape = SubResource("RectangleShape2D_ci8dj")
 disabled = true
 debug_color = Color(0.919403, 0.247321, 0.3578, 0.42)
+
+[node name="bump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_c34n8")
 
 [connection signal="area_entered" from="brick_area" to="." method="_on_brick_area_area_entered"]
 [connection signal="area_entered" from="block_area2" to="." method="_on_bottom_check_area_entered"]

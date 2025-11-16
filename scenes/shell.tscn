@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://h2ccg27eas81"]
+[gd_scene load_steps=24 format=3 uid="uid://h2ccg27eas81"]
 
 [ext_resource type="Script" uid="uid://bauau5bxp0wdq" path="res://script/shell.gd" id="1_8y80q"]
 [ext_resource type="Texture2D" uid="uid://ed1fh4bw1hwm" path="res://sprite/koopa.png" id="2_k7uw7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://b0y4h2xmmwr2e" path="res://script/mushroom.gd" id="4_vvj04"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/power up.wav" id="5_sow7m"]
 [ext_resource type="AudioStream" uid="uid://bj0g8a7ie8lod" path="res://sounds/kill.wav" id="6_qr86p"]
+[ext_resource type="AudioStream" uid="uid://chhy42b001hm4" path="res://sounds/bump.wav" id="7_fdvxk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7c8f"]
 size = Vector2(9.75486, 7.44074)
@@ -504,6 +505,9 @@ shape = SubResource("RectangleShape2D_k7uw7")
 
 [node name="kill" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_qr86p")
+
+[node name="bump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_fdvxk")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="body_exited" from="Node2D2/left bottom" to="." method="_on_side_checks_body_exited"]

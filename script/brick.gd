@@ -29,8 +29,9 @@ func _input(event):
 		spawn_item()
 
 func spawn_item():
-	if Global.snake_status == "small" and Global.direction == "up" or Global.direction == "left" or Global.direction == "right":
+	if Global.snake_status == "small" and Global.direction != "down":
 		$AnimationPlayer.play("bump")
+		$bump.play()
 		
 		
 func keepSpawning():

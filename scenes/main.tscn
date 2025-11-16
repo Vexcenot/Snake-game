@@ -256,7 +256,7 @@ world = "uid://du6cg6ytddp8g"
 position = Vector2(624, 224)
 
 [node name="koopa" parent="level/lvl" instance=ExtResource("13_a8y0u")]
-position = Vector2(184, 208)
+position = Vector2(544, 208)
 
 [node name="lol" type="Control" parent="."]
 process_mode = 3
@@ -320,3 +320,15 @@ position = Vector2(240, 208)
 
 [node name="goomba3" parent="." instance=ExtResource("11_ya4ey")]
 position = Vector2(264, 208)
+
+[node name="coin5" parent="." instance=ExtResource("8_fs55x")]
+position = Vector2(72, 200)
+
+[node name="coin6" parent="." instance=ExtResource("8_fs55x")]
+position = Vector2(88, 200)
+
+[node name="coin7" parent="." instance=ExtResource("8_fs55x")]
+position = Vector2(104, 200)
+
+[node name="coin8" parent="." instance=ExtResource("8_fs55x")]
+position = Vector2(56, 200)

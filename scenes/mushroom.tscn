@@ -16,7 +16,7 @@ size = Vector2(10.0103, 1.27963)
 size = Vector2(1.21936, 1.27965)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sjlml"]
-size = Vector2(2, 2.39006)
+size = Vector2(1, 2.24396)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_exsck"]
 size = Vector2(2.1028948, 2.44695)
@@ -129,8 +129,8 @@ position = Vector2(0, -8)
 scale = Vector2(1, 0.331275)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="left side"]
-position = Vector2(-6, 18.3084)
-scale = Vector2(1, 2.69044)
+position = Vector2(-6, 3.0186405)
+scale = Vector2(1, 16.012205)
 shape = SubResource("RectangleShape2D_sjlml")
 
 [node name="right side" type="Area2D" parent="."]
@@ -138,8 +138,8 @@ position = Vector2(0, -8)
 scale = Vector2(0.95107, 0.380408)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="right side"]
-position = Vector2(5.257237, 16.0397)
-scale = Vector2(0.99999976, 2.36695)
+position = Vector2(6.308684, 2.6287565)
+scale = Vector2(0.52823126, 13.121142)
 shape = SubResource("RectangleShape2D_exsck")
 
 [node name="edible" type="Area2D" parent="."]

@@ -6,6 +6,7 @@ var explode = false
 var explode2 = true
 var halfSpeed = 0
 func _ready() -> void:
+	$fireball2.play()
 	Global.active_balls += 1
 	
 	if Global.direction == "right":
@@ -54,7 +55,9 @@ func exploding():
 		speed = 0
 		$AnimationPlayer.play("explode")
 		$fireball.monitorable = false
+		$bump.play()
 		await get_tree().create_timer(1).timeout
+		
 		queue_free()
 
 func _on_side_collision_body_entered(body: Node2D) -> void:
@@ -62,10 +65,11 @@ func _on_side_collision_body_entered(body: Node2D) -> void:
 		explode = true
 
 
+
 func _on_side_collision_area_entered(area: Area2D) -> void:
 	if area.name == "oob":
 		explode = true
-		
+
 
 func _on_fireball_area_entered(area: Area2D) -> void:
 	if area.name == "left side" or area.name == "right side":
