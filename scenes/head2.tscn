@@ -265,12 +265,12 @@ texture = ExtResource("10_xv6nb")
 editor_description = "suppose to play da power up sound
 "
 stream = ExtResource("11_bp8jb")
+volume_db = -10.146
 
 [node name="Powerdn" type="AudioStreamPlayer" parent="."]
 editor_description = "suppose to play da power up sound
 "
 stream = ExtResource("12_fvphi")
-volume_db = 15.0
 
 [node name="Die" type="AudioStreamPlayer" parent="."]
 editor_description = "suppose to play da power up sound

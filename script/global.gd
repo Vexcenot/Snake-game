@@ -36,14 +36,18 @@ var playMusic : bool = false
 var music : String = "none"
 var dead : bool = false
 var play = false
+
+#########################################################
+var ogTime = 400 #dont need rest
 var multiplayers : bool = false #remember to false this
 var title : bool = true #remember to true this ##################################################
+###########################################################
+
 var timeUp : bool = false
 var timeLive : bool = false
 var timeStart : bool = false
 var demo : bool = false
 var pausable : bool = false
-var ogTime = 100 #dont need rest
 var timer = ogTime #dont need rest
 var score = 0 #dont reset until new game
 var playerComboTimer = 0

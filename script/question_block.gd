@@ -79,7 +79,7 @@ func spawn_item():
 				items[0] = load("res://scenes/fire_flower.tscn")
 		#spawns item normally
 			$spawn_sound.play()
-			$bump_sound.play()
+			
 			var spawned_item = items[0].instantiate()
 			add_child(spawned_item)
 			#spawned_item.position.y

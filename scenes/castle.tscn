@@ -67,7 +67,7 @@ texture = ExtResource("1_pb8oa")
 [node name="entrance" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="entrance"]
-position = Vector2(-8, -17)
+position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_bly62")
 
 [node name="CastleEnd" type="Sprite2D" parent="."]

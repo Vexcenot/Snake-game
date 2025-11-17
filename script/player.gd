@@ -65,6 +65,7 @@ var weakening = false
 var updateCam = 2
 var timeDed = false
 var demo = true
+var disappear = false
 
 func _ready():
 	if Global.title == false:
@@ -249,6 +250,9 @@ func spawn_tail_segment():
 var eatAnim2 = false
 func time_reset():
 	if timer >= final_time:
+		if disappear:
+			disappear = false
+			position.y = 99999
 		updateCam -= 1
 		cramp = false
 		$Camera.limit_left = Global.camera_limit
@@ -704,6 +708,9 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "super_eat":
 		$eat.play()
 		Global.eatable += 1
+	if area.name == "entrance" and Global.winning == true or area.name == "pipe_enter":
+		disappear = true
+
 	
 func teleport():
 	if Global.teleport_all:
@@ -744,10 +751,8 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 		under_block -= 1
 	if area.name == "endpost":
 		move_exit = false
-	if area.name == "entrance" and Global.winning == true or area.name == "pipe_enter":
+	if area.name == "entrance" and Global.winning == true:
 		position.y = 9999
-		#await get_tree().create_timer(3).timeout
-		#get_tree().change_scene_to_file("res://scenes/win screen.tscn")
 	if area.name == "pipe_enter":
 		await get_tree().create_timer(1).timeout
 		invincible = false

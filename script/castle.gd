@@ -5,7 +5,7 @@ var active = true
 var next = false
 func _on_entrance_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area" and Global.winning == true and open:
-		$CastleEnd.visible = true
+		#$CastleEnd.visible = true
 		Global.timerDown = true
 		open = false
 		
@@ -18,6 +18,6 @@ func _process(delta: float) -> void:
 		active = false
 		$AnimationPlayer.play("win")
 	if Global.winEnd and active == false:
-		await get_tree().create_timer(3).timeout
+		await get_tree().create_timer(2).timeout
 		get_tree().change_scene_to_file("res://scenes/win screen.tscn")
 		set_process(false) 

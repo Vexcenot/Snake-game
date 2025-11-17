@@ -2,6 +2,7 @@ extends Node2D
 var snake_under = false
 var snake_boop = false
 var timing = false
+var live = true
 @export var items: Array[PackedScene] = []
 @export var false_block = false
 @export var invis_block = false
@@ -24,20 +25,22 @@ func visability():
 	elif invis_block:
 		$AllTheSmallBlocksTogether.visible = false
 
-func _input(event):
-	if snake_under:
-		spawn_item()
+#func _input(event):
+	#if snake_under:
+		#spawn_item()
 
 func spawn_item():
-	if Global.snake_status == "small" and Global.direction != "down":
+	if Global.direction != "down":
 		$AnimationPlayer.play("bump")
-		$bump.play()
+		#$bump.play()
 		
 		
 func keepSpawning():
-	if snake_under == true:
+	if snake_under == true and live:
+		live = false
 		spawn_item()
 		await get_tree().create_timer(0.8).timeout
+		live = true
 
 
 #make it so that if coin scene then use slightly diff function

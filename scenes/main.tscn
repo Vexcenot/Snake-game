@@ -181,10 +181,6 @@ items = Array[PackedScene]([ExtResource("6_2spgy")])
 position = Vector2(1752, 88)
 items = Array[PackedScene]([ExtResource("6_2spgy")])
 
-[node name="question block18" parent="level/lvl" instance=ExtResource("6_06g6w")]
-position = Vector2(120, 152)
-items = Array[PackedScene]([ExtResource("31_tel4y")])
-
 [node name="PUT STAR HERE" parent="level/lvl" instance=ExtResource("6_06g6w")]
 position = Vector2(1624, 152)
 items = Array[PackedScene]([ExtResource("19_0ld40")])
@@ -308,27 +304,3 @@ position = Vector2(1416, 231)
 [node name="hud" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 script = ExtResource("22_pm3ni")
-
-[node name="Star" parent="." instance=ExtResource("19_0ld40")]
-position = Vector2(96, 208)
-
-[node name="goomba" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(216, 208)
-
-[node name="goomba2" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(240, 208)
-
-[node name="goomba3" parent="." instance=ExtResource("11_ya4ey")]
-position = Vector2(264, 208)
-
-[node name="coin5" parent="." instance=ExtResource("8_fs55x")]
-position = Vector2(72, 200)
-
-[node name="coin6" parent="." instance=ExtResource("8_fs55x")]
-position = Vector2(88, 200)
-
-[node name="coin7" parent="." instance=ExtResource("8_fs55x")]
-position = Vector2(104, 200)
-
-[node name="coin8" parent="." instance=ExtResource("8_fs55x")]
-position = Vector2(56, 200)

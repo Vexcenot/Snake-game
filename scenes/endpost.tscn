@@ -230,7 +230,7 @@ debug_color = Color(0.6585092, 0.38110954, 0.8835248, 0.41960785)
 [node name="100" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="100"]
-position = Vector2(-9, -26.000002)
+position = Vector2(-9, -26)
 scale = Vector2(2.6917183, 1.6726081)
 shape = SubResource("RectangleShape2D_xn5dt")
 debug_color = Color(0.6585092, 0.38110954, 0.8835248, 0.41960785)

@@ -63,6 +63,7 @@ var move_direction = Vector2.ZERO
 var next_move = "the next move the snake will make"
 var weakening = false
 var updateCam = 2
+var disappear = false
 
 
 func _ready():
@@ -233,6 +234,9 @@ func spawn_tail_segment():
 var eatAnim2 = false
 func time_reset():
 	if timer >= final_time:
+		if disappear:
+			disappear = false
+			position.y = 99999
 		updateCam -= 1
 		cramp = false
 		$Camera.limit_left = Global.camera_limit
@@ -666,6 +670,8 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		move_orders.append("up")
 	if area.name == "super_eat":
 		Global.eatable += 1
+	if area.name == "entrance" and Global.winning == true or area.name == "pipe_enter":
+		disappear = true
 
 
 func teleport():

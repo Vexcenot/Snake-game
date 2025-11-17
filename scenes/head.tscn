@@ -298,6 +298,7 @@ texture = ExtResource("4_pw8ip")
 editor_description = "suppose to play da power up sound
 "
 stream = ExtResource("2_ali73")
+volume_db = -10.146
 
 [node name="Powerdn" type="AudioStreamPlayer" parent="."]
 editor_description = "suppose to play da power up sound
@@ -354,6 +355,7 @@ stream = ExtResource("16_a80fa")
 
 [node name="brick break" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_aeddr")
+volume_db = -10.146
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Head Area" to="." method="_on_head_area_area_entered"]
