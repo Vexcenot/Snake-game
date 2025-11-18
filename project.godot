@@ -19,7 +19,7 @@ config/name="idk yet"
 run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
 run/max_fps=60
-config/icon="res://sprite/icon.svg"
+config/icon="uid://c0pxogsnj7nr7"
 
 [autoload]
 

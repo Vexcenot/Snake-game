@@ -251,9 +251,6 @@ world = "uid://du6cg6ytddp8g"
 [node name="pipe5" parent="level/lvl" instance=ExtResource("12_eb6dy")]
 position = Vector2(624, 224)
 
-[node name="koopa" parent="level/lvl" instance=ExtResource("13_a8y0u")]
-position = Vector2(544, 208)
-
 [node name="lol" type="Control" parent="."]
 process_mode = 3
 visible = false
