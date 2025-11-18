@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bywstij4qxlot" path="res://scenes/stair brick.tscn" id="15_e8a6q"]
 [ext_resource type="PackedScene" uid="uid://bc8ayjdv8nyv2" path="res://scenes/pipe stem.tscn" id="16_oo6yi"]
 [ext_resource type="PackedScene" uid="uid://mt2ylxx61b70" path="res://scenes/head2.tscn" id="16_rx8xm"]
-[ext_resource type="Script" uid="uid://mdevubq4s10" path="res://scenes/hud.gd" id="18_g3l68"]
+[ext_resource type="Script" uid="uid://mdevubq4s10" path="res://script/hud.gd" id="18_g3l68"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qt2jv"]
 texture = ExtResource("6_swjso")

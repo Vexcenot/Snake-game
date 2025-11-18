@@ -1,8 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://dc3te3v3tek6h"]
 
-[ext_resource type="Script" uid="uid://tt7ca4k1yx2d" path="res://scenes/gameover.gd" id="1_2mkfd"]
+[ext_resource type="Script" uid="uid://tt7ca4k1yx2d" path="res://script/gameover.gd" id="1_2mkfd"]
 [ext_resource type="FontFile" uid="uid://cvv5f6lv4eikk" path="res://super-mario.otf" id="1_4nh4k"]
 [ext_resource type="AudioStream" uid="uid://b2cxeav6r54sp" path="res://sounds/game over.wav" id="3_h8i2o"]
+
 
 [sub_resource type="Animation" id="Animation_h8i2o"]
 length = 0.001

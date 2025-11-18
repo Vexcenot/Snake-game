@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://fp1nuui5i0p3"]
 
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="1_vlub8"]
-[ext_resource type="Script" uid="uid://d1rd4vmrix24w" path="res://scenes/ground_brick.gd" id="2_5h0ca"]
+[ext_resource type="Script" uid="uid://d1rd4vmrix24w" path="res://script/ground_brick.gd" id="2_5h0ca"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uaqj5"]
 

@@ -1,8 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://cfvi86goh0ohb"]
 
-[ext_resource type="Script" uid="uid://cwq2q2bd4dk78" path="res://scenes/super_eat.gd" id="1_1132s"]
+[ext_resource type="Script" uid="uid://cwq2q2bd4dk78" path="res://script/super_eat.gd" id="1_1132s"]
 [ext_resource type="Texture2D" uid="uid://ck60mld5l2ptc" path="res://sprite/cooked mushroom.png" id="2_1132s"]
 [ext_resource type="Texture2D" uid="uid://dgf52usnl0p6e" path="res://sprite/explode.png" id="3_ppdkq"]
+
 
 [sub_resource type="Animation" id="Animation_k4gy1"]
 length = 0.001

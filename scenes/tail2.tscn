@@ -1,12 +1,13 @@
 [gd_scene load_steps=15 format=3 uid="uid://d3lqbscthiv8x"]
 
-[ext_resource type="Script" uid="uid://oqynmv7l525n" path="res://scenes/tail.gd" id="1_tf7m7"]
+[ext_resource type="Script" uid="uid://oqynmv7l525n" path="res://script/tail.gd" id="1_tf7m7"]
 [ext_resource type="PackedScene" uid="uid://igkvu8xfuvxa" path="res://scenes/snake sprite2.tscn" id="2_pa3ch"]
 [ext_resource type="Texture2D" uid="uid://c0lbmddyaouu8" path="res://sprite/smol luigi.png" id="2_tf7m7"]
 [ext_resource type="Texture2D" uid="uid://lyka1lvcg202" path="res://sprite/fire 2.png" id="3_6tmb2"]
 [ext_resource type="Texture2D" uid="uid://c5lwc826jjh1r" path="res://sprite/snake flash 1.png" id="5_hj1qh"]
 [ext_resource type="Texture2D" uid="uid://spoj5e0o0m44" path="res://sprite/snake flash 2.png" id="6_xgvqi"]
 [ext_resource type="Texture2D" uid="uid://xr7pysod2o11" path="res://sprite/snake flash 3.png" id="7_3n30u"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_frb71"]
 size = Vector2(10.003, 7.502244)

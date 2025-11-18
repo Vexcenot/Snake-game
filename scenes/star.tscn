@@ -1,7 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://dmbesh4pmkuuo"]
 
-[ext_resource type="Script" uid="uid://cenq57j0fptt1" path="res://scenes/star.gd" id="1_j6vao"]
+[ext_resource type="Script" uid="uid://cenq57j0fptt1" path="res://script/star.gd" id="1_j6vao"]
 [ext_resource type="Texture2D" uid="uid://cwey3aue58nl" path="res://sprite/super star.png" id="1_mcqwg"]
+
 
 [sub_resource type="Animation" id="Animation_ef0hr"]
 length = 0.001

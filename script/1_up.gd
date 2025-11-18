@@ -71,5 +71,4 @@ func _on_bumpable_area_entered(area: Area2D) -> void:
 
 func _on_up_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":
-		#spawn_score(5)
 		queue_free()

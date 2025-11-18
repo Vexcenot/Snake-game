@@ -60,7 +60,8 @@ var debug : bool = false
 var topScore = 0 #dont reset
 var purgatory : bool = false
 var eaten : int = 0
-var snake_speed : float = 0.3
+var ogSpeed = 0.3
+var snake_speed : float = ogSpeed
 var resetCoinAnim : bool = false #resets in world load
 var coin : int = 0 #resets in menu script
 var timerDown : bool = false
@@ -84,6 +85,7 @@ func _process(delta: float) -> void:
 		
 
 func reset():
+	snake_speed = ogSpeed
 	winEnd = false
 	timerDown = false
 	lowTime = false

@@ -1,10 +1,15 @@
 extends Node2D
 
-var pole_touched = false
+func pausing():
+	if Global.paused == true:
+		set_process_mode(PROCESS_MODE_INHERIT)
 
-
-
-
-#func _on_tail_area_area_entered(area: Area2D) -> void:
-	#if area.name == "winarea":
-		#$Sprite2D.set_layer_z_index = 1
+	else:
+		set_process_mode(PROCESS_MODE_ALWAYS)
+		
+func _process(delta: float) -> void:
+	if Global.dead:
+		z_index = 400
+	pausing()
+	if Global.winning:
+		$brick/tail_collision_shape.disabled = true

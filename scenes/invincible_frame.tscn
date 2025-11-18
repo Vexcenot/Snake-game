@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://xfdxdevbu8wj"]
 
-[ext_resource type="Script" uid="uid://c6peqluj0vqmm" path="res://scenes/invincible_frame.gd" id="1_rlp8g"]
+[ext_resource type="Script" uid="uid://c6peqluj0vqmm" path="res://script/invincible_frame.gd" id="1_rlp8g"]
 [ext_resource type="Texture2D" uid="uid://cpgqyga26gtxo" path="res://sprite/inv smol.png" id="3_5eb4d"]
 [ext_resource type="AudioStream" uid="uid://cf18w6r3u4wp8" path="res://sounds/invinsibility muffled.wav" id="3_j1ffk"]
 [ext_resource type="AudioStream" uid="uid://chhy42b001hm4" path="res://sounds/bump.wav" id="4_j1ffk"]

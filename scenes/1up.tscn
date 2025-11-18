@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://dwwxvo1q0cwix"]
 
-[ext_resource type="Script" uid="uid://bwe2w3tb8r75a" path="res://scenes/1_up.gd" id="1_giy0g"]
+[ext_resource type="Script" uid="uid://bwe2w3tb8r75a" path="res://script/1_up.gd" id="1_giy0g"]
 [ext_resource type="Script" uid="uid://b0y4h2xmmwr2e" path="res://script/mushroom.gd" id="2_02bd6"]
 [ext_resource type="AudioStream" uid="uid://bkwkwqtdh2goo" path="res://sounds/power up.wav" id="3_ijkqe"]
 [ext_resource type="Texture2D" uid="uid://8j811yk5hue7" path="res://sprite/mushrooms.png" id="4_h66g5"]

@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://h2ccg27eas81" path="res://scenes/shell.tscn" id="6_70a3o"]
 [ext_resource type="PackedScene" uid="uid://c8rpn5napbsdu" path="res://scenes/tail.tscn" id="6_e77pj"]
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="8_23k0g"]
-[ext_resource type="Script" uid="uid://mdevubq4s10" path="res://scenes/hud.gd" id="9_rgvg3"]
+[ext_resource type="Script" uid="uid://mdevubq4s10" path="res://script/hud.gd" id="9_rgvg3"]
 [ext_resource type="PackedScene" uid="uid://d26kswglulmbs" path="res://scenes/question block.tscn" id="10_vwgyb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u6tou"]

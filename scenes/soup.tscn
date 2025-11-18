@@ -1,8 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://mp38m5aijo56"]
 
 [ext_resource type="Texture2D" uid="uid://cl3v23hib0cqe" path="res://sprite/soup.png" id="1_gj4c3"]
-[ext_resource type="Script" uid="uid://cwq2q2bd4dk78" path="res://scenes/super_eat.gd" id="1_lw81e"]
+[ext_resource type="Script" uid="uid://cwq2q2bd4dk78" path="res://script/super_eat.gd" id="1_lw81e"]
 [ext_resource type="Texture2D" uid="uid://dgf52usnl0p6e" path="res://sprite/explode.png" id="2_lw81e"]
+
 
 [sub_resource type="Animation" id="Animation_dh2wj"]
 resource_name = "spawn"
