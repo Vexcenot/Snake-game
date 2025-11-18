@@ -69,6 +69,7 @@ stream = ExtResource("3_mfc1r")
 stream = ExtResource("4_8cppg")
 
 [node name="BG music" type="AudioStreamPlayer" parent="."]
+volume_db = -7.61
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0

@@ -355,7 +355,7 @@ stream = ExtResource("16_a80fa")
 
 [node name="brick break" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("17_aeddr")
-volume_db = -10.146
+volume_db = -5.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Head Area" to="." method="_on_head_area_area_entered"]

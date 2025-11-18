@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://mt2ylxx61b70"]
+[gd_scene load_steps=26 format=3 uid="uid://mt2ylxx61b70"]
 
 [ext_resource type="Script" uid="uid://3ojg4xhrk60l" path="res://script/player2.gd" id="1_bbu2a"]
 [ext_resource type="Texture2D" uid="uid://c0lbmddyaouu8" path="res://sprite/smol luigi.png" id="2_07b4o"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://e44f00ph5aem" path="res://sounds/power down.wav" id="12_fvphi"]
 [ext_resource type="AudioStream" uid="uid://buof28pst6l6n" path="res://sounds/Die.wav" id="13_i7ij1"]
 [ext_resource type="Texture2D" uid="uid://bpu74boc4urrs" path="res://sprite/all the small blocks together.png" id="14_5kj1b"]
+[ext_resource type="AudioStream" uid="uid://dr7sgdb282iie" path="res://sounds/brick break.wav" id="14_bbu2a"]
 
 [sub_resource type="Animation" id="Animation_8dqsq"]
 length = 0.001
@@ -328,6 +329,10 @@ color = Color(0, 0, 0, 1)
 [node name="Sprite2D" parent="." instance=ExtResource("8_g4rqf")]
 position = Vector2(0, -1)
 frame = 2
+
+[node name="brick break" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("14_bbu2a")
+volume_db = -5.0
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="Head Area" to="." method="_on_head_area_area_entered"]
