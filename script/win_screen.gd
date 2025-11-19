@@ -13,7 +13,7 @@ func _ready() -> void:
 	else:
 		print("fuck")
 		$"1p msg".visible = true
-	await get_tree().create_timer(20).timeout
+	await get_tree().create_timer(60).timeout
 	next()
 
 func _input(event):
