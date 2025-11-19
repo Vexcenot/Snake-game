@@ -52,7 +52,6 @@ shape = SubResource("RectangleShape2D_arayy")
 [node name="PowerDown" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-6, 3.5)
 stream = ExtResource("3_8p0di")
-volume_db = 9.0
 
 [node name="brick" type="StaticBody2D" parent="."]
 collision_layer = 135

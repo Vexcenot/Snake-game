@@ -186,6 +186,7 @@ debug_color = Color(0.919403, 0.247321, 0.3578, 0.42)
 
 [node name="bump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_c34n8")
+volume_db = -3.0
 
 [connection signal="area_entered" from="brick_area" to="." method="_on_brick_area_area_entered"]
 [connection signal="area_entered" from="block_area2" to="." method="_on_bottom_check_area_entered"]

@@ -148,6 +148,7 @@ autoplay = "idle"
 
 [node name="coin_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_stl8c")
+volume_db = -5.474
 
 [node name="edible" type="Area2D" parent="."]
 monitorable = false

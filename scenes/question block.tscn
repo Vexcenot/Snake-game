@@ -259,6 +259,7 @@ volume_db = -10.146
 
 [node name="bump_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_nfuos")
+volume_db = -3.0
 
 [node name="kill" type="Area2D" parent="."]
 

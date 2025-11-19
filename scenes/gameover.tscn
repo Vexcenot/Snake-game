@@ -4,7 +4,6 @@
 [ext_resource type="FontFile" uid="uid://cvv5f6lv4eikk" path="res://super-mario.otf" id="1_4nh4k"]
 [ext_resource type="AudioStream" uid="uid://b2cxeav6r54sp" path="res://sounds/game over.wav" id="3_h8i2o"]
 
-
 [sub_resource type="Animation" id="Animation_h8i2o"]
 length = 0.001
 tracks/0/type = "value"
@@ -124,6 +123,7 @@ vertical_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_h8i2o")
+volume_db = -7.61
 autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

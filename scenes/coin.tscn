@@ -152,6 +152,7 @@ autoplay = "idle"
 
 [node name="coin_sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_3ogj1")
+volume_db = -5.474
 
 [connection signal="area_entered" from="coin_area" to="." method="_on_coin_area_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

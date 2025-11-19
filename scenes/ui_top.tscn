@@ -67,6 +67,7 @@ stream = ExtResource("3_mfc1r")
 
 [node name="timer down" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_8cppg")
+volume_db = -7.975
 
 [node name="BG music" type="AudioStreamPlayer" parent="."]
 volume_db = -7.61
