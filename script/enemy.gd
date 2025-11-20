@@ -24,7 +24,7 @@ var direction = 0
 var eatable = 0
 var live = false
 var shellArmed = false
-var squished = false
+var squishArmed = false
 #make var here that assosciates palyer combo to an arrayt with list of points to give out
 
 func _ready():
@@ -34,6 +34,7 @@ func _ready():
 #movement baby!!!!
 func _physics_process(delta: float) -> void:
 	shellTrans()
+	squishTrans()
 	if block == false and activate == true and dead == false:
 		velocity.x = speed
 		velocity.y += gravity * delta  # Apply gravity
@@ -42,6 +43,7 @@ func _physics_process(delta: float) -> void:
 		spriteOrientation()
 		turnMover()
 		getEaten()
+		
 
 #spawns food scene
 #spawns food scene
@@ -227,14 +229,15 @@ func _on_top_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":
 		if turn_shell:
 			shellArmed = true
-		#elif Global.direction == "down":
-			#squish()
+		elif Global.snake_status == "small":
+			squishArmed = true
 func _on_top_area_exited(area: Area2D) -> void:
 	if turn_shell and area.name == "Head Area":
 		shellArmed = false
 		
 func shellTrans():
-	if shellArmed and Global.direction == "down":
+	if shellArmed and Global.direction == "down" and live:
+		live = false
 		spawn_score(0)
 		var enemy_instance = shell.instantiate()
 		disable()
@@ -243,6 +246,11 @@ func shellTrans():
 		global_position.y = 99999
 		await get_tree().create_timer(0.1).timeout
 		queue_free()
+
+func squishTrans():
+	if squishArmed and Global.direction == "down" and live:
+		live = false
+		squish()
 
 #becomes eatad if snake eats it
 func _on_enemy_area_entered(area: Area2D) -> void:
