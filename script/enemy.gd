@@ -24,6 +24,7 @@ var direction = 0
 var eatable = 0
 var live = false
 var shellArmed = false
+var squished = false
 #make var here that assosciates palyer combo to an arrayt with list of points to give out
 
 func _ready():
@@ -115,7 +116,20 @@ func kill():
 	$AnimationPlayer.speed_scale = 1.1
 	$AnimationPlayer.play("die")
 	disable()
+	await get_tree().create_timer(5).timeout
+	queue_free()
 
+
+func squish():
+	spawn_score(0)
+	$AnimationPlayer.play("squish")
+	$kill.play()
+	dead = true
+	await get_tree().create_timer(0.001).timeout
+	$Node2D2/Sprite.frame = 4
+	disable()
+	await get_tree().create_timer(0.8).timeout
+	queue_free()
 
 #play sprite animation sliding up and enabling movement
 func block_spawn():
@@ -210,8 +224,11 @@ func disable():
 
 #becomes shell if snake touches its top
 func _on_top_area_entered(area: Area2D) -> void:
-	if turn_shell and area.name == "Head Area":
-		shellArmed = true
+	if area.name == "Head Area":
+		if turn_shell:
+			shellArmed = true
+		#elif Global.direction == "down":
+			#squish()
 func _on_top_area_exited(area: Area2D) -> void:
 	if turn_shell and area.name == "Head Area":
 		shellArmed = false
