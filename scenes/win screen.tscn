@@ -97,6 +97,7 @@ volume_db = -7.61
 autoplay = true
 
 [node name="1p msg" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

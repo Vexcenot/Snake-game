@@ -17,7 +17,8 @@ func _ready() -> void:
 	if value < score.size():
 		var label = score[value]
 		if value <= 9:
-			Global.score += label
+			if Global.demo == false:
+				Global.score += label
 			$Label.text = str(label)
 	else:
 		# Handle the case where value is out of bounds

@@ -388,7 +388,7 @@ func interact():
 #runs game over function and (should) clear out all datas
 func hurt():
 
-	if Global.invincible == false and under_block <= 0:
+	if Global.invincible == false and under_block <= 0 and Global.piping == false:
 		if Global.snake_status != "small":
 			lose_power()
 		else:
@@ -667,6 +667,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		player_input = false
 		invincible = true
 		Global.checkPointable = false
+		Global.piping = true
 	if area.name == "GOUP":
 		move_orders.append("up")
 	if area.name == "super_eat":

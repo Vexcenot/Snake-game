@@ -36,13 +36,15 @@ var playMusic : bool = false
 var music : String = "none"
 var dead : bool = false
 var play = false
+var piping = false
 
 #########################################################
 var ogTime = 400 #dont need rest
 var multiplayers : bool = false #remember to false this
 var title : bool = true #remember to true this ##################################################
+var demoOgTime = 1
 ###########################################################
-
+var demoTimer = demoOgTime
 var timeUp : bool = false
 var timeLive : bool = false
 var timeStart : bool = false
@@ -66,7 +68,7 @@ var resetCoinAnim : bool = false #resets in world load
 var coin : int = 0 #resets in menu script
 var timerDown : bool = false
 var winEnd : bool = false
-var demoTimer = 8
+
 
 
 func _process(delta: float) -> void:
@@ -82,16 +84,18 @@ func _process(delta: float) -> void:
 	if eaten >= 3:
 		eaten = 0
 		snake_speed -= 0.02
+	print(demo)
 		
 
 func reset():
+	demo = false
+	demoTimer = demoOgTime
 	snake_speed = ogSpeed
 	winEnd = false
 	timerDown = false
 	lowTime = false
 	lowTimer = false
 	pausable = false
-	demo = false
 	timeStart = false
 	timeLive = false
 	timeUp = false
@@ -124,6 +128,7 @@ func reset():
 	dead = false
 	if score > topScore:
 		topScore = score
+	get_tree().paused = false
 
 #for when checkpoints get added
 func resetAll():
@@ -142,4 +147,10 @@ func die(): #make it load gameover first
 	if loadedWorld != "":
 		get_tree().change_scene_to_file("res://scenes/gameover.tscn")
 	else:
+		get_tree().reload_current_scene()
+		
+func _input(event):
+	demoTimer = demoOgTime
+	if demo:
+		resetAll()
 		get_tree().reload_current_scene()

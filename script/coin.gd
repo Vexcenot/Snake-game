@@ -48,6 +48,7 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	queue_free()
 	
 func collect():
-	Global.coin += 1
-	$coin_sound.play()
-	Global.score += 200
+	if Global.demo == false:
+		Global.coin += 1
+		$coin_sound.play()
+		Global.score += 200

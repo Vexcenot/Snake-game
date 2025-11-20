@@ -404,7 +404,7 @@ func interact():
 #runs game over function and (should) clear out all datas
 func hurt():
 
-	if Global.invincible == false and under_block <= 0:
+	if Global.invincible == false and under_block <= 0 and Global.piping == false:
 		if Global.snake_status != "small":
 			lose_power()
 		else:
@@ -561,7 +561,7 @@ func die():
 				await get_tree().create_timer(delay_between_segments).timeout #this causes crash when both snakes die
 		await get_tree().create_timer(3).timeout
 		if Global.demo:
-			Global.reset()
+			Global.resetAll()
 			get_tree().reload_current_scene()
 		else:
 			Global.reset()
@@ -661,6 +661,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		#await get_tree().create_timer(0.1).timeout
 		if powering == false:
 			hurt()
+	#auto turn in demo mode
 	if area.name == "moveUp" and Global.demo:
 		move_orders.append("up")
 	if area.name == "moveDown" and Global.demo:
@@ -703,6 +704,13 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		player_input = false
 		invincible = true
 		Global.checkPointable = false
+		Global.piping = true
+	#if area.name == "pipe_exit":
+		#invincible = false
+		#Global.timeLive = true
+		#Global.piping = false
+		#player_input = true
+		
 	if area.name == "GOUP":
 		move_orders.append("up")
 	if area.name == "super_eat":
@@ -710,6 +718,8 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		Global.eatable += 1
 	if area.name == "entrance" and Global.winning == true or area.name == "pipe_enter":
 		disappear = true
+		player_input = false
+		Global.piping = true
 
 	
 func teleport():
@@ -757,6 +767,8 @@ func _on_head_area_area_exited(area: Area2D) -> void:
 		await get_tree().create_timer(1).timeout
 		invincible = false
 		Global.timeLive = true
+		Global.piping = false
+		player_input = true
 		
 
 

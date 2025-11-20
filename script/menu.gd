@@ -12,12 +12,13 @@ func _process(delta: float) -> void:
 		Global.demoTimer -= 1 * delta
 	if Global.demoTimer <= 0:
 		Global.demo = true
+	if Global.demo:
+		process_mode = Node.PROCESS_MODE_DISABLED
 	
 
 func _input(event):
-	Global.demoTimer = 8
-	if Global.demo == true:
-		Global.reset()
+	if Global.demo:
+		Global.resetAll()
 		get_tree().reload_current_scene()
 	if event.is_action_pressed("ui_up") or event.is_action_pressed("ui_down") or event.is_action_pressed("ui_left") or event.is_action_pressed("ui_right"):
 			highlight = not highlight
