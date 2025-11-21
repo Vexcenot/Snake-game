@@ -35,8 +35,9 @@ var lowTimer : bool = false
 var playMusic : bool = false
 var music : String = "none"
 var dead : bool = false
-var play = false
-var piping = false
+var play : bool = false
+var piping : bool = false
+var fullscreen : bool = false
 
 #########################################################
 var ogTime = 400 #dont need rest
@@ -154,3 +155,11 @@ func _input(event):
 	if demo:
 		resetAll()
 		get_tree().reload_current_scene()
+	if event.is_action_pressed("fullscreen"):
+		if fullscreen:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			fullscreen = false
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+			fullscreen = true
+		

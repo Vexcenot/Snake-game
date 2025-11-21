@@ -223,5 +223,11 @@ offset_bottom = 29.0
 scale = Vector2(95.48, 6.8296285)
 color = Color(0, 0, 0, 1)
 
+[node name="CheckBox" type="CheckBox" parent="."]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+text = "fullscreen"
+
 [connection signal="finished" from="warning timer" to="." method="_on_warning_timer_finished"]
 [connection signal="finished" from="BG music" to="." method="_on_bg_music_finished"]
