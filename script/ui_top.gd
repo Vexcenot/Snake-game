@@ -1,20 +1,20 @@
 extends Control
 var store : String = ""
 @export var trigger : bool = false
-var overworld = preload("res://sounds/overworld.wav")
-var underworld = preload("res://sounds/underworld.wav")
-var invincible = preload("res://sounds/invinsibility muffled.wav")
-var overworldFast = preload("res://sounds/fast overworld.wav")
-var underworldFast = preload("res://sounds/fast underworld.wav")
-var invincibleFast = preload("res://sounds/fast invincible.wav")
-var die = preload("res://sounds/Die.wav")
-var undercoin = preload("res://sprite/under coin top ui.png")
-var overcoin = preload("res://sprite/coin top ui.png")
-var transcoin = preload("res://sprite/trans coin.png")
-var flag = preload("res://sounds/win flag.wav")
-var warning = preload("res://sounds/warning.wav")
-var end = false
-var lowTime = false
+var overworld : AudioStream = preload("res://sounds/overworld.wav")
+var underworld : AudioStream = preload("res://sounds/underworld.wav")
+var invincible : AudioStream = preload("res://sounds/invinsibility muffled.wav")
+var overworldFast : AudioStream = preload("res://sounds/fast overworld.wav")
+var underworldFast : AudioStream = preload("res://sounds/fast underworld.wav")
+var invincibleFast : AudioStream = preload("res://sounds/fast invincible.wav")
+var die : AudioStream = preload("res://sounds/Die.wav")
+var undercoin : Texture2D = preload("res://sprite/under coin top ui.png")
+var overcoin : Texture2D = preload("res://sprite/coin top ui.png")
+var transcoin : Texture2D = preload("res://sprite/trans coin.png")
+var flag : AudioStream = preload("res://sounds/win flag.wav")
+var warning : AudioStream = preload("res://sounds/warning.wav")
+var end : bool = false
+var lowTime : bool = false
 
 
 #pauses game

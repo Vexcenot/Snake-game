@@ -1,11 +1,11 @@
 extends Node2D
-var snake_under = false
-var snake_boop = false
-var timing = false
-var live = true
+var snake_under : bool = false
+var snake_boop : bool = false
+var timing : bool = false
+var live : bool = true
 @export var items: Array[PackedScene] = []
-@export var false_block = false
-@export var invis_block = false
+@export var false_block : bool = false
+@export var invis_block : bool = false
 var underground_sprite = load("res://sprite/dark stuff.png")
 var overworld_sprite = load("res://sprite/all the small blocks together.png")
 

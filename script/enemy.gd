@@ -209,7 +209,6 @@ func _on_right_side_area_entered(area: Area2D) -> void:
 			spawn_food()
 			queue_free()
 		if area.name == "delete" and activate:
-			print("FUEEKE")
 			queue_free()
 
 #disable layers to not interact with anything
