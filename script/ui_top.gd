@@ -46,16 +46,6 @@ func _process(delta: float) -> void:
 		$CanvasLayer/HBoxContainer/POINTS/name.text = str("SNEKS")
 	else:
 		$CanvasLayer/HBoxContainer/POINTS/name.text = str("SNEK")
-	#if Global.timerDown and Global.timer > 0:
-		#Global.timer -= 1
-		#Global.score += 50
-		#$"timer down".play()
-	#if Global.timer == 0:
-		#Global.timerDown = false
-		#await get_tree().create_timer(2.36).timeout
-		#
-		#
-		#get_tree().change_scene_to_file("res://scenes/win screen.tscn")
 	if Global.resetCoinAnim:
 		Global.resetCoinAnim = false
 		$CanvasLayer/HBoxContainer2/COINS/AnimationPlayer.stop()

@@ -54,6 +54,7 @@ script = ExtResource("1_rjj26")
 
 [node name="timer down" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_7pkwf")
+volume_db = -10.0
 
 [node name="20592Png" type="Sprite2D" parent="."]
 visible = false

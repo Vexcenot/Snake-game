@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dbcvw8oku7npa"]
+[gd_scene load_steps=10 format=3 uid="uid://dbcvw8oku7npa"]
 
 [ext_resource type="Script" uid="uid://d0negxyl6jyrh" path="res://script/ui_top.gd" id="1_fx8tn"]
 [ext_resource type="AudioStream" uid="uid://bnd1qp6rpcbtn" path="res://sounds/pause.wav" id="2_lhryq"]
 [ext_resource type="FontFile" uid="uid://cvv5f6lv4eikk" path="res://super-mario.otf" id="2_x2jp4"]
 [ext_resource type="AudioStream" uid="uid://wj622osutpu5" path="res://sounds/warning.wav" id="3_mfc1r"]
-[ext_resource type="AudioStream" uid="uid://vdj2lhwx8lg2" path="res://sounds/timer down.wav" id="4_8cppg"]
 [ext_resource type="Texture2D" uid="uid://b2wt431fesi7n" path="res://sprite/coin top ui.png" id="5_k6t77"]
 [ext_resource type="Texture2D" uid="uid://b2m8263v1aep3" path="res://sprite/x.png" id="7_lhryq"]
 
@@ -64,10 +63,6 @@ volume_db = -7.865
 
 [node name="warning timer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_mfc1r")
-
-[node name="timer down" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_8cppg")
-volume_db = -7.975
 
 [node name="BG music" type="AudioStreamPlayer" parent="."]
 volume_db = -7.61

@@ -317,6 +317,7 @@ follow_viewport_enabled = true
 
 [node name="kill" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_6xltp")
+volume_db = -8.0
 
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_left_bottom_body_exited"]
