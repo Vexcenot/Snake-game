@@ -5,8 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://cy8hvouulqfa" path="res://sprite/20592_png.png" id="2_jxdab"]
 [ext_resource type="Texture2D" uid="uid://chy65qog88bac" path="res://sprite/castle end.png" id="3_njhjj"]
 [ext_resource type="PackedScene" uid="uid://cdbmv0psdbx0l" path="res://scenes/endpost.tscn" id="5_7pkwf"]
-[ext_resource type="AudioStream" uid="uid://vdj2lhwx8lg2" path="res://sounds/timer down.wav" id="6_7pkwf"]
 [ext_resource type="Texture2D" uid="uid://deo6txvc7p0c7" path="res://sprite/castle flag.png" id="7_ha01g"]
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_7pkwf"]
+polyphony = 128
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bly62"]
 size = Vector2(16, 32)
@@ -53,8 +55,10 @@ position = Vector2(96, 8)
 script = ExtResource("1_rjj26")
 
 [node name="timer down" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_7pkwf")
-volume_db = -10.0
+stream = SubResource("AudioStreamPolyphonic_7pkwf")
+volume_db = -13.105
+autoplay = true
+stream_paused = true
 
 [node name="20592Png" type="Sprite2D" parent="."]
 visible = false

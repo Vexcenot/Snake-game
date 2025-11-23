@@ -5,6 +5,7 @@ func _ready() -> void:
 	Global.invincible = false
 	if Global.title == false:
 		Global.timeLive = true
+		$"bg music".play()
 	if Global.play:
 		$logotitle.visible = false
 	Global.world_type = "overworld"

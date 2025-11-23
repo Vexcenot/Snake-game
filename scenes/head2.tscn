@@ -277,7 +277,6 @@ stream = ExtResource("12_fvphi")
 editor_description = "suppose to play da power up sound
 "
 stream = ExtResource("13_i7ij1")
-volume_db = 5.705
 
 [node name="AllTheSmallBlocksTogether" type="Sprite2D" parent="."]
 visible = false

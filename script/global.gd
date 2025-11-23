@@ -1,5 +1,5 @@
 extends Node
-#var invArea: PackedScene = preload("res://scenes/invincible_frame.tscn")
+var bgMusic = AudioServer.get_bus_index("music")
 var snake_status : String = "small"
 var direction : String = "left"
 var hitting : bool = false
@@ -43,7 +43,7 @@ var fullscreen : bool = false
 var ogTime = 400 #dont need rest
 var multiplayers : bool = false #remember to false this
 var title : bool = true #remember to true this ##################################################
-var demoOgTime = 1
+var demoOgTime = 8
 ###########################################################
 var demoTimer = demoOgTime
 var timeUp : bool = false
@@ -70,7 +70,8 @@ var coin : int = 0 #resets in menu script
 var timerDown : bool = false
 var winEnd : bool = false
 
-
+#func _ready() -> void:
+	#bgMusic = AudioServer.get_bus_index("music")
 
 func _process(delta: float) -> void:
 	#print(score)
@@ -89,6 +90,7 @@ func _process(delta: float) -> void:
 		
 
 func reset():
+	unmuteMusic()
 	demo = false
 	demoTimer = demoOgTime
 	snake_speed = ogSpeed
@@ -163,3 +165,8 @@ func _input(event):
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 			fullscreen = true
 		
+func muteMusic():
+	AudioServer.set_bus_mute(bgMusic, true)
+	
+func unmuteMusic():
+	AudioServer.set_bus_mute(bgMusic, false)

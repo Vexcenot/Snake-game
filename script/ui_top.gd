@@ -61,35 +61,35 @@ func _process(delta: float) -> void:
 	if Global.purgatory:
 		$"BG music".volume_db = -80
 #music handler
-	if Global.playMusic == true and Global.title == false:
-		Global.playMusic = false
-		if Global.music == "overworld":
-			if Global.lowTime:
-				$"BG music".stream = overworldFast
-			else:
-				$"BG music".stream = overworld
-			store = Global.music
-		elif Global.music == "underground":
-			if Global.lowTime:
-				$"BG music".stream = underworldFast
-			else:
-				$"BG music".stream = underworld
-			store = Global.music
-		elif Global.music == "invincible":
-			$"BG music".stream = invincible
-			Global.music = store
-		elif Global.music == "die":
-			$"BG music".stream = die
-		elif Global.music == "flag":
-			$"BG music".stream = flag
-		elif Global.music == "none":
-			$"BG music".stop()
-		elif Global.music == "warning":
-			$"BG music".stream = warning
-			lowTime = true
-			Global.music = store
+	#if Global.playMusic == true and Global.title == false:
+		#Global.playMusic = false
+		#if Global.music == "overworld":
+			#if Global.lowTime:
+				#$"BG music".stream = overworldFast
+			#else:
+				#$"BG music".stream = overworld
+			#store = Global.music
+		#elif Global.music == "underground":
+			#if Global.lowTime:
+				#$"BG music".stream = underworldFast
+			#else:
+				#$"BG music".stream = underworld
+			#store = Global.music
+		#elif Global.music == "invincible":
+			#$"BG music".stream = invincible
+			#Global.music = store
+		#elif Global.music == "die":
+			#$"BG music".stream = die
+		#elif Global.music == "flag":
+			#$"BG music".stream = flag
+		#elif Global.music == "none":
+			#$"BG music".stop()
+		#elif Global.music == "warning":
+			#$"BG music".stream = warning
+			#lowTime = true
+			#Global.music = store
+		#$"BG music".play()
 
-		$"BG music".play()
 	if Global.paused:
 		$"warning timer".stream_paused = true
 		$"BG music".stream_paused = true
@@ -97,13 +97,13 @@ func _process(delta: float) -> void:
 		$"warning timer".stream_paused = false
 		$"BG music".stream_paused = false
 		
-	#WHEN ON LOW TIMER 
-	if Global.timer <= 100 and Global.lowTime == false and Global.title == false and Global.winning == false:
-		#$"BG music".volume_db = -80
-		Global.lowTime = true
-		#$"warning timer".play()
-		Global.music = "warning"
-		Global.playMusic = true
+	#low timer warning sound
+	#if Global.timer <= 100 and Global.lowTime == false and Global.title == false and Global.winning == false:
+		#Global.lowTime = true
+		#Global.music = "warning"
+		#Global.playMusic = true
+		
+	#kills player when times up
 	if Global.timer <= 0 and Global.winning == false and Global.timerDown == false:
 		await get_tree().create_timer(1).timeout
 		Global.timeUp = true
@@ -114,10 +114,12 @@ func _process(delta: float) -> void:
 func _on_warning_timer_finished() -> void:
 	Global.playMusic = true
 	$"BG music".volume_db = 0
+	
 
 func _on_bg_music_finished() -> void:
 	if lowTime and Global.winning == false:
 		lowTime = false
 		Global.playMusic = true
+	#signals when music ends
 	elif Global.winning:
 		Global.winEnd = true

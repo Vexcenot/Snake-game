@@ -6,13 +6,15 @@ var live = true
 func _on_winarea_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area" and live:
 		live = false
+		$AudioStreamPlayer.play()
 		Global.playMusic = true
 		Global.music = "flag"
 		$brick/brick.set_collision_layer_value(1, false)
 		if Global.direction == "left" and shit == true:
 			$AnimationPlayer.play("brick down")
 		labelScore()
-
+		await get_tree().create_timer(8).timeout
+		Global.winEnd = true
 
 func _on_endpost_area_entered(area: Area2D) -> void:
 	if area.name == "Head Area":

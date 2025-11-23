@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://du6cg6ytddp8g"]
+[gd_scene load_steps=23 format=4 uid="uid://du6cg6ytddp8g"]
 
 [ext_resource type="PackedScene" uid="uid://disfsrloilqua" path="res://scenes/head.tscn" id="1_5558j"]
 [ext_resource type="Script" uid="uid://3i17aalstqc2" path="res://script/underground.gd" id="1_iubgi"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bc8ayjdv8nyv2" path="res://scenes/pipe stem.tscn" id="16_oo6yi"]
 [ext_resource type="PackedScene" uid="uid://mt2ylxx61b70" path="res://scenes/head2.tscn" id="16_rx8xm"]
 [ext_resource type="Script" uid="uid://mdevubq4s10" path="res://script/hud.gd" id="18_g3l68"]
+[ext_resource type="AudioStream" uid="uid://cyih7beyfpmo2" path="res://sounds/underworld.wav" id="19_g3l68"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qt2jv"]
 texture = ExtResource("6_swjso")
@@ -130,3 +131,8 @@ START_DIR = 1
 [node name="hud" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
 script = ExtResource("18_g3l68")
+
+[node name="bg music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_g3l68")
+autoplay = true
+bus = &"music"

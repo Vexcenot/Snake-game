@@ -123,7 +123,6 @@ vertical_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_h8i2o")
-volume_db = -7.61
 autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -310,6 +310,7 @@ shape = SubResource("RectangleShape2D_3hfl1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
 position = Vector2(0, -14)
+scale = Vector2(0.5999998, 0.55705744)
 shape = SubResource("RectangleShape2D_6xltp")
 
 [node name="hud" type="CanvasLayer" parent="."]

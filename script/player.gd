@@ -530,10 +530,13 @@ func absolute_stop():
 		pause_move()
 		final_time == 99999
 
+
 func die():
-	z_index = 400
-	Global.timeLive = false
 	if Global.winning == false:
+		Global.muteMusic()
+		$Die.play()
+		z_index = 400
+		Global.timeLive = false
 		if Global.checkPointable2:
 			Global.checkPointable = true
 		Global.invincible = false
@@ -799,6 +802,7 @@ func resume_move():
 
 #win conditions when touching flag pole. position pole in way that snake head will always be inside it & snake head doesnt by pass it.
 func win():
+	Global.muteMusic()
 	Global.timeLive = false
 	move_orders.clear()
 	Global.winning = true
