@@ -58,7 +58,6 @@ script = ExtResource("1_rjj26")
 stream = SubResource("AudioStreamPolyphonic_7pkwf")
 volume_db = -13.105
 autoplay = true
-stream_paused = true
 
 [node name="20592Png" type="Sprite2D" parent="."]
 visible = false
