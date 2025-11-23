@@ -661,7 +661,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		await get_tree().create_timer(0.1).timeout
 		if powering == false:
 			hurt()
-	if area.name == "deadly shell" and Global.snake_status == "small":
+	if area.name == "deadly shell" and Global.snake_status == "small": #crashes when rams into goomba
 		#await get_tree().create_timer(0.1).timeout
 		if powering == false:
 			hurt()
@@ -693,6 +693,9 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "brick_area" and Global.snake_status != "small":
 		$"brick break".play()
 		Global.eatable += 1
+	if area.name == "weakeat":
+		$eat.play()
+		Global.eatable += 1
 	if area.name == "enemy" and Global.snake_status != "small":
 		$eat.play()
 		Global.eatable += 1
@@ -708,13 +711,7 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		player_input = false
 		invincible = true
 		Global.checkPointable = false
-		Global.piping = true
-	#if area.name == "pipe_exit":
-		#invincible = false
-		#Global.timeLive = true
-		#Global.piping = false
-		#player_input = true
-		
+		Global.piping = true		
 	if area.name == "GOUP":
 		move_orders.append("up")
 	if area.name == "super_eat":

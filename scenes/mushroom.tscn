@@ -22,6 +22,7 @@ size = Vector2(1, 2.24396)
 size = Vector2(2.1028948, 2.44695)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_euomj"]
+size = Vector2(20, 16.197323)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f4pa7"]
 size = Vector2(20, 33.247185)
@@ -146,7 +147,8 @@ shape = SubResource("RectangleShape2D_exsck")
 position = Vector2(0, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="edible"]
-scale = Vector2(3.07808, 3.07808)
+position = Vector2(0, -8.590397)
+scale = Vector2(3.7787108, 4.5180793)
 shape = SubResource("RectangleShape2D_euomj")
 
 [node name="bumpable" type="Area2D" parent="."]

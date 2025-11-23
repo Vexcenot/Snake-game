@@ -12,6 +12,7 @@ enum Sfood {soup, shitake}
 @export var block = false
 @export var flippable = false
 @export var turn_shell = false
+@export var weak = false
 
 var speed = -speeder
 var activate = false
@@ -258,6 +259,11 @@ func _on_enemy_area_entered(area: Area2D) -> void:
 
 #deletes itself if eaten by snake
 func getEaten():
-	if eatable >= 1 and Global.snake_status != "small":
+	if eatable >= 1 and Global.snake_status != "small" or eatable >= 1 and weak:
 		spawn_scoreSnake()
 		queue_free()
+
+
+func _on_weakeat_area_entered(area: Area2D) -> void:
+	if area.name == "Head Area":
+		eatable += 1 

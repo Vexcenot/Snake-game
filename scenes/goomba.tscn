@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bwwi52l72ncsf"]
+[gd_scene load_steps=22 format=3 uid="uid://bwwi52l72ncsf"]
 
 [ext_resource type="Script" uid="uid://c33skdsqnghbu" path="res://script/enemy.gd" id="1_13s4y"]
 [ext_resource type="Texture2D" uid="uid://cyjxthecr7oxv" path="res://sprite/goomba.png" id="2_tdxqk"]
@@ -206,12 +206,15 @@ size = Vector2(20, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6xltp"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xycq"]
+
 [node name="goomba" type="CharacterBody2D"]
 position = Vector2(0, 8)
 collision_layer = 130
 collision_mask = 133
 script = ExtResource("1_13s4y")
 Super_Food = 1
+weak = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.98023e-08, -3.0463073)
@@ -271,12 +274,24 @@ scale = Vector2(1, 2.36695)
 shape = SubResource("RectangleShape2D_exsck")
 
 [node name="edible2" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, -8)
 scale = Vector2(0.479999, 0.479999)
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="edible2"]
 position = Vector2(0, 8.476613)
 scale = Vector2(3.600393, 2.8880203)
+shape = SubResource("RectangleShape2D_5lml2")
+
+[node name="edible" type="Area2D" parent="."]
+position = Vector2(0, -8)
+scale = Vector2(0.479999, 0.479999)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="edible"]
+position = Vector2(0, 9.536744e-07)
+scale = Vector2(8.933738, 7.1661115)
 shape = SubResource("RectangleShape2D_5lml2")
 
 [node name="20592Png" type="Sprite2D" parent="."]
@@ -300,6 +315,8 @@ position = Vector2(0, -8)
 stream = ExtResource("3_y01q2")
 
 [node name="enemy" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
 position = Vector2(0, -3.5)
@@ -310,7 +327,7 @@ shape = SubResource("RectangleShape2D_3hfl1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
 position = Vector2(0, -14)
-scale = Vector2(0.5999998, 0.55705744)
+scale = Vector2(0.29782158, 0.55705744)
 shape = SubResource("RectangleShape2D_6xltp")
 
 [node name="hud" type="CanvasLayer" parent="."]
@@ -319,6 +336,12 @@ follow_viewport_enabled = true
 [node name="kill" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_6xltp")
 volume_db = -8.0
+
+[node name="weakeat" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="weakeat"]
+position = Vector2(0, -11)
+shape = SubResource("RectangleShape2D_1xycq")
 
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]
 [connection signal="body_exited" from="left bottom" to="." method="_on_left_bottom_body_exited"]
@@ -335,3 +358,4 @@ volume_db = -8.0
 [connection signal="body_entered" from="right side" to="." method="_on_right_side_body_entered"]
 [connection signal="area_entered" from="enemy" to="." method="_on_enemy_area_entered"]
 [connection signal="area_entered" from="top" to="." method="_on_top_area_entered"]
+[connection signal="area_entered" from="weakeat" to="." method="_on_weakeat_area_entered"]

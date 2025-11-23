@@ -4,6 +4,7 @@ var open = true
 var active = true
 var next = false
 var timerdown
+var tick = false
 
 func _ready() -> void:
 	timerdown = $"timer down".get_stream_playback()
@@ -19,6 +20,10 @@ func _process(delta: float) -> void:
 		Global.timer -= 1
 		Global.score += 50
 		timerdown.play_stream(load("res://sounds/timer down.wav"))
+		#if tick == false:
+			#tick = true
+			#$AudioStreamPlayer.play()
+			#tick = false
 	if Global.timerDown and Global.timer <= 0 and active:
 		active = false
 		$AnimationPlayer.play("win")

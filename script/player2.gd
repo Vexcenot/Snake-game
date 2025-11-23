@@ -656,6 +656,9 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 	if area.name == "brick_area" and Global.snake_status != "small":
 		Global.eatable += 1
 		$"brick break".play()
+	if area.name == "weakeat":
+		$eat.play()
+		Global.eatable += 1
 	if area.name == "enemy" and Global.snake_status != "small":
 		Global.eatable += 1
 	if area.name == "coin_area":
