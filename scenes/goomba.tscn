@@ -207,6 +207,7 @@ size = Vector2(20, 7)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6xltp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1xycq"]
+size = Vector2(20, 14)
 
 [node name="goomba" type="CharacterBody2D"]
 position = Vector2(0, 8)
@@ -324,6 +325,8 @@ scale = Vector2(0.44782907, 1)
 shape = SubResource("RectangleShape2D_3hfl1")
 
 [node name="top" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
 position = Vector2(0, -14)
@@ -335,12 +338,12 @@ follow_viewport_enabled = true
 
 [node name="kill" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_6xltp")
-volume_db = -8.0
 
 [node name="weakeat" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="weakeat"]
-position = Vector2(0, -11)
+position = Vector2(0, -8)
+scale = Vector2(0.9199997, 1)
 shape = SubResource("RectangleShape2D_1xycq")
 
 [connection signal="body_entered" from="left bottom" to="." method="_on_left_bottom_body_entered"]

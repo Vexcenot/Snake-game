@@ -86,8 +86,8 @@ func _process(delta: float) -> void:
 	if eaten >= 3:
 		eaten = 0
 		snake_speed -= 0.02
-	print(demo)
 		
+
 
 func reset():
 	unmuteMusic()

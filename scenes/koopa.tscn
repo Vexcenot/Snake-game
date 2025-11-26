@@ -369,7 +369,6 @@ shape = SubResource("RectangleShape2D_grttc")
 
 [node name="kill" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_vo5xu")
-volume_db = -8.0
 
 [node name="weakeat" type="Area2D" parent="."]
 

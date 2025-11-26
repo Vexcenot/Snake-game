@@ -505,7 +505,6 @@ shape = SubResource("RectangleShape2D_k7uw7")
 
 [node name="kill" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_qr86p")
-volume_db = -8.0
 
 [node name="bump" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_fdvxk")

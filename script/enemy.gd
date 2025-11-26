@@ -223,6 +223,7 @@ func disable():
 	$enemy.monitorable = false
 	$enemy.monitoring = false
 	$top.monitoring = false
+	$weakeat.monitorable = false
 
 #becomes shell if snake touches its top
 func _on_top_area_entered(area: Area2D) -> void:

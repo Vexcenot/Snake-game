@@ -26,12 +26,14 @@ func _input(event):
 			pause()
 
 func pause():
+	Global.muteMusic()
 	get_tree().paused = true
 	Global.paused = true
 	Global.timeLive = false
 	$"pause sound".play()
 
 func unpause():
+	Global.unmuteMusic()
 	get_tree().paused = false
 	Global.paused = false
 	Global.timeLive = true
