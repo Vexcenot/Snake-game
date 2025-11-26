@@ -718,7 +718,6 @@ func _on_head_area_area_entered(area: Area2D) -> void:
 		$eat.play()
 		Global.eatable += 1
 	if area.name == "entrance" and Global.winning == true or area.name == "pipe_enter":
-		
 		disappear = true
 		player_input = false
 		Global.piping = true

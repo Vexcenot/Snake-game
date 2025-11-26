@@ -12,7 +12,7 @@
 polyphony = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bly62"]
-size = Vector2(24, 32)
+size = Vector2(16, 32)
 
 [sub_resource type="Animation" id="Animation_uplxu"]
 length = 0.001
@@ -74,7 +74,7 @@ texture = ExtResource("1_pb8oa")
 [node name="entrance" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="entrance"]
-position = Vector2(-4, -16)
+position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_bly62")
 
 [node name="CastleEnd" type="Sprite2D" parent="."]

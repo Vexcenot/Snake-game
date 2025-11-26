@@ -751,6 +751,7 @@ func resume_move():
 
 #win conditions when touching flag pole. position pole in way that snake head will always be inside it & snake head doesnt by pass it.
 func win():
+	Global.muteMusic()
 	final_time = Global.snake_speed
 	move_orders.clear()
 	Global.winning = true
