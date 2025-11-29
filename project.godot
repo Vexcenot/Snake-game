@@ -20,6 +20,7 @@ run/main_scene="res://scenes/main.tscn"
 config/features=PackedStringArray("4.5", "Forward Plus")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="uid://b8uftbif62biu"
 config/icon="uid://c0pxogsnj7nr7"
 config/macos_native_icon="uid://byq24x1wes7r0"
 config/windows_native_icon="uid://c0pxogsnj7nr7"
