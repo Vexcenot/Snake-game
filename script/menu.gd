@@ -2,7 +2,7 @@ extends Control
 var highlight = false
 
 func _process(delta: float) -> void:
-	print(Global.demoTimer)
+	#print(Global.demoTimer)
 	if Global.demo == false:
 		if highlight:
 			$"CanvasLayer/VBoxContainer/2 player".grab_focus()

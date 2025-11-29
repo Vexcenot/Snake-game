@@ -24,6 +24,13 @@ func _input(event):
 			unpause()
 		else:
 			pause()
+	if event.is_action_pressed("click"):
+		if soundHighlight:
+			Global.soundToggle()
+		if screenHighlight:
+			Global.fullscreenToggle()
+	if event.is_action_pressed("mute"):
+		Global.soundToggle()
 
 func pause():
 	Global.muteMusic()
@@ -59,51 +66,14 @@ func _process(delta: float) -> void:
 		$CanvasLayer/HBoxContainer2/COINS/CoinTopUi.texture = undercoin
 	else:
 		$CanvasLayer/HBoxContainer2/COINS/CoinTopUi.texture = overcoin
-		
 	if Global.purgatory:
 		$"BG music".volume_db = -80
-#music handler
-	#if Global.playMusic == true and Global.title == false:
-		#Global.playMusic = false
-		#if Global.music == "overworld":
-			#if Global.lowTime:
-				#$"BG music".stream = overworldFast
-			#else:
-				#$"BG music".stream = overworld
-			#store = Global.music
-		#elif Global.music == "underground":
-			#if Global.lowTime:
-				#$"BG music".stream = underworldFast
-			#else:
-				#$"BG music".stream = underworld
-			#store = Global.music
-		#elif Global.music == "invincible":
-			#$"BG music".stream = invincible
-			#Global.music = store
-		#elif Global.music == "die":
-			#$"BG music".stream = die
-		#elif Global.music == "flag":
-			#$"BG music".stream = flag
-		#elif Global.music == "none":
-			#$"BG music".stop()
-		#elif Global.music == "warning":
-			#$"BG music".stream = warning
-			#lowTime = true
-			#Global.music = store
-		#$"BG music".play()
-
 	if Global.paused:
 		$"warning timer".stream_paused = true
 		$"BG music".stream_paused = true
 	else:
 		$"warning timer".stream_paused = false
 		$"BG music".stream_paused = false
-		
-	#low timer warning sound
-	#if Global.timer <= 100 and Global.lowTime == false and Global.title == false and Global.winning == false:
-		#Global.lowTime = true
-		#Global.music = "warning"
-		#Global.playMusic = true
 		
 	#kills player when times up
 	if Global.timer <= 0 and Global.winning == false and Global.timerDown == false:
@@ -112,11 +82,23 @@ func _process(delta: float) -> void:
 	$CanvasLayer/HBoxContainer2/TIME/counter.text = str(int(Global.timer)).pad_zeros(3)
 	$CanvasLayer/HBoxContainer/POINTS/counter.text = str(Global.score).pad_zeros(6)
 	$CanvasLayer/HBoxContainer2/COINS/HBoxContainer/counter.text = str(int(Global.coin)).pad_zeros(2)
+	if Global.mute:
+		$CanvasLayer2/sound.frame = 1
+	else:
+		$CanvasLayer2/sound.frame = 0
+	if Global.title == false:
+		if Global.mute == false:
+			$CanvasLayer2/sound.hide()
+		else:
+			$CanvasLayer2/sound.show()
+		$CanvasLayer2/fullscreen.hide()
+	else:
+		$CanvasLayer2/sound.show()
+		$CanvasLayer2/fullscreen.show()
 
 func _on_warning_timer_finished() -> void:
 	Global.playMusic = true
 	$"BG music".volume_db = 0
-	
 
 func _on_bg_music_finished() -> void:
 	if lowTime and Global.winning == false:
@@ -125,3 +107,33 @@ func _on_bg_music_finished() -> void:
 	#signals when music ends
 	elif Global.winning:
 		Global.winEnd = true
+
+var screenHighlight = false
+var soundHighlight = false
+
+
+
+
+func _on_fullscreen_mouse_entered() -> void:
+	screenHighlight = true
+	print("shit")
+
+func _on_fullscreen_mouse_exited() -> void:
+	screenHighlight = false
+
+
+func _on_sound_mouse_entered() -> void:
+	soundHighlight = true
+
+
+func _on_sound_mouse_exited() -> void:
+	soundHighlight = false
+
+
+func _on_button_pressed() -> void:
+	Global.fullscreenToggle()
+
+
+func _on_button_pressed2() -> void:
+	Global.soundToggle()
+	print("shit")

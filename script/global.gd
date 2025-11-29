@@ -1,5 +1,6 @@
 extends Node
 var bgMusic = AudioServer.get_bus_index("music")
+var sound = AudioServer.get_bus_index("Master")
 var snake_status : String = "small"
 var direction : String = "left"
 var hitting : bool = false
@@ -69,6 +70,7 @@ var resetCoinAnim : bool = false #resets in world load
 var coin : int = 0 #resets in menu script
 var timerDown : bool = false
 var winEnd : bool = false
+var mute : bool = false
 
 #func _ready() -> void:
 	#bgMusic = AudioServer.get_bus_index("music")
@@ -86,6 +88,11 @@ func _process(delta: float) -> void:
 	if eaten >= 3:
 		eaten = 0
 		snake_speed -= 0.02
+	if demo:
+		AudioServer.set_bus_volume_db(sound, -80.0)
+	else:
+		AudioServer.set_bus_volume_db(sound, 0)
+		
 		
 
 
@@ -158,15 +165,36 @@ func _input(event):
 		resetAll()
 		get_tree().reload_current_scene()
 	if event.is_action_pressed("fullscreen"):
-		if fullscreen:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-			fullscreen = false
-		else:
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-			fullscreen = true
+		fullscreenToggle()
+
+			
+func fullscreenToggle():
+	if fullscreen:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		fullscreen = false
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		fullscreen = true
 		
 func muteMusic():
 	AudioServer.set_bus_mute(bgMusic, true)
 	
 func unmuteMusic():
-	AudioServer.set_bus_mute(bgMusic, false)
+		AudioServer.set_bus_mute(bgMusic, false)
+
+func muteSound():
+	AudioServer.set_bus_mute(sound, true)
+	#AudioServer.set_bus_mute(bgMusic, true)
+	
+func unmuteSound():
+	AudioServer.set_bus_mute(sound, false)
+	#AudioServer.set_bus_mute(bgMusic, false)
+
+	
+func soundToggle(): #make it swasp textrues
+	if not mute:
+		mute = true
+		muteSound()
+	else:
+		mute = false
+		unmuteSound()

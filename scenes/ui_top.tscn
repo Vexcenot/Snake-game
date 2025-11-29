@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbcvw8oku7npa"]
+[gd_scene load_steps=12 format=3 uid="uid://dbcvw8oku7npa"]
 
 [ext_resource type="Script" uid="uid://d0negxyl6jyrh" path="res://script/ui_top.gd" id="1_fx8tn"]
 [ext_resource type="AudioStream" uid="uid://bnd1qp6rpcbtn" path="res://sounds/pause.wav" id="2_lhryq"]
@@ -6,6 +6,8 @@
 [ext_resource type="AudioStream" uid="uid://wj622osutpu5" path="res://sounds/warning.wav" id="3_mfc1r"]
 [ext_resource type="Texture2D" uid="uid://b2wt431fesi7n" path="res://sprite/coin top ui.png" id="5_k6t77"]
 [ext_resource type="Texture2D" uid="uid://b2m8263v1aep3" path="res://sprite/x.png" id="7_lhryq"]
+[ext_resource type="Texture2D" uid="uid://cmkdgyrfpxshi" path="res://sprite/sound.png" id="7_ljbi8"]
+[ext_resource type="Texture2D" uid="uid://cshywg4mylqoi" path="res://sprite/fs.png" id="7_y6a58"]
 
 [sub_resource type="Animation" id="Animation_8cppg"]
 length = 0.001
@@ -224,5 +226,38 @@ offset_right = 24.0
 offset_bottom = 24.0
 text = "fullscreen"
 
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="sound" type="Sprite2D" parent="CanvasLayer2"]
+position = Vector2(200, 224)
+texture = ExtResource("7_ljbi8")
+hframes = 2
+
+[node name="Button" type="Button" parent="CanvasLayer2/sound"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -8.0
+offset_top = -8.0
+scale = Vector2(2.053574, 2.04)
+action_mode = 0
+
+[node name="fullscreen" type="Sprite2D" parent="CanvasLayer2"]
+position = Vector2(232, 224)
+texture = ExtResource("7_y6a58")
+
+[node name="Button" type="Button" parent="CanvasLayer2/fullscreen"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -8.0
+offset_top = -8.0
+scale = Vector2(2.04, 2.04)
+theme_override_colors/font_color = Color(0.8745098, 0.8745098, 0.8745098, 0)
+theme_override_colors/font_focus_color = Color(0.9490196, 0.9490196, 0.9490196, 0)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 0)
+action_mode = 0
+
 [connection signal="finished" from="warning timer" to="." method="_on_warning_timer_finished"]
 [connection signal="finished" from="BG music" to="." method="_on_bg_music_finished"]
+[connection signal="pressed" from="CanvasLayer2/sound/Button" to="." method="_on_button_pressed2"]
+[connection signal="focus_entered" from="CanvasLayer2/fullscreen/Button" to="." method="_on_button_focus_entered"]
+[connection signal="mouse_entered" from="CanvasLayer2/fullscreen/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="CanvasLayer2/fullscreen/Button" to="." method="_on_button_pressed"]
